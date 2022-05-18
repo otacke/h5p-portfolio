@@ -1,0 +1,308 @@
+// H5P Core
+.h5p-confirmation-dialog-header {
+  color: var(--color-base, #356593);
+}
+
+button {
+  &.h5p-core-button {
+    background: var(--color-base, #2579c6);
+    color: var(--color-text, #fff);
+
+    &:link,
+    &:visited {
+      background: var(--color-base, #2579c6);
+      color: var(--color-text, #fff);
+    }
+
+    &:hover {
+      background: var(--color-base-85, rgba(31, 103, 168, 0.83));
+      color: var(--color-text, #fff);
+    }
+
+    &:focus {
+      background: var(--color-base-85, #1f67a8);
+      color: var(--color-text, #fff);
+    }
+
+    &:active {
+      background: var(--color-base-80, #104888);
+      color: var(--color-text, #fff);
+    }
+  }
+}
+
+// Joubel-UI
+.h5peditor .ui-dialog .h5p-joubelui-button,
+.h5p-joubelui-button {
+  background: var(--color-base, #1a73d9);
+  color: var(--color-text, #fff);
+
+  &:hover,
+  &:focus {
+    background: var(--color-base-85, #1356a3);
+    color: var(--color-text, #fff);
+  }
+
+  &:active {
+    background: var(--color-base-80, #104888);
+    box-shadow: inset 0 4px 0 var(--color-base-75, #0e407a);
+    color: var(--color-text, #fff);
+  }
+}
+
+.joubel-simple-rounded-button {
+  background: var(--color-base, #1a73d9);
+  color: var(--color-text, #fff);
+
+  &:hover,
+  &:focus {
+    background: var(--color-base-85, #1356a3);
+    color: var(--color-text, #fff);
+  }
+
+  &:active {
+    background: var(--color-base-80, #104888);
+    box-shadow: inset 0 4px 0 var(--color-base-75, #0e407a);
+    color: var(--color-text, #fff);
+  }
+}
+
+.h5p-joubelui-score-bar .joubel-tip-container {
+  color: var(--color-base, #1a73d9);
+}
+
+.h5p-joubelui-progressbar-background {
+  background-color: var(--color-base-80, #014876);
+}
+
+// H5P.Audio
+.h5p-audio-inner .h5p-audio-minimal-button {
+  background: var(--color-base, rgb(100, 152, 254));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, var(--color-base, rgba(100, 152, 254, 1))), color-stop(100%, var(--color-base-90, rgba(4, 104, 206, 1))));
+  background: -webkit-linear-gradient(top, var(--color-base, rgba(100, 152, 254, 1)) 0%, var(--color-base-90, rgba(4, 104, 206, 1)) 100%);
+  color: var(--color-text, #fff);
+}
+
+// H5P.CoursePresentation
+.h5p-course-presentation {
+  .h5p-progressbar .h5p-progressbar-part-show {
+    background: var(--color-base, #0097fd);
+    background-image: -webkit-linear-gradient(top, var(--color-base, #0097fd), var(--color-base-90, #096bcb));
+    background-image: -moz-linear-gradient(top, var(--color-base, #0097fd), var(--color-base-90, #096bcb));
+    background-image: linear-gradient(to bottom, var(--color-base, #0097fd), var(--color-base-90, #096bcb));
+  }
+
+  .h5p-element-button {
+    background: var(--color-base, #00f);
+    border-color: var(--color-base-90, #70b0ff);
+    color: var(--color-text, #fff);
+
+    &:hover {
+      background: var(--color-base-85, #003fdf);
+      border-color: var(--color-base, #70b0ff);
+    }
+  }
+
+  .h5p-keywords-wrapper > [role=menu] {
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-base, rgb(0, 151, 253));
+
+      &:hover {
+        background: var(--color-base-85, rgb(34, 161, 249));
+      }
+    }
+
+    &> [role=menuitem]:hover span {
+      color: var(--color-base, #1d74c8);
+    }
+  }
+
+  .h5p-element .h5p-element-outer::-webkit-scrollbar-thumb,
+  .h5p-element .h5p-element-outer .h5p-element-inner::-webkit-scrollbar-thumb,
+  .h5p-summary-table-pages::-webkit-scrollbar-thumb {
+    background: var(--color-base, rgb(0, 151, 253));
+
+    &:hover {
+      background: var(--color-base-85, rgb(34, 161, 249));
+    }
+  }
+}
+
+// H5P.DocumentationTool
+.h5p-documentation-tool-nav-button {
+  &:before {
+    color: var(--color-text, #fff);
+  }
+
+  &.next:before {
+    color: var(--color-text, #fff);
+  }
+}
+
+// H5P.FreeTextQuestion
+.h5p-free-text-question-text-wrapper {
+  background: var(--color-base, #2880d0);
+  color: var(--color-text, #fff);
+}
+
+// H5P.GuessTheAnswer
+.h5p-guess-answer .show-solution-button {
+  background-color: var(--color-base, #1a73d9);
+  color: var(--color-text, #fff);
+
+  &:hover,
+  &:focus {
+    background: var(--color-base-85, #1356a3);
+  }
+
+  &:active {
+    background: var(--color-base-80, #104888);
+    box-shadow: inset 0 4px 0 var(--color-base-75, #0e407a);
+  }
+}
+
+// H5P.GoToQuestion
+.h5p-gotoquestion-text {
+  background: var(--color-base, #018d82);
+  color: var(--color-text, #fff)
+}
+
+.h5p-gotoquestion-button[aria-disabled=false]:hover,
+.h5p-gotoquestion-button[aria-disabled=false]:focus {
+  color: var(--color-base, #018d82);
+
+  &:after {
+    border-bottom-color: var(--color-base, #018d82);
+  }
+}
+
+// H5P.MemoryGame
+.h5p-memory-reset {
+  background: var(--color-base, #1a73d9);
+  color: var(--color-text, #fff);
+
+  &:hover,
+  &:focus {
+    background: var(--color-base-85, #1356a3);
+  }
+}
+
+// H5P.OpenEndedQuestion
+.h5p-questionnaire .h5p-open-ended-question-question {
+  background: var(--color-base, #2880d0);
+  color: var(--color-text, #fff);
+}
+
+// H5P.Question
+.h5p-question-feedback {
+  color: var(--color-base, #1a73d9);
+}
+
+// H5P.Questionnaire
+// #0c9bfc is 180 degree turned HUE of default #ff6b00, etc.
+.h5p-questionnaire-submit-screen {
+  background: var(--color-base, #2880d0);
+  color: var(--color-text, #fff);
+
+  .h5p-questionnaire-button.previous {
+    color: var(--color-text, #fff);
+    border-color: var(--color-text, #fff);
+
+    &:hover {
+      background-color: var(--color-base-85, #3b8ace);
+    }
+
+    &:active {
+      background-color: var(--color-base-80, #1879ce);
+    }
+  }
+}
+
+.h5p-questionnaire-success {
+  background: var(--color-base, #2880d0);
+  color: var(--color-text, #fff);
+}
+
+.h5p-questionnaire-button.submit {
+  background: var(--color-base, #0c9bfc);
+  border-color: var(--color-base, #0c9bfc);
+  filter: hue-rotate(180deg);
+
+  &:hover {
+    background-color: var(--color-base-85, #20a5ff);
+  }
+
+  &:active {
+    background-color: var(--color-base-80, #0d8eec);
+  }
+}
+
+.h5p-questionnaire-progress-bar-widget {
+  background-color: var(--color-text, #fff);
+}
+
+.h5p-questionnaire-progress-bar-current {
+  background: var(--color-base, #0c9bfc);
+  filter: hue-rotate(180deg);
+}
+
+.h5p-questionnaire-progress-bar-widget-current {
+  color: var(--color-base, #0c9bfc);
+  filter: hue-rotate(180deg);
+}
+
+// H5P.QuestionSet
+.questionset .progress-dot {
+  &.answered {
+    background: var(--color-base, #73a2d5);
+  }
+
+  &.current {
+    background: var(--color-base-80, #285585);
+  }
+}
+
+// H5P.SimpleMultipleChoice
+.h5p-questionnaire .h5p-simple-multiple-choice-question {
+  background: var(--color-base, #2880d0);
+  color: var(--color-text, #fff);
+}
+
+// H5P.SingleChoiceSet
+.h5p-single-choice-set .h5p-joubelui-progressbar-background {
+  background-color: var(--color-base, #0097fd);
+}
+
+// H5P.Timeline
+.h5p-timeline .vco-storyjs a {
+  color: var(--color-base, #08c) !important;
+
+  &:hover,
+  &:active {
+    color: var(--color-base-85, #08c) !important;
+  }
+}
+
+.h5p-timeline .vco-timeline .vco-navigation {
+  .timenav-background .timenav-line {
+    background-color: var(--color-base, #08c) !important;
+  }
+
+  .timenav .content .marker {
+    &.active {
+      .flag .flag-content h3,
+      .flag-small .flag-content h3 {
+        color: var(--color-base, #08c) !important;
+      }
+
+      .dot,
+      .line {
+        background: var(--color-base, #08c) !important;
+      }
+    }
+
+    .line .event-line {
+      background: var(--color-base, #08c) !important;
+    }
+  }
+}

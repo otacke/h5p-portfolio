@@ -1,0 +1,171 @@
+
+$background-color: #fff;
+$base-color: #1768C4;
+$base-color-5: rgba($base-color, .05);
+$base-color-10: rgba($base-color, .1);
+$base-color-20: rgba($base-color, .2);
+$base-color-50: rgba($base-color, .5);
+$base-color-90: rgba($base-color, .9);
+$base-color-95: rgba($base-color, .95);
+$black: #000;
+$black-20: rgba(0, 0, 0, .2);
+$cool-grey: #eee;
+$dark-grey-20: rgba(166, 166, 166, .2);
+$ghost-white: #e9e4ed;
+$light-grey: #bebebe;
+$medium-grey: #363636;
+$scrollbar: #6C7992;
+$scrollbar-30: rgba($scrollbar, .35);
+$scrollbar-75: rgba($scrollbar, .75);
+$mud: #4c4452;
+$mud-80: rgba($mud, .8);
+
+$fullscreen-button-size: 1.8em;
+
+.h5p-interactive-book {
+  &.h5p-interactive-book-small {
+    .h5p-interactive-book-main {
+
+      &.h5p-interactive-book-navigation-open {
+
+        .h5p-interactive-book-navigation {
+          max-width: none;
+          width: 100%;
+
+          .large-navigation-list {
+            height: auto;
+          }
+        }
+
+        .h5p-interactive-book-navigation-chapter-accordion {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        .h5p-interactive-book-navigation-chapter-button {
+          background-color: $background-color;
+
+          &.h5p-interactive-book-navigation-current {
+            border-bottom: solid 1px $ghost-white;
+          }
+        }
+
+        .h5p-interactive-book-navigation-sectionlist {
+          max-height: none;
+          overflow: inherit;
+          transition: max-height .5s ease-in;
+          visibility: inherit;
+          padding-left: 0.3rem;
+        }
+
+        .h5p-interactive-book-content {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.h5p-scrollable-fullscreen.h5p-semi-fullscreen {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .h5p-scrollable-fullscreen {
+    overflow-y: auto;
+  }
+
+  &.h5p-fullscreen {
+    background-color: $background-color;
+  }
+
+  .h5p-content-controls {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    background: $scrollbar-30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $scrollbar-75;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar;
+  }
+}
+
+.h5p-interactive-book-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+
+  &.h5p-interactive-book-navigation-open {
+
+    .h5p-interactive-book-navigation {
+      max-width: 16.563em;
+      width: 16.563em;
+    }
+  }
+}
+
+.h5p-content-hidden {
+  .h5p-interactive-book-cover-present {
+    display: none;
+  }
+}
+
+.h5p-fullscreen,
+.h5p-semi-fullscreen {
+  .h5p-interactive-book {
+    display: flex;
+    flex-direction: column;
+
+    .h5p-interactive-book-content {
+      padding-bottom: 4.5em;
+    }
+
+    .h5p-interactive-book-status-footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  .h5p-interactive-book-main {
+    flex: 1;
+    overflow: auto;
+
+    .h5p-interactive-book-content {
+      overflow-x: hidden;
+      overflow-y: auto;
+      // Note: Subtracts padding, do not use box-sizing because then inner div
+      // will have too little space
+      min-height: calc(100% - 5.5em);
+    }
+  }
+
+  .h5p-interactive-book-navigation {
+    display: flex;
+    flex-direction: column;
+
+    .navigation-list {
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .large-navigation-list {
+      min-height: 1px;
+    }
+  }
+}
+
+@import 'pagecontent';
+@import 'statusbar';
+@import 'navigationbar';
+@import 'cover';
+@import "summary";

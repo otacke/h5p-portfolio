@@ -1,0 +1,207 @@
+.h5p-interactive-book-navigation {
+  background-color: $background-color;
+  background-size: cover;
+  box-shadow: .625em .625em 1.875em $dark-grey-20;
+  max-width: 0;
+  min-height: 19em;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  transition: width .15s linear, flex-basis .15s linear, max-width .15s linear;
+  width: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+
+  >a {
+    font-weight: bold;
+  }
+
+  >div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .navigation-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .large-navigation-list {
+    height: 0;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 58em;
+  }
+}
+
+.h5p-interactive-book-navigation-sectionlist {
+  background-color: $background-color;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  transition: max-height .5s ease-in;
+
+  >:first-child {
+    margin-top: .5em;
+  }
+
+  >:last-child {
+    border-bottom: solid 1px $ghost-white;
+    padding-bottom: .5em;
+  }
+
+  .h5p-interactive-book-navigation-section {
+    background: transparent;
+    color: $mud;
+    font-size: .875em;
+    font-weight: 400;
+    line-height: 1.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .section-button {
+      position: relative;
+      background: transparent;
+      border: 0;
+      padding: 0 1.125em;
+      max-width: 100%;
+    }
+
+    .h5p-interactive-book-navigation-section-icon {
+      position: absolute;
+      color: $black;
+      font-size: 5px;
+      visibility: hidden;
+      width: 2.17em;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &.h5p-interactive-book-navigation-section-task {
+        visibility: inherit;
+      }
+    }
+
+    .h5p-interactive-book-navigation-section-title {
+      font-size: .85em;
+      margin-left: 15px;
+      margin-right: 2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  :hover {
+    color: var(--color-base, $base-color);
+    cursor: pointer;
+  }
+}
+
+.h5p-interactive-book-navigation-closed {
+  .h5p-interactive-book-navigation-chapter-button {
+    background-color: var(--color-base-10, $background-color);
+
+    .h5p-interactive-book-navigation-chapter-title-text {
+      color: $mud;
+    }
+  }
+
+  .h5p-interactive-book-navigation-sectionlist {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease-out;
+    visibility: hidden;
+  }
+}
+
+.h5p-interactive-book-navigation-chapter {
+  list-style: none;
+}
+
+.h5p-interactive-book-navigation-chapter-button {
+  align-items: center;
+  background-color: var(--color-base-10, $base-color-10);
+  background-size: cover;
+  border: 0;
+  border-bottom: solid 1px $ghost-white;
+  color: $mud;
+  display: flex;
+  font-family: Arial;
+  height: 3.438em;
+  margin: 0;
+  padding: 0 1.125em;
+  text-align: initial;
+  text-decoration: none solid $mud;
+  width: 100%;
+  position: relative;
+
+  &.h5p-interactive-book-navigation-current {
+    background-color: var(--color-base-10, $base-color-10);
+    border-bottom-color: white;
+  }
+
+  &:hover {
+    background-color: var(--color-base-5, $base-color-5);
+    cursor: pointer;
+  }
+
+  .h5p-interactive-book-navigation-chapter-title-text {
+    background-color: transparent;
+    color: var(--color-base, $base-color);
+    font-family: Arial;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.5em;
+    padding-left: 1.5em;
+    padding-right: 2em;
+    overflow: hidden;
+    text-decoration: none solid var(--color-base, $base-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .h5p-interactive-book-navigation-chapter-accordion {
+    align-self: center;
+    font-size: .65em;
+    width: 1em;
+    position: absolute;
+    left: 15px;
+    top: 17px;
+
+    &.hidden {
+      opacity: 0;
+      visibility: none;
+    }
+  }
+
+  .h5p-interactive-book-navigation-chapter-progress {
+    align-self: center;
+    font-size: .75em;
+    position: absolute;
+    right: 15px;
+    top: 17px;
+  }
+
+  &:active {
+    background-color: var(--color-base-10, $base-color-10);
+  }
+}
+
+.h5p-interactive-book-navigation-maintitle {
+  background-color: var(--color-base, $base-color);
+  background-size: cover;
+
+  .navigation-title {
+    align-self: center;
+    color: var(--color-text, $background-color);
+    font-family: Arial;
+    font-size: 1em;
+    font-weight: 400;
+    overflow: hidden;
+    padding-left: 1.25em;
+    text-decoration: none solid var(--color-text, $background-color);
+    text-overflow: ellipsis;
+  }
+}

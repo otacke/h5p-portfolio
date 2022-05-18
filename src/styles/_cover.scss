@@ -1,0 +1,129 @@
+.h5p-interactive-book-cover {
+  align-items: center;
+  background: $background-color;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial;
+  height: 100%;
+  left: 0;
+  padding-bottom: 200px;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+
+  &.h5p-cover-nographics {
+    padding-top: 120px;
+  }
+
+  p {
+    margin: 0 0 .5em;
+  }
+}
+
+.h5p-interactive-book-cover-graphics {
+  align-items: center;
+  display: flex;
+  height: 15em;
+  justify-content: center;
+  margin: 4.375em 0;
+  position: relative;
+  width: 100%;
+
+  &.h5p-image > img,
+  &.h5p-video > video,
+  &.h5p-video.h5p-youtube > div:not(.h5p-interactive-book-cover-bar) {
+    box-shadow: 0.5em 0.25em 3em 0 $black-20;
+    position: absolute;
+    left: 50%;
+    max-height: 15em;
+    min-width: 20em;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.h5p-image > img,
+  &.h5p-video > video {
+    max-width: 85%;
+  }
+
+  &.h5p-video.h5p-youtube > div:not(.h5p-interactive-book-cover-bar) {
+    max-width: 26.666em;
+  }
+}
+
+.h5p-interactive-book-cover-bar {
+  background-color: var(--color-base-5, $base-color-5);
+  background-size: cover;
+  height: 70%;
+  width: inherit;
+}
+
+.h5p-interactive-book-cover-image {
+  box-shadow: 10px 4px 47px 0 $black-20;
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.h5p-interactive-book-cover-title {
+  color: $medium-grey;
+  font-size: 2.188em;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none solid $medium-grey;
+}
+
+.h5p-interactive-book-cover-description {
+  color: $medium-grey;
+  font-size: 1.25em;
+  font-weight: 400;
+  margin-bottom: .5em;
+  width: 80%;
+  text-decoration: none solid $medium-grey;
+}
+
+.h5p-interactive-book-cover-readbutton {
+  margin-top: .5em;
+
+  button {
+    background-color: var(--color-base, $base-color);
+    background-size: cover;
+    border: 0;
+    border-radius: 3px;
+    color: var(--color-text, $background-color);
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none solid var(--color-text, $background-color);
+
+    &:hover {
+      background-color: var(--color-base-90, $base-color-90);
+      background-size: cover;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: var(--color-base-95, $base-color-95);
+      background-size: cover;
+    }
+
+    &:focus {
+      outline-style: double;
+    }
+  }
+}
+
+.h5p-container {
+  &.covered {
+    .h5p-content-controls {
+      display: none;
+    }
+  }
+}

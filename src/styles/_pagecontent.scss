@@ -1,0 +1,93 @@
+.h5p-interactive-book-chapter {
+  display: none;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(0);
+  transition: .25s;
+  width: 100%;
+
+  &.h5p-interactive-book-previous {
+    transform: translateX(-100%);
+  }
+
+  &.h5p-interactive-book-current {
+    display: block;
+    transform: translateX(0);
+  }
+
+  &.h5p-interactive-book-next {
+    transform: translateX(100%);
+  }
+
+  > div {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1058px;
+  }
+}
+
+.h5p-interactive-book-animate {
+  display: block;
+  transition: transform .25s ease-in-out;
+}
+
+.h5p-interactive-book-content {
+  padding: 1rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  &.hidden {
+    display: none;
+  }
+
+  .h5p-column-content {
+    // Workaround for Android to prevent font boosting
+    max-height: 9999999px;
+
+    &:first-child {
+      margin-top: 0;
+
+      &> p {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.h5p-interactive-book-status-progress-marker {
+  align-items: center;
+  border-top: 1px solid $cool-grey;
+  display: flex;
+  padding: 1em 0 0 1em;
+  clear: both;
+  cursor: pointer;
+
+  input {
+    &[type='checkbox'] {
+      transform: scale(1.75);
+      cursor: pointer;
+    }
+  }
+
+  p {
+    color: $mud;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 1em;
+  }
+}
+
+.h5p-content-hidden {
+  display: none;
+}
+
+/* Help Course Presentation to resize properly with initial height of max-width / 9 * 16 */
+.h5p-course-presentation {
+  .h5p-wrapper {
+    height: 596px;
+  }
+}
