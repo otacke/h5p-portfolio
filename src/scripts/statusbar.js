@@ -1,224 +1,77 @@
+import Util from './util';
+
 /**
- * Constructor function.
+ * @constructor
+ * @param {object} params Parameters.
+ * @param {object} callbacks Callbacks.
  */
-class StatusBar extends H5P.EventDispatcher {
-  constructor(contentId, totalChapters, parent, params, styleClassName) {
-    super();
+export default class StatusBar {
+  constructor(params, callbacks = {}) {
+    this.params = params;
+    this.callbacks = Util.extend({
+      onMoved: (() => {}),
+      onScrollToTop: (() => {}),
+      onToggleMenu: (() => {}),
+      onToggleFullscreen: (() => {})
+    }, callbacks);
 
-    this.id = contentId;
-    this.parent = parent;
+    this.buildDOM();
+  }
 
-    this.params = params || {};
+  /**
+   * Build DOM.
+   */
+  buildDOM() {
+    this.wrapper = document.createElement('div');
+    this.wrapper.classList.add(this.params.styleClassName);
+    this.wrapper.setAttribute('tabindex', '-1');
 
-    this.params.l10n = params.l10n;
-
-    this.params.a11y = Object.assign({
-      progress: 'Page @page of @total',
-      menu: 'Toggle navigation menu',
-    }, this.params.a11y || {});
-
-    this.totalChapters = totalChapters;
-    this.arrows = this.addArrows();
-
-    /**
-     * Top row initializer
-     */
-    this.progressBar = this.createProgressBar();
-    this.progressIndicator = this.createProgressIndicator();
-    this.chapterTitle = this.addChapterTitle();
-    this.menuToggleButton = this.createMenuToggleButton();
+    // Progressbar
+    this.progressBar = this.buildProgressBar();
+    this.wrapper.appendChild(this.progressBar.wrapper);
 
     const wrapperInfo = document.createElement('div');
     wrapperInfo.classList.add('h5p-interactive-book-status');
-    wrapperInfo.appendChild(this.menuToggleButton);
-    wrapperInfo.appendChild(this.createToTopButton());
+
+    // Menu toggle button
+    if (this.params.displayMenuToggleButton) {
+      this.menuToggleButton = this.buildMenuToggleButton();
+      wrapperInfo.appendChild(this.menuToggleButton);
+    }
+
+    // To top button
+    if (this.params.displayToTopButton) {
+      this.toTopButton = this.buildToTopButton();
+      wrapperInfo.appendChild(this.toTopButton);
+    }
+
+    // Chapter title
+    this.chapterTitle = this.buildChapterTitle();
     wrapperInfo.appendChild(this.chapterTitle.wrapper);
+
+    // Progress indicator
+    this.progressIndicator = this.buildProgressIndicator();
     wrapperInfo.appendChild(this.progressIndicator.wrapper);
-    wrapperInfo.appendChild(this.arrows.buttonWrapperPrevious);
-    wrapperInfo.appendChild(this.arrows.buttonWrapperNext);
 
+    // Navigation buttons
+    this.navigationButtons = this.buildNavigationButtons();
+    wrapperInfo.appendChild(this.navigationButtons['previous']);
+    wrapperInfo.appendChild(this.navigationButtons['next']);
+
+    // Fullscreen button
     if (this.params.displayFullScreenButton && H5P.fullscreenSupported) {
-      wrapperInfo.appendChild(this.createFullScreenButton());
+      this.fullScreenButton = this.buildFullScreenButton();
+      wrapperInfo.appendChild(this.fullScreenButton);
     }
 
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add(styleClassName);
-    this.wrapper.setAttribute('tabindex', '-1');
-    this.wrapper.appendChild(this.progressBar.wrapper);
     this.wrapper.appendChild(wrapperInfo);
-
-    this.on('updateStatusBar', this.updateStatusBar);
-
-    /**
-     * Sequential traversal of chapters
-     * Event should be either 'next' or 'prev'
-     */
-    this.on('seqChapter', (event) => {
-      const eventInput = {
-        h5pbookid: this.parent.contentId
-      };
-      if (event.data.toTop) {
-        eventInput.section = 'top';
-      }
-
-      if (event.data.direction === 'next') {
-        if (this.parent.activeChapter + 1 < this.parent.chapters.length) {
-          eventInput.chapter = `h5p-interactive-book-chapter-${this.parent.chapters[this.parent.activeChapter + 1].instance.subContentId}`;
-        }
-        else if (this.parent.hasSummary() && this.parent.activeChapter + 1 === this.parent.chapters.length) {
-          this.parent.trigger('viewSummary', eventInput);
-        }
-      }
-      else if (event.data.direction === 'prev') {
-        if (this.parent.activeChapter > 0) {
-          eventInput.chapter = `h5p-interactive-book-chapter-${this.parent.chapters[this.parent.activeChapter - 1].instance.subContentId}`;
-        }
-      }
-      if (eventInput.chapter) {
-        this.parent.trigger('newChapter', eventInput);
-      }
-    });
-  }
-
-  /**
-   * Update progress bar.
-   *
-   * @param {number} chapterId Chapter Id.
-   */
-  updateProgressBar(chapter) {
-    const barWidth = `${chapter / this.totalChapters * 100}%`;
-
-    this.progressBar.progress.style.width = barWidth;
-    const title = this.params.a11y.progress
-      .replace('@page', chapter)
-      .replace('@total', this.totalChapters);
-    this.progressBar.progress.title = title;
-  }
-
-  /**
-   * Update aria label of progress text
-   * @param {number} chapterId Index of chapter
-   */
-  updateA11yProgress(chapterId) {
-    this.progressIndicator.hiddenButRead.innerHTML = this.params.a11y.progress
-      .replace('@page', chapterId)
-      .replace('@total', this.totalChapters);
-  }
-
-  /**
-   * Update status bar.
-   */
-  updateStatusBar() {
-    const currentChapter = this.parent.getActiveChapter() + 1;
-
-    const chapterTitle = this.parent.chapters[currentChapter - 1].title;
-
-    this.progressIndicator.current.innerHTML = currentChapter;
-
-    this.updateA11yProgress(currentChapter);
-    this.updateProgressBar(currentChapter);
-
-    this.chapterTitle.text.innerHTML = chapterTitle;
-
-    this.chapterTitle.text.setAttribute('title', chapterTitle);
-
-    //assure that the buttons are valid in terms of chapter edges
-    if (this.parent.activeChapter <= 0) {
-      this.setButtonStatus('Previous', true);
-    }
-    else {
-      this.setButtonStatus('Previous', false);
-    }
-    if ((this.parent.activeChapter + 1) >= this.totalChapters) {
-      this.setButtonStatus('Next', true);
-    }
-    else {
-      this.setButtonStatus('Next', false);
-    }
-  }
-
-  /**
-   * Add traversal buttons for sequential travel (next and previous chapter)
-   */
-  addArrows() {
-    const acm = {};
-
-    // Initialize elements
-    acm.buttonPrevious = document.createElement('div');
-    acm.buttonPrevious.classList.add('navigation-button');
-    acm.buttonPrevious.classList.add('icon-previous');
-    acm.buttonPrevious.setAttribute('title', this.params.l10n.previousPage);
-    acm.buttonPrevious.setAttribute('aria-label', this.params.l10n.previousPage);
-
-    acm.buttonWrapperPrevious = document.createElement('button');
-    acm.buttonWrapperPrevious.classList.add('h5p-interactive-book-status-arrow');
-    acm.buttonWrapperPrevious.classList.add('h5p-interactive-book-status-button');
-    acm.buttonWrapperPrevious.onclick = () => {
-      this.trigger('seqChapter', {
-        direction:'prev',
-        toTop: true
-      });
-    };
-    acm.buttonWrapperPrevious.appendChild(acm.buttonPrevious);
-
-    acm.buttonNext = document.createElement('div');
-    acm.buttonNext.classList.add('navigation-button');
-    acm.buttonNext.classList.add('icon-next');
-    acm.buttonNext.setAttribute('title', this.params.l10n.nextPage);
-    acm.buttonNext.setAttribute('aria-label', this.params.l10n.nextPage);
-
-    acm.buttonWrapperNext = document.createElement('button');
-    acm.buttonWrapperNext.classList.add('h5p-interactive-book-status-arrow');
-    acm.buttonWrapperNext.classList.add('h5p-interactive-book-status-button');
-    acm.buttonWrapperNext.onclick = () => {
-      this.trigger('seqChapter', {
-        direction:'next',
-        toTop: true
-      });
-    };
-    acm.buttonWrapperNext.appendChild(acm.buttonNext);
-
-    return acm;
-  }
-
-  /**
-   * Add a menu button which hides and shows the navigation bar.
-   *
-   * @return {HTMLElement} Button node.
-   */
-  createMenuToggleButton() {
-    const button = document.createElement('a');
-    button.classList.add('icon-menu');
-
-    const buttonWrapperMenu = document.createElement('button');
-    buttonWrapperMenu.classList.add('h5p-interactive-book-status-menu');
-    buttonWrapperMenu.classList.add('h5p-interactive-book-status-button');
-    buttonWrapperMenu.title = this.params.a11y.menu;
-    buttonWrapperMenu.setAttribute('aria-expanded', 'false');
-    buttonWrapperMenu.setAttribute('aria-controls', 'h5p-interactive-book-navigation-menu');
-    buttonWrapperMenu.onclick = () => {
-      this.parent.trigger('toggleMenu');
-    };
-
-    buttonWrapperMenu.appendChild(button);
-    return buttonWrapperMenu;
-  }
-
-  /**
-   * Check if menu is active/open
-   *
-   * @return {boolean}
-   */
-  isMenuOpen() {
-    return this.menuToggleButton.classList.contains('h5p-interactive-book-status-menu-active');
   }
 
   /**
    * Add progress bar.
-   *
    * @return {object} Progress bar elements.
    */
-  createProgressBar() {
+  buildProgressBar() {
     const progress = document.createElement('div');
     progress.classList.add('h5p-interactive-book-status-progressbar-front');
     progress.setAttribute('tabindex', '-1');
@@ -227,75 +80,75 @@ class StatusBar extends H5P.EventDispatcher {
     wrapper.classList.add('h5p-interactive-book-status-progressbar-back');
     wrapper.appendChild(progress);
 
-    return {
-      wrapper,
-      progress
-    };
+    return { wrapper: wrapper, progress: progress };
   }
 
   /**
-   * Add a paragraph which indicates which chapter is active.
-   *
+   * Build menu toggle button.
+   * @return {HTMLElement} Menu toggle button.
+   */
+  buildMenuToggleButton() {
+    const buttonWrapper = document.createElement('button');
+    buttonWrapper.classList.add('h5p-interactive-book-status-menu');
+    buttonWrapper.classList.add('h5p-interactive-book-status-button');
+    buttonWrapper.title = this.params.a11y.menu;
+    buttonWrapper.setAttribute('aria-expanded', 'false');
+    buttonWrapper.setAttribute('aria-controls', 'h5p-interactive-book-navigation-menu');
+    buttonWrapper.onclick = () => {
+      this.callbacks.onToggleMenu();
+    };
+
+    const button = document.createElement('a');
+    button.classList.add('icon-menu');
+    buttonWrapper.appendChild(button);
+
+    return buttonWrapper;
+  }
+
+  /**
+   * Create button to scroll to top with.
+   * @return {HTMLElement} Button.
+   */
+  buildToTopButton() {
+    const icon = document.createElement('div');
+    icon.classList.add('icon-up');
+    icon.classList.add('navigation-button');
+
+    const button = document.createElement('button');
+    button.classList.add('h5p-interactive-book-status-to-top');
+    button.classList.add('h5p-interactive-book-status-button');
+    button.classList.add('h5p-interactive-book-status-arrow');
+    button.setAttribute('title', this.params.l10n.navigateToTop);
+    button.setAttribute('aria-label', this.params.l10n.navigateToTop);
+    button.addEventListener('click', () => {
+      this.callbacks.onScrollToTop();
+    });
+
+    button.appendChild(icon);
+
+    return button;
+  }
+
+  /**
+   * Create chapter title.
    * @return {object} Chapter title elements.
    */
-  addChapterTitle() {
+  buildChapterTitle() {
     const text = document.createElement('h1');
     text.classList.add('title');
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('h5p-interactive-book-status-chapter');
     wrapper.appendChild(text);
-    return {
-      wrapper,
-      text
-    };
-  }
 
-  /**
-   * Add a button which scrolls to the top of the page.
-   *
-   * @return {HTMLElement} Button.
-   */
-  createToTopButton() {
-    const button = document.createElement('div');
-    button.classList.add('icon-up');
-    button.classList.add('navigation-button');
-
-    const wrapper = document.createElement('button');
-    wrapper.classList.add('h5p-interactive-book-status-to-top');
-    wrapper.classList.add('h5p-interactive-book-status-button');
-    wrapper.classList.add('h5p-interactive-book-status-arrow');
-    wrapper.setAttribute('aria-label', this.params.l10n.navigateToTop);
-    wrapper.addEventListener('click', () => {
-      this.parent.trigger('scrollToTop');
-      document.querySelector('.h5p-interactive-book-status-menu').focus();
-    });
-
-    wrapper.appendChild(button);
-
-    return wrapper;
-  }
-
-  /**
-   * Set the visibility.
-   *
-   * @param {boolean} hide True will hide the bar.
-   */
-  setVisibility(hide) {
-    if (hide) {
-      this.wrapper.classList.add('footer-hidden');
-    }
-    else {
-      this.wrapper.classList.remove('footer-hidden');
-    }
+    return { wrapper: wrapper, text: text };
   }
 
   /**
    * Add a status-button which shows current and total chapters.
-   *
    * @return {object} Progress elements.
    */
-  createProgressIndicator() {
+  buildProgressIndicator() {
     const current = document.createElement('span');
     current.classList.add('h5p-interactive-book-status-progress-number');
     current.setAttribute('aria-hidden', 'true');
@@ -307,7 +160,7 @@ class StatusBar extends H5P.EventDispatcher {
 
     const total = document.createElement('span');
     total.classList.add('h5p-interactive-book-status-progress-number');
-    total.innerHTML = this.totalChapters;
+    total.innerHTML = this.params.totalChapters;
     total.setAttribute('aria-hidden', 'true');
 
     const hiddenButRead = document.createElement('p');
@@ -324,83 +177,236 @@ class StatusBar extends H5P.EventDispatcher {
     wrapper.appendChild(progressText);
 
     return {
-      wrapper,
-      current,
-      total,
-      divider,
-      progressText,
-      hiddenButRead
+      wrapper: wrapper,
+      current: current,
+      total: total,
+      divider: divider,
+      progressText: progressText,
+      hiddenButRead: hiddenButRead
     };
   }
 
   /**
-   * Edit button state on both the top and bottom bar.
-   *
-   * @param {string} target Prev or Next.
-   * @param {boolean} disable True will disable the target button.
+   * Create navigation buttons.
+   * @return {object} Navigation buttons.
    */
-  setButtonStatus(target, disable) {
-    if (disable) {
-      this.arrows['buttonWrapper' + target].setAttribute('disabled', 'disabled');
-      this.arrows['button' + target].classList.add('disabled');
-    }
-    else {
-      this.arrows['buttonWrapper' + target].removeAttribute('disabled');
-      this.arrows['button' + target].classList.remove('disabled');
-    }
+  buildNavigationButtons() {
+    const buttons = {};
+
+    buttons['previous'] = this.buildNavigationButton({
+      icon: 'icon-previous',
+      label: this.params.l10n.previousPage,
+      onClicked: (() => {
+        this.callbacks.onMoved({ direction: 'prev', toTop: true });
+      })
+    });
+
+    buttons['next'] = this.buildNavigationButton({
+      icon: 'icon-next',
+      label: this.params.l10n.nextPage,
+      onClicked: (() => {
+        this.callbacks.onMoved({ direction: 'next', toTop: true });
+      })
+    });
+
+    return buttons;
   }
 
   /**
-   * Creates the fullscreen button.
-   *
-   * @returns {Element} The button dom element
+   * Create navigation button.
+   * @param {object} params Parameters.
+   * @param {function} onClicked Click handler.
+   * @param {string} icon CSS class name for icon.
+   * @param {string} label Label.
+   * @return {HTMLElement} Navigation button.
    */
-  createFullScreenButton() {
-    const toggleFullScreen = () => {
-      if (H5P.isFullscreen === true) {
-        H5P.exitFullScreen();
-      }
-      else {
-        H5P.fullScreen(this.parent.mainWrapper, this.parent);
-      }
-    };
+  buildNavigationButton(params) {
+    const button = document.createElement('button');
+    button.classList.add('h5p-interactive-book-status-arrow');
+    button.classList.add('h5p-interactive-book-status-button');
+    button.addEventListener('click', () => {
+      params.onClicked();
+    });
 
+    const icon = document.createElement('div');
+    icon.classList.add('navigation-button');
+    icon.classList.add(params.icon);
+    icon.setAttribute('title', params.label);
+    icon.setAttribute('aria-label', params.label);
+    button.appendChild(icon);
+
+    return button;
+  }
+
+  /**
+   * Build fullscreen button.
+   * @return {HTMLElement} Fullscreen button.
+   */
+  buildFullScreenButton() {
     const fullScreenButton = document.createElement('button');
     fullScreenButton.classList.add('h5p-interactive-book-status-fullscreen');
     fullScreenButton.classList.add('h5p-interactive-book-status-button');
     fullScreenButton.classList.add('h5p-interactive-book-enter-fullscreen');
     fullScreenButton.setAttribute('title', this.params.l10n.fullscreen);
     fullScreenButton.setAttribute('aria-label', this.params.l10n.fullscreen);
-    fullScreenButton.addEventListener('click', toggleFullScreen);
-    fullScreenButton.addEventListener('keyPress', (event) => {
-      if (event.which === 13 || event.which === 32) {
-        toggleFullScreen();
-        event.preventDefault();
-      }
-    });
-
-    this.parent.on('enterFullScreen', () => {
-      this.parent.isFullscreen = true;
-      fullScreenButton.classList.remove('h5p-interactive-book-enter-fullscreen');
-      fullScreenButton.classList.add('h5p-interactive-book-exit-fullscreen');
-      fullScreenButton.setAttribute('title', this.params.l10n.exitFullscreen);
-      fullScreenButton.setAttribute('aria-label', this.params.l10n.exitFullScreen);
-
-      this.parent.pageContent.updateFooter();
-    });
-
-    this.parent.on('exitFullScreen', () => {
-      this.parent.isFullscreen = false;
-      fullScreenButton.classList.remove('h5p-interactive-book-exit-fullscreen');
-      fullScreenButton.classList.add('h5p-interactive-book-enter-fullscreen');
-      fullScreenButton.setAttribute('title', this.params.l10n.fullscreen);
-      fullScreenButton.setAttribute('aria-label', this.params.l10n.fullscreen);
-
-      this.parent.pageContent.updateFooter();
+    fullScreenButton.addEventListener('click', () => {
+      this.callbacks.onToggleFullscreen();
     });
 
     return fullScreenButton;
   }
 
+  /**
+   * Update status bar.
+   * @param {object} params Parameters.
+   * @param {number} params.chapterId Chapter index + 1.
+   * @param {string} params.title Chapter title.
+   */
+  update(params = {}) {
+    this.updateProgressBar(params.chapterId);
+
+    this.chapterTitle.text.innerHTML = params.title;
+    this.chapterTitle.text.setAttribute('title', params.title);
+
+    this.progressIndicator.current.innerHTML = params.chapterId;
+
+    // Enable/disable navigation buttons depending on chapter
+    this.setButtonStatus(
+      'previous',
+      { enabled: params.chapterId > 1 }
+    );
+    this.setButtonStatus(
+      'next',
+      { enabled: params.chapterId < this.params.totalChapters }
+    );
+  }
+
+  /**
+   * Update progress bar.
+   * @param {number} chapterId Chapter index.
+   */
+  updateProgressBar(chapterId) {
+    this.progressBar.progress.style.width = `${chapterId / this.params.totalChapters * 100}%`;
+
+    const title = this.params.a11y.progress
+      .replace('@page', chapterId)
+      .replace('@total', this.params.totalChapters);
+
+    this.progressBar.progress.title = title;
+    this.progressIndicator.hiddenButRead.innerHTML = title;
+  }
+
+  /**
+   * Set focus to menu toggle button.
+   */
+  setFocusToMenuToggleButton() {
+    if (this.menuToggleButton) {
+      this.menuToggleButton.focus();
+    }
+  }
+
+  /**
+   * Enable button.
+   * @param {string} id Button id.
+   */
+  enableButton(id) {
+    if (!this.navigationButtons[id]) {
+      return;
+    }
+
+    this.navigationButtons[id].removeAttribute('disabled');
+    this.navigationButtons[id].classList.remove('disabled');
+  }
+
+  /**
+   * Disable button.
+   * @param {string} id Button id.
+   */
+  disableButton(id) {
+    if (!this.navigationButtons[id]) {
+      return;
+    }
+
+    this.navigationButtons[id].setAttribute('disabled', 'disabled');
+    this.navigationButtons[id].classList.add('disabled');
+  }
+
+  /**
+   * Set button state.
+   * @param {string} id Button id.
+   * @param {boolean} enabled If true, will enable button, else disable.
+   */
+  setButtonStatus(id, status = {}) {
+    if (status.enabled) {
+      this.enableButton(id);
+    }
+    else {
+      this.disableButton(id);
+    }
+  }
+
+  /**
+   * Set fullscreen state.
+   * @param {boolean} state If true, enter fullscreen, else exit fullscreen.
+   */
+  setFullScreen(state) {
+    if (typeof state !== 'boolean') {
+      return;
+    }
+
+    if (!this.fullScreenButton) {
+      return;
+    }
+
+    this.fullScreenButton.classList.toggle('h5p-interactive-book-enter-fullscreen', !state);
+    this.fullScreenButton.classList.toggle('h5p-interactive-book-exit-fullscreen', state);
+
+    if (state) {
+      this.fullScreenButton.setAttribute('title', this.params.l10n.exitFullscreen);
+      this.fullScreenButton.setAttribute('aria-label', this.params.l10n.exitFullscreen);
+    }
+    else {
+      this.fullScreenButton.setAttribute('title', this.params.l10n.fullscreen);
+      this.fullScreenButton.setAttribute('aria-label', this.params.l10n.fullscreen);
+    }
+  }
+
+  /**
+   * Scroll bar into View.
+   */
+  scrollIntoView() {
+    this.wrapper.scrollIntoView(true);
+  }
+
+  /**
+   * Toggle menu.
+   * @param {boolean} [state] True for open, false for closed or toggle.
+   * @return {boolean} Resulting state.
+   */
+  toggleMenu(state) {
+    if (!this.menuToggleButton) {
+      return false;
+    }
+
+    if (typeof state !== 'boolean') {
+      state = !this.isMenuOpen();
+    }
+
+    this.menuToggleButton.classList.toggle('h5p-interactive-book-status-menu-active', state);
+    this.menuToggleButton.setAttribute('aria-expanded', state);
+
+    return state;
+  }
+
+  /**
+   * Check if menu is active/open.
+   * @return {boolean} True, if open, else false.
+   */
+  isMenuOpen() {
+    if (!this.menuToggleButton) {
+      return false;
+    }
+
+    return this.menuToggleButton.classList.contains('h5p-interactive-book-status-menu-active');
+  }
 }
-export default StatusBar;

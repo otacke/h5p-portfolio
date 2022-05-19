@@ -188,278 +188,77 @@
     ]
   },
   {
-    "name": "read",
-    "type": "text",
-    "label": "Translation for \"Read\"",
-    "importance": "low",
-    "default": "Read",
+    "name": "l10n",
+    "type": "group",
     "common": true,
-    "optional": true
-  },
-  {
-    "name": "displayTOC",
-    "type": "text",
-    "label": "Translation for \"Display 'Table of contents'\"",
+    "label": "User interface",
     "importance": "low",
-    "default": "Display 'Table of contents'",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "hideTOC",
-    "type": "text",
-    "label": "Translation for \"Hide 'Table of contents'\"",
-    "importance": "low",
-    "default": "Hide 'Table of contents'",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "nextPage",
-    "type": "text",
-    "label": "Translation for \"Next page\"",
-    "importance": "low",
-    "default": "Next page",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "previousPage",
-    "type": "text",
-    "label": "Translation for \"Previous page\"",
-    "importance": "low",
-    "default": "Previous page",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "chapterCompleted",
-    "type": "text",
-    "label": "Translation for \"Page completed!\"",
-    "importance": "low",
-    "default": "Page completed!",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "partCompleted",
-    "type": "text",
-    "label": "Translation for \"@pages of @total completed\" (@pages and @total will be replaced by actual values)",
-    "importance": "low",
-    "default": "@pages of @total completed",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "incompleteChapter",
-    "type": "text",
-    "label": "Translation for \"Incomplete page\"",
-    "importance": "low",
-    "default": "Incomplete page",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "navigateToTop",
-    "type": "text",
-    "label": "Translation for \"Navigate to the top\"",
-    "importance": "low",
-    "default": "Navigate to the top",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "markAsFinished",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"I have finished this page\"",
-    "default": "I have finished this page",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "fullscreen",
-    "type": "text",
-    "importance": "low",
-    "label": "Fullscreen button label",
-    "default": "Fullscreen",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "exitFullscreen",
-    "type": "text",
-    "importance": "low",
-    "label": "Exit fullscreen button label",
-    "default": "Exit fullscreen",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "bookProgressSubtext",
-    "type": "text",
-    "importance": "low",
-    "label": "Page progress in book",
-    "description": "\"@count\" will be replaced by page count, and \"@total\" with the total number of pages",
-    "default": "@count of @total pages",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "interactionsProgressSubtext",
-    "type": "text",
-    "importance": "low",
-    "label": "Interaction progress",
-    "description": "\"@count\" will be replaced by interaction count, and \"@total\" with the total number of interactions",
-    "default": "@count of @total interactions",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "submitReport",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"Submit report\"",
-    "default": "Submit Report",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "restartLabel",
-    "type": "text",
-    "importance": "low",
-    "label": "Label for \"restart\" button",
-    "default": "Restart",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "summaryHeader",
-    "type": "text",
-    "importance": "low",
-    "label": "Summary header",
-    "default": "Summary",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "allInteractions",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"All interactions\"",
-    "default": "All interactions",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "unansweredInteractions",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"Unanswered interactions\"",
-    "default": "Unanswered interactions",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "scoreText",
-    "type": "text",
-    "importance": "low",
-    "label": "Score",
-    "description": "\"@score\" will be replaced with current score, and \"@maxscore\" will be replaced with max achievable score",
-    "default": "@score / @maxscore",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "leftOutOfTotalCompleted",
-    "type": "text",
-    "importance": "low",
-    "label": "Per page interactions completion",
-    "description": "\"@left\" will be replaced with remaining interactions, and \"@max\" will be replaced with total number of interactions on the page",
-    "default": "@left of @max interactions completed",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "noInteractions",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"No interactions\"",
-    "default": "No interactions",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "score",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"Score\"",
-    "default": "Score",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "summaryAndSubmit",
-    "type": "text",
-    "importance": "low",
-    "label": "Label for \"Summary &amp; submit\" button",
-    "default": "Summary &amp; submit",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "noChapterInteractionBoldText",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"You have not interacted with any pages.\"",
-    "default": "You have not interacted with any pages.",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "noChapterInteractionText",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"You have to interact with at least one page before you can see the summary.\"",
-    "default": "You have to interact with at least one page before you can see the summary.",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "yourAnswersAreSubmittedForReview",
-    "type": "text",
-    "importance": "low",
-    "label": "Translation for \"Your answers are submitted for review!\"",
-    "default": "Your answers are submitted for review!",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "bookProgress",
-    "type": "text",
-    "importance": "low",
-    "label": "Summary progress label",
-    "default": "Book progress",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "interactionsProgress",
-    "type": "text",
-    "importance": "low",
-    "label": "Interactions progress label",
-    "default": "Interactions progress",
-    "common": true,
-    "optional": true
-  },
-  {
-    "name": "totalScoreLabel",
-    "type": "text",
-    "importance": "low",
-    "label": "Total score label",
-    "default": "Total score",
-    "common": true,
-    "optional": true
+    "fields": [
+      {
+        "name": "read",
+        "type": "text",
+        "label": "Translation for \"Read\"",
+        "importance": "low",
+        "default": "Read",
+        "optional": true
+      },
+      {
+        "name": "displayTOC",
+        "type": "text",
+        "label": "Translation for \"Display 'Table of contents'\"",
+        "importance": "low",
+        "default": "Display 'Table of contents'",
+        "optional": true
+      },
+      {
+        "name": "hideTOC",
+        "type": "text",
+        "label": "Translation for \"Hide 'Table of contents'\"",
+        "importance": "low",
+        "default": "Hide 'Table of contents'",
+        "optional": true
+      },
+      {
+        "name": "nextPage",
+        "type": "text",
+        "label": "Translation for \"Next page\"",
+        "importance": "low",
+        "default": "Next page",
+        "optional": true
+      },
+      {
+        "name": "previousPage",
+        "type": "text",
+        "label": "Translation for \"Previous page\"",
+        "importance": "low",
+        "default": "Previous page",
+        "optional": true
+      },
+      {
+        "name": "navigateToTop",
+        "type": "text",
+        "label": "Translation for \"Navigate to the top\"",
+        "importance": "low",
+        "default": "Navigate to the top",
+        "optional": true
+      },
+      {
+        "name": "fullscreen",
+        "type": "text",
+        "importance": "low",
+        "label": "Fullscreen button label",
+        "default": "Fullscreen",
+        "optional": true
+      },
+      {
+        "name": "exitFullscreen",
+        "type": "text",
+        "importance": "low",
+        "label": "Exit fullscreen button label",
+        "default": "Exit fullscreen",
+        "optional": true
+      }
+    ]
   },
   {
     "name": "a11y",
@@ -469,7 +268,6 @@
     "fields": [
       {
         "name": "progress",
-        "type": "text",
         "label": "Page progress textual alternative",
         "description": "An alternative text for the visual page progress. @page and @total variables available.",
         "default": "Page @page of @total."

@@ -1,4 +1,5 @@
 import URLTools from './urltools';
+import Util from './util';
 
 class PageContent extends H5P.EventDispatcher {
   /**
@@ -10,18 +11,22 @@ class PageContent extends H5P.EventDispatcher {
    * @param {object} parent
    * @param {object} params
    */
-  constructor(config, contentId, contentData, parent, params) {
+  constructor(config, contentId, contentData, parent, params, foo, callbacks = {}) {
     super();
 
     this.parent = parent;
     this.behaviour = config.behaviour;
+
+    this.callbacks = Util.extend({
+      onScrollToTop: (() => {})
+    }, callbacks);
 
     this.params = params;
     this.targetPage = {};
     this.targetPage.redirectFromComponent = false;
 
     this.columnNodes = [];
-    this.chapters = [];
+    this.chapters = foo.chapters;
     this.l10n = config.l10n;
 
     // Retrieve previous state
@@ -30,7 +35,7 @@ class PageContent extends H5P.EventDispatcher {
       null;
 
     if (parent.hasValidChapters()) {
-      const startChapter = this.createColumns(config, contentId, contentData);
+      const startChapter = this.createColumns(config, contentId, contentData, foo);
       this.preloadChapter(startChapter);
     }
 
@@ -44,12 +49,10 @@ class PageContent extends H5P.EventDispatcher {
 
   /**
    * Get chapters for the page
-   *
-   * @param {boolean} includeSummary
    * @return {object[]} Chapters.
    */
-  getChapters(includeSummary = true) {
-    return this.chapters.filter(chapter => !chapter.isSummary || chapter.isSummary && !!includeSummary);
+  getChapters() {
+    return this.chapters;
   }
 
   /**
@@ -129,24 +132,6 @@ class PageContent extends H5P.EventDispatcher {
   }
 
   /**
-   * Inject section instance UUID into DOM.
-   *
-   * @param {object[]} sections Sections.
-   * @param {HTMLElement} columnNode Column element.
-   */
-  injectSectionId(sections, columnNode) {
-    return;
-
-    // TODO: What's this required for?
-
-    // const columnContent = columnNode.getElementsByClassName('h5p-column-content');
-    //
-    // for (let i = 0; i < sections.length; i++) {
-    //   columnContent[i].id = `h5p-interactive-book-section-${sections[i].instance.subContentId}`;
-    // }
-  }
-
-  /**
    * Preload current chapter and the next one
    * @param {number} chapterIndex
    */
@@ -183,7 +168,6 @@ class PageContent extends H5P.EventDispatcher {
 
       // Attach
       chapter.instance.attach(H5P.jQuery(columnNode));
-      this.injectSectionId(chapter.sections, columnNode);
 
       if (this.behaviour.progressIndicators && !this.behaviour.progressAuto) {
         const checked = (this.previousState) ?
@@ -204,7 +188,7 @@ class PageContent extends H5P.EventDispatcher {
    * @param {object} contentData Content data.
    * @return {number} start chapter
    */
-  createColumns(config, contentId, contentData) {
+  createColumns(config, contentId, contentData, foo) {
     contentData = Object.assign({}, contentData);
 
     // Restore previous state
@@ -216,61 +200,11 @@ class PageContent extends H5P.EventDispatcher {
       urlFragments = previousState.urlFragments;
     }
 
-    const chapters = [];
-    this.chapters = chapters;
-
-    // Go through all columns and initialise them
-    for (let i = 0; i < config.chapters.length; i++) {
+    // Go through all chapters and initialise them
+    for (let i = 0; i < this.chapters.length; i++) {
       const columnNode = document.createElement('div');
-
-      const instanceContentData = {
-        ...contentData,
-        metadata: {
-          ...contentData.metadata,
-        },
-        previousState: (previousState) ? previousState.chapters[i].state : {}
-      };
-      const newInstance = H5P.newRunnable(config.chapters[i], contentId, undefined, undefined, instanceContentData);
-      this.parent.bubbleUp(newInstance, 'resize', this.parent);
-
-      const chapter = {
-        isInitialized: false,
-        instance: newInstance,
-        title: config.chapters[i].metadata.title,
-        completed: (previousState) ? previousState.chapters[i].completed : false,
-        tasksLeft: (previousState) ? previousState.chapters[i].tasksLeft : 0,
-        isSummary: false,
-        sections: newInstance.getInstances().map((instance, contentIndex) => ({
-          content: config.chapters[i].params.contents[contentIndex].content,
-          instance: instance,
-          isTask: false
-        }))
-      };
-
       columnNode.classList.add('h5p-interactive-book-chapter');
-      columnNode.id = `h5p-interactive-book-chapter-${newInstance.subContentId}`;
-
-      chapter.maxTasks = 0;
-      chapter.tasksLeft = 0;
-
-      // Find sections with tasks and tracks them
-      chapter.sections.forEach((section, index) => {
-        if (chapter.instance.isTask) {
-          section.isTask = true;
-          chapter.maxTasks++;
-          chapter.tasksLeft++;
-
-          if (this.behaviour.progressIndicators) {
-            section.taskDone = (previousState) ? previousState.chapters[i].sections[index].taskDone : false;
-            if (section.taskDone) {
-              chapter.tasksLeft--;
-            }
-          }
-        }
-      });
-
-      // Register both the HTML-element and the H5P-element
-      chapters.push(chapter);
+      columnNode.id = `h5p-interactive-book-chapter-${this.chapters[i].subContentId}`;
       this.columnNodes.push(columnNode);
     }
 
@@ -303,7 +237,7 @@ class PageContent extends H5P.EventDispatcher {
    */
   redirectSection(sectionUUID, headerNumber = null) {
     if (sectionUUID === 'top') {
-      this.parent.trigger('scrollToTop');
+      this.callbacks.onScrollToTop();
     }
     else {
       let section = document.getElementById(sectionUUID);
@@ -470,6 +404,13 @@ class PageContent extends H5P.EventDispatcher {
    */
   toggleNavigationMenu() {
     this.container.classList.toggle('h5p-interactive-book-navigation-open');
+  }
+
+  /**
+   * Scroll to top.
+   */
+  scrollToTop() {
+    this.container.scrollBy(0, -this.container.scrollHeight);
   }
 }
 

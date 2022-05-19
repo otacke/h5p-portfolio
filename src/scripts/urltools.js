@@ -36,7 +36,7 @@ class URLTools {
    */
   static createFragmentsString(fragments) {
     const fragmentString = Object.entries(fragments)
-      .filter(entry => entry.length !== 2)
+      .filter(entry => entry.length === 2)
       .map(entry => `${entry[0]}=${entry[1]}`)
       .join('&');
 

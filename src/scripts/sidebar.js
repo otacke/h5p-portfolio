@@ -1,10 +1,17 @@
+import Util from './util';
+
 /**
  * A component which helps in navigation
  * Constructor function.
  */
 class SideBar extends H5P.EventDispatcher {
-  constructor(config, contentId, mainTitle, parent) {
+  constructor(config, contentId, mainTitle, parent, foo, callbacks = {}) {
     super();
+
+    this.callbacks = Util.extend({
+      onMoved: (() => {}),
+      onResize: (() => {})
+    }, callbacks);
 
     this.id = contentId;
     this.parent = parent;
@@ -14,7 +21,7 @@ class SideBar extends H5P.EventDispatcher {
     this.container = this.addSideBar();
     this.l10n = config.l10n;
 
-    this.chapters = this.findAllChapters(config.chapters);
+    this.chapters = foo.chapters;
     this.chapterNodes = this.getChapterNodes();
 
     if (mainTitle) {
@@ -232,9 +239,9 @@ class SideBar extends H5P.EventDispatcher {
   findAllChapters(columnsData) {
     const chapters = [];
     for (let i = 0; i < columnsData.length; i++) {
-      const sections = this.findSectionsInChapter(columnsData[i]);
-      const chapterTitle = columnsData[i].metadata.title;
-      const id = `h5p-interactive-book-chapter-${columnsData[i].subContentId}`;
+      const sections = this.findSectionsInChapter(columnsData[i].content);
+      const chapterTitle = columnsData[i].content.metadata.title;
+      const id = `h5p-interactive-book-chapter-${columnsData[i].content.subContentId}`;
       chapters.push({
         sections: sections,
         title: chapterTitle,
@@ -294,8 +301,7 @@ class SideBar extends H5P.EventDispatcher {
       this.toggleChapter(node, index !== chapterId);
     });
     // Trigger resize after toggling all chapters
-    this.parent.trigger('resize');
-
+    this.callbacks.onResize();
 
     // Focus new chapter button if active chapter was closed
     if (chapterId !== this.focusedChapter) {
@@ -387,15 +393,6 @@ class SideBar extends H5P.EventDispatcher {
     const chapterNode = document.createElement('li');
     chapterNode.classList.add('h5p-interactive-book-navigation-chapter');
 
-    if ( chapter.isSummary) {
-      chapterNode.classList.add('h5p-interactive-book-navigation-summary-button');
-      const summary = this.parent.chapters[chapterId];
-      const summaryButton = summary.instance.summaryMenuButton;
-      summaryButton.classList.add('h5p-interactive-book-navigation-chapter-button');
-      chapterNode.appendChild(summaryButton);
-      return chapterNode;
-    }
-
     // TODO: Clean this up. Will require to receive chapter info from parent instead of building itself
     const chapterCollapseIcon = document.createElement('div');
     chapterCollapseIcon.classList.add('h5p-interactive-book-navigation-chapter-accordion');
@@ -429,25 +426,18 @@ class SideBar extends H5P.EventDispatcher {
       const isExpandable = !accordion.classList.contains('hidden');
       const isExpanded = event.currentTarget.getAttribute('aria-expanded') === 'true';
 
-      if (this.isOpenOnMobile()) {
-        this.parent.trigger('toggleMenu');
-      }
-
       // Open chapter in main content
       if (this.isOpenOnMobile() || !isExpandable || !isExpanded) {
-        const newChapter = {
-          h5pbookid: this.parent.contentId,
-          chapter: this.chapters[chapterId].id,
-          section: 0,
-        };
-
-        this.parent.trigger('newChapter', newChapter);
+        this.callbacks.onMoved({
+          chapter: this.chapters[chapterId].getSubContentId(),
+          section: 0
+        });
       }
 
       // Expand chapter in menu
       if (isExpandable) {
         this.toggleChapter(event.currentTarget.parentElement);
-        this.parent.trigger('resize');
+        this.callbacks.onResize();
       }
     };
     chapterNodeTitle.appendChild(chapterCollapseIcon);
@@ -471,37 +461,47 @@ class SideBar extends H5P.EventDispatcher {
 
     const sectionLinks = [];
     // Add sections to the chapter
-    for (let i = 0; i < this.chapters[chapterId].sections.length; i++) {
-      // Non-tasks will only get section links if they have headers
-      if (!this.parent.chapters[chapterId].sections[i].isTask) {
 
-        // Check text content for headers
-        const chapterParams = this.parent.params.chapters[chapterId];
-        const sectionParams = chapterParams.params.content[i].content;
-        const isText = sectionParams.library.split(' ')[0] === 'H5P.AdvancedText';
+    const chap = this.chapters[chapterId];
+    const sections = chap.getSections();
 
-        if (isText) {
-          const text = document.createElement('div');
-          text.innerHTML = sectionParams.params.text;
-          const headers = text.querySelectorAll('h2, h3');
-          for (let j = 0; j < headers.length; j++) {
-            const header = headers[j];
-            const sectionNode = this.createSectionLink(chapterId, i, header.textContent, j);
-            sectionLinks.push(sectionNode);
-            sectionsWrapper.appendChild(sectionNode);
+    sections.forEach((section, sectionIndex) => {
+      section.getContents().forEach(content => {
+
+        if (!Util.isTask(content.getInstance())) {
+          // Check text content for headers
+          const semantics = content.getSemantics();
+
+          if (semantics.library.split(' ')[0] === 'H5P.AdvancedText') {
+            const text = document.createElement('div');
+            text.innerHTML = semantics.params.text;
+            const headers = text.querySelectorAll('h2, h3');
+            for (let j = 0; j < headers.length; j++) {
+              const sectionNode = this.buildContentLink({
+                id: sectionIndex,
+                chapter: chap,
+                section: section,
+                content: content,
+                header: j,
+                title: headers[j].textContent
+              });
+
+              sectionLinks.push(sectionNode);
+              sectionsWrapper.appendChild(sectionNode);
+            }
           }
         }
-      }
-      else {
-        const sectionNode = this.createSectionLink(chapterId, i);
-        sectionLinks.push(sectionNode);
-        sectionsWrapper.appendChild(sectionNode);
-      }
-    }
-
-    if (chapter.tasksLeft) {
-      chapter.maxTasks = chapter.tasksLeft;
-    }
+        else {
+          const sectionNode = this.buildContentLink({
+            id: sectionIndex,
+            chapter: chap,
+            section: section,
+            content: content
+          });          sectionLinks.push(sectionNode);
+          sectionsWrapper.appendChild(sectionNode);
+        }
+      });
+    });
 
     // Don't show collapse arrow if there are no sections or on mobile
     if (sectionLinks.length === 0) {
@@ -516,58 +516,41 @@ class SideBar extends H5P.EventDispatcher {
     return chapterNode;
   }
 
-  /**
-   * Create a section link
-   * @param chapterId
-   * @param i Index of section
-   * @param [title] Force title
-   * @param [headerNumber] Set header index within section to link to.
-   * @returns {Element} Section node containing the link
-   */
-  createSectionLink(chapterId, i, title = null, headerNumber = null) {
-    const section = this.chapters[chapterId].sections[i];
-
-    const sectionTitleText = document.createElement('div');
-    sectionTitleText.innerHTML = title || section.title;
-    sectionTitleText.setAttribute('title', title || section.title);
-    sectionTitleText.classList.add('h5p-interactive-book-navigation-section-title');
-
-    const sectionCompletionIcon = document.createElement('div');
-    sectionCompletionIcon.classList.add('h5p-interactive-book-navigation-section-icon');
-    sectionCompletionIcon.classList.add('icon-chapter-blank');
-    if (this.parent.chapters[chapterId].sections[i].isTask) {
-      sectionCompletionIcon.classList.add('h5p-interactive-book-navigation-section-task');
+  buildContentLink(params = {}) {
+    if (typeof params.id !== 'number' || !params.chapter) {
+      return null;
     }
-    const sectionLink = document.createElement('button');
-    sectionLink.classList.add('section-button');
-    sectionLink.setAttribute('tabindex', '-1');
-    sectionLink.onclick = (event) => {
-      const newChapter = {
-        h5pbookid: this.parent.contentId,
-        chapter: this.chapters[chapterId].id,
-        section: section.id,
-      };
-      if (headerNumber !== null) {
-        newChapter.headerNumber = headerNumber;
-      }
 
-      this.parent.trigger('newChapter', newChapter);
+    // label
+    const labelText = params.title || params.content?.getTitle() || params.section?.getTitle();
+    const label = document.createElement('div');
+    label.classList.add('h5p-interactive-book-navigation-section-title');
+    label.setAttribute('title', labelText);
+    label.innerHTML = labelText;
 
-      if (this.isOpenOnMobile()) {
-        this.parent.trigger('toggleMenu');
-      }
-
+    // link
+    const link = document.createElement('button');
+    link.classList.add('section-button');
+    link.setAttribute('tabindex', '-1');
+    link.appendChild(label);
+    link.onclick = (event) => {
       event.preventDefault();
+
+      this.callbacks.onMoved({
+        chapter: params.chapter.getSubContentId(),
+        section: params.section?.getSubContentId(),
+        content: params.content?.getSubContentId(),
+        ...(params.header !== undefined && { headerNumber: params.header })
+      });
     };
-    sectionLink.appendChild(sectionCompletionIcon);
-    sectionLink.appendChild(sectionTitleText);
 
-    const sectionNode = document.createElement('li');
-    sectionNode.classList.add('h5p-interactive-book-navigation-section');
-    sectionNode.classList.add('h5p-interactive-book-navigation-section-' + i);
-    sectionNode.appendChild(sectionLink);
+    // item node
+    const item = document.createElement('li');
+    item.classList.add('h5p-interactive-book-navigation-section');
+    item.classList.add('h5p-interactive-book-navigation-section-' + params.id);
+    item.appendChild(link);
 
-    return sectionNode;
+    return item;
   }
 
   /**
@@ -594,7 +577,7 @@ class SideBar extends H5P.EventDispatcher {
     this.container.addEventListener('transitionend', (event) => {
       // propertyName is used trigger once, not for every property that has transitionend
       if (event.propertyName === 'flex-basis') {
-        this.parent.trigger('resize');
+        this.callbacke.onResize();
       }
     });
   }
