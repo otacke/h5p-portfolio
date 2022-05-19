@@ -137,24 +137,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       this.pageContent.updateFooter();
     });
 
-    H5P.externalDispatcher.on('xAPI', (event) => {
-      const actionVerbs = [
-        'answered',
-        'completed',
-        'interacted',
-        'attempted',
-      ];
-      const isActionVerb = actionVerbs.indexOf(event.getVerb()) > -1;
-      // Some content types may send xAPI events when they are initialized,
-      // so check that chapter is initialized before setting any section change
-      const isInitialized = this.chapters.length;
-
-      // TODO: What's this doing
-      // if (isActionVerb && isInitialized) {
-      //   this.setSectionStatusByID(this.subContentId || this.contentData.subContentId, this.activeChapter);
-      // }
-    });
-
     try {
       this.addHashListener(top);
     }
@@ -220,11 +202,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         })
       }
     );
-
-    // Set progress (from previous state);
-    this.chapters.forEach((chapter, index) => {
-      this.setChapterRead(index, chapter.completed);
-    });
 
     this.statusBarHeader = new StatusBar(
       {
@@ -672,75 +649,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Set the current chapter as completed.
-   * @param {number} [chapterId] Chapter Id, defaults to current chapter.
-   * @param {boolean} [read=true] True for chapter read, false for not read.
-   */
-  setChapterRead(chapterId = this.activeChapter, read = true) {
-    this.handleChapterCompletion(chapterId, read);
-    this.sideBar.updateChapterProgressIndicator(chapterId, read ? 'DONE' : this.hasChapterStartedTasks(this.chapters[chapterId]) ? 'STARTED' : 'BLANK');
-  }
-
-  /**
-   * Checks if chapter has started on any of the sections
-   * @param chapter
-   * @return {boolean}
-   */
-  hasChapterStartedTasks(chapter) {
-    return chapter.sections.filter(section => section.taskDone).length > 0;
-  }
-
-  /**
-   * Get textual status for chapter
-   * @param chapter
-   * @param {boolean} progressAuto
-   * @return {string}
-   */
-  getChapterStatus(chapter, progressAuto = this.params.behaviour.progressAuto) {
-    let status = 'BLANK';
-
-    if (this.isChapterRead(chapter, progressAuto)) {
-      status = 'DONE';
-    }
-    else if (this.hasChapterStartedTasks(chapter)) {
-      status = 'STARTED';
-    }
-
-    return status;
-  }
-
-  /**
-   * Update statistics on the main chapter.
-   * @param {number} chapterId Chapter Id.
-   * @param {boolean} hasChangedChapter Indicate whether a chapter changed.
-   */
-  updateChapterProgress(chapterId, hasChangedChapter = false) {
-    if (!this.params.behaviour.progressIndicators) {
-      return;
-    }
-
-    const chapter = this.chapters[chapterId];
-    let status;
-    if (chapter.maxTasks) {
-      status = this.getChapterStatus(chapter);
-    }
-    else {
-      if (this.isChapterRead(chapter) && hasChangedChapter) {
-        status = 'DONE';
-      }
-      else {
-        status = 'BLANK';
-      }
-    }
-
-    if (status === 'DONE') {
-      this.handleChapterCompletion(chapterId);
-    }
-
-    this.sideBar.updateChapterProgressIndicator(chapterId, status);
-  }
-
-  /**
    * Get id of chapter.
    * @param {string} chapterUUID ChapterUUID.
    * @return {number} Chapter Id.
@@ -750,40 +658,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     return this.chapters
       .map(chapter => chapter.instance.subContentId).indexOf(chapterUUID);
-  }
-
-  /**
-   * Handle chapter completion, e.g. trigger xAPI statements
-   * @param {number} chapterId Id of the chapter that was completed.
-   * @param {boolean} [completed=true] True for completed, false for uncompleted.
-   */
-  handleChapterCompletion(chapterId, completed = true) {
-    const chapter = this.chapters[chapterId];
-
-    if (chapter.isSummary === true) {
-      return;
-    }
-
-    if (!completed) {
-      // Reset chapter and book completion.
-      chapter.completed = false;
-      this.completed = false;
-
-      // TODO: Handle book completed
-      return;
-    }
-
-    // New chapter completed
-    if (!chapter.completed) {
-      chapter.completed = true;
-      chapter.instance.triggerXAPIScored(chapter.instance.getScore(), chapter.instance.getMaxScore(), 'completed');
-    }
-
-    // All chapters completed
-    if (!this.completed && this.chapters.filter(chapter => !chapter.isSummary).every(chapter => chapter.completed)) {
-      this.completed = true;
-      this.trigger('bookCompleted', {completed: this.completed});
-    }
   }
 
   /**
@@ -904,28 +778,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     this.changeChapter(false);
-  }
-
-  /**
-   * Set a section progress indicator.
-   * @param {string} sectionUUID UUID of target section.
-   * @param {number} chapterId Number of targetchapter.
-   */
-  setSectionStatusByID(sectionUUID, chapterId) {
-    this.chapters[chapterId].sections.forEach((section, index) => {
-      const sectionInstance = section.instance;
-
-      if (sectionInstance.subContentId === sectionUUID && !section.taskDone) {
-        // Check if instance has given an answer
-        section.taskDone = sectionInstance.getAnswerGiven ? sectionInstance.getAnswerGiven() : true;
-
-        this.sideBar.setSectionMarker(chapterId, index);
-        if (section.taskDone) {
-          this.chapters[chapterId].tasksLeft -= 1;
-        }
-        this.updateChapterProgress(chapterId);
-      }
-    });
   }
 
   /**

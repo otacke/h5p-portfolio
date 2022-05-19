@@ -48,14 +48,6 @@ class PageContent extends H5P.EventDispatcher {
   }
 
   /**
-   * Get chapters for the page
-   * @return {object[]} Chapters.
-   */
-  getChapters() {
-    return this.chapters;
-  }
-
-  /**
    * Reset all the chapters
    */
   resetChapters() {
@@ -69,7 +61,6 @@ class PageContent extends H5P.EventDispatcher {
 
   /**
    * Create page content.
-   *
    * @return {HTMLElement} Page content.
    */
   createPageContent() {
@@ -107,31 +98,6 @@ class PageContent extends H5P.EventDispatcher {
   }
 
   /**
-   * Create page read checkbox.
-   *
-   * @param {boolean} checked True, if box should be checked.
-   * @return {HTMLElement} Checkbox for marking a chapter as read.
-   */
-  createChapterReadCheckbox(checked) {
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.checked = checked;
-    checkbox.onclick = (event) => {
-      this.parent.setChapterRead(undefined, event.target.checked);
-    };
-
-    const checkText = document.createElement('p');
-    checkText.innerHTML = this.params.l10n.markAsFinished;
-
-    const wrapper = document.createElement('label');
-    wrapper.classList.add('h5p-interactive-book-status-progress-marker');
-    wrapper.appendChild(checkbox);
-    wrapper.appendChild(checkText);
-
-    return wrapper;
-  }
-
-  /**
    * Preload current chapter and the next one
    * @param {number} chapterIndex
    */
@@ -151,31 +117,13 @@ class PageContent extends H5P.EventDispatcher {
     }
 
     const chapter = this.chapters[chapterIndex];
-    if ( chapter.isSummary) {
-      const columnNode = this.columnNodes[chapterIndex];
-
-      if (chapter.isInitialized) {
-        chapter.instance.setChapters(this.getChapters(false));
-        columnNode.innerHTML = "";
-      }
-      // Attach
-      chapter.instance.addSummaryPage(H5P.jQuery(columnNode));
-      chapter.isInitialized = true;
-      return;
-    }
     if (!chapter.isInitialized) {
       const columnNode = this.columnNodes[chapterIndex];
 
       // Attach
+      // TODO: What does this help actually? The really timeconsuming
+      // thing is instantiating the content, isn't it?
       chapter.instance.attach(H5P.jQuery(columnNode));
-
-      if (this.behaviour.progressIndicators && !this.behaviour.progressAuto) {
-        const checked = (this.previousState) ?
-          this.previousState.chapters[chapterIndex].completed :
-          false;
-        columnNode.appendChild(this.createChapterReadCheckbox(checked));
-      }
-
       chapter.isInitialized = true;
     }
   }
@@ -188,13 +136,15 @@ class PageContent extends H5P.EventDispatcher {
    * @param {object} contentData Content data.
    * @return {number} start chapter
    */
-  createColumns(config, contentId, contentData, foo) {
+  createColumns(config, contentId, contentData) {
     contentData = Object.assign({}, contentData);
 
     // Restore previous state
     const previousState = (contentData.previousState && Object.keys(contentData.previousState).length > 0) ?
       contentData.previousState :
       null;
+
+    // TODO: App should prepare the data amd just pass what's needed
     let urlFragments = URLTools.extractFragmentsFromURL(this.parent.validateFragments, this.parent.hashWindow);
     if (Object.keys(urlFragments).length === 0 && contentData && previousState && previousState.urlFragments) {
       urlFragments = previousState.urlFragments;
@@ -212,16 +162,13 @@ class PageContent extends H5P.EventDispatcher {
     if (urlFragments.chapter && urlFragments.h5pbookid === this.parent.contentId) {
       const chapterIndex = this.findChapterIndex(urlFragments.chapter);
       this.parent.setActiveChapter(chapterIndex);
-      const headerNumber = urlFragments.headerNumber;
 
-      if (urlFragments.section) {
-        setTimeout(() => {
-          this.redirectSection(urlFragments.section, headerNumber);
-          if (this.parent.hasCover()) {
-            this.parent.cover.remove();
-          }
-        }, 1000);
-      }
+      setTimeout(() => {
+        this.redirectSection(urlFragments);
+        if (this.parent.hasCover()) {
+          this.parent.cover.remove();
+        }
+      }, 1000);
 
       return chapterIndex;
     }
@@ -230,43 +177,66 @@ class PageContent extends H5P.EventDispatcher {
   }
 
   /**
-   * Redirect section.
-   *
-   * @param {string} sectionUUID Section UUID or top.
-   * @param {number} headerNumber Header index within section
+   * Find content by subContentId.
+   * @param {string} subContentId SubContentId.
+   * @return {object|null} Content element.
    */
-  redirectSection(sectionUUID, headerNumber = null) {
-    if (sectionUUID === 'top') {
-      this.callbacks.onScrollToTop();
-    }
-    else {
-      let section = document.getElementById(sectionUUID);
+  findContent(subContentId) {
+    let content;
 
-      if (section) {
-        if (headerNumber !== null) {
-          // find header within section
-          const headers = section.querySelectorAll('h2, h3');
-          if (headers[headerNumber]) {
-            // Set section to the header
-            section = headers[headerNumber];
-          }
+    this.chapters.forEach(chapter => {
+      if (content) {
+        return;
+      }
+
+      chapter.instance.getInstances().forEach(got => {
+        if (content) {
+          return;
         }
+        content = got.findField(subContentId);
+      });
+    });
 
-        const focusHandler = document.createElement('div');
-        focusHandler.setAttribute('tabindex', '-1');
-        section.parentNode.insertBefore(focusHandler, section);
-        focusHandler.focus();
+    return content || null;
+  }
 
-        focusHandler.addEventListener('blur', () => {
-          focusHandler.parentNode.removeChild(focusHandler);
-        });
+  /**
+   * Redirect section.
+   * @param {object} target Target.
+   */
+  redirectSection(target) {
+    if (target.toTop) {
+      this.callbacks.onScrollToTop();
+      return;
+    }
 
-        this.targetPage.redirectFromComponent = false;
-        setTimeout(() => {
-          section.scrollIntoView(true);
-        }, 100);
+    let content = this.findContent(target.content);
+    if (!content) {
+      return;
+    }
+
+    // If header is specified, try to find headers
+    let dom = content.dom;
+    if (target.headerNumber !== null) {
+      const headers = dom.querySelectorAll('h2, h3');
+      if (headers[target.headerNumber]) {
+        dom = headers[target.headerNumber];
       }
     }
+
+    const focusHandler = document.createElement('div');
+    focusHandler.setAttribute('tabindex', '-1');
+    dom.parentNode.insertBefore(focusHandler, dom);
+    focusHandler.focus();
+
+    focusHandler.addEventListener('blur', () => {
+      focusHandler.parentNode.removeChild(focusHandler);
+    });
+
+    this.targetPage.redirectFromComponent = false;
+    setTimeout(() => {
+      dom.scrollIntoView(true);
+    }, 100);
   }
 
   /**
@@ -304,10 +274,6 @@ class PageContent extends H5P.EventDispatcher {
     const chapterIdOld = this.parent.getActiveChapter();
     const chapterIdNew = this.parent.getChapterId(this.targetPage.chapter);
     const hasChangedChapter = chapterIdOld !== chapterIdNew;
-
-    if (!redirectOnLoad) {
-      this.parent.updateChapterProgress(chapterIdOld, hasChangedChapter);
-    }
 
     this.preloadChapter(chapterIdNew);
 
@@ -352,7 +318,7 @@ class PageContent extends H5P.EventDispatcher {
           targetChapter.classList.remove('h5p-interactive-book-animate');
           oldChapter.classList.remove('h5p-interactive-book-animate');
 
-          this.redirectSection(this.targetPage.section, this.targetPage.headerNumber);
+          this.redirectSection(this.targetPage);
 
           this.parent.trigger('resize');
         }, 250);
@@ -361,11 +327,11 @@ class PageContent extends H5P.EventDispatcher {
         if (this.parent.cover && !this.parent.cover.isHidden()) {
           // TODO: Check what this is ...
           this.parent.on('coverRemoved', () => {
-            this.redirectSection(this.targetPage.section, this.targetPage.headerNumber);
+            this.redirectSection(this.targetPage);
           });
         }
         else {
-          this.redirectSection(this.targetPage.section, this.targetPage.headerNumber);
+          this.redirectSection(this.targetPage);
         }
       }
 
@@ -383,6 +349,8 @@ class PageContent extends H5P.EventDispatcher {
     const activeChapter = this.parent.getActiveChapter();
     const column = this.columnNodes[activeChapter];
     const moveFooterInsideContent = this.parent.shouldFooterBeHidden(column.clientHeight);
+
+    // TODO: Let app take care of this
 
     // Move status bar footer to content in fullscreen
     const footerParent = this.parent.statusBarFooter.wrapper.parentNode;
@@ -411,6 +379,7 @@ class PageContent extends H5P.EventDispatcher {
    * Scroll to top.
    */
   scrollToTop() {
+    // TODO: Check of this is doing what it is supposed to do
     this.container.scrollBy(0, -this.container.scrollHeight);
   }
 }
