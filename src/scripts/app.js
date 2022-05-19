@@ -768,7 +768,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       // Reset chapter and book completion.
       chapter.completed = false;
       this.completed = false;
-      this.trigger('bookCompleted', {completed: this.completed});
+
+      // TODO: Handle book completed
       return;
     }
 
