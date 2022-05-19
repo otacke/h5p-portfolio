@@ -100,7 +100,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.completed = false;
 
     this.l10n = this.params.l10n;
-    this.mainWrapper = null;
+    this.$mainWrapper = null;
     this.currentRatio = null;
 
     this.smallSurface = 'h5p-interactive-book-small';
@@ -170,7 +170,21 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     // Initialize the support components
     if (this.params.showCoverPage) {
-      this.cover = new Cover(this.params.bookCover, extras.metadata.title, this.l10n.read, contentId, this);
+      this.cover = new Cover(
+        {
+          coverData: this.params.bookCover,
+          contentId: contentId,
+          title: extras.metadata.title,
+          l10n: {
+            read: this.l10n.read
+          }
+        },
+        {
+          onClosed: (() => {
+            this.handleCoverRemoved();
+          })
+        }
+      );
     }
 
     const childContentData = {
@@ -281,19 +295,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     );
 
     if (this.hasCover()) {
-
       this.hideAllElements(true);
-
-      this.on('coverRemoved', () => {
-        this.hideAllElements(false);
-        this.trigger('resize');
-        // This will happen also on retry, but that doesn't matter, since
-        // setActivityStarted() checks if it has been run before
-        this.setActivityStarted();
-
-        // Focus header progress bar when cover is removed
-        this.statusBarHeader.progressBar.progress.focus();
-      });
     }
     else {
       this.setActivityStarted();
@@ -316,11 +318,12 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @param {jQuery} $wrapper
    */
   attach($wrapper) {
-    this.mainWrapper = $wrapper;
+    this.$mainWrapper = $wrapper;
+
     // Needed to enable scrolling in fullscreen
     $wrapper.addClass('h5p-interactive-book h5p-scrollable-fullscreen');
 
-    this.setWrapperClassFromRatio(this.mainWrapper);
+    this.setWrapperClassFromRatio(this.$mainWrapper);
     if (this.cover) {
       this.displayCover($wrapper);
     }
@@ -347,10 +350,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Handle resizing of the content
    */
   resize() {
-    if (!this.pageContent || !this.hasValidChapters() || !this.mainWrapper) {
+    if (!this.pageContent || !this.hasValidChapters() || !this.$mainWrapper) {
       return;
     }
-    this.setWrapperClassFromRatio(this.mainWrapper);
+    this.setWrapperClassFromRatio(this.$mainWrapper);
     const currentChapterId = this.getActiveChapter();
     const currentNode = this.pageContent.columnNodes[currentChapterId];
 
@@ -478,7 +481,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       H5P.exitFullScreen();
     }
     else {
-      H5P.fullScreen(this.mainWrapper, this);
+      H5P.fullScreen(this.$mainWrapper, this);
     }
   }
 
@@ -606,7 +609,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @return {*}
    */
   isSmallSurface() {
-    return this.mainWrapper?.hasClass(this.smallSurface) || false;
+    return this.$mainWrapper?.hasClass(this.smallSurface) || false;
   }
 
   /**
@@ -614,7 +617,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @return {number} Ratio.
    */
   getRatio() {
-    return this.mainWrapper.width() / parseFloat(this.mainWrapper.css('font-size'));
+    return this.$mainWrapper.width() / parseFloat(this.$mainWrapper.css('font-size'));
   }
 
   /**
@@ -629,10 +632,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.breakpoints().forEach(item => {
       if (item.shouldAdd(ratio)) {
-        this.mainWrapper.addClass(item.className);
+        this.$mainWrapper.addClass(item.className);
       }
       else {
-        this.mainWrapper.removeClass(item.className);
+        this.$mainWrapper.removeClass(item.className);
       }
     });
     this.currentRatio = ratio;
@@ -850,6 +853,25 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
+   * Handle cover removed.
+   */
+  handleCoverRemoved() {
+    this.$mainWrapper.get(0).classList.remove('covered');
+    this.$mainWrapper.get(0).removeChild(this.cover.container);
+
+    this.hideAllElements(false);
+
+    this.trigger('resize');
+    // This will happen also on retry, but that doesn't matter, since
+    // setActivityStarted() checks if it has been run before
+    this.setActivityStarted();
+
+    // Focus header progress bar when cover is removed
+    // TODO: Don't manipulate directly
+    this.statusBarHeader.progressBar.progress.focus();
+  }
+
+  /**
    * Redirect chapter.
    *
    * @param {object} target Target data.
@@ -1052,7 +1074,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       });
 
       if ( this.hasCover()) {
-        this.displayCover(this.mainWrapper);
+        this.displayCover(this.$mainWrapper);
       }
       this.isAnswerUpdated = false;
     }
@@ -1135,13 +1157,13 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     };
   }
 
-  /*
+  /**
    * Get context data.
    * Contract used for confusion report.
    * @return {object} Context data.
    */
   getContext() {
-    if (!this.cover?.hidden) {
+    if (!this.cover?.isHidden()) {
       return {};
     }
 

@@ -358,7 +358,8 @@ class PageContent extends H5P.EventDispatcher {
         }, 250);
       }
       else {
-        if (this.parent.cover && !this.parent.cover.hidden) {
+        if (this.parent.cover && !this.parent.cover.isHidden()) {
+          // TODO: Check what this is ...
           this.parent.on('coverRemoved', () => {
             this.redirectSection(this.targetPage.section, this.targetPage.headerNumber);
           });
