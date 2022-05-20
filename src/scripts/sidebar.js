@@ -329,7 +329,7 @@ class SideBar extends H5P.EventDispatcher {
       if (this.isOpenOnMobile() || !isExpandable || !isExpanded) {
         this.callbacks.onMoved({
           chapter: this.chapters[chapterId].getSubContentId(),
-          section: 0
+          toTop: true
         });
       }
 
@@ -438,7 +438,7 @@ class SideBar extends H5P.EventDispatcher {
         chapter: params.chapter.getSubContentId(),
         section: params.section?.getSubContentId(),
         content: params.content?.getSubContentId(),
-        ...(params.header !== undefined && { headerNumber: params.header })
+        ...(params.header !== undefined && { header: params.header })
       });
     };
 

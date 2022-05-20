@@ -94,8 +94,8 @@
       "expanded": true,
       "fields": [
         {
-          "name": "chapterId",
-          "label": "Chapter id",
+          "name": "chapterHierarchy",
+          "label": "Chapter hierarchy",
           "type": "text",
           "optional": false
         },
