@@ -30,6 +30,9 @@ export default class Chapter {
         semantics: childSemantics[i]
       }));
     }
+
+    // If needed, needs to be set when instance is attached
+    this.dom = null;
   }
 
   /**
@@ -38,6 +41,14 @@ export default class Chapter {
    */
   getInstance() {
     return this.instance;
+  }
+
+  /**
+   * Get DOM.
+   * @return {HTMLElement|null} Instance DOM.
+   */
+  getDOM() {
+    return this.dom;
   }
 
   /**

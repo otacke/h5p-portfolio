@@ -127,6 +127,26 @@ export default class PageContent {
   }
 
   /**
+   * Get container height.
+   * @return {number} Height.
+   */
+  getHeight() {
+    return parseInt(this.content.style.height);
+  }
+
+  /**
+   * Set container height.
+   * @param {number} Height.
+   */
+  setHeight(height) {
+    if (typeof height !== 'number') {
+      return;
+    }
+
+    this.content.style.height = `${height}px`;
+  }
+
+  /**
    * Scroll to target.
    * @param {object} target Target.
    */
@@ -204,8 +224,8 @@ export default class PageContent {
      * Animation done by making the current and the target node
      * visible and then applying the correct translation in x-direction
      */
-    const chapterFrom = Chapters.get(chapterIdFrom).dom;
-    const chapterTo = Chapters.get(chapterIdTo).dom;
+    const chapterFrom = Chapters.get(chapterIdFrom).getDOM();
+    const chapterTo = Chapters.get(chapterIdTo).getDOM();
     const direction = (chapterIdFrom < chapterIdTo) ? 'next' : 'previous';
 
     chapterTo.classList.add(`h5p-interactive-book-${direction}`);
