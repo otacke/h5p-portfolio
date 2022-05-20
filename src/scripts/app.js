@@ -167,12 +167,13 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
     );
 
-    this.sideBar = new SideBar(this.params, contentId, extras.metadata.title, this,
+    this.sideBar = new SideBar(
+      { mainTitle: extras?.metadata?.title },
       {
         onMoved: ((params) => {
           this.moveTo(params);
         }),
-        onResize: (() => {
+        onResized: (() => {
           this.trigger('resize');
         })
       }
@@ -274,6 +275,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     this.updateFooter();
+    this.sideBar.update(this.currentChapterId);
   }
 
   /**
@@ -497,7 +499,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       this.currentChapterId = chapterId;
     }
 
-    this.sideBar.redirectHandler(this.currentChapterId);
+    this.sideBar.update(this.currentChapterId);
   }
 
   /**

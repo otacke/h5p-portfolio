@@ -2,29 +2,28 @@ import Util from './../util';
 import Chapters from './../services/chapters';
 
 /**
- * A component which helps in navigation
- * Constructor function.
+ * @constructor
+ * @param {object} params Parameters.
+ * @param {object} callbacks Callbacks.
  */
 class SideBar extends H5P.EventDispatcher {
-  constructor(config, contentId, mainTitle, parent, callbacks = {}) {
+  constructor(params = {}, callbacks = {}) {
     super();
 
     this.callbacks = Util.extend({
       onMoved: (() => {}),
-      onResize: (() => {})
+      onResized: (() => {})
     }, callbacks);
 
-    this.id = contentId;
-    this.parent = parent;
-    this.behaviour = config.behaviour;
     this.content = document.createElement('ul');
     this.content.classList.add('navigation-list');
-    this.container = this.addSideBar();
+    this.container = this.buildSideBar();
 
+    // TODO: Rename those to avoid confusion with the chapters - those here are navigational elements
     this.chapterNodes = this.getChapterNodes();
 
-    if (mainTitle) {
-      this.titleElem = this.addMainTitle(mainTitle);
+    if (params.mainTitle) {
+      this.titleElem = this.buildMainTitle(params.mainTitle);
       this.container.appendChild(this.titleElem);
     }
 
@@ -38,26 +37,27 @@ class SideBar extends H5P.EventDispatcher {
 
     this.container.appendChild(this.content);
 
-    this.addTransformListener();
     this.initializeNavigationControls();
   }
 
   initializeNavigationControls() {
-    const keyCodes = Object.freeze({
-      'UP': 38,
-      'DOWN': 40,
+    const keys = Object.freeze({
+      'UP': 'ArrowUp',
+      'DOWN': 'ArrowDown',
     });
+
+    // TODO: Add this when building the elements
 
     this.chapterNodes.forEach((chapter, i) => {
       const chapterButton = chapter.querySelector('.h5p-interactive-book-navigation-chapter-button');
       chapterButton.addEventListener('keydown', (e) => {
-        switch (e.keyCode) {
-          case keyCodes.UP:
+        switch (e.key) {
+          case keys.UP:
             this.setFocusToChapterItem(i, -1);
             e.preventDefault();
             break;
 
-          case keyCodes.DOWN:
+          case keys.DOWN:
             this.setFocusToChapterItem(i, 1);
             e.preventDefault();
             break;
@@ -69,13 +69,13 @@ class SideBar extends H5P.EventDispatcher {
         const section = sections[sectionIndex];
         const sectionButton = section.querySelector('.section-button');
         sectionButton.addEventListener('keydown', e => {
-          switch (e.keyCode) {
-            case keyCodes.UP:
+          switch (e.key) {
+            case keys.UP:
               this.setFocusToSectionItem(i, sectionIndex, -1);
               e.preventDefault();
               break;
 
-            case keyCodes.DOWN:
+            case keys.DOWN:
               this.setFocusToSectionItem(i, sectionIndex, 1);
               e.preventDefault();
               break;
@@ -164,23 +164,22 @@ class SideBar extends H5P.EventDispatcher {
   }
 
   /**
-   * Get sidebar DOM.
+   * Build sidebar DOM.
    * @return {HTMLElement} DOM for sidebar.
    */
-  addSideBar() {
+  buildSideBar() {
     const container = document.createElement('div');
-    container.id = 'h5p-interactive-book-navigation-menu';
     container.classList.add('h5p-interactive-book-navigation');
 
     return container;
   }
 
   /**
-   * Get main title.
+   * Build main title.
    * @param {string} title Title.
    * @return {HTMLElement} Title element.
    */
-  addMainTitle(titleText) {
+  buildMainTitle(titleText) {
     const title = document.createElement('h2');
     title.classList.add('navigation-title');
     title.innerHTML = titleText;
@@ -267,17 +266,15 @@ class SideBar extends H5P.EventDispatcher {
   }
 
   /**
-   * Fires whenever a redirect is happening in parent
-   * All chapters will be collapsed except for the active
-   *
-   * @param {number} chapterId The chapter that should stay open in the menu.
+   * Update entries' state.
+   * @param {number} chapterId Chapter that should stay open in the menu.
    */
-  redirectHandler(chapterId) {
+  update(chapterId) {
     this.chapterNodes.forEach((node, index) => {
       this.toggleChapter(node, index !== chapterId);
     });
-    // Trigger resize after toggling all chapters
-    this.callbacks.onResize();
+
+    this.callbacks.onResized();
 
     // Focus new chapter button if active chapter was closed
     if (chapterId !== this.focusedChapter) {
@@ -309,23 +306,13 @@ class SideBar extends H5P.EventDispatcher {
     const chapterNodeTitle = document.createElement('button');
     chapterNodeTitle.setAttribute('tabindex', chapterId === 0 ? '0' : '-1');
     chapterNodeTitle.classList.add('h5p-interactive-book-navigation-chapter-button');
-    if (this.parent.activeChapter !== chapterId) {
-      chapterCollapseIcon.classList.add('icon-collapsed');
-      chapterNodeTitle.setAttribute('aria-expanded', 'false');
-    }
-    else {
-      chapterCollapseIcon.classList.add('icon-expanded');
-      chapterNodeTitle.setAttribute('aria-expanded', 'true');
-    }
+    chapterCollapseIcon.classList.add('icon-expanded');
+    chapterNodeTitle.setAttribute('aria-expanded', 'true');
     chapterNodeTitle.setAttribute('aria-controls', sectionsDivId);
-    chapterNodeTitle.onclick = (event) => {
-      const accordion = event.currentTarget.querySelector('.h5p-interactive-book-navigation-chapter-accordion');
+    chapterNodeTitle.addEventListener('click', event => {
 
-      const isExpandable = !accordion.classList.contains('hidden');
-      const isExpanded = event.currentTarget.getAttribute('aria-expanded') === 'true';
-
-      // Open chapter in main content
-      if (this.isOpenOnMobile() || !isExpandable || !isExpanded) {
+      if (!event.currentTarget.classList.contains('h5p-interactive-book-navigation-current')) {
+        // Open chapter in main content
         this.callbacks.onMoved({
           chapter: Chapters.get(chapterId).getSubContentId(),
           toTop: true
@@ -333,23 +320,18 @@ class SideBar extends H5P.EventDispatcher {
       }
 
       // Expand chapter in menu
-      if (isExpandable) {
+      if (!chapterCollapseIcon.classList.contains('hidden')) {
         this.toggleChapter(event.currentTarget.parentElement);
-        this.callbacks.onResize();
+        this.callbacks.onResized();
       }
-    };
+    });
+
     chapterNodeTitle.appendChild(chapterCollapseIcon);
     chapterNodeTitle.appendChild(chapterTitleText);
 
     chapterNode.appendChild(chapterNodeTitle);
 
-    // Collapse all but current chapters in menu and highlight current
-    if (this.parent.activeChapter === chapterId) {
-      chapterNode.querySelector('.h5p-interactive-book-navigation-chapter-button').classList.add('h5p-interactive-book-navigation-current');
-    }
-    else {
-      this.toggleChapter(chapterNode, true);
-    }
+    this.toggleChapter(chapterNode, true);
 
     const sectionsWrapper = document.createElement('ul');
     sectionsWrapper.classList.add('h5p-interactive-book-navigation-sectionlist');
@@ -430,7 +412,7 @@ class SideBar extends H5P.EventDispatcher {
     link.classList.add('section-button');
     link.setAttribute('tabindex', '-1');
     link.appendChild(label);
-    link.onclick = (event) => {
+    link.addEventListener('click', event => {
       event.preventDefault();
 
       this.callbacks.onMoved({
@@ -439,7 +421,7 @@ class SideBar extends H5P.EventDispatcher {
         content: params.content?.getSubContentId(),
         ...(params.header !== undefined && { header: params.header })
       });
-    };
+    });
 
     // item node
     const item = document.createElement('li');
@@ -452,31 +434,10 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Get chapter elements.
-   *
    * @return {HTMLElement[]} Chapter elements.
    */
   getChapterNodes() {
     return Chapters.get().map((chapter, index) => this.getNodesFromChapter(chapter, index));
-  }
-
-  /**
-   * Detect whether navigation is open on a small surface(pc or mobile).
-   * @return {boolean} True, if navigation is open on mobile view.
-   */
-  isOpenOnMobile() {
-    return this.parent.isMenuOpen() && this.parent.isSmallSurface();
-  }
-
-  /**
-   * Add transform listener.
-   */
-  addTransformListener() {
-    this.container.addEventListener('transitionend', (event) => {
-      // propertyName is used trigger once, not for every property that has transitionend
-      if (event.propertyName === 'flex-basis') {
-        this.callbacke.onResize();
-      }
-    });
   }
 }
 export default SideBar;
