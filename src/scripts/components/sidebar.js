@@ -1,4 +1,4 @@
-import Util from './util';
+import Util from './../util';
 
 /**
  * A component which helps in navigation
@@ -19,7 +19,6 @@ class SideBar extends H5P.EventDispatcher {
     this.content = document.createElement('ul');
     this.content.classList.add('navigation-list');
     this.container = this.addSideBar();
-    this.l10n = config.l10n;
 
     this.chapters = foo.chapters;
     this.chapterNodes = this.getChapterNodes();

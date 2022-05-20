@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "color": "^4.2.3",
-    "element-scroll-polyfill": "^1.0.1"
+    "element-scroll-polyfill": "^1.0.1",
+    "he": "^1.2.0"
   }
 }

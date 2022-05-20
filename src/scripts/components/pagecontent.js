@@ -1,4 +1,4 @@
-import Util from './util';
+import Util from './../util';
 
 export default class PageContent {
   /**
@@ -55,9 +55,22 @@ export default class PageContent {
     this.params.chapters.forEach(chapter => {
       const columnNode = document.createElement('div');
       columnNode.classList.add('h5p-interactive-book-chapter');
-      columnNode.id = `h5p-interactive-book-chapter-${chapter.subContentId}`; // TODO: Required?
       chapter.dom = columnNode;
     });
+  }
+
+  /**
+   * Show.
+   */
+  show() {
+    this.content.classList.remove('h5p-content-hidden');
+  }
+
+  /**
+   * Hide.
+   */
+  hide() {
+    this.content.classList.add('h5p-content-hidden');
   }
 
   /**

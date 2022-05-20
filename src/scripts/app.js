@@ -1,12 +1,13 @@
 import URLTools from './urltools';
 import Util from './util';
-import SideBar from './sidebar';
-import StatusBar from './statusbar';
-import Cover from './cover';
-import PageContent from './pagecontent';
+import Cover from './components/cover';
+import StatusBar from './components/statusbar';
+import SideBar from './components/sidebar';
+import PageContent from './components/pagecontent';
 import Chapter from './chapter';
 import 'element-scroll-polyfill';
 import Colors from './colors';
+import Dictionary from './dictionary';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**
@@ -43,6 +44,12 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         menu: 'Toggle navigation menu'
       }
     }, params);
+
+    // Fill dictionary
+    Dictionary.fill({
+      l10n: this.params.l10n,
+      a11y: this.params.a11y
+    });
 
     // Filter out empty chapters
     this.params.chapters = this.params.chapters.filter(chapter => {
@@ -100,7 +107,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.completed = false;
 
-    this.l10n = this.params.l10n;
     this.$mainWrapper = null;
     this.currentRatio = null;
 
@@ -157,10 +163,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         {
           coverData: this.params.bookCover,
           contentId: contentId,
-          title: extras.metadata.title,
-          l10n: {
-            read: this.l10n.read
-          }
+          title: extras.metadata.title
         },
         {
           onClosed: (() => {
@@ -204,18 +207,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         totalChapters: this.chapters.length,
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-interactive-book-status-header',
-        l10n: {
-          navigateToTop: this.params.l10n.navigateToTop,
-          previousPage: this.params.l10n.previousPage,
-          nextPage: this.params.l10n.nextPage,
-          fullscreen: this.params.l10n.fullscreen,
-          exitFullscreen: this.params.l10n.exitFullscreen
-        },
-        a11y: {
-          menu: this.params.a11y.menu,
-          progress: this.params.a11y.progress
-        }
+        styleClassName: 'h5p-interactive-book-status-header'
       },
       {
         onMoved: ((params) => {
@@ -268,7 +260,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     );
 
     if (this.hasCover()) {
-      this.hideAllElements(true);
+      this.hideElements();
     }
     else {
       this.setActivityStarted();
@@ -713,7 +705,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @param {HTMLElement} wrapper Wrapper.
    */
   displayCover(wrapper) {
-    this.hideAllElements(true);
+    this.hideElements();
     wrapper.append(this.cover.container);
     wrapper.addClass('covered');
     this.cover.initMedia();
@@ -726,7 +718,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.$mainWrapper.get(0).classList.remove('covered');
     this.$mainWrapper.get(0).removeChild(this.cover.container);
 
-    this.hideAllElements(false);
+    this.showElements();
 
     this.trigger('resize');
     // This will happen also on retry, but that doesn't matter, since
@@ -760,29 +752,19 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Hide all elements.
-   * @param {boolean} hide True to hide elements.
+   * Show elements.
    */
-  // TODO: Replace by showAllElements/hideAllElements
-  hideAllElements(hide) {
-    const nodes = [
-      this.statusBarHeader.wrapper,
-      this.statusBarFooter.wrapper,
-      this.pageContent.container
-    ];
+  showElements() {
+    this.statusBarHeader.show();
+    this.statusBarFooter.show();
+  }
 
-    if (hide) {
-      nodes.forEach(node => {
-        node.classList.add('h5p-content-hidden');
-        node.classList.add('h5p-interactive-book-cover-present');
-      });
-    }
-    else {
-      nodes.forEach(node => {
-        node.classList.remove('h5p-content-hidden');
-        node.classList.remove('h5p-interactive-book-cover-present');
-      });
-    }
+  /**
+   * Hide elements.
+   */
+  hideElements() {
+    this.statusBarHeader.hide();
+    this.statusBarFooter.hide();
   }
 
   // TODO: Replace this custom implementation by trusting the "Column"

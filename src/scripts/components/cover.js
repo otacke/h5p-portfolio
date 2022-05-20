@@ -1,4 +1,5 @@
-import Util from './util';
+import Util from './../util';
+import Dictionary from './../dictionary';
 
 /**
  * @constructor
@@ -36,7 +37,7 @@ export default class Cover {
     }
 
     // Read button
-    this.container.appendChild(this.buildReadButton(params.l10n.read));
+    this.container.appendChild(this.buildReadButton(Dictionary.get('l10n.read')));
   }
 
   /**

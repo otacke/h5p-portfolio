@@ -1,4 +1,5 @@
-import Util from './util';
+import Util from './../util';
+import Dictionary from './../dictionary';
 
 /**
  * @constructor
@@ -91,7 +92,7 @@ export default class StatusBar {
     const buttonWrapper = document.createElement('button');
     buttonWrapper.classList.add('h5p-interactive-book-status-menu');
     buttonWrapper.classList.add('h5p-interactive-book-status-button');
-    buttonWrapper.title = this.params.a11y.menu;
+    buttonWrapper.title = Dictionary.get('a11y.menu');
     buttonWrapper.setAttribute('aria-expanded', 'false');
     buttonWrapper.setAttribute('aria-controls', 'h5p-interactive-book-navigation-menu');
     buttonWrapper.onclick = () => {
@@ -118,8 +119,8 @@ export default class StatusBar {
     button.classList.add('h5p-interactive-book-status-to-top');
     button.classList.add('h5p-interactive-book-status-button');
     button.classList.add('h5p-interactive-book-status-arrow');
-    button.setAttribute('title', this.params.l10n.navigateToTop);
-    button.setAttribute('aria-label', this.params.l10n.navigateToTop);
+    button.setAttribute('title', Dictionary.get('l10n.navigateToTop'));
+    button.setAttribute('aria-label', Dictionary.get('l10n.navigateToTop'));
     button.addEventListener('click', () => {
       this.callbacks.onScrollToTop();
     });
@@ -195,7 +196,7 @@ export default class StatusBar {
 
     buttons['previous'] = this.buildNavigationButton({
       icon: 'icon-previous',
-      label: this.params.l10n.previousPage,
+      label: Dictionary.get('l10n.previousPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'prev', toTop: true });
       })
@@ -203,7 +204,7 @@ export default class StatusBar {
 
     buttons['next'] = this.buildNavigationButton({
       icon: 'icon-next',
-      label: this.params.l10n.nextPage,
+      label: Dictionary.get('l10n.nextPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'next', toTop: true });
       })
@@ -247,13 +248,27 @@ export default class StatusBar {
     fullScreenButton.classList.add('h5p-interactive-book-status-fullscreen');
     fullScreenButton.classList.add('h5p-interactive-book-status-button');
     fullScreenButton.classList.add('h5p-interactive-book-enter-fullscreen');
-    fullScreenButton.setAttribute('title', this.params.l10n.fullscreen);
-    fullScreenButton.setAttribute('aria-label', this.params.l10n.fullscreen);
+    fullScreenButton.setAttribute('title', Dictionary.get('l10n.fullscreen'));
+    fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.fullscreen'));
     fullScreenButton.addEventListener('click', () => {
       this.callbacks.onToggleFullscreen();
     });
 
     return fullScreenButton;
+  }
+
+  /**
+   * Show.
+   */
+  show() {
+    this.wrapper.classList.remove('h5p-content-hidden');
+  }
+
+  /**
+   * Hide.
+   */
+  hide() {
+    this.wrapper.classList.add('h5p-content-hidden');
   }
 
   /**
@@ -288,7 +303,7 @@ export default class StatusBar {
   updateProgressBar(chapterId) {
     this.progressBar.progress.style.width = `${chapterId / this.params.totalChapters * 100}%`;
 
-    const title = this.params.a11y.progress
+    const title = Dictionary.get('a11y.progress')
       .replace('@page', chapterId)
       .replace('@total', this.params.totalChapters);
 
@@ -362,12 +377,12 @@ export default class StatusBar {
     this.fullScreenButton.classList.toggle('h5p-interactive-book-exit-fullscreen', state);
 
     if (state) {
-      this.fullScreenButton.setAttribute('title', this.params.l10n.exitFullscreen);
-      this.fullScreenButton.setAttribute('aria-label', this.params.l10n.exitFullscreen);
+      this.fullScreenButton.setAttribute('title', Dictionary.get('l10n.exitFullscreen'));
+      this.fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.exitFullscreen'));
     }
     else {
-      this.fullScreenButton.setAttribute('title', this.params.l10n.fullscreen);
-      this.fullScreenButton.setAttribute('aria-label', this.params.l10n.fullscreen);
+      this.fullScreenButton.setAttribute('title', Dictionary.get('l10n.fullscreen'));
+      this.fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.fullscreen'));
     }
   }
 
