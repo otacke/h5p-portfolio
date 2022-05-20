@@ -1,11 +1,12 @@
 import Util from './../util';
+import Chapters from './../services/chapters';
 
 /**
  * A component which helps in navigation
  * Constructor function.
  */
 class SideBar extends H5P.EventDispatcher {
-  constructor(config, contentId, mainTitle, parent, foo, callbacks = {}) {
+  constructor(config, contentId, mainTitle, parent, callbacks = {}) {
     super();
 
     this.callbacks = Util.extend({
@@ -20,7 +21,6 @@ class SideBar extends H5P.EventDispatcher {
     this.content.classList.add('navigation-list');
     this.container = this.addSideBar();
 
-    this.chapters = foo.chapters;
     this.chapterNodes = this.getChapterNodes();
 
     if (mainTitle) {
@@ -32,7 +32,7 @@ class SideBar extends H5P.EventDispatcher {
       this.content.appendChild(element);
     });
 
-    if (this.chapters.length > 20) {
+    if (Chapters.get().length > 20) {
       this.content.classList.add('large-navigation-list');
     }
 
@@ -327,7 +327,7 @@ class SideBar extends H5P.EventDispatcher {
       // Open chapter in main content
       if (this.isOpenOnMobile() || !isExpandable || !isExpanded) {
         this.callbacks.onMoved({
-          chapter: this.chapters[chapterId].getSubContentId(),
+          chapter: Chapters.get(chapterId).getSubContentId(),
           toTop: true
         });
       }
@@ -359,7 +359,7 @@ class SideBar extends H5P.EventDispatcher {
     const sectionLinks = [];
     // Add sections to the chapter
 
-    const chap = this.chapters[chapterId];
+    const chap = Chapters.get(chapterId);
     const sections = chap.getSections();
 
     sections.forEach((section, sectionIndex) => {
@@ -434,7 +434,7 @@ class SideBar extends H5P.EventDispatcher {
       event.preventDefault();
 
       this.callbacks.onMoved({
-        chapter: params.chapter.getSubContentId(),
+        chapter: params.chapter?.getSubContentId(),
         section: params.section?.getSubContentId(),
         content: params.content?.getSubContentId(),
         ...(params.header !== undefined && { header: params.header })
@@ -456,7 +456,7 @@ class SideBar extends H5P.EventDispatcher {
    * @return {HTMLElement[]} Chapter elements.
    */
   getChapterNodes() {
-    return this.chapters.map((chapter, index) => this.getNodesFromChapter(chapter, index));
+    return Chapters.get().map((chapter, index) => this.getNodesFromChapter(chapter, index));
   }
 
   /**

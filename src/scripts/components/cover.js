@@ -1,5 +1,5 @@
 import Util from './../util';
-import Dictionary from './../dictionary';
+import Dictionary from './../services/dictionary';
 
 /**
  * @constructor

@@ -1,4 +1,5 @@
 import Util from './../util';
+import Chapters from './../services/chapters';
 
 export default class PageContent {
   /**
@@ -39,7 +40,7 @@ export default class PageContent {
     const content = document.createElement('div');
     content.classList.add('h5p-interactive-book-content');
 
-    this.params.chapters.forEach(chapter => {
+    Chapters.get().forEach(chapter => {
       content.appendChild(chapter.dom);
     });
 
@@ -52,7 +53,7 @@ export default class PageContent {
    * Build Chapter DOMs.
    */
   buildChapterDOMs() {
-    this.params.chapters.forEach(chapter => {
+    Chapters.get().forEach(chapter => {
       const columnNode = document.createElement('div');
       columnNode.classList.add('h5p-interactive-book-chapter');
       chapter.dom = columnNode;
@@ -78,11 +79,11 @@ export default class PageContent {
    * @param {number} currentId Current chapter's id.
    */
   setChapterOrder(currentId) {
-    if (currentId < 0 || currentId > this.params.chapters.length - 1) {
+    if (currentId < 0 || currentId > Chapters.get().length - 1) {
       return;
     }
 
-    this.params.chapters.forEach((chapter, index) => {
+    Chapters.get().forEach((chapter, index) => {
       chapter.dom.classList.remove('h5p-interactive-book-previous');
       chapter.dom.classList.remove('h5p-interactive-book-current');
       chapter.dom.classList.remove('h5p-interactive-book-next');
@@ -113,12 +114,12 @@ export default class PageContent {
    * @param {number} chapterIndex
    */
   initializeChapter(chapterIndex) {
-    if (chapterIndex < 0 || chapterIndex > this.params.chapters.length - 1) {
+    if (chapterIndex < 0 || chapterIndex > Chapters.get().length - 1) {
       return; // Out of bounds
     }
 
     // Instantiate and attach chapter contents
-    const chapter = this.params.chapters[chapterIndex];
+    const chapter = Chapters.get(chapterIndex);
     if (!chapter.isInitialized) {
       chapter.instance.attach(H5P.jQuery(chapter.dom));
       chapter.isInitialized = true;
@@ -133,7 +134,7 @@ export default class PageContent {
   findContent(subContentId) {
     let content;
 
-    this.params.chapters.forEach(chapter => {
+    Chapters.get().forEach(chapter => {
       if (content) {
         return;
       }
@@ -156,7 +157,7 @@ export default class PageContent {
    */
   findChapterIndex(subContentId) {
     let position = -1;
-    this.params.chapters.forEach((chapter, index) => {
+    Chapters.get().forEach((chapter, index) => {
       if (position !== -1) {
         return; // Skip
       }
@@ -247,8 +248,8 @@ export default class PageContent {
      * Animation done by making the current and the target node
      * visible and then applying the correct translation in x-direction
      */
-    const chapterFrom = this.params.chapters[chapterIdFrom].dom;
-    const chapterTo = this.params.chapters[chapterIdTo].dom;
+    const chapterFrom = Chapters.get(chapterIdFrom).dom;
+    const chapterTo = Chapters.get(chapterIdTo).dom;
     const direction = (chapterIdFrom < chapterIdTo) ? 'next' : 'previous';
 
     chapterTo.classList.add(`h5p-interactive-book-${direction}`);
@@ -297,9 +298,9 @@ export default class PageContent {
   }
 
   /**
-   * Resize.
+   * Resize visible instance.
    */
   resize() {
-    this.params.chapters[this.currentChapterId].instance.trigger('resize');
+    Chapters.get(this.currentChapterId).instance.trigger('resize');
   }
 }

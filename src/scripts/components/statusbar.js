@@ -1,5 +1,6 @@
 import Util from './../util';
-import Dictionary from './../dictionary';
+import Dictionary from './../services/dictionary';
+import Chapters from './../services/chapters';
 
 /**
  * @constructor
@@ -161,7 +162,7 @@ export default class StatusBar {
 
     const total = document.createElement('span');
     total.classList.add('h5p-interactive-book-status-progress-number');
-    total.innerHTML = this.params.totalChapters;
+    total.innerHTML = Chapters.get().length;
     total.setAttribute('aria-hidden', 'true');
 
     const hiddenButRead = document.createElement('p');
@@ -292,7 +293,7 @@ export default class StatusBar {
     );
     this.setButtonStatus(
       'next',
-      { enabled: params.chapterId < this.params.totalChapters }
+      { enabled: params.chapterId < Chapters.get().length }
     );
   }
 
@@ -301,11 +302,11 @@ export default class StatusBar {
    * @param {number} chapterId Chapter index.
    */
   updateProgressBar(chapterId) {
-    this.progressBar.progress.style.width = `${chapterId / this.params.totalChapters * 100}%`;
+    this.progressBar.progress.style.width = `${chapterId / Chapters.get().length * 100}%`;
 
     const title = Dictionary.get('a11y.progress')
       .replace('@page', chapterId)
-      .replace('@total', this.params.totalChapters);
+      .replace('@total', Chapters.get().length);
 
     this.progressBar.progress.title = title;
     this.progressIndicator.hiddenButRead.innerHTML = title;

@@ -4,10 +4,10 @@ import Cover from './components/cover';
 import StatusBar from './components/statusbar';
 import SideBar from './components/sidebar';
 import PageContent from './components/pagecontent';
-import Chapter from './chapter';
 import 'element-scroll-polyfill';
 import Colors from './colors';
-import Dictionary from './dictionary';
+import Chapters from './services/chapters';
+import Dictionary from './services/dictionary';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**
@@ -51,19 +51,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       a11y: this.params.a11y
     });
 
-    // Filter out empty chapters
-    this.params.chapters = this.params.chapters.filter(chapter => {
-      return chapter?.content?.params?.contents?.length > 0;
-    });
-
-    if (!this.params.chapters.length) {
-      this.params.chapters = [{
-        id: 0,
-        chapterHierarchy: 1,
-        content: {}
-      }];
-    }
-
     this.contentId = contentId;
     this.previousState = extras.previousState || {};
 
@@ -86,21 +73,13 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       document.head.appendChild(style);
     }
 
-    // Build chapters
-    this.chapters = this.params.chapters.map((chapter, index) => {
-      const newChapter = new Chapter({
-        id: index,
-        hierarchy: chapter.chapterHierarchy,
-        content: chapter.content,
-        contentId: this.contentId,
-        previousState: Array.isArray(this.previousState.chapters) ?
-          this.previousState.chapters[index] :
-          {}
-      });
+    Chapters.fill(
+      this.params.chapters,
+      this.contentId,
+      { previousState : this.previousState });
 
-      this.bubbleUp(newChapter.getInstance(), 'resize', this);
-
-      return newChapter;
+    Chapters.get().forEach(chapter => {
+      this.bubbleUp(chapter.getInstance(), 'resize', this);
     });
 
     this.currentChapterId = 0;
@@ -174,9 +153,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     this.pageContent = new PageContent(
-      {
-        chapters: this.chapters
-      },
+      {},
       {
         onScrollToTop: () => {
           this.scrollToTop();
@@ -191,7 +168,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     );
 
     this.sideBar = new SideBar(this.params, contentId, extras.metadata.title, this,
-      { chapters: this.chapters },
       {
         onMoved: ((params) => {
           this.moveTo(params);
@@ -204,7 +180,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.statusBarHeader = new StatusBar(
       {
-        totalChapters: this.chapters.length,
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-interactive-book-status-header'
@@ -227,21 +202,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.statusBarFooter = new StatusBar(
       {
-        totalChapters: this.chapters.length,
         displayToTopButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-interactive-book-status-footer',
-        l10n: {
-          navigateToTop: this.params.l10n.navigateToTop,
-          previousPage: this.params.l10n.previousPage,
-          nextPage: this.params.l10n.nextPage,
-          fullscreen: this.params.l10n.fullscreen,
-          exitFullscreen: this.params.l10n.exitFullscreen
-        },
-        a11y: {
-          menu: this.params.a11y.menu,
-          progress: this.params.a11y.progress
-        }
+        styleClassName: 'h5p-interactive-book-status-footer'
       },
       {
         onMoved: ((params) => {
@@ -269,7 +232,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     // Kickstart the statusbar
     const statusUpdates = {
       chapterId: this.currentChapterId + 1,
-      title: this.chapters[this.currentChapterId].getTitle()
+      title: Chapters.get(this.currentChapterId).getTitle()
     };
 
     this.statusBarHeader.update(statusUpdates);
@@ -317,11 +280,11 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Handle resizing of the content
    */
   resize() {
-    if (!this.pageContent || !this.chapters.length || !this.$mainWrapper) {
+    if (!this.pageContent || !Chapters.get().length || !this.$mainWrapper) {
       return;
     }
     this.setWrapperClassFromRatio(this.$mainWrapper);
-    const currentNode = this.chapters[this.currentChapterId].dom;
+    const currentNode = Chapters.get(this.currentChapterId).dom;
 
     // Only resize the visible column
     if (currentNode.offsetParent !== null) {
@@ -364,16 +327,16 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     if (params.direction) {
       if (
         this.currentChapterId === 0 && params.direction === 'prev' ||
-        this.currentChapterId === this.chapters.length - 1 && params.direction === 'next'
+        this.currentChapterId === Chapters.get().length - 1 && params.direction === 'next'
       ) {
         return; // Nowhere to move to
       }
 
       if (params.direction === 'prev') {
-        params.chapter = this.chapters[this.currentChapterId - 1].getSubContentId();
+        params.chapter = Chapters.get(this.currentChapterId - 1).getSubContentId();
       }
       else if (params.direction === 'next') {
-        params.chapter = this.chapters[this.currentChapterId + 1].getSubContentId();
+        params.chapter = Chapters.get(this.currentChapterId + 1).getSubContentId();
       }
 
       delete params.section;
@@ -425,11 +388,11 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Re-attach footer.
    */
   updateFooter() {
-    if ( this.chapters.length === 0) {
+    if ( Chapters.get().length === 0) {
       return;
     }
 
-    const column = this.chapters[this.currentChapterId].dom;
+    const column = Chapters.get(this.currentChapterId).dom;
     const moveFooterInsideContent = this.shouldFooterBeHidden(column.clientHeight);
 
     // Move status bar footer to content in fullscreen
@@ -616,7 +579,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @returns {boolean} True, if current chapter was read.
    */
   isCurrentChapterRead() {
-    return this.isChapterRead(this.chapters[this.currentChapterId], this.params.behaviour.progressAuto);
+    return this.isChapterRead(Chapters.get(this.currentChapterId), this.params.behaviour.progressAuto);
   }
 
   /**
@@ -636,8 +599,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @return {boolean} True, if final chapter without tasks and other chapters done.
    */
   isFinalChapterWithoutTask(chapterId) {
-    return this.chapters[chapterId].maxTasks === 0 &&
-      this.chapters.slice(0, chapterId).concat(this.chapters.slice(chapterId + 1))
+    return Chapters.get(chapterId).maxTasks === 0 &&
+      Chapters.get().slice(0, chapterId).concat(Chapters.get().slice(chapterId + 1))
         .every(chapter => chapter.tasksLeft === 0);
   }
 
@@ -649,7 +612,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   getChapterId(chapterUUID) {
     chapterUUID = chapterUUID.replace('h5p-interactive-book-chapter-', '');
 
-    return this.chapters
+    return Chapters.get()
       .map(chapter => chapter.instance.subContentId).indexOf(chapterUUID);
   }
 
@@ -671,7 +634,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     const params = {
       chapterId: this.currentChapterId + 1,
-      title: this.chapters[this.currentChapterId].getTitle()
+      title: Chapters.get(this.currentChapterId).getTitle()
     };
 
     this.statusBarHeader.update(params);
@@ -744,7 +707,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
       else {
         this.changeChapter({
-          chapter: `h5p-interactive-book-chapter-${this.chapters[0].instance.subContentId}`,
+          chapter: `h5p-interactive-book-chapter-${Chapters.get(0).instance.subContentId}`,
           h5pbookid: this.h5pbookid
         });
       }
@@ -775,7 +738,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   getAnswerGiven() {
-    return this.chapters.reduce((accu, current) => {
+    return Chapters.get().reduce((accu, current) => {
       if (typeof current.instance.getAnswerGiven === 'function') {
         return accu && current.instance.getAnswerGiven();
       }
@@ -789,8 +752,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   getScore() {
-    if (this.chapters.length > 0) {
-      return this.chapters.reduce((accu, current) => {
+    if (Chapters.get().length > 0) {
+      return Chapters.get().reduce((accu, current) => {
         if (typeof current.instance.getScore === 'function') {
           return accu + current.instance.getScore();
         }
@@ -810,8 +773,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
-    if (this.chapters.length > 0) {
-      return this.chapters.reduce((accu, current) => {
+    if (Chapters.get().length > 0) {
+      return Chapters.get().reduce((accu, current) => {
         if (typeof current.instance.getMaxScore === 'function') {
           return accu + current.instance.getMaxScore();
         }
@@ -830,7 +793,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   showSolutions() {
-    this.chapters.forEach(chapter => {
+    Chapters.get().forEach(chapter => {
       if (typeof chapter.instance.toggleReadSpeaker === 'function') {
         chapter.instance.toggleReadSpeaker(true);
       }
@@ -848,11 +811,11 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   resetTask() {
-    if (!this.chapters.length) {
+    if (!Chapters.get().length) {
       return;
     }
 
-    this.chapters.forEach(chapter => {
+    Chapters.get().forEach(chapter => {
       if (!chapter.isInitialized) {
         return;
       }
@@ -868,7 +831,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.moveTo({
       h5pbookid: this.contentId,
-      chapter: this.chapters[0].getSubContentId(),
+      chapter: Chapters.get(0).getSubContentId(),
       toTop: true
     });
 
@@ -897,7 +860,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     return {
       statement: xAPIEvent.data.statement,
       children: this.getXAPIDataFromChildren(
-        this.chapters.map(chapter => chapter.instance)
+        Chapters.get().map(chapter => chapter.instance)
       )
     };
   }
@@ -940,7 +903,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    */
   getCurrentState() {
     // Get relevant state information from non-summary chapters
-    // const chapters = this.chapters
+    // const chapters = Chapters.get()
     //   .filter(chapter => !chapter.isSummary)
     //   .map(chapter => ({
     //     completed: chapter.completed,
