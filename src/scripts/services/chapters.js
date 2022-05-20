@@ -1,4 +1,4 @@
-import Chapter from './../chapter';
+import Chapter from './../models/chapter';
 
 export default class Chapters {
 

@@ -1,13 +1,16 @@
-import URLTools from './urltools';
-import Util from './util';
+import URLTools from './helpers/urltools';
+import Util from './helpers/util';
+
 import Cover from './components/cover';
 import StatusBar from './components/statusbar';
 import SideBar from './components/sidebar';
 import PageContent from './components/pagecontent';
-import 'element-scroll-polyfill';
-import Colors from './colors';
+
+import Colors from './services/colors';
 import Chapters from './services/chapters';
 import Dictionary from './services/dictionary';
+
+import 'element-scroll-polyfill';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**

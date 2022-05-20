@@ -1,5 +1,5 @@
 /** Class representing URL related functions */
-class URLTools {
+export default class URLTools {
   /**
    * Extract fragments from browser URL.
    *
@@ -64,4 +64,3 @@ class URLTools {
     return true;
   }
 }
-export default URLTools;

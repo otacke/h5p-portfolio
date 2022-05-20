@@ -1,4 +1,4 @@
-import Util from './../util';
+import Util from './../helpers/util';
 import Dictionary from './../services/dictionary';
 
 /**

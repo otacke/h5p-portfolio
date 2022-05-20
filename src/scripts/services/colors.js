@@ -1,5 +1,5 @@
 import Color from 'color';
-import './../styles/_color_overrides.scss';
+import './../../styles/_color_overrides.scss';
 
 /**
  * Color class.

@@ -1,4 +1,4 @@
-import Util from './../util';
+import Util from './../helpers/util';
 import Chapters from './../services/chapters';
 
 export default class PageContent {
