@@ -127,50 +127,6 @@ export default class PageContent {
   }
 
   /**
-   * Find content by subContentId.
-   * @param {string} subContentId SubContentId.
-   * @return {object|null} Content element.
-   */
-  findContent(subContentId) {
-    let content;
-
-    Chapters.get().forEach(chapter => {
-      if (content) {
-        return;
-      }
-
-      chapter.instance.getInstances().forEach(got => {
-        if (content) {
-          return;
-        }
-        content = got.findField(subContentId);
-      });
-    });
-
-    return content || null;
-  }
-
-  /**
-   * Find chapter index.
-   * @param {string} subContentId Chapter UUID.
-   * @return {number} Chapter index.
-   */
-  findChapterIndex(subContentId) {
-    let position = -1;
-    Chapters.get().forEach((chapter, index) => {
-      if (position !== -1) {
-        return; // Skip
-      }
-
-      position = (chapter.instance.subContentId === subContentId) ?
-        index :
-        -1;
-    });
-
-    return position;
-  }
-
-  /**
    * Scroll to target.
    * @param {object} target Target.
    */
@@ -180,7 +136,7 @@ export default class PageContent {
       return;
     }
 
-    let content = this.findContent(target.content);
+    let content = Chapters.findContent(target.content);
     if (!content) {
       return;
     }
@@ -214,13 +170,13 @@ export default class PageContent {
    * Change chapter.
    * @param {object} target Target.
    */
-  changeChapter(target) {
+  moveToChapter(target) {
     if (this.isAnimating()) {
       return; // Busy
     }
 
     const chapterIdFrom = this.currentChapterId;
-    const chapterIdTo = this.findChapterIndex(target.chapter);
+    const chapterIdTo = Chapters.findChapterIndex(target.chapter);
 
     if (chapterIdFrom === chapterIdTo) {
       this.scrollTo(target);

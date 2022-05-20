@@ -310,7 +310,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Move to.
-   * TODO: params
+   * TODO: There also moveToChapter, and this one only seems to process the
+   * target beforehand: merge
    */
   moveTo(params = {}) {
     if (params.direction && params.direction !== 'prev' && params.direction !== 'next') {
@@ -357,7 +358,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
       if (fragmentsEqual) {
         // only trigger section redirect without changing hash
-        this.pageContent.changeChapter(params);
+        this.pageContent.moveToChapter(params);
         return;
       }
     }
@@ -629,8 +630,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Change the current active chapter.
    * @param {object} target Target.
    */
-  changeChapter(target) {
-    this.pageContent.changeChapter(target);
+  moveToChapter(target) {
+    this.pageContent.moveToChapter(target);
 
     const params = {
       chapterId: this.currentChapterId + 1,
@@ -703,10 +704,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     hashWindow.addEventListener('hashchange', () => {
       const payload = URLTools.extractFragmentsFromURL(this.validateFragments, this.hashWindow);
       if (payload.h5pbookid && String(payload.h5pbookid) === String(this.contentId)) {
-        this.changeChapter(payload);
+        this.moveToChapter(payload);
       }
       else {
-        this.changeChapter({
+        this.moveToChapter({
           chapter: `h5p-interactive-book-chapter-${Chapters.get(0).instance.subContentId}`,
           h5pbookid: this.h5pbookid
         });

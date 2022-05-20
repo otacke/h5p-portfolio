@@ -76,6 +76,52 @@ export default class Chapters {
   }
 
   /**
+   * Find content by subContentId.
+   * @param {string} subContentId SubContentId.
+   * @return {object|null} Content element.
+   */
+  static findContent(subContentId) {
+    let content = null;
+
+    Chapters.get().forEach(chapter => {
+      if (content) {
+        return; // Already found;
+      }
+
+      chapter.getInstance().getInstances().forEach(placeholder => {
+        if (content) {
+          return; // already found
+        }
+
+        content = placeholder.findField(subContentId);
+      });
+    });
+
+    return content;
+  }
+
+  /**
+   * Find chapter index.
+   * @param {string} subContentId Chapter subContentId.
+   * @return {number|null} Chapter index.
+   */
+  static findChapterIndex(subContentId) {
+    let position = null;
+
+    Chapters.get().forEach((chapter, index) => {
+      if (position !== null) {
+        return; // Already found
+      }
+
+      position = (chapter.getInstance().subContentId === subContentId) ?
+        index :
+        null;
+    });
+
+    return position;
+  }
+
+  /**
    * Sanitize parameters.
    * @param {object[]} params Semantics parameters for chapters.
    * @return {object} Sanitized parameters for chapters.
