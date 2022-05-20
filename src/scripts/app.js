@@ -10,8 +10,6 @@ import Colors from './services/colors';
 import Chapters from './services/chapters';
 import Dictionary from './services/dictionary';
 
-import 'element-scroll-polyfill';
-
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**
    * @constructor
