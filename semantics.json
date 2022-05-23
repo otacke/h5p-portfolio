@@ -104,7 +104,7 @@
           "name": "content",
           "type": "library",
           "options": [
-            "H5P.PortfolioChapterContent 0.1"
+            "H5P.PortfolioChapter 0.1"
           ],
           "optional": false
         }
