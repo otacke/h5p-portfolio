@@ -1,5 +1,6 @@
 import Util from './../helpers/util';
 import Chapters from './../services/chapters';
+import Title from './sidebar/title';
 
 /**
  * @constructor
@@ -23,8 +24,8 @@ class SideBar extends H5P.EventDispatcher {
     this.chapterNodes = this.getChapterNodes();
 
     if (params.mainTitle) {
-      this.titleElem = this.buildMainTitle(params.mainTitle);
-      this.container.appendChild(this.titleElem);
+      const title = new Title({ titleText: params.mainTitle });
+      this.container.appendChild(title.getDOM());
     }
 
     this.chapterNodes.forEach(element => {
@@ -172,24 +173,6 @@ class SideBar extends H5P.EventDispatcher {
     container.classList.add('h5p-interactive-book-navigation');
 
     return container;
-  }
-
-  /**
-   * Build main title.
-   * @param {string} title Title.
-   * @return {HTMLElement} Title element.
-   */
-  buildMainTitle(titleText) {
-    const title = document.createElement('h2');
-    title.classList.add('navigation-title');
-    title.innerHTML = titleText;
-    title.setAttribute('title', titleText);
-
-    const titleWrapper = document.createElement('div');
-    titleWrapper.classList.add('h5p-interactive-book-navigation-maintitle');
-    titleWrapper.appendChild(title);
-
-    return titleWrapper;
   }
 
   /**
