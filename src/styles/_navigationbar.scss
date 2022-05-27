@@ -24,7 +24,7 @@
   }
 
   .navigation-list {
-    background-color: var(--color-base-5, #fff);
+    background-color: $background-color;
     margin: 0;
     padding: 0;
   }
@@ -124,7 +124,7 @@
 
 .h5p-interactive-book-navigation-chapter-button {
   align-items: center;
-  background-color: var(--color-base-5, $background-color);
+  background-color: $background-color;
   background-size: cover;
   border: 0;
   border-bottom: solid 1px $ghost-white;
