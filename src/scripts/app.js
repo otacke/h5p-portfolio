@@ -270,7 +270,15 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     this.updateFooter();
-    this.sideBar.update(this.currentChapterId);
+
+    // Set start view. TODO: previous state
+    this.sideBar.handleClicked({
+      hierarchy: Chapters.get(0).getHierarchy(),
+      target: {
+        chapter: Chapters.get(0).getSubContentId(),
+        toTop: true
+      }
+    });
   }
 
   /**
@@ -456,8 +464,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     else {
       this.statusBarHeader.scrollIntoView();
     }
-
-    this.statusBarHeader.setFocusToMenuToggleButton();
   }
 
   /**
@@ -488,9 +494,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     chapterId = parseInt(chapterId);
     if (!isNaN(chapterId)) {
       this.currentChapterId = chapterId;
-    }
 
-    this.sideBar.update(this.currentChapterId);
+      this.sideBar.setCurrentItem(Chapters.get(chapterId).getHierarchy());
+    }
   }
 
   /**

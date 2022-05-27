@@ -141,6 +141,8 @@ export default class Chapters {
       }];
     }
 
+    // TODO: Sort
+
     return params;
   }
 

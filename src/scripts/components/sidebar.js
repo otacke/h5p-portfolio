@@ -1,6 +1,7 @@
 import Util from './../helpers/util';
 import Chapters from './../services/chapters';
 import Title from './sidebar/title';
+import MenuChapterItem from './sidebar/menuchapteritem';
 
 /**
  * @constructor
@@ -16,411 +17,366 @@ class SideBar extends H5P.EventDispatcher {
       onResized: (() => {})
     }, callbacks);
 
-    this.content = document.createElement('ul');
-    this.content.classList.add('navigation-list');
-    this.container = this.buildSideBar();
-
-    // TODO: Rename those to avoid confusion with the chapters - those here are navigational elements
-    this.chapterNodes = this.getChapterNodes();
-
+    this.container = document.createElement('div');
+    this.container.classList.add('h5p-interactive-book-navigation');
     if (params.mainTitle) {
       const title = new Title({ titleText: params.mainTitle });
       this.container.appendChild(title.getDOM());
     }
 
-    this.chapterNodes.forEach(element => {
-      this.content.appendChild(element);
-    });
-
-    if (Chapters.get().length > 20) {
+    this.content = document.createElement('ul');
+    this.content.classList.add('navigation-list');
+    if (Chapters.get().length > 20) { // TODO: Check what this was used for
       this.content.classList.add('large-navigation-list');
     }
 
+    // List of all hierarchy keys including content items
+    this.hierarchyKeys = this.buildHierarchyKeys();
+
+    /*
+     * Using an array here that directly mirrors the structure on page
+     * Could as well have been a tree structure, but it didn't feel necessary
+     * here.
+     */
+    this.menuItems = this.buildMenuItems();
+    this.menuItems.forEach(item => {
+      this.content.appendChild(item.instance.getDOM());
+    });
+
     this.container.appendChild(this.content);
 
-    this.initializeNavigationControls();
+    // Show top level entries only
+    this.menuItems.forEach(item => {
+      if (
+        item.hierarchy.split('-').length === 1 &&
+        item.hierarchy.indexOf(':') === -1
+      ) {
+        item.instance.show();
+      }
+    });
   }
 
-  initializeNavigationControls() {
-    const keys = Object.freeze({
-      'UP': 'ArrowUp',
-      'DOWN': 'ArrowDown',
-    });
+  /**
+   * Build menu items.
+   * @return {object[]} Menu items.
+   */
+  buildMenuItems() {
+    const menuItems = [];
 
-    // TODO: Add this when building the elements
+    Chapters.get().forEach(chapter => {
+      const hierarchy = chapter.getHierarchy();
 
-    this.chapterNodes.forEach((chapter, i) => {
-      const chapterButton = chapter.querySelector('.h5p-interactive-book-navigation-chapter-button');
-      chapterButton.addEventListener('keydown', (e) => {
-        switch (e.key) {
-          case keys.UP:
-            this.setFocusToChapterItem(i, -1);
-            e.preventDefault();
-            break;
-
-          case keys.DOWN:
-            this.setFocusToChapterItem(i, 1);
-            e.preventDefault();
-            break;
+      // MenuChapterItem parameters for chapter
+      const chapterMenuItem = {
+        title: chapter.getTitle(),
+        hierarchy: hierarchy,
+        isExpandable: this.hasChildren(hierarchy),
+        target: {
+          chapter: chapter.getSubContentId(),
+          toTop: true
         }
+      };
+
+      // MenuChapterItem parameters for contents
+      const contentMenuItems = this.extractContentItemTargets(chapter).map((target, index) => {
+        const hierarchy = `${chapter.getHierarchy()}:${index}`;
+        return {
+          title: target.title,
+          hierarchy: hierarchy,
+          target: {
+            chapter: target.chapter,
+            section: target.section,
+            content: target.content,
+            header: target.header
+          }
+        };
       });
 
-      const sections = chapter.querySelectorAll('.h5p-interactive-book-navigation-section');
-      for (let sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
-        const section = sections[sectionIndex];
-        const sectionButton = section.querySelector('.section-button');
-        sectionButton.addEventListener('keydown', e => {
-          switch (e.key) {
-            case keys.UP:
-              this.setFocusToSectionItem(i, sectionIndex, -1);
-              e.preventDefault();
-              break;
+      /*
+       * Build one menu item for each parameter
+       * One could also have some "content" subcontent attached to
+       * a chapter, but the structure felt easier this way.
+       */
+      [chapterMenuItem, ...contentMenuItems].forEach(param => {
+        const menuItem = new MenuChapterItem(
+          param,
+          {
+            onClicked: ((params) => {
+              this.handleClicked(params);
+            }),
+            onKeyUp: (params => {
+              this.handleKeyNavigated(params, -1);
+            }),
+            onKeyDown: (params => {
+              this.handleKeyNavigated(params, 1);
+            })
+          });
 
-            case keys.DOWN:
-              this.setFocusToSectionItem(i, sectionIndex, 1);
-              e.preventDefault();
-              break;
-          }
+        menuItems.push({
+          hierarchy: param.hierarchy,
+          instance: menuItem
         });
+      });
+    });
+
+    return menuItems;
+  }
+
+  /**
+   * Extract targets of chapter content items.
+   * @param {Chapter} chapter.
+   * @return {object[]} Targets of chapter content items.
+   */
+  extractContentItemTargets(chapter) {
+    /*
+     * Build target information for all task like instances and AdvancedText
+     * headers of level 2 and 3.
+     */
+    return chapter.getSections().reduce((sectionItems, currentSection) => {
+      const newSectionItems = currentSection.getContents()
+        .reduce((contentItems, currentContent) => {
+          const instance = currentContent.getInstance();
+
+          let linkInfo = [];
+
+          if (Util.isTask(instance)) {
+            linkInfo = [{
+              title: currentContent.getTitle(),
+              chapter: chapter.getSubContentId(),
+              section: currentSection.getSubContentId(),
+              content: currentContent.getSubContentId()
+            }];
+          }
+          else if (instance.libraryInfo?.machineName === 'H5P.AdvancedText') {
+            const text = document.createElement('div');
+            text.innerHTML = currentContent.getSemantics().params.text;
+            linkInfo = Array.from(text.querySelectorAll('h2, h3'))
+              .map((header, index) => {
+                return {
+                  title: header.textContent,
+                  chapter: chapter.getSubContentId(),
+                  section: currentSection.getSubContentId(),
+                  content: currentContent.getSubContentId(),
+                  header: index
+                };
+              });
+          }
+
+          return [...contentItems, ...linkInfo];
+        }, []);
+
+      return [...sectionItems, ...newSectionItems];
+    }, []);
+  }
+
+  /**
+   * Build list of all hierarchies.
+   * @return {string[]} List of all hierarchies.
+   */
+  buildHierarchyKeys() {
+    return Chapters.get().reduce((all, chapter) => {
+      const chapterHierarchy = chapter.getHierarchy();
+
+      const chapterHierarchies = this.extractContentItemTargets(chapter)
+        .reduce((hierarchies, target, index) => {
+          return [...hierarchies, `${chapterHierarchy}:${index}`];
+        }, [chapterHierarchy]);
+
+      return [...all, ...chapterHierarchies];
+    }, []);
+  }
+
+  /**
+   * Determine whether a child is really the child of a parent.
+   * @param {string} child Hierarchy to check for being child.
+   * @param {string} parent Hierarchy to check for being parent.
+   * @param {object} [params={}] Extra parameters.
+   * @param {boolean} [params.directChild] If true, grandchildren... not child.
+   * @return {boolean} True, if (direct) child, else false.
+   */
+  isChild(child, parent, params = {}) {
+    if (parent === child) {
+      return false;
+    }
+
+    if (params.directChild) {
+      if (child.indexOf(':') !== -1 && child.indexOf(`${parent}:`) !== 0) {
+        return false; // Not a direct child content
+      }
+      if (
+        child.indexOf(':') === -1 &&
+        child.split('-').length !== parent.split('-').length + 1
+      ) {
+        return false; // Not a direct child chapter
+      }
+    }
+
+    return (
+      child.indexOf(parent) === 0 &&
+      (child[parent.length] === '-' || child[parent.length] === ':')
+    );
+  }
+
+  /**
+   * Determine whether a hierarchy has children.
+   */
+  hasChildren(hierarchy) {
+    return this.hierarchyKeys.some(key => this.isChild(key, hierarchy));
+  }
+
+  /**
+   * Show hierarchy item including parents and direct children.
+   * @param {string} hierarchy Hierarchy.
+   */
+  show(hierarchy) {
+    this.menuItems.forEach(item => {
+      if (!item.instance.isHidden()) {
+        return; // Already shown
+      }
+
+      if (hierarchy === item.hierarchy) {
+        item.instance.show();
+        return;
+      }
+
+      // Show all parents
+      if (
+        this.isChild(hierarchy, item.hierarchy)
+      ) {
+        item.instance.expand();
+        this.show(item.hierarchy);
+      }
+
+      // Show direct children
+      if (this.isChild(item.hierarchy, hierarchy, { directChild: true })) {
+        item.instance.show();
       }
     });
   }
 
-  setFocusToChapterItem(index, direction = 0) {
-    let nextIndex = index + direction;
-    if (nextIndex < 0) {
-      nextIndex = this.chapterNodes.length - 1;
-    }
-    else if (nextIndex > this.chapterNodes.length - 1) {
-      nextIndex = 0;
-    }
-
-    // Check if we should navigate to a section
-    if (direction) {
-      const chapterIndex = direction > 0 ? index : nextIndex;
-      const chapter = this.chapterNodes[chapterIndex];
-      if (!chapter.classList.contains('h5p-interactive-book-navigation-closed')) {
-        const sections = chapter.querySelectorAll('.h5p-interactive-book-navigation-section');
-        if (sections.length) {
-          const sectionItemIndex = direction > 0 ? 0 : sections.length - 1;
-          this.setFocusToSectionItem(chapterIndex, sectionItemIndex);
-          return;
-        }
+  /**
+   * Hide all children of hierarchy item.
+   * @param {string} hierarchy Hierarchy.
+   */
+  hideChildren(hierarchy) {
+    this.menuItems.forEach(item => {
+      if (item.instance.isHidden()) {
+        return; // Already hidden
       }
-    }
 
-    const nextChapter = this.chapterNodes[nextIndex];
-    const chapterButton = nextChapter.querySelector('.h5p-interactive-book-navigation-chapter-button');
-    this.setFocusToItem(chapterButton, nextIndex);
-  }
-
-  setFocusToSectionItem(chapterIndex, index, direction = 0) {
-    const chapter = this.chapterNodes[chapterIndex];
-    const sections = chapter.querySelectorAll('.h5p-interactive-book-navigation-section');
-
-    // Navigate chapter if outside of section bounds
-    const nextIndex = index + direction;
-    if (nextIndex > sections.length - 1) {
-      this.setFocusToChapterItem(chapterIndex + 1);
-      return;
-    }
-    else  if (nextIndex < 0) {
-      this.setFocusToChapterItem(chapterIndex);
-      return;
-    }
-
-    const section = sections[nextIndex];
-    const sectionButton = section.querySelector('.section-button');
-    this.setFocusToItem(sectionButton, chapterIndex);
-  }
-
-  setFocusToItem(element, chapterIndex, skipFocusing = false) {
-    // Remove focus from all other elements
-    this.chapterNodes.forEach((chapter, index) => {
-      const chapterButton = chapter.querySelector('.h5p-interactive-book-navigation-chapter-button');
-
-      // Highlight current chapter
-      if (index === chapterIndex) {
-        chapterButton.classList.add('h5p-interactive-book-navigation-current');
-      }
-      else {
-        chapterButton.classList.remove('h5p-interactive-book-navigation-current');
-      }
-      chapterButton.setAttribute('tabindex', '-1');
-
-      const sections = chapter.querySelectorAll('.h5p-interactive-book-navigation-section');
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        const sectionButton = section.querySelector('.section-button');
-        sectionButton.setAttribute('tabindex', '-1');
-
+      if (this.isChild(item.hierarchy, hierarchy)) {
+        item.instance.hide();
       }
     });
-
-    element.setAttribute('tabindex', '0');
-    this.focusedChapter = chapterIndex;
-    if (!skipFocusing) {
-      element.focus();
-    }
   }
 
   /**
-   * Build sidebar DOM.
-   * @return {HTMLElement} DOM for sidebar.
+   * Set currente item.
+   * @param {string} hierarchy Hierarchy.
+   * @param {params} [params={}] Parameters.
+   * @param {boolean} [params.toggleSelected] If true, may collapse item.
    */
-  buildSideBar() {
-    const container = document.createElement('div');
-    container.classList.add('h5p-interactive-book-navigation');
+  setCurrentItem(hierarchy, params = {}) {
+    this.menuItems.forEach(item => {
+      const instance = item.instance;
 
-    return container;
-  }
+      if (item.hierarchy === hierarchy) {
+        instance.makeTabbable();
 
-  /**
-   * Find sections in chapter.
-   *
-   * @param {object} columnData Column data.
-   * @return {object[]} Sections data.
-   */
-  findSectionsInChapter(columnData) {
-    const sectionsData = [];
-    const sections = columnData.params.contents;
-    for (let j = 0; j < sections.length; j++) {
-      const content = sections[j].content;
+        // Do not care about content items
+        if (hierarchy.indexOf(':') === -1) {
+          instance.activate();
 
-      let title = '';
-      switch (content.library.split(' ')[0]) {
-        case 'H5P.Link':
-          if (content.params.title) {
-            title = content.params.title;
+          // Toggle expanded state
+          if (params.toggleSelected && instance.isExpanded()) {
+            instance.collapse();
+            this.hideChildren(item.hierarchy);
           }
           else {
-            title = 'New link';
+            instance.expand();
+            this.show(item.hierarchy);
           }
-          break;
-        default:
-          title = content.metadata.title;
-      }
-
-      sectionsData.push({
-        title: title,
-        id: content.subContentId ? `h5p-interactive-book-section-${content.subContentId}` : undefined
-      });
-    }
-
-    return sectionsData;
-  }
-
-  /**
-   * Toggle chapter menu.
-   *
-   * @param {HTMLElement} chapterNode Chapter.
-   * @param {boolean} collapse If true, will collapse chapter.
-   */
-  toggleChapter(chapterNode, collapse) {
-    collapse = (collapse !== undefined) ? collapse : !(chapterNode.classList.contains('h5p-interactive-book-navigation-closed'));
-
-    const childNav = chapterNode.querySelector('.h5p-interactive-book-navigation-sectionlist');
-    const arrow = chapterNode.getElementsByClassName('h5p-interactive-book-navigation-chapter-accordion')[0];
-    const chapterButton = chapterNode.querySelector('.h5p-interactive-book-navigation-chapter-button');
-    chapterButton.setAttribute('aria-expanded', (!collapse).toString());
-
-    if (collapse === true) {
-      chapterNode.classList.add('h5p-interactive-book-navigation-closed');
-      if (arrow) {
-        arrow.classList.remove('icon-expanded');
-        arrow.classList.add('icon-collapsed');
-        if (childNav) {
-          childNav.setAttribute('aria-hidden', true);
-          childNav.setAttribute('tabindex', '-1');
         }
       }
-    }
-    else {
-      chapterNode.classList.remove('h5p-interactive-book-navigation-closed');
-      if (arrow) {
-        arrow.classList.remove('icon-collapsed');
-        arrow.classList.add('icon-expanded');
-        if (childNav) {
-          childNav.removeAttribute('aria-hidden');
-          childNav.removeAttribute('tabindex');
+      else {
+        instance.makeUntabbable();
+
+        // Collapse and hide everything that's not a child of clicked menu item
+        if (!this.isChild(hierarchy, item.hierarchy)) {
+          instance.collapse();
+          this.hideChildren(item.hierarchy);
         }
-      }
-    }
-  }
 
-  /**
-   * Update entries' state.
-   * @param {number} chapterId Chapter that should stay open in the menu.
-   */
-  update(chapterId) {
-    this.chapterNodes.forEach((node, index) => {
-      this.toggleChapter(node, index !== chapterId);
-    });
-
-    this.callbacks.onResized();
-
-    // Focus new chapter button if active chapter was closed
-    if (chapterId !== this.focusedChapter) {
-      const chapterButton = this.chapterNodes[chapterId].querySelector('.h5p-interactive-book-navigation-chapter-button');
-      this.setFocusToItem(chapterButton, chapterId, true);
-    }
-  }
-
-  /**
-   * Create chapter.
-   *
-   * @param {object} chapter Chapter data.
-   * @param {number} chapterId Chapter Id.
-   * @return {HTMLElement} Chapter node.
-   */
-  getNodesFromChapter(chapter, chapterId) {
-    const chapterNode = document.createElement('li');
-    chapterNode.classList.add('h5p-interactive-book-navigation-chapter');
-
-    // TODO: Clean this up. Will require to receive chapter info from parent instead of building itself
-    const chapterCollapseIcon = document.createElement('div');
-    chapterCollapseIcon.classList.add('h5p-interactive-book-navigation-chapter-accordion');
-
-    const chapterTitleText = document.createElement('div');
-    chapterTitleText.classList.add('h5p-interactive-book-navigation-chapter-title-text');
-    chapterTitleText.innerHTML = chapter.title;
-    chapterTitleText.setAttribute('title', chapter.title);
-
-    const chapterNodeTitle = document.createElement('button');
-    chapterNodeTitle.setAttribute('tabindex', chapterId === 0 ? '0' : '-1');
-    chapterNodeTitle.classList.add('h5p-interactive-book-navigation-chapter-button');
-    chapterCollapseIcon.classList.add('icon-expanded');
-    chapterNodeTitle.setAttribute('aria-expanded', 'true');
-    chapterNodeTitle.setAttribute('aria-controls', sectionsDivId);
-    chapterNodeTitle.addEventListener('click', event => {
-
-      if (!event.currentTarget.classList.contains('h5p-interactive-book-navigation-current')) {
-        // Open chapter in main content
-        this.callbacks.onMoved({
-          chapter: Chapters.get(chapterId).getSubContentId(),
-          toTop: true
-        });
-      }
-
-      // Expand chapter in menu
-      if (!chapterCollapseIcon.classList.contains('hidden')) {
-        this.toggleChapter(event.currentTarget.parentElement);
-        this.callbacks.onResized();
-      }
-    });
-
-    chapterNodeTitle.appendChild(chapterCollapseIcon);
-    chapterNodeTitle.appendChild(chapterTitleText);
-
-    chapterNode.appendChild(chapterNodeTitle);
-
-    this.toggleChapter(chapterNode, true);
-
-    const sectionsWrapper = document.createElement('ul');
-    sectionsWrapper.classList.add('h5p-interactive-book-navigation-sectionlist');
-    const sectionsDivId = 'h5p-interactive-book-sectionlist-' + chapterId;
-    sectionsWrapper.id = sectionsDivId;
-
-    const sectionLinks = [];
-    // Add sections to the chapter
-
-    const chap = Chapters.get(chapterId);
-    const sections = chap.getSections();
-
-    sections.forEach((section, sectionIndex) => {
-      section.getContents().forEach(content => {
-
-        if (!Util.isTask(content.getInstance())) {
-          // Check text content for headers
-          const semantics = content.getSemantics();
-
-          if (semantics.library.split(' ')[0] === 'H5P.AdvancedText') {
-            const text = document.createElement('div');
-            text.innerHTML = semantics.params.text;
-            const headers = text.querySelectorAll('h2, h3');
-            for (let j = 0; j < headers.length; j++) {
-              const sectionNode = this.buildContentLink({
-                id: sectionIndex,
-                chapter: chap,
-                section: section,
-                content: content,
-                header: j,
-                title: headers[j].textContent
-              });
-
-              sectionLinks.push(sectionNode);
-              sectionsWrapper.appendChild(sectionNode);
-            }
-          }
+        /*
+         * If current menu item is direct parent of clicked content item,
+         * activate current menu item
+         */
+        if (
+          hierarchy.indexOf(':') !== -1 &&
+          this.isChild(hierarchy, item.hierarchy, { directChild: true })
+        ) {
+          instance.activate();
         }
         else {
-          const sectionNode = this.buildContentLink({
-            id: sectionIndex,
-            chapter: chap,
-            section: section,
-            content: content
-          });          sectionLinks.push(sectionNode);
-          sectionsWrapper.appendChild(sectionNode);
+          instance.deactivate();
         }
-      });
-    });
-
-    // Don't show collapse arrow if there are no sections or on mobile
-    if (sectionLinks.length === 0) {
-      const arrowIconElement = chapterNode.querySelector('.h5p-interactive-book-navigation-chapter-accordion');
-      if (arrowIconElement) {
-        arrowIconElement.classList.add('hidden');
       }
-    }
-
-    chapterNode.appendChild(sectionsWrapper);
-
-    return chapterNode;
-  }
-
-  buildContentLink(params = {}) {
-    if (typeof params.id !== 'number' || !params.chapter) {
-      return null;
-    }
-
-    // label
-    const labelText = params.title || params.content?.getTitle() || params.section?.getTitle();
-    const label = document.createElement('div');
-    label.classList.add('h5p-interactive-book-navigation-section-title');
-    label.setAttribute('title', labelText);
-    label.innerHTML = labelText;
-
-    // link
-    const link = document.createElement('button');
-    link.classList.add('section-button');
-    link.setAttribute('tabindex', '-1');
-    link.appendChild(label);
-    link.addEventListener('click', event => {
-      event.preventDefault();
-
-      this.callbacks.onMoved({
-        chapter: params.chapter?.getSubContentId(),
-        section: params.section?.getSubContentId(),
-        content: params.content?.getSubContentId(),
-        ...(params.header !== undefined && { header: params.header })
-      });
     });
-
-    // item node
-    const item = document.createElement('li');
-    item.classList.add('h5p-interactive-book-navigation-section');
-    item.classList.add('h5p-interactive-book-navigation-section-' + params.id);
-    item.appendChild(link);
-
-    return item;
   }
 
   /**
-   * Get chapter elements.
-   * @return {HTMLElement[]} Chapter elements.
+   * Handle click on menu item.
+   * @param {object} params Parameters.
    */
-  getChapterNodes() {
-    return Chapters.get().map((chapter, index) => this.getNodesFromChapter(chapter, index));
+  handleClicked(params) {
+    // Set current item
+    this.setCurrentItem(params.hierarchy, { toggleSelected: true });
+
+    // Trigger moving to target
+    if (params.target) {
+      this.callbacks.onMoved(params.target);
+    }
+  }
+
+  /**
+   * Handle navigated with key.
+   * @param {object} params Parameters.
+   * @param {string} params.hierarchy Current hierarchy.
+   * @param {number} diff -1 for up, 1 for down.
+   */
+  handleKeyNavigated(params, diff) {
+    const index = this.menuItems.findIndex(item => {
+      return item.hierarchy === params.hierarchy;
+    });
+
+    // Loop over next/previous item until visible one found
+    let currentIndex = index;
+    let found = null;
+    do {
+      if (diff === 1 && currentIndex === this.menuItems.length - 1) {
+        currentIndex = 0;
+      }
+      else if (diff === -1 && currentIndex === 0) {
+        currentIndex = this.menuItems.length - 1;
+      }
+      else {
+        currentIndex = currentIndex + diff;
+      }
+
+      if (
+        !this.menuItems[currentIndex].instance.isHidden() ||
+        currentIndex === index // Only item
+      ) {
+        found = this.menuItems[currentIndex];
+      }
+    } while (!found);
+
+    // Make new item current one.
+    if (currentIndex !== index) {
+      this.menuItems[index].instance.makeUntabbable();
+      found.instance.makeTabbable();
+      found.instance.focus();
+    }
   }
 }
 export default SideBar;

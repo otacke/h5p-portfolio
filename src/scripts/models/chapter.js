@@ -9,6 +9,7 @@ export default class Chapter {
   constructor(params = {}) {
     this.isInitialized = false;
     this.title = params.content.metadata.title; // TODO: Something better?
+    this.hierarchy = params.hierarchy;
 
     // Build chapter instance
     this.instance = H5P.newRunnable(
@@ -49,6 +50,14 @@ export default class Chapter {
    */
   getDOM() {
     return this.dom;
+  }
+
+  /**
+   * Get id.
+   * @return {string} Hierachy.
+   */
+  getHierarchy() {
+    return this.hierarchy;
   }
 
   /**
