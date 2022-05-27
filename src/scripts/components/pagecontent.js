@@ -120,7 +120,7 @@ export default class PageContent {
 
     // Instantiate and attach chapter contents
     const chapter = Chapters.get(chapterIndex);
-    if (!chapter.isInitialized) {
+    if (!chapter.isInitialized && chapter.instance) {
       chapter.instance.attach(H5P.jQuery(chapter.dom));
       chapter.isInitialized = true;
     }
