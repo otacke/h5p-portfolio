@@ -25,10 +25,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       bookCover: {},
       chapters: [],
       behaviour: {
-        defaultTableOfContents: true,
-        progressIndicators: true,
-        progressAuto: true,
-        displaySummary: true
+        defaultTableOfContents: true
       },
       l10n: {
         read: 'Read',

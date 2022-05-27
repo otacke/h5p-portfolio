@@ -154,36 +154,6 @@
         "label": "Display table of contents as default",
         "description": "When enabled the table of contents is showed when opening the book",
         "default": true
-      },
-      {
-        "name": "progressIndicators",
-        "type": "boolean",
-        "label": "Display Progress Indicators",
-        "description": "When enabled there will be indicators per page showing the user if he is done with the page or not.",
-        "default": true
-      },
-      {
-        "name": "progressAuto",
-        "type": "boolean",
-        "label": "Enable automatic progress",
-        "description": "If enabled a page without tasks is considered done when viewed. A page with tasks when all tasks are done. If disabled there will be a button at the bottom of every page for the user to click when done with the page.",
-        "default": true,
-        "widget": "showWhen",
-        "showWhen": {
-          "rules": [
-            {
-              "field": "progressIndicators",
-              "equals": true
-            }
-          ]
-        }
-      },
-      {
-        "name": "displaySummary",
-        "type": "boolean",
-        "label": "Display summary",
-        "description": "When enabled the user can see a summary and submit the progress/answers",
-        "default": true
       }
     ]
   },
