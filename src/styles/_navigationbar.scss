@@ -24,6 +24,7 @@
   }
 
   .navigation-list {
+    background-color: var(--color-base-5, #fff);
     margin: 0;
     padding: 0;
   }
@@ -114,11 +115,16 @@
   &.h5p-interactive-book-navigation-chapter-first {
     margin-top: .5em;
   }
+
+  &.h5p-interactive-book-navigation-chapter-last {
+    border-bottom: solid 1px $ghost-white;
+    height: 2em;
+  }
 }
 
 .h5p-interactive-book-navigation-chapter-button {
   align-items: center;
-  background-color: var(--color-base-10, $background-color);
+  background-color: var(--color-base-5, $background-color);
   background-size: cover;
   border: 0;
   border-bottom: solid 1px $ghost-white;
@@ -165,7 +171,7 @@
 
   &.h5p-interactive-book-navigation-current:not(.h5p-interactive-book-navigation-chapter-content) {
     background-color: var(--color-base-10, $base-color-10);
-    border-bottom-color: white;
+    // border-bottom-color: white;
 
     .h5p-interactive-book-navigation-chapter-title-text {
       color: var(--color-base, $base-color);

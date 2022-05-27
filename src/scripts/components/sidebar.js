@@ -78,10 +78,20 @@ class SideBar extends H5P.EventDispatcher {
       };
 
       // MenuChapterItem parameters for contents
-      const contentMenuItems = this.extractContentItemTargets(chapter).map((target, index) => {
+      const contentMenuItems = this.extractContentItemTargets(chapter).map((target, index, all) => {
         const hierarchy = `${chapter.getHierarchy()}:${index}`;
+
+        let className;
+        if (index === 0) {
+          className = 'h5p-interactive-book-navigation-chapter-first';
+        }
+        else if (index === all.length - 1) {
+          className = 'h5p-interactive-book-navigation-chapter-last';
+        }
+
         return {
           title: target.title,
+          className: className,
           hierarchy: hierarchy,
           target: {
             chapter: target.chapter,

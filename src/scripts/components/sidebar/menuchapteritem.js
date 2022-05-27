@@ -26,8 +26,8 @@ export default class MenuChapterItem {
     this.menuItem = document.createElement('li');
     this.menuItem.classList.add('h5p-interactive-book-navigation-chapter');
     this.menuItem.classList.add('h5p-interactive-book-navigation-closed');
-    if (this.isContentLink && this.params.hierarchy.split(':')[1] === '0') {
-      this.menuItem.classList.add('h5p-interactive-book-navigation-chapter-first');
+    if (this.params.className) {
+      this.menuItem.classList.add(this.params.className);
     }
 
     this.button = document.createElement('button');
@@ -83,6 +83,20 @@ export default class MenuChapterItem {
    */
   getDOM() {
     return this.menuItem;
+  }
+
+  /**
+   * Add CSS class.
+   */
+  addClass(className) {
+    this.menuItem.classList.add(className);
+  }
+
+  /**
+   * Remove CSS class.
+   */
+  removeClass(className) {
+    this.menuItem.classList.remove(className);
   }
 
   /**
