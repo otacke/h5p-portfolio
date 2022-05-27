@@ -606,10 +606,11 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Display book cover.
    * @param {HTMLElement} wrapper Wrapper.
    */
-  displayCover(wrapper) {
+  displayCover($wrapper) {
     this.hideElements();
-    wrapper.append(this.cover.container);
-    wrapper.addClass('covered');
+    $wrapper.append(this.cover.container);
+    console.log($wrapper);
+    $wrapper.addClass('covered');
     this.cover.initMedia();
   }
 
