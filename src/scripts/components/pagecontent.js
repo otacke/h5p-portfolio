@@ -243,27 +243,27 @@ export default class PageContent {
         chapterFrom.classList.add('h5p-interactive-book-previous');
       }
       chapterTo.classList.remove(`h5p-interactive-book-${direction}`);
-    }, 1);
 
-    // End the animation
-    setTimeout(() => {
-      chapterFrom.classList.remove('h5p-interactive-book-next');
-      chapterFrom.classList.remove('h5p-interactive-book-previous');
-      chapterFrom.classList.remove('h5p-interactive-book-current');
+      // End the animation
+      setTimeout(() => {
+        chapterFrom.classList.remove('h5p-interactive-book-next');
+        chapterFrom.classList.remove('h5p-interactive-book-previous');
 
-      chapterTo.classList.add('h5p-interactive-book-current');
+        chapterFrom.classList.remove('h5p-interactive-book-current');
+        chapterTo.classList.add('h5p-interactive-book-current');
 
-      chapterTo.classList.remove('h5p-interactive-book-animate');
-      chapterFrom.classList.remove('h5p-interactive-book-animate');
+        chapterFrom.classList.remove('h5p-interactive-book-animate');
+        chapterTo.classList.remove('h5p-interactive-book-animate');
 
-      if (targetOnPage) {
-        this.scrollTo(targetOnPage);
-      }
+        if (targetOnPage) {
+          this.scrollTo(targetOnPage);
+        }
 
-      this.isAnimatingState = false;
+        this.isAnimatingState = false;
 
-      this.callbacks.onResized();
-    }, 250);
+        this.callbacks.onResized();
+      }, 250);
+    }, 50); // TODO: Investigate why 0 is not enough
   }
 
   /**
