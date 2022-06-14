@@ -158,6 +158,7 @@ export default class Chapters {
         hierarchy: chapter.chapterHierarchy,
         content: chapter.content,
         contentId: contentId,
+        ...(chapter.useHotspotNavigation && {hotspotNavigation: chapter.hotspotNavigation}),
         previousState: Array.isArray(extras.previousState.chapters) ?
           this.previousState.chapters[index] :
           {}

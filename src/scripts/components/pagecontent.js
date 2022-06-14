@@ -1,5 +1,6 @@
 import Util from './../helpers/util';
 import Chapters from './../services/chapters';
+import HotspotNavigation from './hotspotnavigation/navigation';
 
 export default class PageContent {
   /**
@@ -57,6 +58,20 @@ export default class PageContent {
       const columnNode = document.createElement('div');
       columnNode.classList.add('h5p-interactive-book-chapter');
       chapter.setInstanceDOM(columnNode);
+      chapter.setHotspotNavigation(new HotspotNavigation(
+        {
+          image: this.params.hotspotNavigationImage,
+          contentId: this.params.contentId
+        },
+        {
+          onClicked: ((subContentId) => {
+            this.callbacks.onMoved({
+              chapter: subContentId,
+              toTop: true
+            });
+          })
+        }
+      ));
     });
   }
 

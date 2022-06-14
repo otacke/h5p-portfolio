@@ -74,6 +74,13 @@
     ]
   },
   {
+    "name": "hotspotNavigationImage",
+    "type": "image",
+    "label": "Hotspot navigation image",
+    "description": "Image used as background for the hotspot navigation",
+    "optional": true
+  },
+  {
     "name": "chapters",
     "type": "list",
     "label": "Pages",
@@ -98,6 +105,52 @@
           "label": "Chapter hierarchy",
           "type": "text",
           "optional": false
+        },
+        {
+          "name": "useHotspotNavigation",
+          "type": "boolean",
+          "label": "Use hotspot navigation",
+          "default": false
+        },
+        {
+          "name": "hotspotNavigation",
+          "type": "group",
+          "label": "Hotspot navigation",
+          "fields": [
+            {
+              "name": "position",
+              "type": "group",
+              "widget": "imageCoordinateSelector",
+              "imageFieldPath": "../../../hotspotNavigationImage",
+              "label": "Hotspot position",
+              "description": "Click on the thumbnail image to place the hotspot",
+              "fields": [
+                {
+                  "name": "x",
+                  "type": "number"
+                },
+                {
+                  "name": "y",
+                  "type": "number"
+                }
+              ]
+            },
+            {
+              "name": "title",
+              "type": "text",
+              "label": "Hotspot title",
+              "optional": "true"
+            }
+          ],
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "useHotspotNavigation",
+                "equals": true
+              }
+            ]
+          }
         },
         {
           "label": "Chapter",

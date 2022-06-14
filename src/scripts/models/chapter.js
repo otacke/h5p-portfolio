@@ -7,6 +7,8 @@ export default class Chapter {
    * @param {params} Parameters.
    */
   constructor(params = {}) {
+    this.params = params;
+
     this.isInitialized = false;
     this.title = params.content.metadata.title; // TODO: Something better?
     this.hierarchy = params.hierarchy;
@@ -66,6 +68,15 @@ export default class Chapter {
 
     this.instanceDOM = dom;
     this.dom.appendChild(this.instanceDOM);
+  }
+
+  setHotspotNavigation(hotspotNavigation) {
+    if (this.hotspotNavigationDOM) {
+      this.dom.removeChild(this.hotspotNavigationDOM);
+    }
+
+    this.hotspotNavigation = hotspotNavigation;
+    this.dom.appendChild(this.hotspotNavigation.getDOM());
   }
 
   /**

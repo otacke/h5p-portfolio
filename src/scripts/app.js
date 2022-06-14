@@ -147,7 +147,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     this.pageContent = new PageContent(
-      {},
+      {
+        hotspotNavigationImage: this.params.hotspotNavigationImage || null,
+        contentId: this.contentId
+      },
       {
         onScrollToTop: () => {
           this.scrollToTop();
@@ -157,6 +160,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         }),
         onChapterChanged: ((chapterId) => {
           this.handleChapterChanged(chapterId);
+        }),
+        onMoved: ((params) => {
+          this.moveTo(params);
         })
       }
     );
