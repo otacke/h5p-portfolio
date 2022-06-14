@@ -32,8 +32,11 @@ export default class Chapter {
       }));
     }
 
+    this.dom = document.createElement('div');
+    this.dom.classList.add('h5p-portfolio-chapter-container');
+
     // If needed, needs to be set when instance is attached
-    this.dom = null;
+    this.instanceDOM = null;
   }
 
   /**
@@ -50,6 +53,43 @@ export default class Chapter {
    */
   getDOM() {
     return this.dom;
+  }
+
+  /**
+   * Set DOM.
+   * @param {HTMLElement|null} Instance DOM.
+   */
+  setInstanceDOM(dom) {
+    if (this.instanceDOM) {
+      this.dom.removeChild(this.instanceDOM);
+    }
+
+    this.instanceDOM = dom;
+    this.dom.appendChild(this.instanceDOM);
+  }
+
+  /**
+   * Start animation.
+   */
+  startAnimation() {
+    this.dom.classList.add('h5p-interactive-book-animate');
+  }
+
+  /**
+   * Stop animation.
+   */
+  stopAnimation() {
+    this.dom.classList.remove('h5p-interactive-book-animate');
+  }
+
+  /**
+   * Set position. There can be only one!
+   * @param {string} position From previous|current|next.
+   */
+  setAnimationPosition(position) {
+    this.dom.classList.toggle('h5p-interactive-book-previous', position === 'previous');
+    this.dom.classList.toggle('h5p-interactive-book-current', position === 'current');
+    this.dom.classList.toggle('h5p-interactive-book-next', position === 'next');
   }
 
   /**

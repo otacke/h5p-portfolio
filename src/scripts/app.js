@@ -84,7 +84,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.currentChapterId = 0;
 
-
     this.$mainWrapper = null;
     this.currentRatio = null;
 
@@ -412,7 +411,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     if (moveFooterInsideContent) {
       // Add status bar footer to page content
       if (footerParent !== this.pageContent.getDOM()) {
-        this.pageContent.getDOM().appendChild(this.statusBarFooter.wrapper);
+        this.pageContent.addFooter(this.statusBarFooter.wrapper);
       }
     }
     else {

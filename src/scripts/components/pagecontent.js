@@ -41,7 +41,7 @@ export default class PageContent {
     content.classList.add('h5p-interactive-book-content');
 
     Chapters.get().forEach(chapter => {
-      content.appendChild(chapter.dom);
+      content.appendChild(chapter.getDOM());
     });
 
     this.setChapterOrder(this.currentChapterId);
@@ -56,7 +56,7 @@ export default class PageContent {
     Chapters.get().forEach(chapter => {
       const columnNode = document.createElement('div');
       columnNode.classList.add('h5p-interactive-book-chapter');
-      chapter.dom = columnNode;
+      chapter.setInstanceDOM(columnNode);
     });
   }
 
@@ -84,19 +84,7 @@ export default class PageContent {
     }
 
     Chapters.get().forEach((chapter, index) => {
-      chapter.dom.classList.remove('h5p-interactive-book-previous');
-      chapter.dom.classList.remove('h5p-interactive-book-current');
-      chapter.dom.classList.remove('h5p-interactive-book-next');
-
-      if (index === currentId - 1) {
-        // chapter.dom.classList.add('h5p-interactive-book-previous');
-      }
-      else if (index === currentId) {
-        chapter.dom.classList.add('h5p-interactive-book-current');
-      }
-      else if (index === currentId + 1) {
-        // chapter.dom.classList.add('h5p-interactive-book-next');
-      }
+      chapter.setAnimationPosition(index === currentId ? 'current' : null);
     });
   }
 
@@ -224,36 +212,32 @@ export default class PageContent {
      * Animation done by making the current and the target node
      * visible and then applying the correct translation in x-direction
      */
-    const chapterFrom = Chapters.get(chapterIdFrom).getDOM();
-    const chapterTo = Chapters.get(chapterIdTo).getDOM();
+    const chapterFrom = Chapters.get(chapterIdFrom);
+    const chapterTo = Chapters.get(chapterIdTo);
     const direction = (chapterIdFrom < chapterIdTo) ? 'next' : 'previous';
 
-    chapterTo.classList.add(`h5p-interactive-book-${direction}`);
+    chapterTo.setAnimationPosition(direction);
 
-    chapterTo.classList.add('h5p-interactive-book-animate');
-    chapterFrom.classList.add('h5p-interactive-book-animate');
+    chapterTo.startAnimation();
+    chapterFrom.startAnimation();
 
     // Start the animation
     setTimeout(() => {
       if (direction === 'previous') {
-        chapterFrom.classList.add('h5p-interactive-book-next');
+        chapterFrom.setAnimationPosition('next');
       }
       else {
-        chapterFrom.classList.remove('h5p-interactive-book-current');
-        chapterFrom.classList.add('h5p-interactive-book-previous');
+        chapterFrom.setAnimationPosition('previous');
       }
-      chapterTo.classList.remove(`h5p-interactive-book-${direction}`);
+      chapterTo.setAnimationPosition(direction);
 
       // End the animation
       setTimeout(() => {
-        chapterFrom.classList.remove('h5p-interactive-book-next');
-        chapterFrom.classList.remove('h5p-interactive-book-previous');
+        chapterFrom.setAnimationPosition();
+        chapterTo.setAnimationPosition('current');
 
-        chapterFrom.classList.remove('h5p-interactive-book-current');
-        chapterTo.classList.add('h5p-interactive-book-current');
-
-        chapterFrom.classList.remove('h5p-interactive-book-animate');
-        chapterTo.classList.remove('h5p-interactive-book-animate');
+        chapterTo.stopAnimation();
+        chapterFrom.stopAnimation();
 
         if (targetOnPage) {
           this.scrollTo(targetOnPage);
@@ -278,5 +262,13 @@ export default class PageContent {
    */
   resize() {
     Chapters.get(this.currentChapterId).instance.trigger('resize');
+  }
+
+  /**
+   * Add footer.
+   * @param {HTMLElement} footer Footer.
+   */
+  addFooter(footer) {
+    this.content.appendChild(footer);
   }
 }
