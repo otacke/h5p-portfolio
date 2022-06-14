@@ -94,13 +94,20 @@ export default class Chapter {
   }
 
   /**
-   * Set position. There can be only one!
+   * Add position.
    * @param {string} position From previous|current|next.
+   * @param {boolean} [state] Forced state to toggle to.
    */
-  setAnimationPosition(position) {
-    this.dom.classList.toggle('h5p-interactive-book-previous', position === 'previous');
-    this.dom.classList.toggle('h5p-interactive-book-current', position === 'current');
-    this.dom.classList.toggle('h5p-interactive-book-next', position === 'next');
+  toggleAnimationPosition(position, state) {
+    if (!['previous', 'current', 'next'].includes(position)) {
+      return;
+    }
+
+    if (typeof state !== 'boolean') {
+      state = !this.dom.classList.contains(`h5p-interactive-book-${position}`);
+    }
+
+    this.dom.classList.toggle(`h5p-interactive-book-${position}`, state);
   }
 
   /**

@@ -99,7 +99,9 @@ export default class PageContent {
     }
 
     Chapters.get().forEach((chapter, index) => {
-      chapter.setAnimationPosition(index === currentId ? 'current' : null);
+      chapter.toggleAnimationPosition('previous', false);
+      chapter.toggleAnimationPosition('current', index === currentId);
+      chapter.toggleAnimationPosition('next', false);
     });
   }
 
@@ -231,7 +233,7 @@ export default class PageContent {
     const chapterTo = Chapters.get(chapterIdTo);
     const direction = (chapterIdFrom < chapterIdTo) ? 'next' : 'previous';
 
-    chapterTo.setAnimationPosition(direction);
+    chapterTo.toggleAnimationPosition(direction, true);
 
     chapterTo.startAnimation();
     chapterFrom.startAnimation();
@@ -239,17 +241,20 @@ export default class PageContent {
     // Start the animation
     setTimeout(() => {
       if (direction === 'previous') {
-        chapterFrom.setAnimationPosition('next');
+        chapterFrom.toggleAnimationPosition('next', true);
       }
       else {
-        chapterFrom.setAnimationPosition('previous');
+        chapterFrom.toggleAnimationPosition('current', false);
+        chapterFrom.toggleAnimationPosition('previous', true);
       }
-      chapterTo.setAnimationPosition(direction);
+      chapterTo.toggleAnimationPosition(direction, false);
 
       // End the animation
       setTimeout(() => {
-        chapterFrom.setAnimationPosition();
-        chapterTo.setAnimationPosition('current');
+        chapterFrom.toggleAnimationPosition('previous', false);
+        chapterFrom.toggleAnimationPosition('current', false);
+        chapterFrom.toggleAnimationPosition('next', false);
+        chapterTo.toggleAnimationPosition('current', true);
 
         chapterTo.stopAnimation();
         chapterFrom.stopAnimation();
