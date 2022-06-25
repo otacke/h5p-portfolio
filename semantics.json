@@ -130,9 +130,15 @@
           "optional": false
         },
         {
-          "name": "useHotspotNavigation",
+          "name": "displayHotspotNavigation",
           "type": "boolean",
-          "label": "Use hotspot navigation",
+          "label": "Display hotspot navigation",
+          "default": false
+        },
+        {
+          "name": "providesHotspot",
+          "type": "boolean",
+          "label": "Provides a hotspot for navigation",
           "default": false
         },
         {
@@ -169,7 +175,7 @@
           "showWhen": {
             "rules": [
               {
-                "field": "useHotspotNavigation",
+                "field": "providesHotspot",
                 "equals": true
               }
             ]

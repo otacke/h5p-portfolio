@@ -71,6 +71,10 @@ export default class Chapter {
   }
 
   setHotspotNavigation(hotspotNavigation) {
+    if (!this.params.displayHotspotNavigation) {
+      return; // Chapter should not display hotspot navigation
+    }
+
     if (this.hotspotNavigationDOM) {
       this.dom.removeChild(this.hotspotNavigationDOM);
     }
