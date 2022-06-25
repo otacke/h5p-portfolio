@@ -20,7 +20,6 @@ export default class Hotspot {
     this.dom.style.top = `${this.params.position.y}%`;
     if (this.params.title) {
       this.dom.setAttribute('title', this.params.title);
-      // TODO: ARIA
     }
 
     this.dom.addEventListener('click', () => {

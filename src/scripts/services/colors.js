@@ -134,6 +134,22 @@ export default class Colors {
       --color-contrast: ${Colors.computeContrastColor(Colors.colorBase, Colors.DEFAULT_COLOR_BG)};
     }`;
   }
+
+  static appendToStylesheet(css) {
+    if (typeof css !== 'string') {
+      return;
+    }
+
+    const style = document.createElement('style');
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    }
+    else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    document.head.appendChild(style);
+  }
 }
 
 /** @const {string} Preferred default color as defined in SCSS */

@@ -74,11 +74,34 @@
     ]
   },
   {
-    "name": "hotspotNavigationImage",
-    "type": "image",
-    "label": "Hotspot navigation image",
-    "description": "Image used as background for the hotspot navigation",
-    "optional": true
+    "name": "hotspotNavigationGlobals",
+    "type": "group",
+    "label": "Hotspot navigation",
+    "description": "Set global values for hotspot navigation",
+    "optional": true,
+    "expanded": false,
+    "fields": [
+      {
+        "name": "hotspotNavigationImage",
+        "type": "image",
+        "label": "Hotspot navigation image",
+        "description": "Image used as background for the hotspot navigation",
+        "optional": true
+      },
+      {
+        "name": "hotspotNavigationColor",
+        "type": "text",
+        "label": "Hotspot color",
+        "optional": true,
+        "widget": "colorSelector",
+        "default": "rgba(255, 255, 255, .6)",
+        "spectrum": {
+          "showInput": true,
+          "showAlpha": true,
+          "preferredFormat": "rgb"
+        }
+      }
+    ]
   },
   {
     "name": "chapters",
@@ -121,7 +144,7 @@
               "name": "position",
               "type": "group",
               "widget": "imageCoordinateSelector",
-              "imageFieldPath": "../../../hotspotNavigationImage",
+              "imageFieldPath": "../../../hotspotNavigationGlobals/hotspotNavigationImage",
               "label": "Hotspot position",
               "description": "Click on the thumbnail image to place the hotspot",
               "fields": [

@@ -11,15 +11,24 @@ export default class HotspotNavigation {
    * @param {object} callbacks Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
-    this.params = Util.extend({}, params);
+    this.params = Util.extend({
+      image: {}
+    }, params);
+
     this.callbacks = Util.extend({
       onClicked: (() => {})
     }, callbacks);
 
     this.dom = document.createElement('div');
     this.dom.classList.add('h5p-portfolio-hotspot-navigation');
+    this.dom.setAttribute('aria-hidden', true);
 
-    // TODO: Handle no image given
+    this.hotspots = [];
+
+    if (!this.params.image.path) {
+      return; // No hotspot image provided, can't continue.
+    }
+
     const image = document.createElement('img');
     image.classList.add('h5p-portfolio-hotspot-navigation-image');
     image.src = H5P.getPath(this.params.image.path, this.params.contentId);
@@ -33,7 +42,8 @@ export default class HotspotNavigation {
           {
             id: chapter.getSubContentId(),
             position: chapter.params.hotspotNavigation.position,
-            title: chapter.params.hotspotNavigation.title
+            title: chapter.params.hotspotNavigation.title,
+            color: this.params.color
           }, {
             onClicked: ((subContentId) => this.callbacks.onClicked(subContentId))
           }

@@ -60,7 +60,8 @@ export default class PageContent {
       chapter.setInstanceDOM(columnNode);
       chapter.setHotspotNavigation(new HotspotNavigation(
         {
-          image: this.params.hotspotNavigationImage,
+          image: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
+          color: this.params.hotspotNavigationGlobals.hotspotNavigationColor,
           contentId: this.params.contentId
         },
         {

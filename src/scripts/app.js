@@ -22,6 +22,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.params = Util.extend({
       showCoverPage: false,
+      hotspotNavigationGlobals: {
+        hotspotNavigationImage: {},
+        hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
+      },
       bookCover: {},
       chapters: [],
       behaviour: {
@@ -55,22 +59,19 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     // Will be called in static context
     this.validateFragments = this.validateFragments.bind(this);
 
-    // Apply custom base color, TODO: custom function
+    // Apply custom base color
     if (
       params?.behaviour?.baseColor &&
       !Colors.isBaseColor(params.behaviour.baseColor)
     ) {
       Colors.setBase(params.behaviour.baseColor);
-
-      const style = document.createElement('style');
-      if (style.styleSheet) {
-        style.styleSheet.cssText = Colors.getCSS();
-      }
-      else {
-        style.appendChild(document.createTextNode(Colors.getCSS()));
-      }
-      document.head.appendChild(style);
+      Colors.appendToStylesheet(Colors.getCSS());
     }
+
+    // Apply hotspot color
+    Colors.appendToStylesheet(`:root{--color-hotspot-background:
+      ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
+    ;}`);
 
     // Fill up chapter service
     Chapters.fill(
@@ -148,7 +149,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.pageContent = new PageContent(
       {
-        hotspotNavigationImage: this.params.hotspotNavigationImage || null,
+        hotspotNavigationGlobals: this.params.hotspotNavigationGlobals,
         contentId: this.contentId
       },
       {
