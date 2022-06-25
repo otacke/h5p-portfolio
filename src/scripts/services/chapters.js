@@ -180,8 +180,6 @@ export default class Chapters {
       }];
     }
 
-    console.log(params);
-
     return params;
   }
 
