@@ -133,7 +133,7 @@
           "name": "displayHotspotNavigation",
           "type": "boolean",
           "label": "Display hotspot navigation",
-          "default": false
+          "default": true
         },
         {
           "name": "providesHotspot",
