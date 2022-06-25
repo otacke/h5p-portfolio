@@ -224,6 +224,10 @@ export default class PageContent {
    * @param {object} [targetOnPage] Optional target in chapter to scroll to.
    */
   animateChapterTransition(chapterIdFrom, chapterIdTo, targetOnPage) {
+    if (typeof chapterIdFrom !== 'number' || typeof chapterIdTo !== 'number') {
+      return;
+    }
+
     this.isAnimatingState = true;
 
     /*
@@ -282,6 +286,10 @@ export default class PageContent {
    * Resize visible instance.
    */
   resize() {
+    if (typeof this.currentChapterId !== 'number') {
+      return;
+    }
+
     Chapters.get(this.currentChapterId).instance.trigger('resize');
   }
 
