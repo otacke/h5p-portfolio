@@ -18,18 +18,18 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.18.0",
-    "@babel/preset-env": "^7.18.0",
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
     "babel-loader": "^8.2.5",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
-    "mini-css-extract-plugin": "^2.6.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "regenerator-runtime": "^0.13.9",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.52.1",
-    "sass-loader": "^13.0.0",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "color": "^4.2.3",
