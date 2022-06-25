@@ -127,21 +127,60 @@ export default class Chapters {
    * @return {object} Sanitized parameters for chapters.
    */
   static sanitize(params = []) {
-    // Filter out empty chapters
+
+    // Filter out invalid chapters
     params = params.filter(chapter => {
-      return chapter?.content?.params?.contents?.length > 0;
+      const validHierarchy = (new RegExp('^[1-9][0-9]*(-[1-9][0-9]*)*$'))
+        .test(chapter.chapterHierarchy);
+
+      const hasPlaceholder = chapter?.content?.params?.contents?.length > 0;
+
+      return validHierarchy && hasPlaceholder;
+    });
+
+    // Determine hierarchy depth
+    const hierarchyDepth = params.reduce((length, chapter) => {
+      return Math.max(length, chapter.chapterHierarchy.split('-').length);
+    }, 1);
+
+    // Sort by chapter hierarchy
+    params = params.sort((chapterA, chapterB) => {
+      // Fill hierarchy up with 0s for comparison
+      const levelsA = chapterA.chapterHierarchy.split('-');
+      while (levelsA.length < hierarchyDepth) {
+        levelsA.push(0);
+      }
+      const levelsB = chapterB.chapterHierarchy.split('-');
+      while (levelsB.length < hierarchyDepth) {
+        levelsB.push(0);
+      }
+
+      // Compare level by level
+      let result = 0;
+      for (let i = 0; i < levelsA.length; i++) {
+        if (levelsA[i] < levelsB[i]) {
+          result = -1;
+          break;
+        }
+        else if (levelsA[i] > levelsB[i]) {
+          result = 1;
+          break;
+        }
+      }
+
+      return result;
     });
 
     // Add dummy chapter. TODO: parameters for Advanced Text
     if (!params.length) {
       params = [{
         id: 0,
-        chapterHierarchy: 1,
+        chapterHierarchy: '1',
         content: {}
       }];
     }
 
-    // TODO: Sort
+    console.log(params);
 
     return params;
   }
