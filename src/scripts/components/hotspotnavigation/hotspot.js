@@ -14,6 +14,8 @@ export default class Hotspot {
       onClicked: (() => {})
     }, callbacks);
 
+    this.isShowingToast = false;
+
     this.dom = document.createElement('button');
     this.dom.classList.add('h5p-portfolio-hotspot-navigation-hotspot');
     this.dom.style.left = `${this.params.position.x}%`;
@@ -22,14 +24,47 @@ export default class Hotspot {
       this.dom.setAttribute('title', this.params.title);
     }
 
-    this.dom.addEventListener('click', () => {
-      // TODO: On touch, show title first, then callback on 2nd click
-      this.callbacks.onClicked(this.params.id);
+    this.dom.addEventListener('click', (event) => {
+      this.handleClicked(event);
     });
-
   }
 
   getDOM() {
     return this.dom;
   }
+
+  /**
+   * Handle click on hotspot.
+   * @param {Event} event Mouse event.
+   */
+  handleClicked(event) {
+    if (event.pointerType === 'mouse') {
+      this.callbacks.onClicked(this.params.id);
+      return;
+    }
+
+    /*
+     * Touch or pen. Will show title for Hotspot.toastDurationMs and during
+     * that interval, another "click" will execute the regular click.
+     */
+    if (this.isShowingToast) {
+      this.callbacks.onClicked(this.params.id);
+      this.isShowingToast = false;
+      clearTimeout(this.toastTimeout);
+      return;
+    }
+
+    H5P.attachToastTo(this.dom, this.params.title, {
+      duration: Hotspot.toastDurationMs,
+      position: { noOverflowX: true, noOverflowY: true }
+    });
+
+    this.isShowingToast = true;
+    this.toastTimeout = setTimeout(() => {
+      this.isShowingToast = false;
+    }, Hotspot.toastDurationMs);
+  }
 }
+
+/** @const {number} Time period to show toast message for */
+Hotspot.toastDurationMs = 3000;
