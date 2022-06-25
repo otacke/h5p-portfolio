@@ -9,7 +9,9 @@ export default class Hotspot {
    * @param {object} callbacks Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
-    this.params = Util.extend({}, params);
+    this.params = Util.extend({
+      position: { x: 50, y: 50 }
+    }, params);
     this.callbacks = Util.extend({
       onClicked: (() => {})
     }, callbacks);
@@ -29,6 +31,10 @@ export default class Hotspot {
     });
   }
 
+  /**
+   * Get hotspot DOM.
+   * @return {HTMLElement} Hotspot DOM.
+   */
   getDOM() {
     return this.dom;
   }
