@@ -1,6 +1,7 @@
 import './hotspot.scss';
 
 import Util from './../../helpers/util';
+import he from 'he';
 
 export default class Hotspot {
   /**
@@ -15,6 +16,10 @@ export default class Hotspot {
     this.callbacks = Util.extend({
       onClicked: (() => {})
     }, callbacks);
+
+    if (this.params.title) {
+      this.params.title = he.decode(this.params.title);
+    }
 
     this.isShowingToast = false;
 
