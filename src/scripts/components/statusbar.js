@@ -226,6 +226,7 @@ export default class StatusBar {
     const button = document.createElement('button');
     button.classList.add('h5p-interactive-book-status-arrow');
     button.classList.add('h5p-interactive-book-status-button');
+    button.setAttribute('aria-label', params.label);
     button.addEventListener('click', () => {
       params.onClicked();
     });
@@ -234,7 +235,6 @@ export default class StatusBar {
     icon.classList.add('navigation-button');
     icon.classList.add(params.icon);
     icon.setAttribute('title', params.label);
-    icon.setAttribute('aria-label', params.label);
     button.appendChild(icon);
 
     return button;
