@@ -133,7 +133,7 @@ export default class Chapters {
       const validHierarchy = (new RegExp('^[1-9][0-9]*(-[1-9][0-9]*)*$'))
         .test(chapter.chapterHierarchy);
 
-      const hasPlaceholder = chapter?.content?.params?.contents?.length > 0;
+      const hasPlaceholder = chapter?.content?.params?.chapter?.contents?.length > 0;
 
       return validHierarchy && hasPlaceholder;
     });
