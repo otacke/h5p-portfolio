@@ -21,31 +21,35 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     super();
 
     this.params = Util.extend({
-      showCoverPage: false,
-      hotspotNavigationGlobals: {
-        hotspotNavigationImage: {},
-        hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
-      },
-      bookCover: {},
-      chapters: [],
-      behaviour: {
-        defaultTableOfContents: true
-      },
-      l10n: {
-        read: 'Read',
-        displayTOC: 'Display "Table of contents"',
-        hideTOC: 'Hide "Table of contents"',
-        nextPage: 'Next page',
-        previousPage: 'Previous page',
-        navigateToTop: 'Navigate to the top',
-        fullscreen: 'Fullscreen',
-        exitFullscreen: 'Exit fullscreen'
-      },
-      a11y: {
-        progress: 'Page @page of @total.',
-        menu: 'Toggle navigation menu'
+      portfolio: {
+        showCoverPage: false,
+        hotspotNavigationGlobals: {
+          hotspotNavigationImage: {},
+          hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
+        },
+        bookCover: {},
+        chapters: [],
+        behaviour: {
+          defaultTableOfContents: true
+        },
+        l10n: {
+          read: 'Read',
+          displayTOC: 'Display "Table of contents"',
+          hideTOC: 'Hide "Table of contents"',
+          nextPage: 'Next page',
+          previousPage: 'Previous page',
+          navigateToTop: 'Navigate to the top',
+          fullscreen: 'Fullscreen',
+          exitFullscreen: 'Exit fullscreen'
+        },
+        a11y: {
+          progress: 'Page @page of @total.',
+          menu: 'Toggle navigation menu'
+        }
       }
     }, params);
+
+    this.params = this.params.portfolio;
 
     this.contentId = contentId;
     this.previousState = extras.previousState || {};
