@@ -158,11 +158,11 @@ export default class Chapters {
       // Compare level by level
       let result = 0;
       for (let i = 0; i < levelsA.length; i++) {
-        if (levelsA[i] < levelsB[i]) {
+        if (parseInt(levelsA[i]) < parseInt(levelsB[i])) {
           result = -1;
           break;
         }
-        else if (levelsA[i] > levelsB[i]) {
+        else if (parseInt(levelsA[i]) > parseInt(levelsB[i])) {
           result = 1;
           break;
         }
