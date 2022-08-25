@@ -4,6 +4,7 @@ export default class Dictionary {
 
   /**
    * Fill dictionary with translations.
+   *
    * @param {object} translation Translations.
    */
   static fill(translation = {}) {
@@ -12,9 +13,10 @@ export default class Dictionary {
 
   /**
    * Get translation for a key.
+   *
    * @param {string} key Key to look for.
    * @param {object} [base] Base to start looking.
-   * @return {string} Translation.
+   * @returns {string} Translation.
    */
   static get(key, base = Dictionary.translation) {
     const splits = key.split(/[./]+/);
@@ -34,6 +36,9 @@ export default class Dictionary {
 
   /**
    * Sanitize translations recursively: HTML decode and strip HTML.
+   *
+   * @param {string|object} translation Translation.
+   * @returns {string} Translation value.
    */
   static sanitize(translation) {
     if (typeof translation === 'object') {

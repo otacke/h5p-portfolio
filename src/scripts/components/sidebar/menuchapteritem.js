@@ -2,9 +2,9 @@ import Util from './../../helpers/util';
 
 export default class MenuChapterItem {
   /**
-   * @constructor
-   * @param {object} params Parameters.
-   * @param {object} callbacks Callbacks.
+   * @class
+   * @param {object} [params={}] Parameters.
+   * @param {object} [callbacks={}] Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({}, params);
@@ -79,7 +79,8 @@ export default class MenuChapterItem {
 
   /**
    * Get DOM.
-   * @return {HTMLElement} DOM.
+   *
+   * @returns {HTMLElement} DOM.
    */
   getDOM() {
     return this.menuItem;
@@ -87,6 +88,8 @@ export default class MenuChapterItem {
 
   /**
    * Add CSS class.
+   *
+   * @param {string} className Class name.
    */
   addClass(className) {
     this.menuItem.classList.add(className);
@@ -94,6 +97,8 @@ export default class MenuChapterItem {
 
   /**
    * Remove CSS class.
+   *
+   * @param {string} className Class name.
    */
   removeClass(className) {
     this.menuItem.classList.remove(className);
@@ -101,7 +106,8 @@ export default class MenuChapterItem {
 
   /**
    * Determine whether item is expanded.
-   * @return {boolean} True, if expanded, else false.
+   *
+   * @returns {boolean} True, if expanded, else false.
    */
   isExpanded() {
     return this.isExpandedValue;
@@ -109,7 +115,8 @@ export default class MenuChapterItem {
 
   /**
    * Determine whether item is hidden.
-   * @return {boolean} True, if hidden, else false.
+   *
+   * @returns {boolean} True, if hidden, else false.
    */
   isHidden() {
     return this.isHiddenValue;

@@ -12,10 +12,10 @@ import Dictionary from './services/dictionary';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**
-   * @constructor
-   * @param {object} params
-   * @param {string} contentId
-   * @param {object} extras
+   * @class
+   * @param {object} params Parameters.
+   * @param {string} contentId ContentId.
+   * @param {object} [extras={}] Extra configuration, e.g. metadata.
    */
   constructor(params, contentId, extras = {}) {
     super();
@@ -249,8 +249,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Attach library to wrapper
-   * @param {jQuery} $wrapper
+   * Attach library to wrapper.
+   *
+   * @param {H5P.jQuery} $wrapper Wrapping element.
    */
   attach($wrapper) {
     this.$mainWrapper = $wrapper;
@@ -323,6 +324,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Move to.
    * TODO: There also moveToChapter, and this one only seems to process the
    * target beforehand: merge
+   *
+   * @param {object} [params={}] Parameters.
    */
   moveTo(params = {}) {
     if (params.direction && params.direction !== 'prev' && params.direction !== 'next') {
@@ -371,6 +374,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Change the current active chapter.
+   *
    * @param {object} target Target.
    */
   moveToChapter(target) {
@@ -387,6 +391,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Add listener for hash changes to specified window.
+   *
    * @param {HTMLElement} hashWindow Window to listen on.
    */
   addHashListener(hashWindow) {
@@ -475,7 +480,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Change URL hash.
-   * @params {object} params Parameters.
+   *
+   * @param {object} params Parameters.
    */
   changeHash(params) {
     if (String(params.h5pPortfolioId) !== String(this.contentId)) {
@@ -487,7 +493,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Check if there's a cover.
-   * @return {boolean} True, if there's a cover.
+   *
+   * @returns {boolean} True, if there's a cover.
    */
   hasCover() {
     return this.cover?.container;
@@ -495,6 +502,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Set number of active chapter.
+   *
    * @param {number} chapterId Number of active chapter.
    */
   handleChapterChanged(chapterId) {
@@ -508,8 +516,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Validate fragments.
+   *
    * @param {object} fragments Fragments object from URL.
-   * @return {boolean} True, if fragments are valid.
+   * @returns {boolean} True, if fragments are valid.
    */
   validateFragments(fragments) {
     return fragments.chapter &&
@@ -518,6 +527,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Bubble events from child to parent.
+   *
    * @param {object} origin Origin of event.
    * @param {string} eventName Name of event.
    * @param {object} target Target to trigger event on.
@@ -536,8 +546,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Check if menu is open
-   * @return {boolean} True, if menu is open, else false.
+   * Check if menu is open.
+   *
+   * @returns {boolean} True, if menu is open, else false.
    */
   isMenuOpen() {
     // TODO: Let sidebar keep status instead
@@ -545,44 +556,44 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Detect if wrapper is a small surface
-   * @return {*}
+   * Detect if wrapper is a small surface.
+   *
+   * @returns {boolean} True, if wrapper is a small surface.
    */
   isSmallSurface() {
     return this.$mainWrapper?.hasClass(this.smallSurface) || false;
   }
 
   /**
-   * Get the ratio of the wrapper
-   * @return {number} Ratio.
+   * Get the ratio of the wrapper.
+   *
+   * @returns {number} Ratio.
    */
   getRatio() {
     return this.$mainWrapper.width() / parseFloat(this.$mainWrapper.css('font-size'));
   }
 
   /**
-   * Add/remove classname based on the ratio
-   * @param {jQuery} wrapper
-   * @param {number} ratio
+   * Add/remove classname based on the ratio.
+   *
+   * @param {H5P.jQuery} $wrapper Wrapper.
+   * @param {number} ratio Ratio.
    */
-  setWrapperClassFromRatio(wrapper, ratio = this.getRatio()) {
-    if ( ratio === this.currentRatio) {
+  setWrapperClassFromRatio($wrapper, ratio = this.getRatio()) {
+    if (ratio === this.currentRatio) {
       return;
     }
 
     this.breakpoints().forEach(item => {
-      if (item.shouldAdd(ratio)) {
-        this.$mainWrapper.addClass(item.className);
-      }
-      else {
-        this.$mainWrapper.removeClass(item.className);
-      }
+      $wrapper.toggleClass(item.className, item.shouldAdd(ratio));
     });
     this.currentRatio = ratio;
   }
 
   /**
    * Check if the content height exceeds the window.
+   *
+   * @returns {boolean} True if footer should be hidden.
    */
   shouldFooterBeHidden() {
     // Always show except for in fullscreen
@@ -591,8 +602,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Get list of classname and conditions for when to add the classname to the content type
-   * @return {[{className: string, shouldAdd: (function(*): boolean)}, {className: string, shouldAdd: (function(*): boolean|boolean)}, {className: string, shouldAdd: (function(*): boolean)}]}
+   * Get list of classname and conditions for when to add classname to content.
+   *
+   * @returns {object} breakpoints.
    */
   breakpoints() {
     // TODO: Why is this not done with media queries?
@@ -614,7 +626,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Display book cover.
-   * @param {HTMLElement} wrapper Wrapper.
+   *
+   * @param {HTMLElement} $wrapper Wrapper.
    */
   displayCover($wrapper) {
     this.hideElements();
@@ -662,7 +675,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Check if result has been submitted or input has been given.
-   * @return {boolean} True, if answer was given.
+   *
+   * @returns {boolean} True, if answer was given.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   getAnswerGiven() {
@@ -677,7 +691,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Get latest score.
-   * @return {number} Latest score.
+   *
+   * @returns {number} Latest score.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   getScore() {
@@ -696,7 +711,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Get maximum possible score.
-   * @return {number} Score necessary for mastering.
+   *
+   * @returns {number} Score necessary for mastering.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
@@ -714,6 +730,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Show solutions.
+   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   showSolutions() {
@@ -732,6 +749,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Reset task.
+   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   resetTask() {
@@ -766,7 +784,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Get xAPI data.
-   * @return {object} xAPI statement.
+   *
+   * @returns {object} xAPI statement.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   getXAPIData() {
@@ -789,8 +808,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Get xAPI data from sub content types.
+   *
    * @param {H5P.ContentType[]} instances H5P instances.
-   * @return {object[]} xAPI data objects used to build a report.
+   * @returns {object[]} xAPI data objects used to build a report.
    */
   getXAPIDataFromChildren(instances) {
     return instances
@@ -800,7 +820,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Add question itself to the definition part of an xAPIEvent.
-   * @param {H5P.XAPIEvent} xAPIEvent.
+   *
+   * @param {H5P.XAPIEvent} xAPIEvent XAPI event.
    */
   addQuestionToXAPI(xAPIEvent) {
     const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
@@ -809,7 +830,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Generate xAPI object definition used in xAPI statements.
-   * @return {object} xAPI definition.
+   *
+   * @returns {object} xAPI definition.
    */
   getxAPIDefinition() {
     return {
@@ -821,7 +843,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Answer call to return the current state.
-   * @return {object} Current state.
+   * TODO
+   *
+   * @returns {object} Current state.
    */
   getCurrentState() {
     // Get relevant state information from non-summary chapters
@@ -845,7 +869,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   /**
    * Get context data.
    * Contract used for confusion report.
-   * @return {object} Context data.
+   *
+   * @returns {object} Context data.
    */
   getContext() {
     if (!this.cover?.isHidden()) {

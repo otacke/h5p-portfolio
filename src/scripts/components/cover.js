@@ -2,7 +2,7 @@ import Util from './../helpers/util';
 import Dictionary from './../services/dictionary';
 
 /**
- * @constructor
+ * @class
  * @param {object} params Parameters.
  * @param {object} callbacks Callbacks.
  */
@@ -42,7 +42,8 @@ export default class Cover {
 
   /**
    * Create the top level element.
-   * @return {HTMLElement} Cover.
+   *
+   * @returns {HTMLElement} Cover.
    */
   buildContainer() {
     const container = document.createElement('div');
@@ -52,7 +53,9 @@ export default class Cover {
 
   /**
    * Create an element which contains both the cover image and a background bar.
-   * @param {HTMLElement} coverImage Image object.
+   *
+   * @param {object} [params={}] Parameters.
+   * @returns {HTMLElement} Visual stuff for cover.
    */
   buildVisualsElement(params = {}) {
     if (!params.params) {
@@ -103,7 +106,8 @@ export default class Cover {
 
   /**
    * Build element responsible for the bar behind medium.
-   * @return {HTMLElement} Horizontal bar in the background.
+   *
+   * @returns {HTMLElement} Horizontal bar in the background.
    */
   buildCoverBar() {
     const coverBar = document.createElement('div');
@@ -113,8 +117,9 @@ export default class Cover {
 
   /**
    * Build title.
+   *
    * @param {string} titleText Text for title element.
-   * @return {HTMLElement} Title element.
+   * @returns {HTMLElement} Title element.
    */
   BuildTitle(titleText) {
     const title = document.createElement('p');
@@ -129,8 +134,9 @@ export default class Cover {
 
   /**
    * Build description.
+   *
    * @param {string} descriptionText Text for description element.
-   * @return {HTMLElement} Description element.
+   * @returns {HTMLElement} Description element.
    */
   buildDescription(descriptionText) {
     if (!descriptionText) {
@@ -146,8 +152,9 @@ export default class Cover {
 
   /**
    * Build read button.
+   *
    * @param {string} buttonText Button text.
-   * @return {HTMLElement} Read button element.
+   * @returns {HTMLElement} Read button element.
    */
   buildReadButton(buttonText) {
     const button = document.createElement('button');
@@ -165,7 +172,8 @@ export default class Cover {
 
   /**
    * Determine whether cover is hidden.
-   * @return {boolean} True, if cover is hidden.
+   *
+   * @returns {boolean} True, if cover is hidden.
    */
   isHidden() {
     return this.hidden || false;

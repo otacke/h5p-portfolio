@@ -3,12 +3,14 @@ import './../../styles/_color_overrides.scss';
 
 /**
  * Color class.
+ *
  * @class
  */
 export default class Colors {
 
   /**
    * Set new base color.
+   *
    * @param {string} color RGB color code in hex: #rrggbb.
    */
   static setBase(color) {
@@ -33,10 +35,11 @@ export default class Colors {
 
   /**
    * Get color.
+   *
    * @param {Color} color Base color.
    * @param {object} [params={}] Parameters.
    * @param {number} [params.opacity] Opacity value assuming white background.
-   * @return {Color} Color with opacity figured in.
+   * @returns {Color} Color with opacity figured in.
    */
   static getColor(color, params = {}) {
     if (
@@ -65,8 +68,9 @@ export default class Colors {
 
   /**
    * Check whether color is default base color.
+   *
    * @param {string} color RGB color code in hex: #rrggbb.
-   * @return {boolean} True, if color is default base color, else false.
+   * @returns {boolean} True, if color is default base color, else false.
    */
   static isBaseColor(color) {
     return Color(color).hex() === Colors.colorBase.hex();
@@ -75,10 +79,11 @@ export default class Colors {
   /**
    * Compute contrast color to given color.
    * Tries to get contrast ratio of at least 4.5.
-   * @compare https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-description
+   *
+   * @see https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-description
    * @param {Color} baseColor Color to compute contrast color for.
    * @param {Color} comparisonColor Color that the base color is compared to.
-   * @return {Color} Contrast color.
+   * @returns {Color} Contrast color.
    */
   static computeContrastColor(baseColor, comparisonColor) {
     comparisonColor = comparisonColor || baseColor;
@@ -102,8 +107,9 @@ export default class Colors {
 
   /**
    * Get CSS override for content type.
+   *
    * @param {string} machineName content types machine name.
-   * @return {string} CSS override for content type.
+   * @returns {string} CSS override for content type.
    */
   static getContentTypeCSS(machineName) {
     if (!Colors.COLOR_OVERRIDES[machineName]) {
@@ -117,7 +123,8 @@ export default class Colors {
    * Get CSS overrides.
    * Color values are set in SCSS including pseudo elements, so we need to
    * override CSS.
-   * @return {string} CSS overrides.
+   *
+   * @returns {string} CSS overrides.
    */
   static getCSS() {
     return `:root{
@@ -152,11 +159,11 @@ export default class Colors {
   }
 }
 
-/** @const {string} Preferred default color as defined in SCSS */
+/** @constant {string} Preferred default color as defined in SCSS */
 Colors.DEFAULT_COLOR_BASE = Color('#1768c4');
 Colors.DEFAULT_COLOR_BG = Color('#ffffff');
 
-/** @const {number} Minimum acceptable contrast for normal font size, cmp. https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure */
+/** @constant {number} Minimum acceptable contrast for normal font size, cmp. https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure */
 Colors.MINIMUM_ACCEPTABLE_CONTRAST = 4.5;
 
 // Relevant default colors defined in SCSS main class or derived from those

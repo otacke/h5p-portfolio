@@ -1,8 +1,8 @@
 export default class Content {
 
   /**
-   * @constructor
-   * @param {params} Parameters.
+   * @class
+   * @param {object} [params={}] Parameters.
    */
   constructor(params = {}) {
     this.instance = params.instance;
@@ -11,7 +11,8 @@ export default class Content {
 
   /**
    * Get section instance.
-   * @return {H5P.ContentType} H5P content type instance.
+   *
+   * @returns {H5P.ContentType} H5P content type instance.
    */
   getInstance() {
     return this.instance;
@@ -19,7 +20,8 @@ export default class Content {
 
   /**
    * Get section title.
-   * @return {string} Section title.
+   *
+   * @returns {string} Section title.
    */
   getTitle() {
     if (typeof this.instance.getTitle === 'function') {
@@ -37,7 +39,8 @@ export default class Content {
 
   /**
    * Get semantics values.
-   * @return {object} Semantics values.
+   *
+   * @returns {object} Semantics values.
    */
   getSemantics() {
     return this.semantics;
@@ -45,7 +48,8 @@ export default class Content {
 
   /**
    * Get subContentId.
-   * @return {string} SubContentId.
+   *
+   * @returns {string} SubContentId.
    */
   getSubContentId() {
     return this.getInstance().subContentId;

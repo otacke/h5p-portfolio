@@ -3,7 +3,9 @@ export default class URLTools {
   /**
    * Extract fragments from browser URL.
    *
-   * @return {object} Fragments.
+   * @param {function} validate Validation function.
+   * @param {Window} hashWindow Window.
+   * @returns {object} Fragments.
    */
   static extractFragmentsFromURL(validate, hashWindow) {
     if (!hashWindow.location.hash) {
@@ -31,8 +33,9 @@ export default class URLTools {
 
   /**
    * Create fragments string from fragments object.
+   *
    * @param {object} fragments Fragments.
-   * @return {string} Fragments string.
+   * @returns {string} Fragments string.
    */
   static createFragmentsString(fragments) {
     const fragmentString = Object.entries(fragments)
@@ -45,10 +48,11 @@ export default class URLTools {
 
   /**
    * Determine whether two fragment objects are equal.
+   *
    * @param {object} fragment1 Fragment 1.
    * @param {object} fragment2 Fragment 2.
    * @param {string[]} [limitTo] Keys to limit equality check to.
-   * @return {boolean} True, if fragments are equal.
+   * @returns {boolean} True, if fragments are equal.
    */
   static areFragmentsEqual(fragment1, fragment2, limitTo = []) {
     for (const key in fragment1) {

@@ -26,7 +26,8 @@ export default class Section {
 
   /**
    * Get section instance.
-   * @return {H5P.ContentType} H5P content type instance.
+   *
+   * @returns {H5P.ContentType} H5P content type instance.
    */
   getInstance() {
     return this.instance;
@@ -34,7 +35,8 @@ export default class Section {
 
   /**
    * Get contents.
-   * @return {H5P.ContentType[]} Contents of section.
+   *
+   * @returns {H5P.ContentType[]} Contents of section.
    */
   getContents() {
     return this.contents;
@@ -42,7 +44,8 @@ export default class Section {
 
   /**
    * Get section title.
-   * @return {string} Section title.
+   *
+   * @returns {string} Section title.
    */
   getTitle() {
     if (typeof this.instance.getTitle === 'function') {
@@ -54,7 +57,8 @@ export default class Section {
 
   /**
    * Get semantics values.
-   * @return {object} Semantics values.
+   *
+   * @returns {object} Semantics values.
    */
   getSemantics() {
     return this.semantics;
@@ -62,7 +66,8 @@ export default class Section {
 
   /**
    * Get subContentId.
-   * @return {string} SubContentId.
+   *
+   * @returns {string} SubContentId.
    */
   getSubContentId() {
     return this.getInstance().subContentId;

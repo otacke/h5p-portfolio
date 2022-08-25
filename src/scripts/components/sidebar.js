@@ -1,10 +1,11 @@
 import Util from './../helpers/util';
 import Chapters from './../services/chapters';
+import Chapter from './../models/chapter';
 import Title from './sidebar/title';
 import MenuChapterItem from './sidebar/menuchapteritem';
 
 /**
- * @constructor
+ * @class
  * @param {object} params Parameters.
  * @param {object} callbacks Callbacks.
  */
@@ -58,7 +59,8 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Build menu items.
-   * @return {object[]} Menu items.
+   *
+   * @returns {object[]} Menu items.
    */
   buildMenuItems() {
     const menuItems = [];
@@ -134,8 +136,9 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Extract targets of chapter content items.
-   * @param {Chapter} chapter.
-   * @return {object[]} Targets of chapter content items.
+   *
+   * @param {Chapter} chapter Chapter.
+   * @returns {object[]} Targets of chapter content items.
    */
   extractContentItemTargets(chapter) {
     /*
@@ -181,7 +184,8 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Build list of all hierarchies.
-   * @return {string[]} List of all hierarchies.
+   *
+   * @returns {string[]} List of all hierarchies.
    */
   buildHierarchyKeys() {
     return Chapters.get().reduce((all, chapter) => {
@@ -198,11 +202,12 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Determine whether a child is really the child of a parent.
+   *
    * @param {string} child Hierarchy to check for being child.
    * @param {string} parent Hierarchy to check for being parent.
    * @param {object} [params={}] Extra parameters.
    * @param {boolean} [params.directChild] If true, grandchildren... not child.
-   * @return {boolean} True, if (direct) child, else false.
+   * @returns {boolean} True, if (direct) child, else false.
    */
   isChild(child, parent, params = {}) {
     if (parent === child) {
@@ -229,6 +234,9 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Determine whether a hierarchy has children.
+   *
+   * @param {object} hierarchy Hierarchy.
+   * @returns {boolean} True if hierarchy has children.
    */
   hasChildren(hierarchy) {
     return this.hierarchyKeys.some(key => this.isChild(key, hierarchy));
@@ -236,6 +244,7 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Show hierarchy item including parents and direct children.
+   *
    * @param {string} hierarchy Hierarchy.
    */
   show(hierarchy) {
@@ -266,6 +275,7 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Hide all children of hierarchy item.
+   *
    * @param {string} hierarchy Hierarchy.
    */
   hideChildren(hierarchy) {
@@ -282,6 +292,7 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Set currente item.
+   *
    * @param {string} hierarchy Hierarchy.
    * @param {params} [params={}] Parameters.
    * @param {boolean} [params.toggleSelected] If true, may collapse item.
@@ -336,6 +347,7 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Handle click on menu item.
+   *
    * @param {object} params Parameters.
    */
   handleClicked(params) {
@@ -350,6 +362,7 @@ class SideBar extends H5P.EventDispatcher {
 
   /**
    * Handle navigated with key.
+   *
    * @param {object} params Parameters.
    * @param {string} params.hierarchy Current hierarchy.
    * @param {number} diff -1 for up, 1 for down.

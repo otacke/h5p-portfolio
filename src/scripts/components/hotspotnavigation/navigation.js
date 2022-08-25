@@ -6,7 +6,7 @@ import Hotspot from './hotspot';
 
 export default class HotspotNavigation {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters.
    * @param {object} callbacks Callbacks.
    */

@@ -3,7 +3,7 @@ import Dictionary from './../services/dictionary';
 import Chapters from './../services/chapters';
 
 /**
- * @constructor
+ * @class
  * @param {object} params Parameters.
  * @param {object} callbacks Callbacks.
  */
@@ -71,7 +71,8 @@ export default class StatusBar {
 
   /**
    * Add progress bar.
-   * @return {object} Progress bar elements.
+   *
+   * @returns {object} Progress bar elements.
    */
   buildProgressBar() {
     const progress = document.createElement('div');
@@ -87,7 +88,8 @@ export default class StatusBar {
 
   /**
    * Build menu toggle button.
-   * @return {HTMLElement} Menu toggle button.
+   *
+   * @returns {HTMLElement} Menu toggle button.
    */
   buildMenuToggleButton() {
     const buttonWrapper = document.createElement('button');
@@ -109,7 +111,8 @@ export default class StatusBar {
 
   /**
    * Create button to scroll to top with.
-   * @return {HTMLElement} Button.
+   *
+   * @returns {HTMLElement} Button.
    */
   buildToTopButton() {
     const icon = document.createElement('div');
@@ -133,7 +136,8 @@ export default class StatusBar {
 
   /**
    * Create chapter title.
-   * @return {object} Chapter title elements.
+   *
+   * @returns {object} Chapter title elements.
    */
   buildChapterTitle() {
     const text = document.createElement('h1');
@@ -148,7 +152,8 @@ export default class StatusBar {
 
   /**
    * Add a status-button which shows current and total chapters.
-   * @return {object} Progress elements.
+   *
+   * @returns {object} Progress elements.
    */
   buildProgressIndicator() {
     const current = document.createElement('span');
@@ -190,7 +195,8 @@ export default class StatusBar {
 
   /**
    * Create navigation buttons.
-   * @return {object} Navigation buttons.
+   *
+   * @returns {object} Navigation buttons.
    */
   buildNavigationButtons() {
     const buttons = {};
@@ -216,11 +222,12 @@ export default class StatusBar {
 
   /**
    * Create navigation button.
+   *
    * @param {object} params Parameters.
-   * @param {function} onClicked Click handler.
-   * @param {string} icon CSS class name for icon.
-   * @param {string} label Label.
-   * @return {HTMLElement} Navigation button.
+   * @param {function} params.onClicked Click handler.
+   * @param {string} params.icon CSS class name for icon.
+   * @param {string} params.label Label.
+   * @returns {HTMLElement} Navigation button.
    */
   buildNavigationButton(params) {
     const button = document.createElement('button');
@@ -242,7 +249,8 @@ export default class StatusBar {
 
   /**
    * Build fullscreen button.
-   * @return {HTMLElement} Fullscreen button.
+   *
+   * @returns {HTMLElement} Fullscreen button.
    */
   buildFullScreenButton() {
     const fullScreenButton = document.createElement('button');
@@ -274,6 +282,7 @@ export default class StatusBar {
 
   /**
    * Update status bar.
+   *
    * @param {object} params Parameters.
    * @param {number} params.chapterId Chapter index + 1.
    * @param {string} params.title Chapter title.
@@ -299,6 +308,7 @@ export default class StatusBar {
 
   /**
    * Update progress bar.
+   *
    * @param {number} chapterId Chapter index.
    */
   updateProgressBar(chapterId) {
@@ -323,6 +333,7 @@ export default class StatusBar {
 
   /**
    * Enable button.
+   *
    * @param {string} id Button id.
    */
   enableButton(id) {
@@ -336,6 +347,7 @@ export default class StatusBar {
 
   /**
    * Disable button.
+   *
    * @param {string} id Button id.
    */
   disableButton(id) {
@@ -349,8 +361,9 @@ export default class StatusBar {
 
   /**
    * Set button state.
+   *
    * @param {string} id Button id.
-   * @param {boolean} enabled If true, will enable button, else disable.
+   * @param {object} status Status.
    */
   setButtonStatus(id, status = {}) {
     if (status.enabled) {
@@ -363,6 +376,7 @@ export default class StatusBar {
 
   /**
    * Set fullscreen state.
+   *
    * @param {boolean} state If true, enter fullscreen, else exit fullscreen.
    */
   setFullScreen(state) {
@@ -396,8 +410,9 @@ export default class StatusBar {
 
   /**
    * Toggle menu.
+   *
    * @param {boolean} [state] True for open, false for closed or toggle.
-   * @return {boolean} Resulting state.
+   * @returns {boolean} Resulting state.
    */
   toggleMenu(state) {
     if (!this.menuToggleButton) {
@@ -416,7 +431,8 @@ export default class StatusBar {
 
   /**
    * Check if menu is active/open.
-   * @return {boolean} True, if open, else false.
+   *
+   * @returns {boolean} True, if open, else false.
    */
   isMenuOpen() {
     if (!this.menuToggleButton) {

@@ -4,9 +4,9 @@ import HotspotNavigation from './hotspotnavigation/navigation';
 
 export default class PageContent {
   /**
-   * @constructor
-   * @param {object} config
-   * @param {object} params
+   * @class
+   * @param {object} [params={}] Parameters.
+   * @param {object} [callbacks={}] Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
     this.params = params;
@@ -24,7 +24,8 @@ export default class PageContent {
 
   /**
    * Get DOM.
-   * @return {HTMLElement} DOM.
+   *
+   * @returns {HTMLElement} DOM.
    */
   getDOM() {
     return this.content;
@@ -32,7 +33,8 @@ export default class PageContent {
 
   /**
    * Build page content.
-   * @return {HTMLElement} Page content.
+   *
+   * @returns {HTMLElement} Page content.
    */
   buildPageContent() {
     this.buildChapterDOMs();
@@ -92,6 +94,7 @@ export default class PageContent {
 
   /**
    * Set chapter order in DOM.
+   *
    * @param {number} currentId Current chapter's id.
    */
   setChapterOrder(currentId) {
@@ -108,7 +111,8 @@ export default class PageContent {
 
   /**
    * Preload current chapter and the next one
-   * @param {number} chapterIndex
+   *
+   * @param {number} chapterIndex Chapter index.
    */
   preloadChapter(chapterIndex) {
     this.initializeChapter(chapterIndex);
@@ -116,8 +120,9 @@ export default class PageContent {
   }
 
   /**
-   * Initialize chapter
-   * @param {number} chapterIndex
+   * Initialize chapter.
+   *
+   * @param {number} chapterIndex Chapter index.
    */
   initializeChapter(chapterIndex) {
     if (chapterIndex < 0 || chapterIndex > Chapters.get().length - 1) {
@@ -134,7 +139,8 @@ export default class PageContent {
 
   /**
    * Get container height.
-   * @return {number} Height.
+   *
+   * @returns {number} Height.
    */
   getHeight() {
     return parseInt(this.content.style.height);
@@ -142,7 +148,8 @@ export default class PageContent {
 
   /**
    * Set container height.
-   * @param {number} Height.
+   *
+   * @param {number} height Height.
    */
   setHeight(height) {
     if (typeof height !== 'number') {
@@ -154,6 +161,7 @@ export default class PageContent {
 
   /**
    * Scroll to target.
+   *
    * @param {object} target Target.
    */
   scrollTo(target) {
@@ -194,6 +202,7 @@ export default class PageContent {
 
   /**
    * Change chapter.
+   *
    * @param {object} target Target.
    */
   moveToChapter(target) {
@@ -219,6 +228,7 @@ export default class PageContent {
 
   /**
    * Animate chapter transition.
+   *
    * @param {number} chapterIdFrom Chapter from.
    * @param {number} chapterIdTo Chapter to.
    * @param {object} [targetOnPage] Optional target in chapter to scroll to.
@@ -277,6 +287,8 @@ export default class PageContent {
 
   /**
    * Determine whether page is animating.
+   *
+   * @returns {boolean} True, if is animating.
    */
   isAnimating() {
     return this.isAnimatingState;
@@ -295,6 +307,7 @@ export default class PageContent {
 
   /**
    * Add footer.
+   *
    * @param {HTMLElement} footer Footer.
    */
   addFooter(footer) {

@@ -5,7 +5,7 @@ import he from 'he';
 
 export default class Hotspot {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters.
    * @param {object} callbacks Callbacks.
    */
@@ -38,7 +38,8 @@ export default class Hotspot {
 
   /**
    * Get hotspot DOM.
-   * @return {HTMLElement} Hotspot DOM.
+   *
+   * @returns {HTMLElement} Hotspot DOM.
    */
   getDOM() {
     return this.dom;
@@ -46,6 +47,7 @@ export default class Hotspot {
 
   /**
    * Handle click on hotspot.
+   *
    * @param {Event} event Mouse event.
    */
   handleClicked(event) {
@@ -77,5 +79,5 @@ export default class Hotspot {
   }
 }
 
-/** @const {number} Time period to show toast message for */
+/** @constant {number} Time period to show toast message for */
 Hotspot.toastDurationMs = 3000;

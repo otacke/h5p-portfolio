@@ -2,8 +2,8 @@
 export default class Util {
   /**
    * Extend an array just like JQuery's extend.
-   * @param {object} arguments Objects to be merged.
-   * @return {object} Merged objects.
+   *
+   * @returns {object} Merged objects.
    */
   static extend() {
     for (let i = 1; i < arguments.length; i++) {
@@ -26,8 +26,9 @@ export default class Util {
 
   /**
    * Retrieve true string from HTML encoded string.
+   *
    * @param {string} input Input string.
-   * @return {string} Output string.
+   * @returns {string} Output string.
    */
   static htmlDecode(input) {
     const dparser = new DOMParser().parseFromString(input, 'text/html');
@@ -37,8 +38,9 @@ export default class Util {
   /**
    * Format language tag (RFC 5646). Assuming "language-coutry". No validation.
    * Cmp. https://tools.ietf.org/html/rfc5646
-   * @param {string} languageTag Language tag.
-   * @return {string} Formatted language tag.
+   *
+   * @param {string} languageCode Language tag.
+   * @returns {string} Formatted language tag.
    */
   static formatLanguageCode(languageCode) {
     if (typeof languageCode !== 'string') {
@@ -61,8 +63,9 @@ export default class Util {
 
   /**
    * Determine whether an H5P instance is a task.
-   * @param {H5P.ContentType} H5P content instance.
-   * @return {boolean} True, if instance is a task.
+   *
+   * @param {H5P.ContentType} instance content instance.
+   * @returns {boolean} True, if instance is a task.
    */
   static isTask(instance = {}) {
     if (!instance) {

@@ -4,7 +4,10 @@ export default class Chapters {
 
   /**
    * Fill chapters with chapters.
-   * @param {object} chapters Chapters.
+   *
+   * @param {object} params Parameters.
+   * @param {number} contentId ContentId.
+   * @param {object} [extras={}] Extras.
    */
   static fill(params = [], contentId, extras = {}) {
     Chapters.chapters = Chapters.build(
@@ -19,8 +22,9 @@ export default class Chapters {
    * Parameter undefined: all chapters.
    * Parameter number: get by index.
    * Parameter string: get by subContentId.
+   *
    * @param {undefined|string|number} param Parameter.
-   * @return {Chapter|Chapter[]} Chapter|Chapters.
+   * @returns {Chapter|Chapter[]} Chapter|Chapters.
    */
   static get(param) {
     if (typeof param === 'number') {
@@ -39,7 +43,8 @@ export default class Chapters {
 
   /**
    * Get all chapters.
-   * @return {Chapter[]} Chapters.
+   *
+   * @returns {Chapter[]} Chapters.
    */
   static getAll() {
     return Chapters.chapters || [];
@@ -47,8 +52,9 @@ export default class Chapters {
 
   /**
    * Get chapter by index.
+   *
    * @param {number} index Chapter index.
-   * @return {Chapter} Chapter.
+   * @returns {Chapter} Chapter.
    */
   static getByIndex(index) {
     const length = Chapters.chapters?.length;
@@ -62,8 +68,9 @@ export default class Chapters {
 
   /**
    * Get chapter by subContentId.
+   *
    * @param {string} subContentId SubContentId.
-   * @return {Chapter} Chapter.
+   * @returns {Chapter} Chapter.
    */
   static getBySubcontentId(subContentId) {
     if (typeof subContentId !== 'string') {
@@ -77,8 +84,9 @@ export default class Chapters {
 
   /**
    * Find content by subContentId.
+   *
    * @param {string} subContentId SubContentId.
-   * @return {object|null} Content element.
+   * @returns {object|null} Content element.
    */
   static findContent(subContentId) {
     let content = null;
@@ -102,8 +110,9 @@ export default class Chapters {
 
   /**
    * Find chapter index.
+   *
    * @param {string} subContentId Chapter subContentId.
-   * @return {number|null} Chapter index.
+   * @returns {number|null} Chapter index.
    */
   static findChapterIndex(subContentId) {
     let position = null;
@@ -123,8 +132,9 @@ export default class Chapters {
 
   /**
    * Sanitize parameters.
+   *
    * @param {object[]} params Semantics parameters for chapters.
-   * @return {object} Sanitized parameters for chapters.
+   * @returns {object} Sanitized parameters for chapters.
    */
   static sanitize(params = []) {
 
@@ -185,8 +195,11 @@ export default class Chapters {
 
   /**
    * Build chapters.
+   *
    * @param {object[]} params Semantics parameters for chapters.
-   * @return {Chapter[]} Sanitized parameters for chapters.
+   * @param {number} contentId Content id.
+   * @param {object} [extras={}] Extras.
+   * @returns {Chapter[]} Sanitized parameters for chapters.
    */
   static build(params = [], contentId, extras = {}) {
     return params.map((chapter, index) => {

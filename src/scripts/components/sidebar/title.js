@@ -1,7 +1,7 @@
 export default class Title {
   /**
-   * @constructor
-   * @param {object} params Parameters.
+   * @class
+   * @param {object} [params={}] Parameters.
    * @param {string} params.titleText Title text.
    */
   constructor(params = {}) {
@@ -22,7 +22,8 @@ export default class Title {
 
   /**
    * Get DOM.
-   * @return {HTMLElement} DOM.
+   *
+   * @returns {HTMLElement} DOM.
    */
   getDOM() {
     return this.content;

@@ -3,8 +3,8 @@ import Section from './section';
 export default class Chapter {
 
   /**
-   * @constructor
-   * @param {params} Parameters.
+   * @class
+   * @param {object} [params={}] Parameters.
    */
   constructor(params = {}) {
     this.params = params;
@@ -43,7 +43,8 @@ export default class Chapter {
 
   /**
    * Get chapter instance.
-   * @return {H5P.ContentType} H5P instance of chapter.
+   *
+   * @returns {H5P.ContentType} H5P instance of chapter.
    */
   getInstance() {
     return this.instance;
@@ -51,7 +52,8 @@ export default class Chapter {
 
   /**
    * Get DOM.
-   * @return {HTMLElement|null} Instance DOM.
+   *
+   * @returns {HTMLElement|null} Instance DOM.
    */
   getDOM() {
     return this.dom;
@@ -59,7 +61,8 @@ export default class Chapter {
 
   /**
    * Set DOM.
-   * @param {HTMLElement|null} Instance DOM.
+   *
+   * @param {HTMLElement|null} dom Instance DOM.
    */
   setInstanceDOM(dom) {
     if (this.instanceDOM) {
@@ -99,6 +102,7 @@ export default class Chapter {
 
   /**
    * Add position.
+   *
    * @param {string} position From previous|current|next.
    * @param {boolean} [state] Forced state to toggle to.
    */
@@ -116,7 +120,8 @@ export default class Chapter {
 
   /**
    * Get id.
-   * @return {string} Hierachy.
+   *
+   * @returns {string} Hierachy.
    */
   getHierarchy() {
     return this.hierarchy;
@@ -124,6 +129,8 @@ export default class Chapter {
 
   /**
    * Get sections.
+   *
+   * @returns {object[]} Sections.
    */
   getSections() {
     return this.sections;
@@ -131,8 +138,9 @@ export default class Chapter {
 
   /**
    * Get section.
+   *
    * @param {number} index Section index.
-   * @return {Section} Section.
+   * @returns {Section} Section.
    */
   getSection(index) {
     if (
@@ -147,7 +155,8 @@ export default class Chapter {
 
   /**
    * Get title.
-   * @return {string} Chapter title.
+   *
+   * @returns {string} Chapter title.
    */
   getTitle() {
     return this.getInstance().getTitle();
@@ -155,7 +164,8 @@ export default class Chapter {
 
   /**
    * Get subContentId.
-   * @return {string} SubContentId.
+   *
+   * @returns {string} SubContentId.
    */
   getSubContentId() {
     return this.getInstance().subContentId;
