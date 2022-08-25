@@ -1,14 +1,17 @@
 {
   "globals": {
-    "H5P": true,
-    "H5PIntegration": true,
-    "H5PEditor": true
+    "H5P": "readonly",
+    "H5PIntegration": "readonly"
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es2020": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:jsdoc/recommended"
+  ],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2020
@@ -30,5 +33,13 @@
     }],
     "no-extra-boolean-cast": "off",
     "no-console": ["error", {"allow": ["warn", "error"]}]
+  },
+  "plugins": ["jsdoc"],
+  "settings": {
+    "jsdoc": {
+      "preferredTypes": {
+        "Function": "function"
+      }
+    }
   }
 }
