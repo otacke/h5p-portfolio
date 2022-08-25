@@ -10,7 +10,7 @@ export default class Chapter {
     this.params = params;
 
     this.isInitialized = false;
-    this.title = params.content.metadata.title; // TODO: Something better?
+    this.title = params.content.metadata.title;
     this.hierarchy = params.hierarchy;
 
     // Build chapter instance

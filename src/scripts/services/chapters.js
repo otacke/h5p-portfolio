@@ -181,7 +181,7 @@ export default class Chapters {
       return result;
     });
 
-    // Add dummy chapter. TODO: parameters for Advanced Text
+    // Add dummy chapter.
     if (!params.length) {
       params = [{
         id: 0,

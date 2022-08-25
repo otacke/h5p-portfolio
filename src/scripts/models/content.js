@@ -32,8 +32,6 @@ export default class Content {
       return this.semantics.metadata.title;
     }
 
-    // TODO: Localized unnamed
-
     return null;
   }
 
