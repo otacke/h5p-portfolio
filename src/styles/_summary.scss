@@ -1,5 +1,5 @@
-.h5p-interactive-book {
-  &.h5p-interactive-book-small {
+.h5p-portfolio {
+  &.h5p-portfolio-small {
     .h5p-interactive-box-summary-progress {
       display: block;
 
@@ -9,44 +9,44 @@
       }
     }
 
-    .h5p-interactive-book-summary-menu-button {
+    .h5p-portfolio-summary-menu-button {
       justify-content: center;
       border-width: 0.125rem;
     }
 
-    .h5p-interactive-book-summary-menu-button-arrow {
+    .h5p-portfolio-summary-menu-button-arrow {
       visibility: visible;
       opacity: 1;
       right: 0.6875rem;
     }
 
-    .h5p-interactive-book-summary-buttons {
+    .h5p-portfolio-summary-buttons {
       display: flex;
 
-      .h5p-interactive-book-summary-button {
+      .h5p-portfolio-summary-button {
         margin-right: initial;
         justify-content: center;
         padding: 1rem;
       }
 
-      .h5p-interactive-book-summary-submit {
+      .h5p-portfolio-summary-submit {
         flex-grow: 6;
       }
-      .h5p-interactive-book-summary-restart {
+      .h5p-portfolio-summary-restart {
         flex-grow: 4;
         margin-left: 0.5rem;
       }
     }
 
-    .h5p-interactive-book-summary-score-bar {
+    .h5p-portfolio-summary-score-bar {
       margin-top: 1.25rem;
     }
 
-    .h5p-interactive-book-summary-page {
+    .h5p-portfolio-summary-page {
       padding: 0.5rem;
     }
 
-    & .h5p-interactive-book-navigation-open .h5p-interactive-book-navigation-chapter-button.h5p-interactive-book-navigation-current[aria-expanded="true"]
+    & .h5p-portfolio-navigation-open .h5p-portfolio-navigation-chapter-button.h5p-portfolio-navigation-current[aria-expanded="true"]
     {
       border-bottom-color: #0E7C57;
       border-bottom-width: 2px;
@@ -55,12 +55,12 @@
   }
 }
 
-.h5p-interactive-book-summary {
+.h5p-portfolio-summary {
   padding: 0 1.125rem;
   margin: 0.7rem auto;
 }
 
-.h5p-interactive-book-summary-menu-button {
+.h5p-portfolio-summary-menu-button {
   border: 1px solid #0E7C57;
   border-radius: 2px;
   background-color: #ffffff;
@@ -72,7 +72,7 @@
   height: 100%;
   padding: 0.5rem;
 
-  &.h5p-interactive-book-navigation-chapter-button.h5p-interactive-book-navigation-current {
+  &.h5p-portfolio-navigation-chapter-button.h5p-portfolio-navigation-current {
     background-color: #f1f9f8;
     border-bottom-color: #0E7C57;
   }
@@ -80,7 +80,7 @@
   &:hover {
     background-color: #f1f9f8;
 
-    .h5p-interactive-book-summary-menu-button-arrow {
+    .h5p-portfolio-summary-menu-button-arrow {
       opacity: 1;
       visibility: visible;
       transform: rotate(90deg) translateY(-10px);
@@ -92,7 +92,7 @@
     box-shadow: 0 0 0.625rem rgba(12,201,167,1);
   }
 
-  .h5p-interactive-book-summary-text {
+  .h5p-portfolio-summary-text {
     white-space: normal;
     text-align: left;
     height: 100%;
@@ -100,13 +100,13 @@
     margin-right: 0.75rem;
   }
 
-  .h5p-interactive-book-summary-icon {
+  .h5p-portfolio-summary-icon {
     margin-right: 0.25rem;
     margin-left: auto;
     font-size: 1.1em;
   }
 
-  .h5p-interactive-book-summary-menu-button-arrow {
+  .h5p-portfolio-summary-menu-button-arrow {
     transform: rotate(90deg);
     position: absolute;
     right: 25px;
@@ -123,11 +123,11 @@
   }
 }
 
-.h5p-interactive-book-navigation-summary-button {
+.h5p-portfolio-navigation-summary-button {
   padding: 1.125rem 0.5rem;
 }
 
-.h5p-interactive-book-summary-page {
+.h5p-portfolio-summary-page {
 
   padding: 1.25rem;
 
@@ -142,7 +142,7 @@
     justify-content: space-between;
     color: #273C59;
 
-    .h5p-interactive-book-summary-progress-container {
+    .h5p-portfolio-summary-progress-container {
       background-color: transparentize(#dbdbdb, 0.7);
       width: 49%;
       padding: 1rem;
@@ -176,14 +176,14 @@
       margin-top: 0;
     }
 
-    .h5p-interactive-book-summary-progressbox-bigtext {
+    .h5p-portfolio-summary-progressbox-bigtext {
       font-size: 1.375rem;
       color: var(--color-contrast, #2d7ad2);
       margin: 0.4375rem auto;
       font-weight: bold;
     }
 
-    .h5p-interactive-book-summary-progressbox-smalltext {
+    .h5p-portfolio-summary-progressbox-smalltext {
       font-size: 0.875rem;
       color: #273c59;
       font-style: italic;
@@ -192,11 +192,11 @@
     }
   }
 
-  .h5p-interactive-book-summary-buttons {
+  .h5p-portfolio-summary-buttons {
     margin-top: 1rem;
     flex-wrap: wrap;
 
-    .h5p-interactive-book-summary-button {
+    .h5p-portfolio-summary-button {
       border-radius: 4px;
       padding: 0.6125rem 0.8125rem;
       display: inline-flex;
@@ -214,7 +214,7 @@
         font-size: 1.1875rem;
       }
     }
-    .h5p-interactive-book-summary-submit {
+    .h5p-portfolio-summary-submit {
       background-color: #0E7C57;
       color: #ffffff;
       border: 1px solid #0E7C57;
@@ -225,7 +225,7 @@
       }
     }
 
-    .h5p-interactive-book-summary-restart {
+    .h5p-portfolio-summary-restart {
       color: #757575;
       border: 1px solid #ebebeb;
       background-color: #ffffff;
@@ -236,7 +236,7 @@
       }
     }
 
-    .h5p-interactive-book-summary-submitted {
+    .h5p-portfolio-summary-submitted {
       transform: translateY(100%);
       transition: transform 0.4s;
       position: absolute;
@@ -262,7 +262,7 @@
         color: #0e8275;
       }
 
-      .h5p-interactive-book-summary-restart {
+      .h5p-portfolio-summary-restart {
         margin-left: auto;
         padding: 0.5615rem;
         flex-grow: initial;
@@ -278,7 +278,7 @@
         display: none;
       }
 
-      .h5p-interactive-book-summary-submitted {
+      .h5p-portfolio-summary-submitted {
         transform: translateY(0);
         opacity: 1;
         position: static;
@@ -289,7 +289,7 @@
     }
   }
 
-  .h5p-interactive-book-summary-overview-header {
+  .h5p-portfolio-summary-overview-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -300,20 +300,20 @@
     }
   }
 
-  .h5p-interactive-book-summary-overview-list {
+  .h5p-portfolio-summary-overview-list {
     display: flex;
     flex-direction: column;
     line-height: 1.9375rem;
   }
 
-  .h5p-interactive-book-summary-overview-list-only-unanswered  {
-    .h5p-interactive-book-summary-overview-section-details-task-done,
-    .h5p-interactive-book-summary-no-interactions {
+  .h5p-portfolio-summary-overview-list-only-unanswered  {
+    .h5p-portfolio-summary-overview-section-details-task-done,
+    .h5p-portfolio-summary-no-interactions {
       display: none;
     }
   }
 
-  .h5p-interactive-book-summary-overview-section {
+  .h5p-portfolio-summary-overview-section {
     padding: 0.875rem 1.25rem;
     border: 1px solid #e8e8e8;
     border-bottom: 0;
@@ -340,20 +340,20 @@
     }
   }
 
-  .h5p-interactive-book-summary-overview-section:first-of-type,
-  .h5p-interactive-book-summary-top-section {
+  .h5p-portfolio-summary-overview-section:first-of-type,
+  .h5p-portfolio-summary-top-section {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
   }
 
-  .h5p-interactive-book-summary-overview-section:last-of-type,
-  .h5p-interactive-book-summary-bottom-section {
+  .h5p-portfolio-summary-overview-section:last-of-type,
+  .h5p-portfolio-summary-bottom-section {
     border-bottom: 1px solid #ebebeb;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
   }
 
-  .h5p-interactive-book-summary-overview-section-score-header {
+  .h5p-portfolio-summary-overview-section-score-header {
     display: flex;
 
     div {
@@ -363,12 +363,12 @@
     }
   }
 
-  .h5p-interactive-book-summary-overview-list-empty {
-    @extend .h5p-interactive-book-summary-overview-section;
+  .h5p-portfolio-summary-overview-list-empty {
+    @extend .h5p-portfolio-summary-overview-section;
     display: none;
   }
 
-  .h5p-interactive-book-summary-overview-section-details {
+  .h5p-portfolio-summary-overview-section-details {
     display: flex;
     border-top: 1px solid #ebebeb;
     padding: 0.25rem;
@@ -377,7 +377,7 @@
       background: #f3f3f3;
     }
 
-    & .h5p-interactive-book-summary-section-title {
+    & .h5p-portfolio-summary-section-title {
       font-size: 0.875rem;
       border: 0;
       background-color: transparent;
@@ -387,14 +387,14 @@
       cursor: pointer;
     }
 
-    & .h5p-interactive-book-summary-section-score {
+    & .h5p-portfolio-summary-section-score {
       margin-left: auto;
       white-space: nowrap;
       font-size: 0.875rem;
     }
   }
 
-  .h5p-interactive-book-summary-section-icon {
+  .h5p-portfolio-summary-section-icon {
     margin-right: 0.6125rem;
     color: var(--color-contrast, #2d7ad2);
     font-size: 0.8125rem;
@@ -402,14 +402,14 @@
     display: flex;
   }
 
-  .h5p-interactive-book-summary-chapter-subheader {
+  .h5p-portfolio-summary-chapter-subheader {
     font-style: italic;
     color: #737285;
     font-size: 0.875rem;
     line-height: 0.9375rem;
   }
 
-  .h5p-interactive-book-summary-progress-circle {
+  .h5p-portfolio-summary-progress-circle {
     width: 3rem;
     height: 3rem;
     min-height: 3rem;
@@ -427,13 +427,13 @@
     }
   }
 
-  .h5p-interactive-book-summary-score-bar {
+  .h5p-portfolio-summary-score-bar {
     display: flex;
     justify-content: flex-end;
     margin-top: 3rem;
   }
 
-  .h5p-interactive-book-summary-no-chapter-interactions {
+  .h5p-portfolio-summary-no-chapter-interactions {
     p:first-child {
       font-size: 1.2rem;
       font-weight: bold;
@@ -441,7 +441,7 @@
   }
 }
 
-.h5p-interactive-book-summary-footer {
+.h5p-portfolio-summary-footer {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -469,7 +469,7 @@
   }
 }
 
-.h5p-interactive-book-summary-dropdown {
+.h5p-portfolio-summary-dropdown {
   position: relative;
   max-width: 200px;
   border: 1px solid #e8e8e8;
@@ -485,7 +485,7 @@
 
   &[active]{
 
-    .h5p-interactive-book-summary-dropdown-menu {
+    .h5p-portfolio-summary-dropdown-menu {
       display: block;
       box-shadow: 0 2px 3px 2px rgba(0,0,0,0.1);
 
@@ -502,7 +502,7 @@
 
   }
 
-  .h5p-interactive-book-summary-dropdown-menu {
+  .h5p-portfolio-summary-dropdown-menu {
     position: absolute;
     list-style: none;
     display: none;

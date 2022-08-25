@@ -39,7 +39,7 @@ export default class PageContent {
     this.preloadChapter(this.currentChapterId);
 
     const content = document.createElement('div');
-    content.classList.add('h5p-interactive-book-content');
+    content.classList.add('h5p-portfolio-content');
 
     Chapters.get().forEach(chapter => {
       content.appendChild(chapter.getDOM());
@@ -56,7 +56,7 @@ export default class PageContent {
   buildChapterDOMs() {
     Chapters.get().forEach(chapter => {
       const columnNode = document.createElement('div');
-      columnNode.classList.add('h5p-interactive-book-chapter');
+      columnNode.classList.add('h5p-portfolio-chapter');
       chapter.setInstanceDOM(columnNode);
       chapter.setHotspotNavigation(new HotspotNavigation(
         {

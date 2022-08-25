@@ -92,9 +92,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.$mainWrapper = null;
     this.currentRatio = null;
 
-    this.smallSurface = 'h5p-interactive-book-small';
-    this.mediumSurface = 'h5p-interactive-book-medium';
-    this.largeSurface = 'h5p-interactive-book-large';
+    this.smallSurface = 'h5p-portfolio-small';
+    this.mediumSurface = 'h5p-portfolio-medium';
+    this.largeSurface = 'h5p-portfolio-large';
 
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry
@@ -188,7 +188,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       {
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-interactive-book-status-header'
+        styleClassName: 'h5p-portfolio-status-header'
       },
       {
         onMoved: ((params) => {
@@ -210,7 +210,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       {
         displayToTopButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-interactive-book-status-footer'
+        styleClassName: 'h5p-portfolio-status-footer'
       },
       {
         onMoved: ((params) => {
@@ -245,7 +245,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.statusBarFooter.update(statusUpdates);
 
     this.contentArea = document.createElement('div');
-    this.contentArea.classList.add('h5p-interactive-book-main');
+    this.contentArea.classList.add('h5p-portfolio-main');
   }
 
   /**
@@ -258,7 +258,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     // TODO: Remove jQuery use
 
     // Needed to enable scrolling in fullscreen
-    $wrapper.addClass('h5p-interactive-book h5p-scrollable-fullscreen');
+    $wrapper.addClass('h5p-portfolio h5p-scrollable-fullscreen');
 
     this.setWrapperClassFromRatio(this.$mainWrapper);
     if (this.cover) {
@@ -399,7 +399,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
       else {
         this.moveToChapter({
-          chapter: `h5p-interactive-book-chapter-${Chapters.get(0).instance.subContentId}`,
+          chapter: `h5p-portfolio-chapter-${Chapters.get(0).instance.subContentId}`,
           h5pPortfolioId: this.h5pPortfolioId
         });
       }
@@ -437,7 +437,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * Toggle menu.
    */
   toggleMenu() {
-    this.contentArea.classList.toggle('h5p-interactive-book-navigation-open');
+    this.contentArea.classList.toggle('h5p-portfolio-navigation-open');
 
     // Update the menu button
     this.statusBarHeader.toggleMenu();

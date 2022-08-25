@@ -87,14 +87,14 @@ export default class Chapter {
    * Start animation.
    */
   startAnimation() {
-    this.dom.classList.add('h5p-interactive-book-animate');
+    this.dom.classList.add('h5p-portfolio-animate');
   }
 
   /**
    * Stop animation.
    */
   stopAnimation() {
-    this.dom.classList.remove('h5p-interactive-book-animate');
+    this.dom.classList.remove('h5p-portfolio-animate');
   }
 
   /**
@@ -108,10 +108,10 @@ export default class Chapter {
     }
 
     if (typeof state !== 'boolean') {
-      state = !this.dom.classList.contains(`h5p-interactive-book-${position}`);
+      state = !this.dom.classList.contains(`h5p-portfolio-${position}`);
     }
 
-    this.dom.classList.toggle(`h5p-interactive-book-${position}`, state);
+    this.dom.classList.toggle(`h5p-portfolio-${position}`, state);
   }
 
   /**

@@ -22,13 +22,13 @@ $mud-80: rgba($mud, .8);
 
 $fullscreen-button-size: 1.8em;
 
-.h5p-interactive-book {
-  &.h5p-interactive-book-small {
-    .h5p-interactive-book-main {
+.h5p-portfolio {
+  &.h5p-portfolio-small {
+    .h5p-portfolio-main {
 
-      &.h5p-interactive-book-navigation-open {
+      &.h5p-portfolio-navigation-open {
 
-        .h5p-interactive-book-navigation {
+        .h5p-portfolio-navigation {
           max-width: none;
           width: 100%;
 
@@ -37,20 +37,20 @@ $fullscreen-button-size: 1.8em;
           }
         }
 
-        .h5p-interactive-book-navigation-chapter-accordion {
+        .h5p-portfolio-navigation-chapter-accordion {
           opacity: 0;
           visibility: hidden;
         }
 
-        .h5p-interactive-book-navigation-chapter-button {
+        .h5p-portfolio-navigation-chapter-button {
           background-color: $background-color;
 
-          &.h5p-interactive-book-navigation-current {
+          &.h5p-portfolio-navigation-current {
             border-bottom: solid 1px $ghost-white;
           }
         }
 
-        .h5p-interactive-book-navigation-sectionlist {
+        .h5p-portfolio-navigation-sectionlist {
           max-height: none;
           overflow: inherit;
           transition: max-height .5s ease-in;
@@ -58,7 +58,7 @@ $fullscreen-button-size: 1.8em;
           padding-left: 0.3rem;
         }
 
-        .h5p-interactive-book-content {
+        .h5p-portfolio-content {
           display: none;
         }
       }
@@ -97,14 +97,14 @@ $fullscreen-button-size: 1.8em;
   }
 }
 
-.h5p-interactive-book-main {
+.h5p-portfolio-main {
   display: flex;
   flex: 1;
   overflow: hidden;
 
-  &.h5p-interactive-book-navigation-open {
+  &.h5p-portfolio-navigation-open {
 
-    .h5p-interactive-book-navigation {
+    .h5p-portfolio-navigation {
       max-width: 16.563em;
       width: 16.563em;
     }
@@ -117,15 +117,15 @@ $fullscreen-button-size: 1.8em;
 
 .h5p-fullscreen,
 .h5p-semi-fullscreen {
-  .h5p-interactive-book {
+  .h5p-portfolio {
     display: flex;
     flex-direction: column;
 
-    .h5p-interactive-book-content {
+    .h5p-portfolio-content {
       padding-bottom: 4.5em;
     }
 
-    .h5p-interactive-book-status-footer {
+    .h5p-portfolio-status-footer {
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -133,11 +133,11 @@ $fullscreen-button-size: 1.8em;
     }
   }
 
-  .h5p-interactive-book-main {
+  .h5p-portfolio-main {
     flex: 1;
     overflow: auto;
 
-    .h5p-interactive-book-content {
+    .h5p-portfolio-content {
       overflow-x: hidden;
       overflow-y: auto;
       // Note: Subtracts padding, do not use box-sizing because then inner div
@@ -146,7 +146,7 @@ $fullscreen-button-size: 1.8em;
     }
   }
 
-  .h5p-interactive-book-navigation {
+  .h5p-portfolio-navigation {
     display: flex;
     flex-direction: column;
 

@@ -10,7 +10,7 @@ export default class Title {
     this.params.titleText = this.params.titleText ?? '';
 
     this.content = document.createElement('div');
-    this.content.classList.add('h5p-interactive-book-navigation-maintitle');
+    this.content.classList.add('h5p-portfolio-navigation-maintitle');
 
     const title = document.createElement('h2');
     title.classList.add('navigation-title');

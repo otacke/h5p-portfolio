@@ -46,7 +46,7 @@ export default class Cover {
    */
   buildContainer() {
     const container = document.createElement('div');
-    container.classList.add('h5p-interactive-book-cover');
+    container.classList.add('h5p-portfolio-cover');
     return container;
   }
 
@@ -60,7 +60,7 @@ export default class Cover {
     }
 
     const visuals = document.createElement('div');
-    visuals.classList.add('h5p-interactive-book-cover-graphics');
+    visuals.classList.add('h5p-portfolio-cover-graphics');
 
     return visuals;
   }
@@ -107,7 +107,7 @@ export default class Cover {
    */
   buildCoverBar() {
     const coverBar = document.createElement('div');
-    coverBar.classList.add('h5p-interactive-book-cover-bar');
+    coverBar.classList.add('h5p-portfolio-cover-bar');
     return coverBar;
   }
 
@@ -121,7 +121,7 @@ export default class Cover {
     title.innerHTML = titleText;
 
     const titleWrapper = document.createElement('div');
-    titleWrapper.classList.add('h5p-interactive-book-cover-title');
+    titleWrapper.classList.add('h5p-portfolio-cover-title');
     titleWrapper.appendChild(title);
 
     return titleWrapper;
@@ -138,7 +138,7 @@ export default class Cover {
     }
 
     const descriptionElement = document.createElement('div');
-    descriptionElement.classList.add('h5p-interactive-book-cover-description');
+    descriptionElement.classList.add('h5p-portfolio-cover-description');
     descriptionElement.innerHTML = descriptionText;
 
     return descriptionElement;
@@ -157,7 +157,7 @@ export default class Cover {
     });
 
     const buttonWrapper = document.createElement('div');
-    buttonWrapper.classList.add('h5p-interactive-book-cover-readbutton');
+    buttonWrapper.classList.add('h5p-portfolio-cover-readbutton');
     buttonWrapper.appendChild(button);
 
     return buttonWrapper;

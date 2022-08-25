@@ -9,32 +9,32 @@
   transition: .25s;
   width: 100%;
 
-  &.h5p-interactive-book-previous {
+  &.h5p-portfolio-previous {
     transform: translateX(-100%);
   }
 
-  &.h5p-interactive-book-current {
+  &.h5p-portfolio-current {
     display: block;
     transform: translateX(0);
   }
 
-  &.h5p-interactive-book-next {
+  &.h5p-portfolio-next {
     transform: translateX(100%);
   }
 
-  .h5p-interactive-book-chapter > div {
+  .h5p-portfolio-chapter > div {
     margin-left: auto;
     margin-right: auto;
     max-width: 1058px;
   }
 }
 
-.h5p-interactive-book-animate {
+.h5p-portfolio-animate {
   display: block;
   transition: transform .25s ease-in-out;
 }
 
-.h5p-interactive-book-content {
+.h5p-portfolio-content {
   padding: 1rem;
   overflow: hidden;
   position: relative;
@@ -58,7 +58,7 @@
   }
 }
 
-.h5p-interactive-book-status-progress-marker {
+.h5p-portfolio-status-progress-marker {
   align-items: center;
   border-top: 1px solid $cool-grey;
   display: flex;

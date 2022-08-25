@@ -33,7 +33,7 @@ export default class StatusBar {
     this.wrapper.appendChild(this.progressBar.wrapper);
 
     const wrapperInfo = document.createElement('div');
-    wrapperInfo.classList.add('h5p-interactive-book-status');
+    wrapperInfo.classList.add('h5p-portfolio-status');
 
     // Menu toggle button
     if (this.params.displayMenuToggleButton) {
@@ -75,11 +75,11 @@ export default class StatusBar {
    */
   buildProgressBar() {
     const progress = document.createElement('div');
-    progress.classList.add('h5p-interactive-book-status-progressbar-front');
+    progress.classList.add('h5p-portfolio-status-progressbar-front');
     progress.setAttribute('tabindex', '-1');
 
     const wrapper = document.createElement('div');
-    wrapper.classList.add('h5p-interactive-book-status-progressbar-back');
+    wrapper.classList.add('h5p-portfolio-status-progressbar-back');
     wrapper.appendChild(progress);
 
     return { wrapper: wrapper, progress: progress };
@@ -91,11 +91,11 @@ export default class StatusBar {
    */
   buildMenuToggleButton() {
     const buttonWrapper = document.createElement('button');
-    buttonWrapper.classList.add('h5p-interactive-book-status-menu');
-    buttonWrapper.classList.add('h5p-interactive-book-status-button');
+    buttonWrapper.classList.add('h5p-portfolio-status-menu');
+    buttonWrapper.classList.add('h5p-portfolio-status-button');
     buttonWrapper.title = Dictionary.get('a11y.menu');
     buttonWrapper.setAttribute('aria-expanded', 'false');
-    buttonWrapper.setAttribute('aria-controls', 'h5p-interactive-book-navigation-menu');
+    buttonWrapper.setAttribute('aria-controls', 'h5p-portfolio-navigation-menu');
     buttonWrapper.onclick = () => {
       this.callbacks.onToggleMenu();
     };
@@ -117,9 +117,9 @@ export default class StatusBar {
     icon.classList.add('navigation-button');
 
     const button = document.createElement('button');
-    button.classList.add('h5p-interactive-book-status-to-top');
-    button.classList.add('h5p-interactive-book-status-button');
-    button.classList.add('h5p-interactive-book-status-arrow');
+    button.classList.add('h5p-portfolio-status-to-top');
+    button.classList.add('h5p-portfolio-status-button');
+    button.classList.add('h5p-portfolio-status-arrow');
     button.setAttribute('title', Dictionary.get('l10n.navigateToTop'));
     button.setAttribute('aria-label', Dictionary.get('l10n.navigateToTop'));
     button.addEventListener('click', () => {
@@ -140,7 +140,7 @@ export default class StatusBar {
     text.classList.add('title');
 
     const wrapper = document.createElement('div');
-    wrapper.classList.add('h5p-interactive-book-status-chapter');
+    wrapper.classList.add('h5p-portfolio-status-chapter');
     wrapper.appendChild(text);
 
     return { wrapper: wrapper, text: text };
@@ -152,16 +152,16 @@ export default class StatusBar {
    */
   buildProgressIndicator() {
     const current = document.createElement('span');
-    current.classList.add('h5p-interactive-book-status-progress-number');
+    current.classList.add('h5p-portfolio-status-progress-number');
     current.setAttribute('aria-hidden', 'true');
 
     const divider = document.createElement('span');
-    divider.classList.add('h5p-interactive-book-status-progress-divider');
+    divider.classList.add('h5p-portfolio-status-progress-divider');
     divider.innerHTML = ' / ';
     divider.setAttribute('aria-hidden', 'true');
 
     const total = document.createElement('span');
-    total.classList.add('h5p-interactive-book-status-progress-number');
+    total.classList.add('h5p-portfolio-status-progress-number');
     total.innerHTML = Chapters.get().length;
     total.setAttribute('aria-hidden', 'true');
 
@@ -169,7 +169,7 @@ export default class StatusBar {
     hiddenButRead.classList.add('hidden-but-read');
 
     const progressText = document.createElement('p');
-    progressText.classList.add('h5p-interactive-book-status-progress');
+    progressText.classList.add('h5p-portfolio-status-progress');
     progressText.appendChild(current);
     progressText.appendChild(divider);
     progressText.appendChild(total);
@@ -224,8 +224,8 @@ export default class StatusBar {
    */
   buildNavigationButton(params) {
     const button = document.createElement('button');
-    button.classList.add('h5p-interactive-book-status-arrow');
-    button.classList.add('h5p-interactive-book-status-button');
+    button.classList.add('h5p-portfolio-status-arrow');
+    button.classList.add('h5p-portfolio-status-button');
     button.setAttribute('aria-label', params.label);
     button.addEventListener('click', () => {
       params.onClicked();
@@ -246,9 +246,9 @@ export default class StatusBar {
    */
   buildFullScreenButton() {
     const fullScreenButton = document.createElement('button');
-    fullScreenButton.classList.add('h5p-interactive-book-status-fullscreen');
-    fullScreenButton.classList.add('h5p-interactive-book-status-button');
-    fullScreenButton.classList.add('h5p-interactive-book-enter-fullscreen');
+    fullScreenButton.classList.add('h5p-portfolio-status-fullscreen');
+    fullScreenButton.classList.add('h5p-portfolio-status-button');
+    fullScreenButton.classList.add('h5p-portfolio-enter-fullscreen');
     fullScreenButton.setAttribute('title', Dictionary.get('l10n.fullscreen'));
     fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.fullscreen'));
     fullScreenButton.addEventListener('click', () => {
@@ -374,8 +374,8 @@ export default class StatusBar {
       return;
     }
 
-    this.fullScreenButton.classList.toggle('h5p-interactive-book-enter-fullscreen', !state);
-    this.fullScreenButton.classList.toggle('h5p-interactive-book-exit-fullscreen', state);
+    this.fullScreenButton.classList.toggle('h5p-portfolio-enter-fullscreen', !state);
+    this.fullScreenButton.classList.toggle('h5p-portfolio-exit-fullscreen', state);
 
     if (state) {
       this.fullScreenButton.setAttribute('title', Dictionary.get('l10n.exitFullscreen'));
@@ -408,7 +408,7 @@ export default class StatusBar {
       state = !this.isMenuOpen();
     }
 
-    this.menuToggleButton.classList.toggle('h5p-interactive-book-status-menu-active', state);
+    this.menuToggleButton.classList.toggle('h5p-portfolio-status-menu-active', state);
     this.menuToggleButton.setAttribute('aria-expanded', state);
 
     return state;
@@ -423,6 +423,6 @@ export default class StatusBar {
       return false;
     }
 
-    return this.menuToggleButton.classList.contains('h5p-interactive-book-status-menu-active');
+    return this.menuToggleButton.classList.contains('h5p-portfolio-status-menu-active');
   }
 }

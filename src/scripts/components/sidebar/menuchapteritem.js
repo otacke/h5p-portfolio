@@ -24,17 +24,17 @@ export default class MenuChapterItem {
     this.isContentLink = this.params.hierarchy.indexOf(':') !== -1;
 
     this.menuItem = document.createElement('li');
-    this.menuItem.classList.add('h5p-interactive-book-navigation-chapter');
-    this.menuItem.classList.add('h5p-interactive-book-navigation-closed');
+    this.menuItem.classList.add('h5p-portfolio-navigation-chapter');
+    this.menuItem.classList.add('h5p-portfolio-navigation-closed');
     if (this.params.className) {
       this.menuItem.classList.add(this.params.className);
     }
 
     this.button = document.createElement('button');
-    this.button.classList.add('h5p-interactive-book-navigation-chapter-button');
+    this.button.classList.add('h5p-portfolio-navigation-chapter-button');
     this.button.classList.add(`level-${hierarchyLevel}`);
     if (this.isContentLink) {
-      this.button.classList.add('h5p-interactive-book-navigation-chapter-content');
+      this.button.classList.add('h5p-portfolio-navigation-chapter-content');
     }
 
     this.button.addEventListener('click', () => {
@@ -56,13 +56,13 @@ export default class MenuChapterItem {
     });
 
     this.expandIcon = document.createElement('div');
-    this.expandIcon.classList.add('h5p-interactive-book-navigation-chapter-accordion');
+    this.expandIcon.classList.add('h5p-portfolio-navigation-chapter-accordion');
     this.expandIcon.classList.add(`level-${hierarchyLevel}`);
 
     this.button.appendChild(this.expandIcon);
 
     const label = document.createElement('div');
-    label.classList.add('h5p-interactive-book-navigation-chapter-title-text');
+    label.classList.add('h5p-portfolio-navigation-chapter-title-text');
     label.title = params.title;
     label.innerHTML = params.title;
 
@@ -119,7 +119,7 @@ export default class MenuChapterItem {
    * Collapse menu item.
    */
   collapse() {
-    this.menuItem.classList.add('h5p-interactive-book-navigation-closed');
+    this.menuItem.classList.add('h5p-portfolio-navigation-closed');
     this.isExpandedValue = false;
 
     if (!this.isExpandable) {
@@ -136,7 +136,7 @@ export default class MenuChapterItem {
    * Expand menu item.
    */
   expand() {
-    this.menuItem.classList.remove('h5p-interactive-book-navigation-closed');
+    this.menuItem.classList.remove('h5p-portfolio-navigation-closed');
     this.isExpandedValue = true;
 
     if (!this.isExpandable) {
@@ -173,14 +173,14 @@ export default class MenuChapterItem {
    * Activate item.
    */
   activate() {
-    this.button.classList.add('h5p-interactive-book-navigation-current');
+    this.button.classList.add('h5p-portfolio-navigation-current');
   }
 
   /**
    * Deactivate item.
    */
   deactivate() {
-    this.button.classList.remove('h5p-interactive-book-navigation-current');
+    this.button.classList.remove('h5p-portfolio-navigation-current');
     this.makeUntabbable();
   }
 

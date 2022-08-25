@@ -1,4 +1,4 @@
-.h5p-interactive-book-navigation {
+.h5p-portfolio-navigation {
   background-color: $background-color;
   background-size: cover;
   box-shadow: .625em .625em 1.875em $dark-grey-20;
@@ -37,7 +37,7 @@
   }
 }
 
-.h5p-interactive-book-navigation-sectionlist {
+.h5p-portfolio-navigation-sectionlist {
   background-color: $background-color;
   background-size: cover;
   margin: 0;
@@ -53,7 +53,7 @@
     padding-bottom: .5em;
   }
 
-  .h5p-interactive-book-navigation-section {
+  .h5p-portfolio-navigation-section {
     background: transparent;
     color: $mud;
     font-size: .875em;
@@ -70,7 +70,7 @@
       max-width: 100%;
     }
 
-    .h5p-interactive-book-navigation-section-icon {
+    .h5p-portfolio-navigation-section-icon {
       position: absolute;
       color: $black;
       font-size: 5px;
@@ -79,12 +79,12 @@
       top: 50%;
       transform: translateY(-50%);
 
-      &.h5p-interactive-book-navigation-section-task {
+      &.h5p-portfolio-navigation-section-task {
         visibility: inherit;
       }
     }
 
-    .h5p-interactive-book-navigation-section-title {
+    .h5p-portfolio-navigation-section-title {
       font-size: .85em;
       margin-left: 15px;
       margin-right: 2em;
@@ -100,8 +100,8 @@
   }
 }
 
-.h5p-interactive-book-navigation-closed {
-  .h5p-interactive-book-navigation-sectionlist {
+.h5p-portfolio-navigation-closed {
+  .h5p-portfolio-navigation-sectionlist {
     max-height: 0;
     overflow: hidden;
     transition: max-height .5s ease-out;
@@ -109,20 +109,20 @@
   }
 }
 
-.h5p-interactive-book-navigation-chapter {
+.h5p-portfolio-navigation-chapter {
   list-style: none;
 
-  &.h5p-interactive-book-navigation-chapter-first {
+  &.h5p-portfolio-navigation-chapter-first {
     margin-top: .5em;
   }
 
-  &.h5p-interactive-book-navigation-chapter-last {
+  &.h5p-portfolio-navigation-chapter-last {
     border-bottom: solid 1px $ghost-white;
     height: 2em;
   }
 }
 
-.h5p-interactive-book-navigation-chapter-button {
+.h5p-portfolio-navigation-chapter-button {
   align-items: center;
   background-color: $background-color;
   background-size: cover;
@@ -139,11 +139,11 @@
   width: 100%;
   position: relative;
 
-  &.h5p-interactive-book-navigation-chapter-content {
+  &.h5p-portfolio-navigation-chapter-content {
     border-bottom: none;
     height: 1.75em;
 
-    .h5p-interactive-book-navigation-chapter-title-text {
+    .h5p-portfolio-navigation-chapter-title-text {
       font-size: 0.85em;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -169,22 +169,22 @@
     padding-left: 3.125em;
   }
 
-  &.h5p-interactive-book-navigation-current:not(.h5p-interactive-book-navigation-chapter-content) {
+  &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
     background-color: var(--color-base-10, $base-color-10);
     // border-bottom-color: white;
 
-    .h5p-interactive-book-navigation-chapter-title-text {
+    .h5p-portfolio-navigation-chapter-title-text {
       color: var(--color-base, $base-color);
       text-decoration: none solid var(--color-base, $base-color);
     }
   }
 
-  &:hover:not(.h5p-interactive-book-navigation-chapter-content) {
+  &:hover:not(.h5p-portfolio-navigation-chapter-content) {
     background-color: var(--color-base-5, $base-color-5);
     cursor: pointer;
   }
 
-  .h5p-interactive-book-navigation-chapter-title-text {
+  .h5p-portfolio-navigation-chapter-title-text {
     background-color: transparent;
     color: $mud;
     font-size: 1em;
@@ -198,7 +198,7 @@
     white-space: nowrap;
   }
 
-  .h5p-interactive-book-navigation-chapter-accordion {
+  .h5p-portfolio-navigation-chapter-accordion {
     align-self: center;
     font-size: .65em;
     width: 1em;
@@ -223,7 +223,7 @@
     }
   }
 
-  .h5p-interactive-book-navigation-chapter-progress {
+  .h5p-portfolio-navigation-chapter-progress {
     align-self: center;
     font-size: .75em;
     position: absolute;
@@ -231,12 +231,12 @@
     top: 17px;
   }
 
-  &:not(.h5p-interactive-book-navigation-chapter-content):active {
+  &:not(.h5p-portfolio-navigation-chapter-content):active {
     background-color: var(--color-base-10, $base-color-10);
   }
 }
 
-.h5p-interactive-book-navigation-maintitle {
+.h5p-portfolio-navigation-maintitle {
   background-color: var(--color-base, $base-color);
   background-size: cover;
 

@@ -18,7 +18,7 @@ class SideBar extends H5P.EventDispatcher {
     }, callbacks);
 
     this.container = document.createElement('div');
-    this.container.classList.add('h5p-interactive-book-navigation');
+    this.container.classList.add('h5p-portfolio-navigation');
     if (params.mainTitle) {
       const title = new Title({ titleText: params.mainTitle });
       this.container.appendChild(title.getDOM());
@@ -83,10 +83,10 @@ class SideBar extends H5P.EventDispatcher {
 
         let className;
         if (index === 0) {
-          className = 'h5p-interactive-book-navigation-chapter-first';
+          className = 'h5p-portfolio-navigation-chapter-first';
         }
         else if (index === all.length - 1) {
-          className = 'h5p-interactive-book-navigation-chapter-last';
+          className = 'h5p-portfolio-navigation-chapter-last';
         }
 
         return {
