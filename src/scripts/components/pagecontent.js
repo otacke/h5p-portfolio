@@ -282,7 +282,7 @@ export default class PageContent {
 
         this.callbacks.onResized();
       }, 250);
-    }, 50); // TODO: Investigate why 0 is not enough
+    }, 50);
   }
 
   /**

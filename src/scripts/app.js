@@ -90,11 +90,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.currentChapterId = 0;
 
     this.$mainWrapper = null;
-    this.currentRatio = null;
-
-    this.smallSurface = 'h5p-portfolio-small';
-    this.mediumSurface = 'h5p-portfolio-medium';
-    this.largeSurface = 'h5p-portfolio-large';
 
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry
@@ -256,12 +251,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   attach($wrapper) {
     this.$mainWrapper = $wrapper;
 
-    // TODO: Remove jQuery use
-
     // Needed to enable scrolling in fullscreen
     $wrapper.addClass('h5p-portfolio h5p-scrollable-fullscreen');
 
-    this.setWrapperClassFromRatio(this.$mainWrapper);
     if (this.cover) {
       this.displayCover($wrapper);
     }
@@ -296,7 +288,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     if (!this.pageContent || !Chapters.get().length || !this.$mainWrapper) {
       return;
     }
-    this.setWrapperClassFromRatio(this.$mainWrapper);
     const currentNode = Chapters.get(this.currentChapterId).getDOM();
 
     if (currentNode.offsetParent === null) {
@@ -322,8 +313,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Move to.
-   * TODO: There also moveToChapter, and this one only seems to process the
-   * target beforehand: merge
    *
    * @param {object} [params={}] Parameters.
    */
@@ -551,7 +540,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @returns {boolean} True, if menu is open, else false.
    */
   isMenuOpen() {
-    // TODO: Let sidebar keep status instead
     return this.statusBarHeader.isMenuOpen();
   }
 
@@ -565,32 +553,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
   }
 
   /**
-   * Get the ratio of the wrapper.
-   *
-   * @returns {number} Ratio.
-   */
-  getRatio() {
-    return this.$mainWrapper.width() / parseFloat(this.$mainWrapper.css('font-size'));
-  }
-
-  /**
-   * Add/remove classname based on the ratio.
-   *
-   * @param {H5P.jQuery} $wrapper Wrapper.
-   * @param {number} ratio Ratio.
-   */
-  setWrapperClassFromRatio($wrapper, ratio = this.getRatio()) {
-    if (ratio === this.currentRatio) {
-      return;
-    }
-
-    this.breakpoints().forEach(item => {
-      $wrapper.toggleClass(item.className, item.shouldAdd(ratio));
-    });
-    this.currentRatio = ratio;
-  }
-
-  /**
    * Check if the content height exceeds the window.
    *
    * @returns {boolean} True if footer should be hidden.
@@ -599,29 +561,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     // Always show except for in fullscreen
     // Ideally we'd check on the top window size but we can't always get it.
     return this.isFullscreen;
-  }
-
-  /**
-   * Get list of classname and conditions for when to add classname to content.
-   *
-   * @returns {object} breakpoints.
-   */
-  breakpoints() {
-    // TODO: Why is this not done with media queries?
-    return [
-      {
-        'className': this.smallSurface,
-        'shouldAdd': ratio => ratio < 43,
-      },
-      {
-        'className': this.mediumSurface,
-        'shouldAdd': ratio => ratio >= 43 && ratio < 60,
-      },
-      {
-        'className': this.largeSurface,
-        'shouldAdd': ratio => ratio >= 60,
-      },
-    ];
   }
 
   /**
@@ -651,7 +590,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.setActivityStarted();
 
     // Focus header progress bar when cover is removed
-    // TODO: Don't manipulate directly
     this.statusBarHeader.progressBar.progress.focus();
   }
 
@@ -670,8 +608,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.statusBarHeader.hide();
     this.statusBarFooter.hide();
   }
-
-  // TODO: Replace this custom implementation by trusting the "Column"
 
   /**
    * Check if result has been submitted or input has been given.
@@ -843,7 +779,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Answer call to return the current state.
-   * TODO
+   * TODO: Implement previous state function
    *
    * @returns {object} Current state.
    */

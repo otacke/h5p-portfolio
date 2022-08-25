@@ -23,44 +23,6 @@ $mud-80: rgba($mud, .8);
 $fullscreen-button-size: 1.8em;
 
 .h5p-portfolio {
-  &.h5p-portfolio-small {
-    .h5p-portfolio-main {
-
-      &.h5p-portfolio-navigation-open {
-
-        .h5p-portfolio-navigation {
-          max-width: none;
-          width: 100%;
-        }
-
-        .h5p-portfolio-navigation-chapter-accordion {
-          opacity: 0;
-          visibility: hidden;
-        }
-
-        .h5p-portfolio-navigation-chapter-button {
-          background-color: $background-color;
-
-          &.h5p-portfolio-navigation-current {
-            border-bottom: solid 1px $ghost-white;
-          }
-        }
-
-        .h5p-portfolio-navigation-sectionlist {
-          max-height: none;
-          overflow: inherit;
-          transition: max-height .5s ease-in;
-          visibility: inherit;
-          padding-left: 0.3rem;
-        }
-
-        .h5p-portfolio-content {
-          display: none;
-        }
-      }
-    }
-  }
-
   &.h5p-scrollable-fullscreen.h5p-semi-fullscreen {
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
@@ -150,6 +112,46 @@ $fullscreen-button-size: 1.8em;
       flex: 1;
       overflow-x: hidden;
       overflow-y: auto;
+    }
+  }
+}
+
+@media (max-width: 40rem) {
+  .h5p-portfolio {
+    .h5p-portfolio-main {
+
+      &.h5p-portfolio-navigation-open {
+
+        .h5p-portfolio-navigation {
+          max-width: none;
+          width: 100%;
+        }
+
+        .h5p-portfolio-navigation-chapter-accordion {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        .h5p-portfolio-navigation-chapter-button {
+          background-color: $background-color;
+
+          &.h5p-portfolio-navigation-current {
+            border-bottom: solid 1px $ghost-white;
+          }
+        }
+
+        .h5p-portfolio-navigation-sectionlist {
+          max-height: none;
+          overflow: inherit;
+          transition: max-height .5s ease-in;
+          visibility: inherit;
+          padding-left: 0.3rem;
+        }
+
+        .h5p-portfolio-content {
+          display: none;
+        }
+      }
     }
   }
 }

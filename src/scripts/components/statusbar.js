@@ -323,6 +323,13 @@ export default class StatusBar {
   }
 
   /**
+   * Focus progress on progress bar.
+   */
+  focusProgressBar() {
+    this.progressBar.progress.focus();
+  }
+
+  /**
    * Set focus to menu toggle button.
    */
   setFocusToMenuToggleButton() {
