@@ -27,9 +27,6 @@ class SideBar extends H5P.EventDispatcher {
 
     this.content = document.createElement('ul');
     this.content.classList.add('navigation-list');
-    if (Chapters.get().length > 20) { // TODO: Check what this was used for
-      this.content.classList.add('large-navigation-list');
-    }
 
     // List of all hierarchy keys including content items
     this.hierarchyKeys = this.buildHierarchyKeys();

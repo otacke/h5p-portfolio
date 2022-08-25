@@ -31,10 +31,6 @@ $fullscreen-button-size: 1.8em;
         .h5p-portfolio-navigation {
           max-width: none;
           width: 100%;
-
-          .large-navigation-list {
-            height: auto;
-          }
         }
 
         .h5p-portfolio-navigation-chapter-accordion {
@@ -154,10 +150,6 @@ $fullscreen-button-size: 1.8em;
       flex: 1;
       overflow-x: hidden;
       overflow-y: auto;
-    }
-
-    .large-navigation-list {
-      min-height: 1px;
     }
   }
 }
