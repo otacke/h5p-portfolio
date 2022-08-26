@@ -210,8 +210,8 @@ export default class Chapters {
         contentId: contentId,
         displayHotspotNavigation: chapter.displayHotspotNavigation || false,
         ...(chapter.providesHotspot && {hotspotNavigation: chapter.hotspotNavigation}),
-        previousState: Array.isArray(extras.previousState.chapters) ?
-          this.previousState.chapters[index] :
+        previousState: Array.isArray(extras.previousState) ?
+          extras.previousState[index] :
           {}
       });
 

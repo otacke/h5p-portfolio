@@ -81,13 +81,13 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     Chapters.fill(
       this.params.chapters,
       this.contentId,
-      { previousState : this.previousState });
+      { previousState : this.previousState?.chapterStates });
 
     Chapters.get().forEach(chapter => {
       this.bubbleUp(chapter.getInstance(), 'resize', this);
     });
 
-    this.currentChapterId = 0;
+    this.currentChapterId = this.previousState?.currentChapterId || 0;
 
     this.$mainWrapper = null;
 
@@ -131,7 +131,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     // Initialize the support components
-    if (this.params.showCoverPage) {
+    if (
+      this.params.showCoverPage &&
+      typeof this.previousState.currentChapterId !== 'number'
+    ) {
       this.cover = new Cover(
         {
           coverData: this.params.bookCover,
@@ -271,11 +274,12 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.updateFooter();
 
-    // Set start view. TODO: previous state
+    // Set start view.
+    const currentChapter = Chapters.get(this.currentChapterId);
     this.sideBar.handleClicked({
-      hierarchy: Chapters.get(0).getHierarchy(),
+      hierarchy: currentChapter.getHierarchy(),
       target: {
-        chapter: Chapters.get(0).getSubContentId(),
+        chapter: currentChapter.getSubContentId(),
         toTop: true
       }
     });
@@ -779,27 +783,16 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
   /**
    * Answer call to return the current state.
-   * TODO: Implement previous state function
    *
    * @returns {object} Current state.
    */
   getCurrentState() {
-    // Get relevant state information from non-summary chapters
-    // const chapters = Chapters.get()
-    //   .filter(chapter => !chapter.isSummary)
-    //   .map(chapter => ({
-    //     completed: chapter.completed,
-    //     sections: chapter.sections.map(section => ({taskDone: section.taskDone})),
-    //     state: chapter.instance.getCurrentState()
-    //   }));
-    //
-    // return {
-    //   urlFragments: URLTools.extractFragmentsFromURL(this.validateFragments, this.hashWindow),
-    //   chapters: chapters,
-    //   score: this.getScore(),
-    //   maxScore: this.getMaxScore()
-    // };
-    return {};
+    return {
+      chapterStates: Chapters.getAll().map(chapter => {
+        return chapter?.instance?.getCurrentState() || {};
+      }),
+      currentChapterId: this.currentChapterId
+    };
   }
 
   /**
