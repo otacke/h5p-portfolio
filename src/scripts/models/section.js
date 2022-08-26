@@ -11,7 +11,7 @@ export default class Section {
 
     this.contents = [];
     for (let i = 0; i < instances.length; i++) {
-      if (!instances[i] || instancesSemantics[i]) {
+      if (!instances[i] || !instancesSemantics[i]) {
         break; // No content set
       }
 
