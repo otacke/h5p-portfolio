@@ -10,7 +10,7 @@ import Colors from './services/colors';
 import Chapters from './services/chapters';
 import Dictionary from './services/dictionary';
 
-export default class InteractiveBook extends H5P.EventDispatcher {
+export default class Portfolio extends H5P.EventDispatcher {
   /**
    * @class
    * @param {object} params Parameters.
@@ -66,16 +66,19 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     // Apply custom base color
     if (
       params?.behaviour?.baseColor &&
-      !Colors.isBaseColor(params.behaviour.baseColor)
+      !Colors.isBaseColor(params.behaviour.baseColor) &&
+      !Portfolio.wasInstantiated[this.contentId]
     ) {
       Colors.setBase(params.behaviour.baseColor);
       Colors.appendToStylesheet(Colors.getCSS());
     }
 
-    // Apply hotspot color
-    Colors.appendToStylesheet(`:root{--color-hotspot-background:
-      ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
-    ;}`);
+    if (!Portfolio.wasInstantiated[this.contentId]) {
+      // Apply hotspot color
+      Colors.appendToStylesheet(`:root{--color-hotspot-background:
+        ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
+      ;}`);
+    }
 
     // Fill up chapter service
     Chapters.fill(
@@ -244,6 +247,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
 
     this.contentArea = document.createElement('div');
     this.contentArea.classList.add('h5p-portfolio-main');
+
+    Portfolio.wasInstantiated[this.contentId] = true;
   }
 
   /**
@@ -279,8 +284,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.sideBar.handleClicked({
       hierarchy: currentChapter.getHierarchy(),
       target: {
-        chapter: currentChapter.getSubContentId(),
-        toTop: true
+        chapter: currentChapter.getSubContentId()
       }
     });
   }
@@ -477,6 +481,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
    * @param {object} params Parameters.
    */
   changeHash(params) {
+    if (this.isPreview) {
+      return; // Don't use hash in preview
+    }
+
     if (String(params.h5pPortfolioId) !== String(this.contentId)) {
       return;
     }
@@ -812,3 +820,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     };
   }
 }
+
+// Used to prevent to write base color styles again and again in editor preview
+Portfolio.wasInstantiated = {};
