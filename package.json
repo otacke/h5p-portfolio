@@ -1,6 +1,6 @@
 {
   "name": "h5p-portfolio",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "description": "H5P Portfolio",
   "scripts": {
     "build": "cross-env NODE_ENV='production' webpack",
@@ -24,7 +24,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "eslint": "^8.20.0",
-    "eslint-plugin-jsdoc": "^39.3.6",  
+    "eslint-plugin-jsdoc": "^39.3.6",
     "mini-css-extract-plugin": "^2.6.1",
     "regenerator-runtime": "^0.13.9",
     "resolve-url-loader": "^5.0.0",
