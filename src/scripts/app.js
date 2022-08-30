@@ -479,11 +479,13 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} params Parameters.
    */
   changeHash(params) {
-    if (this.isPreview) {
-      return; // Don't use hash in preview
+    if (String(params.h5pPortfolioId) !== String(this.contentId)) {
+      return;
     }
 
-    if (String(params.h5pPortfolioId) !== String(this.contentId)) {
+    if (this.isPreview) {
+      // Don't change hash in preview but trigger moving to chapter
+      this.moveToChapter(params);
       return;
     }
 
