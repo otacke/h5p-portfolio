@@ -817,7 +817,8 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   getChaptersInformation() {
     return Chapters.getAll().map((chapter) => ({
-      hierarchy: chapter.hierarchy
+      hierarchy: chapter.hierarchy,
+      title: chapter.title
     }));
   }
 
