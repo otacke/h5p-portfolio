@@ -285,6 +285,10 @@ export default class Portfolio extends H5P.EventDispatcher {
         chapter: currentChapter.getSubContentId()
       }
     });
+
+    setTimeout(() => {
+      this.trigger('attached');
+    }, 0);
   }
 
   /**
@@ -334,7 +338,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     params.h5pPortfolioId = this.contentId;
 
     // Use shorthand
-    if (params.direction) {
+    if (!params.id && params.direction) {
       if (
         this.currentChapterId === 0 && params.direction === 'prev' ||
         this.currentChapterId === Chapters.get().length - 1 && params.direction === 'next'
@@ -352,6 +356,9 @@ export default class Portfolio extends H5P.EventDispatcher {
       delete params.section;
       delete params.content;
       delete params.header;
+    }
+    else if (typeof params.id === 'number') {
+      params.chapter = Chapters.get(params.id).getSubContentId();
     }
 
     // Create the new hash
@@ -801,6 +808,17 @@ export default class Portfolio extends H5P.EventDispatcher {
       }),
       currentChapterId: this.currentChapterId
     };
+  }
+
+  /**
+   * Get chapters' information.
+   *
+   * @returns {object[]} Chapter information.
+   */
+  getChaptersInformation() {
+    return Chapters.getAll().map((chapter) => ({
+      hierarchy: chapter.hierarchy
+    }));
   }
 
   /**
