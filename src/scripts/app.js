@@ -167,6 +167,9 @@ export default class Portfolio extends H5P.EventDispatcher {
         }),
         onMoved: ((params) => {
           this.moveTo(params);
+        }),
+        isPreview: (() => {
+          return this.isPreview || false;
         })
       }
     );

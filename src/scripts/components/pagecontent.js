@@ -14,7 +14,9 @@ export default class PageContent {
     this.callbacks = Util.extend({
       onScrollToTop: (() => {}),
       onResized: (() => {}),
-      onChapterChanged: (() => {})
+      onChapterChanged: (() => {}),
+      onMoved: (() => {}),
+      isPreview: (() => {})
     }, callbacks);
 
     this.currentChapterId = params.currentChapterId ?? 0;
@@ -195,9 +197,11 @@ export default class PageContent {
       focusHandler.parentNode.removeChild(focusHandler);
     });
 
-    setTimeout(() => {
-      dom.scrollIntoView(true);
-    }, 100);
+    if (!this.callbacks.isPreview()) { // Prevent jumping all around in preview
+      setTimeout(() => {
+        dom.scrollIntoView(true);
+      }, 100);
+    }
   }
 
   /**
