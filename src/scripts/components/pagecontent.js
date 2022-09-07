@@ -186,18 +186,18 @@ export default class PageContent {
       }
     }
 
-    // What's this doing? Setting focus to an arbitrary element
-    // and the remove it once blur kicked in?
-    const focusHandler = document.createElement('div');
-    focusHandler.setAttribute('tabindex', '-1');
-    dom.parentNode.insertBefore(focusHandler, dom);
-    focusHandler.focus();
-
-    focusHandler.addEventListener('blur', () => {
-      focusHandler.parentNode.removeChild(focusHandler);
-    });
-
     if (!this.callbacks.isPreview()) { // Prevent jumping all around in preview
+      // What's this doing? Setting focus to an arbitrary element
+      // and the remove it once blur kicked in?
+      const focusHandler = document.createElement('div');
+      focusHandler.setAttribute('tabindex', '-1');
+      dom.parentNode.insertBefore(focusHandler, dom);
+      focusHandler.focus();
+
+      focusHandler.addEventListener('blur', () => {
+        focusHandler.parentNode.removeChild(focusHandler);
+      });
+
       setTimeout(() => {
         dom.scrollIntoView(true);
       }, 100);
