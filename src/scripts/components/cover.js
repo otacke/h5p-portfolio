@@ -18,7 +18,7 @@ export default class Cover {
     this.container = this.buildContainer();
 
     // Visual header
-    if (params.coverData?.coverMedium) {
+    if (params.coverData?.coverMedium?.params?.file) {
       this.visuals = this.buildVisualsElement(params.coverData.coverMedium);
       if (this.visuals) {
         this.container.appendChild(this.visuals);
@@ -74,7 +74,10 @@ export default class Cover {
    * already.
    */
   initMedia() {
-    if (!this.visuals || !this.params.coverData?.coverMedium) {
+    if (
+      !this.visuals ||
+      !this.params.coverData?.coverMedium?.params?.coverData
+    ) {
       return;
     }
 

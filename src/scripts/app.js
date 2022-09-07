@@ -140,7 +140,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         {
           coverData: this.params.bookCover,
           contentId: contentId,
-          title: extras.metadata.title
+          title: extras?.metadata?.title || ''
         },
         {
           onClosed: (() => {
@@ -230,13 +230,6 @@ export default class Portfolio extends H5P.EventDispatcher {
       }
     );
 
-    if (this.hasCover()) {
-      this.hideElements();
-    }
-    else {
-      this.setActivityStarted();
-    }
-
     // Kickstart the statusbar
     const statusUpdates = {
       chapterId: this.currentChapterId + 1,
@@ -248,6 +241,13 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.contentArea = document.createElement('div');
     this.contentArea.classList.add('h5p-portfolio-main');
+
+    if (this.hasCover()) {
+      this.hideElements();
+    }
+    else {
+      this.setActivityStarted();
+    }
 
     Portfolio.wasInstantiated[this.contentId] = true;
   }
@@ -620,6 +620,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   showElements() {
     this.statusBarHeader.show();
+    this.contentArea.classList.remove('h5p-content-hidden');
     this.statusBarFooter.show();
   }
 
@@ -628,6 +629,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   hideElements() {
     this.statusBarHeader.hide();
+    this.contentArea.classList.add('h5p-content-hidden');
     this.statusBarFooter.hide();
   }
 
