@@ -76,7 +76,7 @@ export default class Cover {
   initMedia() {
     if (
       !this.visuals ||
-      !this.params.coverData?.coverMedium?.params?.coverData
+      !this.params.coverData?.coverMedium?.params?.file
     ) {
       return;
     }
