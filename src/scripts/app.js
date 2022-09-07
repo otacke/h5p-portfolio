@@ -816,13 +816,18 @@ export default class Portfolio extends H5P.EventDispatcher {
   /**
    * Get chapters' information.
    *
-   * @returns {object[]} Chapter information.
+   * @param {number} [chapterId=null] Optional id of specific chapter.
+   * @returns {object[]|object} Chapter information.
    */
-  getChaptersInformation() {
-    return Chapters.getAll().map((chapter) => ({
-      hierarchy: chapter.hierarchy,
-      title: chapter.title
-    }));
+  getChaptersInformation(chapterId = null) {
+    const info = Chapters.getAll()
+      .map((chapter) => ({
+        hierarchy: chapter.hierarchy,
+        title: chapter.title,
+        placeholderDOMs: chapter.instance.getPlaceholderDOMs()
+      }));
+
+    return (chapterId !== null) ? info[chapterId] : info;
   }
 
   /**
