@@ -602,7 +602,9 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   handleCoverRemoved() {
     this.$mainWrapper.get(0).classList.remove('covered');
-    this.$mainWrapper.get(0).removeChild(this.cover.container);
+    if (this.cover) {
+      this.$mainWrapper.get(0).removeChild(this.cover.container);
+    }
 
     this.showElements();
 
