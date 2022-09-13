@@ -3,7 +3,7 @@
     "name": "showCoverPage",
     "type": "boolean",
     "label": "Enable book cover",
-    "description": "A cover that shows info regarding the book before access",
+    "description": "A cover that shows info regarding the book before access.",
     "importance": "low",
     "default": false
   },
@@ -77,7 +77,7 @@
     "name": "hotspotNavigationGlobals",
     "type": "group",
     "label": "Hotspot navigation",
-    "description": "Set global values for hotspot navigation",
+    "description": "Set global values for hotspot navigation.",
     "optional": true,
     "expanded": false,
     "fields": [
@@ -85,7 +85,7 @@
         "name": "hotspotNavigationImage",
         "type": "image",
         "label": "Hotspot navigation image",
-        "description": "Image used as background for the hotspot navigation",
+        "description": "Image used as background for the hotspot navigation.",
         "optional": true
       },
       {
@@ -156,7 +156,7 @@
                   "widget": "imageCoordinateSelector",
                   "imageFieldPath": "../../../../hotspotNavigationGlobals/hotspotNavigationImage",
                   "label": "Hotspot position",
-                  "description": "Click on the thumbnail image to place the hotspot",
+                  "description": "Click on the thumbnail image to place the hotspot.",
                   "fields": [
                     {
                       "name": "x",
@@ -246,7 +246,7 @@
         "name": "defaultTableOfContents",
         "type": "boolean",
         "label": "Display table of contents as default",
-        "description": "When enabled the table of contents is showed when opening the book",
+        "description": "When enabled the table of contents is showed when opening the book.",
         "default": true
       }
     ]
