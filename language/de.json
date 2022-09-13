@@ -1,0 +1,140 @@
+{
+  "semantics": [
+    {
+      "label": "Titelseite anzeigen",
+      "description": "Auf der Titelseite werden Informationen über das Buch angezeigt bevor es geöffnet wird."
+    },
+    {
+      "label": "Titelseite",
+      "fields": [
+        {
+          "label": "Beschreibung",
+          "description": "Dieser Text wird zur Beschreibung des Portfolios unter dem eigentlichen Titel angezeigt.",
+          "default": "<p style=\"text-align: center;\"></p>"
+        },
+        {
+          "label": "Medium für die Titelseite",
+          "description": "Optionales Medium für die Titelseite."
+        }
+      ]
+    },
+    {
+      "label": "Hotspot-Navigation",
+      "description": "Setze die globalen Werte für die Hotspot-Navigation.",
+      "fields": [
+        {
+          "label": "Bild für die Hotspot-Navigation",
+          "description": "Bild, das für den Hintergrund der Hotspot-Navigation verwendet wird."
+        },
+        {
+          "label": "Hotspot-Farbe"
+        }
+      ]
+    },
+    {
+      "label": "Portfolio",
+      "fields": [
+        {
+          "label": "Seiten",
+          "entity": "Seite",
+          "field": {
+            "label": "Kapitel",
+            "fields": [
+              {
+                "label": "Kapitelhierarchie"
+              },
+              {
+                "label": "Zeige die Hotspot-Navigation"
+              },
+              {
+                "label": "Füge eine Hotspot zu diesem Kapitel hinzu"
+              },
+              {
+                "label": "Hotspot-Navigation",
+                "fields": [
+                  {
+                    "label": "Hotspot-Position",
+                    "description": "Klicke auf die gewünschte Stelle im Vorschaubild, um den Hotspot zu platzieren."
+                  },
+                  {
+                    "label": "Hotspot-Beschriftung"
+                  }
+                ]
+              },
+              {
+                "label": "Kapitel"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Verhaltenseinstellungen",
+      "fields": [
+        {
+          "label": "Basisfarbe",
+          "description": "Setze die Basisfarbe für das Farbschema im Portfolio. Bitte denke an einen ausreichend hohen Kontrast."
+        },
+        {
+          "label": "Standardmäßig Inhaltsverzeichnis anzeigen",
+          "description": "Wenn gewählt, wird das Inhaltsverzeichnis beim Öffnen des Portfolios angezeigt."
+        }
+      ]
+    },
+    {
+      "label": "Bedienoberfläche",
+      "fields": [
+        {
+          "label": "Beschriftung für \"Lesen\"",
+          "default": "Lesen"
+        },
+        {
+          "label": "Beschriftung für \"Zeige 'Inhaltsverzeichnis'\"",
+          "default": "Zeige 'Inhaltsverzeichnis'"
+        },
+        {
+          "label": "Beschriftung für \"Blende 'Inhaltsverzeichnis' aus\"",
+          "default": "Blende 'Inhaltsverzeichnis' aus"
+        },
+        {
+          "label": "Beschriftung für \"Nächste Seite\"",
+          "default": "Nächste Seite"
+        },
+        {
+          "label": "Beschriftung für \"Vorherige Seite\"",
+          "default": "Vorherige Seite"
+        },
+        {
+          "label": "Beschriftung für \"Nach oben\"",
+          "default": "Nach oben"
+        },
+        {
+          "label": "Beschriftung für den Vollbild-Button",
+          "default": "Vollbild"
+        },
+        {
+          "label": "Beschriftung für den Vollbild-Button (verlassen)",
+          "default": "Verlasse Vollbild"
+        }
+      ]
+    },
+    {
+      "label": "Texte zur Barrierefreiheit",
+      "fields": [
+        {
+          "label": "Textalternative für die Fortschrittsanzeige",
+          "description": "Dieser Text ersetzt die grafische Fortschrittsanzeige. (Es können die Platzhalter @page und @total verwendet werden.)",
+          "default": "Seite @page von @total."
+        },
+        {
+          "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis ein- und auszublenden",
+          "default": "Inhaltsverzeichnis ein- bzw. ausschalten"
+        }
+      ]
+    }
+  ]
+}
