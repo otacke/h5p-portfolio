@@ -1,0 +1,140 @@
+{
+  "semantics": [
+    {
+      "label": "Enable book cover",
+      "description": "A cover that shows info regarding the book before access"
+    },
+    {
+      "label": "Cover Page",
+      "fields": [
+        {
+          "label": "Cover description",
+          "description": "This text will be the description of your book.",
+          "default": "<p style=\"text-align: center;\"></p>"
+        },
+        {
+          "label": "Cover medium",
+          "description": "Optional medium for the introduction."
+        }
+      ]
+    },
+    {
+      "label": "Hotspot navigation",
+      "description": "Set global values for hotspot navigation",
+      "fields": [
+        {
+          "label": "Hotspot navigation image",
+          "description": "Image used as background for the hotspot navigation"
+        },
+        {
+          "label": "Hotspot color"
+        }
+      ]
+    },
+    {
+      "label": "Portfolio",
+      "fields": [
+        {
+          "label": "Pages",
+          "entity": "Page",
+          "field": {
+            "label": "Chapter",
+            "fields": [
+              {
+                "label": "Chapter hierarchy"
+              },
+              {
+                "label": "Display hotspot navigation"
+              },
+              {
+                "label": "Provide a hotspot for this chapter"
+              },
+              {
+                "label": "Hotspot navigation",
+                "fields": [
+                  {
+                    "label": "Hotspot position",
+                    "description": "Click on the thumbnail image to place the hotspot"
+                  },
+                  {
+                    "label": "Hotspot title"
+                  }
+                ]
+              },
+              {
+                "label": "Chapter"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "fields": [
+        {
+          "label": "Base color",
+          "description": "Set the base color that will define the overall color scheme of the book. Please ensure a high enough contrast."
+        },
+        {
+          "label": "Display table of contents as default",
+          "description": "When enabled the table of contents is showed when opening the book"
+        }
+      ]
+    },
+    {
+      "label": "User interface",
+      "fields": [
+        {
+          "label": "Translation for \"Read\"",
+          "default": "Read"
+        },
+        {
+          "label": "Translation for \"Display 'Table of contents'\"",
+          "default": "Display 'Table of contents'"
+        },
+        {
+          "label": "Translation for \"Hide 'Table of contents'\"",
+          "default": "Hide 'Table of contents'"
+        },
+        {
+          "label": "Translation for \"Next page\"",
+          "default": "Next page"
+        },
+        {
+          "label": "Translation for \"Previous page\"",
+          "default": "Previous page"
+        },
+        {
+          "label": "Translation for \"Navigate to the top\"",
+          "default": "Navigate to the top"
+        },
+        {
+          "label": "Fullscreen button label",
+          "default": "Fullscreen"
+        },
+        {
+          "label": "Exit fullscreen button label",
+          "default": "Exit fullscreen"
+        }
+      ]
+    },
+    {
+      "label": "Accessibility texts",
+      "fields": [
+        {
+          "label": "Page progress textual alternative",
+          "description": "An alternative text for the visual page progress. @page and @total variables available.",
+          "default": "Page @page of @total."
+        },
+        {
+          "label": "Label for expanding/collapsing navigation menu",
+          "default": "Toggle navigation menu"
+        }
+      ]
+    }
+  ]
+}
