@@ -2,8 +2,8 @@
   {
     "name": "showCoverPage",
     "type": "boolean",
-    "label": "Enable book cover",
-    "description": "A cover that shows info regarding the book before access.",
+    "label": "Enable portfolio cover",
+    "description": "A cover that shows info regarding the portfolio before access.",
     "importance": "low",
     "default": false
   },
@@ -29,7 +29,7 @@
         "label": "Cover description",
         "importance": "medium",
         "optional": true,
-        "description": "This text will be the description of your book.",
+        "description": "This text will be the description of your portfolio.",
         "default": "<p style=\"text-align: center;\"></p>",
         "enterMode": "p",
         "tags": [
@@ -215,7 +215,7 @@
         "name": "baseColor",
         "type": "text",
         "label": "Base color",
-        "description": "Set the base color that will define the overall color scheme of the book. Please ensure a high enough contrast.",
+        "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast.",
         "optional": true,
         "widget": "colorSelector",
         "default": "#1768c4",
@@ -246,7 +246,7 @@
         "name": "defaultTableOfContents",
         "type": "boolean",
         "label": "Display table of contents as default",
-        "description": "When enabled the table of contents is showed when opening the book.",
+        "description": "When enabled the table of contents is showed when opening the portfolio.",
         "default": true
       }
     ]

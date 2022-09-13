@@ -1,15 +1,15 @@
 {
   "semantics": [
     {
-      "label": "Enable book cover",
-      "description": "A cover that shows info regarding the book before access."
+      "label": "Enable portfolio cover",
+      "description": "A cover that shows info regarding the portfolio before access."
     },
     {
       "label": "Cover Page",
       "fields": [
         {
           "label": "Cover description",
-          "description": "This text will be the description of your book.",
+          "description": "This text will be the description of your portfolio.",
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
@@ -77,11 +77,11 @@
       "fields": [
         {
           "label": "Base color",
-          "description": "Set the base color that will define the overall color scheme of the book. Please ensure a high enough contrast."
+          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast."
         },
         {
           "label": "Display table of contents as default",
-          "description": "When enabled the table of contents is showed when opening the book."
+          "description": "When enabled the table of contents is showed when opening the portfolio."
         }
       ]
     },
