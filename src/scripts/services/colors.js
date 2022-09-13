@@ -25,7 +25,7 @@ export default class Colors {
       Colors.DEFAULT_COLOR_BG,
       Colors.computeContrastColor(Colors.colorBase),
       Colors.computeContrastColor(Colors.colorBase, Colors.DEFAULT_COLOR_BG)
-    ].map(color => ({
+    ].map((color) => ({
       color: color,
       contrast: Colors.colorBase.contrast(color)
     })).reduce((result, current) => {
@@ -92,7 +92,7 @@ export default class Colors {
 
     let contrastColor;
     for (let diff = 0; diff <= 1; diff = diff + 0.05) {
-      contrastColor = Color.rgb(baseColor.rgb().array().map(value => {
+      contrastColor = Color.rgb(baseColor.rgb().array().map((value) => {
         return value * ((luminance > .5) ? (1 - diff) : (1 + diff));
       }));
 

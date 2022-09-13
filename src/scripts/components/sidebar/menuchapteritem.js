@@ -44,7 +44,7 @@ export default class MenuChapterItem {
       });
     });
 
-    this.button.addEventListener('keydown', event => {
+    this.button.addEventListener('keydown', (event) => {
       if (event.code === 'ArrowUp') {
         event.preventDefault();
         this.callbacks.onKeyUp({ hierarchy: this.params.hierarchy });

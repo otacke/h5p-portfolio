@@ -84,7 +84,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.contentId,
       { previousState : this.previousState?.chapterStates });
 
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       this.bubbleUp(chapter.getInstance(), 'resize', this);
     });
 
@@ -544,7 +544,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} target Target to trigger event on.
    */
   bubbleUp(origin, eventName, target) {
-    origin.on(eventName, event => {
+    origin.on(eventName, (event) => {
       // Prevent target from sending event back down
       target.bubblingUpwards = true;
 
@@ -696,7 +696,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   showSolutions() {
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       if (typeof chapter.instance.toggleReadSpeaker === 'function') {
         chapter.instance.toggleReadSpeaker(true);
       }
@@ -719,7 +719,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       return;
     }
 
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       if (!chapter.isInitialized) {
         return;
       }
@@ -763,7 +763,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     return {
       statement: xAPIEvent.data.statement,
       children: this.getXAPIDataFromChildren(
-        Chapters.get().map(chapter => chapter.instance)
+        Chapters.get().map((chapter) => chapter.instance)
       )
     };
   }
@@ -776,8 +776,8 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   getXAPIDataFromChildren(instances) {
     return instances
-      .filter(instance => typeof instance.getXAPIData === 'function')
-      .map(instance => instance.getXAPIData());
+      .filter((instance) => typeof instance.getXAPIData === 'function')
+      .map((instance) => instance.getXAPIData());
   }
 
   /**
@@ -810,7 +810,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   getCurrentState() {
     return {
-      chapterStates: Chapters.getAll().map(chapter => {
+      chapterStates: Chapters.getAll().map((chapter) => {
         return chapter?.instance?.getCurrentState() || {};
       }),
       currentChapterId: this.currentChapterId

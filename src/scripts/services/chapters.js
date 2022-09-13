@@ -77,7 +77,7 @@ export default class Chapters {
       return {};
     }
 
-    return Chapters.chapters.find(chapter => {
+    return Chapters.chapters.find((chapter) => {
       return chapter.instance?.subContentId === subContentId;
     }) || {};
   }
@@ -91,12 +91,12 @@ export default class Chapters {
   static findContent(subContentId) {
     let content = null;
 
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       if (content) {
         return; // Already found;
       }
 
-      chapter.getInstance().getInstances().forEach(placeholder => {
+      chapter.getInstance().getInstances().forEach((placeholder) => {
         if (content) {
           return; // already found
         }
@@ -139,7 +139,7 @@ export default class Chapters {
   static sanitize(params = []) {
 
     // Filter out invalid chapters
-    params = params.filter(chapter => {
+    params = params.filter((chapter) => {
       const validHierarchy = (new RegExp('^[1-9][0-9]*(-[1-9][0-9]*)*$'))
         .test(chapter.chapterHierarchy);
 

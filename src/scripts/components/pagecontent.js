@@ -45,7 +45,7 @@ export default class PageContent {
     const content = document.createElement('div');
     content.classList.add('h5p-portfolio-content');
 
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       content.appendChild(chapter.getDOM());
     });
 
@@ -58,7 +58,7 @@ export default class PageContent {
    * Build Chapter DOMs.
    */
   buildChapterDOMs() {
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       const columnNode = document.createElement('div');
       columnNode.classList.add('h5p-portfolio-chapter');
       chapter.setInstanceDOM(columnNode);

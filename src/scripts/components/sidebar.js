@@ -37,14 +37,14 @@ class SideBar extends H5P.EventDispatcher {
      * here.
      */
     this.menuItems = this.buildMenuItems();
-    this.menuItems.forEach(item => {
+    this.menuItems.forEach((item) => {
       this.content.appendChild(item.instance.getDOM());
     });
 
     this.container.appendChild(this.content);
 
     // Show top level entries only
-    this.menuItems.forEach(item => {
+    this.menuItems.forEach((item) => {
       if (
         item.hierarchy.split('-').length === 1 &&
         item.hierarchy.indexOf(':') === -1
@@ -62,7 +62,7 @@ class SideBar extends H5P.EventDispatcher {
   buildMenuItems() {
     const menuItems = [];
 
-    Chapters.get().forEach(chapter => {
+    Chapters.get().forEach((chapter) => {
       const hierarchy = chapter.getHierarchy();
 
       // MenuChapterItem parameters for chapter
@@ -106,17 +106,17 @@ class SideBar extends H5P.EventDispatcher {
        * One could also have some "content" subcontent attached to
        * a chapter, but the structure felt easier this way.
        */
-      [chapterMenuItem, ...contentMenuItems].forEach(param => {
+      [chapterMenuItem, ...contentMenuItems].forEach((param) => {
         const menuItem = new MenuChapterItem(
           param,
           {
             onClicked: ((params) => {
               this.handleClicked(params);
             }),
-            onKeyUp: (params => {
+            onKeyUp: ((params) => {
               this.handleKeyNavigated(params, -1);
             }),
-            onKeyDown: (params => {
+            onKeyDown: ((params) => {
               this.handleKeyNavigated(params, 1);
             })
           });
@@ -236,7 +236,7 @@ class SideBar extends H5P.EventDispatcher {
    * @returns {boolean} True if hierarchy has children.
    */
   hasChildren(hierarchy) {
-    return this.hierarchyKeys.some(key => this.isChild(key, hierarchy));
+    return this.hierarchyKeys.some((key) => this.isChild(key, hierarchy));
   }
 
   /**
@@ -245,7 +245,7 @@ class SideBar extends H5P.EventDispatcher {
    * @param {string} hierarchy Hierarchy.
    */
   show(hierarchy) {
-    this.menuItems.forEach(item => {
+    this.menuItems.forEach((item) => {
       if (!item.instance.isHidden()) {
         return; // Already shown
       }
@@ -276,7 +276,7 @@ class SideBar extends H5P.EventDispatcher {
    * @param {string} hierarchy Hierarchy.
    */
   hideChildren(hierarchy) {
-    this.menuItems.forEach(item => {
+    this.menuItems.forEach((item) => {
       if (item.instance.isHidden()) {
         return; // Already hidden
       }
@@ -295,7 +295,7 @@ class SideBar extends H5P.EventDispatcher {
    * @param {boolean} [params.toggleSelected] If true, may collapse item.
    */
   setCurrentItem(hierarchy, params = {}) {
-    this.menuItems.forEach(item => {
+    this.menuItems.forEach((item) => {
       const instance = item.instance;
 
       if (item.hierarchy === hierarchy) {
@@ -365,7 +365,7 @@ class SideBar extends H5P.EventDispatcher {
    * @param {number} diff -1 for up, 1 for down.
    */
   handleKeyNavigated(params, diff) {
-    const index = this.menuItems.findIndex(item => {
+    const index = this.menuItems.findIndex((item) => {
       return item.hierarchy === params.hierarchy;
     });
 

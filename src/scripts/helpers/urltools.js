@@ -14,7 +14,7 @@ export default class URLTools {
 
     // Convert fragment string to object with properties
     const fragments = {};
-    hashWindow.location.hash.replace('#', '').split('&').forEach(fragment => {
+    hashWindow.location.hash.replace('#', '').split('&').forEach((fragment) => {
       if (fragment.indexOf('=') === -1) {
         return; // Skip if incomplete pair
       }
@@ -39,8 +39,8 @@ export default class URLTools {
    */
   static createFragmentsString(fragments) {
     const fragmentString = Object.entries(fragments)
-      .filter(entry => entry.length === 2)
-      .map(entry => `${entry[0]}=${entry[1]}`)
+      .filter((entry) => entry.length === 2)
+      .map((entry) => `${entry[0]}=${entry[1]}`)
       .join('&');
 
     return `#${fragmentString}`;

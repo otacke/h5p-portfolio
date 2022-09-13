@@ -32,7 +32,8 @@
       "asyncArrow": "always"
     }],
     "no-extra-boolean-cast": "off",
-    "no-console": ["error", {"allow": ["warn", "error"]}]
+    "no-console": ["error", {"allow": ["warn", "error"]}],
+    "arrow-parens": ["error", "always"]
   },
   "plugins": ["jsdoc"],
   "settings": {
