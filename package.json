@@ -1,6 +1,6 @@
 {
   "name": "h5p-portfolio",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "H5P Portfolio",
   "scripts": {
     "build": "cross-env NODE_ENV='production' webpack",
