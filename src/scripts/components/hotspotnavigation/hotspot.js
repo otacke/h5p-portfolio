@@ -60,7 +60,7 @@ export default class Hotspot {
      * Touch or pen. Will show title for Hotspot.toastDurationMs and during
      * that interval, another "click" will execute the regular click.
      */
-    if (this.isShowingToast) {
+    if (this.isShowingToast || !this.params.title) {
       this.callbacks.onClicked(this.params.id);
       this.isShowingToast = false;
       clearTimeout(this.toastTimeout);
