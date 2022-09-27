@@ -41,6 +41,9 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  &.h5p-image > img {
+    object-fit: contain;
+  }
 
   &.h5p-image > img,
   &.h5p-video > video {
