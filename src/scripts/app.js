@@ -133,7 +133,7 @@ export default class Portfolio extends H5P.EventDispatcher {
        * link that is now missing may be semi-helpful only anyway.
        */
       if (error instanceof DOMException) {
-        if (H5P.Integration?.moodleComponent !== 'mod_h5pactivity') {
+        if (!H5P.Integration?.moodleComponent) {
           // Use iframe window to store book location hash
           this.addHashListener(window);
         }
