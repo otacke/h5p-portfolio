@@ -129,7 +129,7 @@ export default class Portfolio extends H5P.EventDispatcher {
      * course access, the link that is now missing may be semi-helpful only
      * anyway.
      */
-    if (typeof H5P.Integration?.moodleComponent !== 'undefined') {
+    if (typeof H5PIntegration?.moodleComponent === 'undefined') {
       try {
         this.addHashListener(top);
       }
@@ -512,7 +512,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       return;
     }
 
-    this.hashWindow.location.replace(params.newHash);
+    this.hashWindow?.location?.replace(params.newHash);
   }
 
   /**
