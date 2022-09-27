@@ -31,7 +31,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         chapters: [],
       },
       behaviour: {
-        defaultTableOfContents: true
+        defaultTableOfContents: true,
+        isPreview: false
       },
       l10n: {
         read: 'Read',
@@ -52,6 +53,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.contentId = contentId;
     this.previousState = extras.previousState || {};
 
+    this.isPreview = this.params.behaviour.isPreview;
+
     // Fill dictionary
     Dictionary.fill({
       l10n: this.params.l10n,
@@ -65,13 +68,13 @@ export default class Portfolio extends H5P.EventDispatcher {
     if (
       params?.behaviour?.baseColor &&
       !Colors.isBaseColor(params.behaviour.baseColor) &&
-      !Portfolio.wasInstantiated[this.contentId]
+      (!Portfolio.wasInstantiated[this.contentId] || this.isPreview)
     ) {
       Colors.setBase(params.behaviour.baseColor);
       Colors.appendToStylesheet(Colors.getCSS());
     }
 
-    if (!Portfolio.wasInstantiated[this.contentId]) {
+    if (!Portfolio.wasInstantiated[this.contentId] || this.isPreview) {
       // Apply hotspot color
       Colors.appendToStylesheet(`:root{--color-hotspot-background:
         ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
