@@ -190,7 +190,7 @@
               "name": "content",
               "type": "library",
               "options": [
-                "H5P.PortfolioChapter 0.5"
+                "H5P.PortfolioChapter 0.6"
               ],
               "optional": false
             }
