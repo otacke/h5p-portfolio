@@ -121,25 +121,26 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.updateFooter();
     });
 
-    try {
-      this.addHashListener(top);
-    }
-    catch (error) {
-      /*
-       * Bad check. Neither should H5PIntegration be queried directly nor
-       * should there be custom code for a platform - but this code taken from
-       * Interactive Book will trigger moodle to redirect the page otherwise
-       * and given that moodle doesn't usually allow open course access, the
-       * link that is now missing may be semi-helpful only anyway.
-       */
-      if (error instanceof DOMException) {
-        if (!H5P.Integration?.moodleComponent) {
+    /*
+     * Bad check. Neither should H5PIntegration be queried directly nor
+     * should there be custom code for a platform - but this code taken from
+     * Interactive Book will trigger moodle's custom integration to redirect
+     * the page otherwise and given that moodle doesn't usually allow open
+     * course access, the link that is now missing may be semi-helpful only
+     * anyway.
+     */
+    if (typeof H5P.Integration?.moodleComponent !== 'undefined') {
+      try {
+        this.addHashListener(top);
+      }
+      catch (error) {
+        if (error instanceof DOMException) {
           // Use iframe window to store book location hash
           this.addHashListener(window);
         }
-      }
-      else {
-        throw error;
+        else {
+          throw error;
+        }
       }
     }
 
