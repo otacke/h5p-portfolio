@@ -127,7 +127,7 @@
       "fields": [
         {
           "label": "Textalternative für die Fortschrittsanzeige",
-          "description": "Dieser Text ersetzt die grafische Fortschrittsanzeige. (Es können die Platzhalter @page und @total verwendet werden.)",
+          "description": "Dieser Text ersetzt die grafische Fortschrittsanzeige. Es können die Platzhalter @page und @total verwendet werden.",
           "default": "Seite @page von @total."
         },
         {
