@@ -140,8 +140,12 @@ export default class Portfolio extends H5P.EventDispatcher {
         }
         else {
           throw error;
+          this.hasNoHashListener = true;
         }
       }
+    }
+    else {
+      this.hasNoHashListener = true;
     }
 
     // Initialize the support components
@@ -506,7 +510,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       return;
     }
 
-    if (this.isPreview) {
+    if (this.isPreview || this.hasNoHashListener) {
       // Don't change hash in preview but trigger moving to chapter
       this.moveToChapter(params);
       return;
