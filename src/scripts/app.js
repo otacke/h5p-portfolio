@@ -471,8 +471,13 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     // We need to resize the whole book since the interactions are getting
     // more width and those with a static ratio will increase their height.
-    setTimeout(() => {
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(() => {
       this.trigger('resize');
+
+      setTimeout(() => {
+        this.trigger('resize');
+      }, 0); // Content may need to be resized after re-drawn
     }, 150);
   }
 
