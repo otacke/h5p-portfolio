@@ -139,8 +139,8 @@ export default class Portfolio extends H5P.EventDispatcher {
           this.addHashListener(window);
         }
         else {
-          throw error;
           this.hasNoHashListener = true;
+          throw error;
         }
       }
     }
