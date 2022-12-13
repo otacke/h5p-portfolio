@@ -1,0 +1,140 @@
+{
+  "semantics": [
+    {
+      "label": "Activa a portada do portafolios",
+      "description": "Unha portada que amosa información sobre o portafolios antes do acceso."
+    },
+    {
+      "label": "Páxina de Cuberta",
+      "fields": [
+        {
+          "label": "Descrición da cuberta",
+          "description": "Este texto será a descrición da teu portafolios.",
+          "default": "<p style=\"text-align: center;\"></p>"
+        },
+        {
+          "label": "Medios da cuberta",
+          "description": "Medios opcionais para a introdución."
+        }
+      ]
+    },
+    {
+      "label": "Navegación por puntos de acceso",
+      "description": "Establece valores globais para a navegación por puntos de acceso.",
+      "fields": [
+        {
+          "label": "Imaxe para a navegación por puntos de acceso",
+          "description": "Imaxe utilizada como fondo para a navegación por puntos de acceso."
+        },
+        {
+          "label": "Cor do punto de acceso"
+        }
+      ]
+    },
+    {
+      "fields": [
+        {
+          "entity": "Páxina",
+          "field": {
+            "label": "Capítulo",
+            "fields": [
+              {
+                "label": "Xerarquía de capítulos"
+              },
+              {
+                "label": "Amosar navegación por puntos de acceso"
+              },
+              {
+                "label": "Proporciona un punto de acceso para este capítulo"
+              },
+              {
+                "label": "Navegación por puntos de acceso",
+                "fields": [
+                  {
+                    "label": "Posición do punto de acceso",
+                    "description": "Preme na imaxe en miniatura para colocar o punto de acceso."
+                  },
+                  {
+                    "label": "Título do punto de acceso"
+                  }
+                ]
+              },
+              {
+                "label": "Capítulo"
+              }
+            ]
+          },
+          "label": "Páxinas"
+        },
+        {
+          "label": "Maniquí"
+        }
+      ],
+      "label": "Portafolios"
+    },
+    {
+      "label": "Configuración do comportamento",
+      "fields": [
+        {
+          "label": "Cor base",
+          "description": "Establece a cor base que definirá o esquema de cores global do libro. Asegúrate de establecer un contraste suficientemente alto."
+        },
+        {
+          "label": "Amosar a táboa de contidos por defecto",
+          "description": "Cando está activado, a táboa de contidos amósase ao abrir o portafolios."
+        }
+      ]
+    },
+    {
+      "label": "Interface de usuario",
+      "fields": [
+        {
+          "label": "Tradución para \"Ler\"",
+          "default": "Ler"
+        },
+        {
+          "label": "Tradución para \"Amosar 'Táboa de contidos'\"",
+          "default": "Amosar 'Táboa de contidos'"
+        },
+        {
+          "label": "Tradución para \"Agochar 'Táboa de contidos'\"",
+          "default": "Agochar 'Táboa de contidos'"
+        },
+        {
+          "label": "Tradución para \"Páxina seguinte\"",
+          "default": "Páxina seguinte"
+        },
+        {
+          "label": "Tradución para \"Páxina anterior\"",
+          "default": "Páxina anterior"
+        },
+        {
+          "label": "Tradución para \"Ir á parte superior\"",
+          "default": "Ir á parte superior"
+        },
+        {
+          "label": "Etiqueta do botón pantalla completa",
+          "default": "Pantalla Completa"
+        },
+        {
+          "label": "Etiqueta do botón saír de pantalla completa",
+          "default": "Saír de Pantalla Completa"
+        }
+      ]
+    },
+    {
+      "label": "Textos de accesibilidade",
+      "fields": [
+        {
+          "label": "Alternativa textual para o progreso de páxina",
+          "description": "Un texto alternativo para o progreso visual de páxina. Variables dispoñibles: @page e @total.",
+          "default": "Páxina @page de @total."
+        },
+        {
+          "label": "Etiqueta para expandir/colapsar o menú de navegación",
+          "default": "Alternar o menú de navegación"
+        }
+      ]
+    }
+  ]
+}
