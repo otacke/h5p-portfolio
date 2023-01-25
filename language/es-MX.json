@@ -1,0 +1,140 @@
+{
+  "semantics": [
+    {
+      "label": "Habilitar portada de portafolios",
+      "description": "Una portada que muestra información sobre el portafolios antes de acceder a él."
+    },
+    {
+      "label": "Página de Portada",
+      "fields": [
+        {
+          "label": "Descripción de la portada",
+          "description": "Este texto será la descripción de tu portafolios.",
+          "default": "<p style=\"text-align: center;\"></p>"
+        },
+        {
+          "label": "Medio de portada",
+          "description": "Medio opcional para la introducción."
+        }
+      ]
+    },
+    {
+      "label": "Navegación de puntos de acceso (hotspots)",
+      "description": "Establece valores globales para la navegación por puntos de acceso (hotspots).",
+      "fields": [
+        {
+          "label": "Imagen para navegación por puntos de acceso (hotspot)",
+          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso (hotspot)."
+        },
+        {
+          "label": "Color del punto de acceso (hotspot)"
+        }
+      ]
+    },
+    {
+      "fields": [
+        {
+          "field": {
+            "fields": [
+              {
+                "label": "Jerarquía de capítulos"
+              },
+              {
+                "label": "Mostrar navegación por puntos de acceso (hotspot)"
+              },
+              {
+                "label": "Proporciona un punto de acceso (hotspot) para este capítulo"
+              },
+              {
+                "label": "Navegación por puntos de acceso (hotspot)",
+                "fields": [
+                  {
+                    "label": "Posición del punto de acceso (hotspot)",
+                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso (hotspot)."
+                  },
+                  {
+                    "label": "Título del punto de acceso (hotspot)"
+                  }
+                ]
+              },
+              {
+                "label": "Capítulo"
+              }
+            ],
+            "label": "Capítulo"
+          },
+          "label": "Páginas",
+          "entity": "Página"
+        },
+        {
+          "label": "Maniquí"
+        }
+      ],
+      "label": "Portafolios"
+    },
+    {
+      "label": "Configuraciones del comportamiento",
+      "fields": [
+        {
+          "label": "Color base",
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto."
+        },
+        {
+          "label": "Mostrar tabla de contenidos como predeterminado",
+          "description": "Cuando se habilita, la tabla de contenido se muestra al abrir el portafolios."
+        }
+      ]
+    },
+    {
+      "label": "Interfaz de usuario",
+      "fields": [
+        {
+          "label": "Traducción para \"Leer\"",
+          "default": "Leer"
+        },
+        {
+          "label": "Traducción para \"Mostrar tabla de contenidos'\"",
+          "default": "Mostrar 'Tabla de contenidos'"
+        },
+        {
+          "label": "Traducción para \"Ocultar tabla de contenidos'\"",
+          "default": "Ocultar 'Tabla de contenidos'"
+        },
+        {
+          "label": "Traducción para \"Página siguiente\"",
+          "default": "Página siguiente"
+        },
+        {
+          "label": "Traducción para \"Página anterior\"",
+          "default": "Página anterior"
+        },
+        {
+          "label": "Traducción para \"Ir a la parte superior\"",
+          "default": "Ir a la parte superior"
+        },
+        {
+          "label": "Etiqueta botón pantalla completa",
+          "default": "Pantalla completa"
+        },
+        {
+          "label": "Etiqueta botón Salir de pantalla completa",
+          "default": "Salir de pantalla completa"
+        }
+      ]
+    },
+    {
+      "label": "Textos de Accesibilidad",
+      "fields": [
+        {
+          "label": "Alternativa textual para progreso de páginas",
+          "description": "Un texto alternativo para el progreso visual de página. @page y @total son las variables disponibles.",
+          "default": "Página @page de @total."
+        },
+        {
+          "label": "Etiqueta para expandir/contraer el menú de navegación",
+          "default": "Alternar menú de navegación"
+        }
+      ]
+    }
+  ]
+}
