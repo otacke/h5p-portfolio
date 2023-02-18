@@ -74,6 +74,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       Colors.appendToStylesheet(Colors.getCSS());
     }
 
+    // TODO: This should simply update the values
     if (!Portfolio.wasInstantiated[this.contentId] || this.isPreview) {
       // Apply hotspot color
       Colors.appendToStylesheet(`:root{--color-hotspot-background:

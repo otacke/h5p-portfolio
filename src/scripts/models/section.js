@@ -6,10 +6,14 @@ export default class Section {
     this.instance = params.instance;
     this.semantics = params.semantics;
 
-    const instances = this.instance.getInstances();
-    const instancesSemantics = this.instance.getInstancesSemantics();
+    const instances = this.instance?.getInstances();
+    const instancesSemantics = this.instance?.getInstancesSemantics();
 
     this.contents = [];
+    if (!instances) {
+      return;
+    }
+
     for (let i = 0; i < instances.length; i++) {
       if (!instances[i] || !instancesSemantics[i]) {
         break; // No content set

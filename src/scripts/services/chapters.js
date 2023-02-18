@@ -101,7 +101,7 @@ export default class Chapters {
           return; // already found
         }
 
-        content = placeholder.findField(subContentId);
+        content = placeholder?.findField(subContentId) || null;
       });
     });
 
@@ -143,9 +143,7 @@ export default class Chapters {
       const validHierarchy = (new RegExp('^[1-9][0-9]*(-[1-9][0-9]*)*$'))
         .test(chapter.chapterHierarchy);
 
-      const hasPlaceholder = chapter?.content?.params?.chapter?.contents?.length > 0;
-
-      return validHierarchy && hasPlaceholder;
+      return validHierarchy;
     });
 
     // Determine hierarchy depth
