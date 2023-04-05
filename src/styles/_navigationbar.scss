@@ -162,6 +162,10 @@
     padding-left: 3.125em;
   }
 
+  &.level-4 {
+    padding-left: 4.125em;
+  }
+
   &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
     background-color: var(--color-base-10, $base-color-10);
     // border-bottom-color: white;
@@ -213,6 +217,10 @@
 
     &.level-3 {
       left: 5.5em;
+    }
+
+    &.level-4 {
+      left: 7.5em;
     }
   }
 
