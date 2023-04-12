@@ -71,13 +71,12 @@ export default class Portfolio extends H5P.EventDispatcher {
       (!Portfolio.wasInstantiated[this.contentId] || this.isPreview)
     ) {
       Colors.setBase(params.behaviour.baseColor);
-      Colors.appendToStylesheet(Colors.getCSS());
+      Colors.addCustomCSSProperty(Colors.getCSS());
     }
 
-    // TODO: This should simply update the values
     if (!Portfolio.wasInstantiated[this.contentId] || this.isPreview) {
       // Apply hotspot color
-      Colors.appendToStylesheet(`:root{--color-hotspot-background:
+      Colors.addCustomCSSProperty(`:root{--color-hotspot-background:
         ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
       ;}`);
     }

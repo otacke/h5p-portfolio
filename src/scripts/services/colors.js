@@ -142,20 +142,23 @@ export default class Colors {
     }`;
   }
 
-  static appendToStylesheet(css) {
+  /**
+   * Add custom CSS property.
+   *
+   * @param {string} css CSS.
+   */
+  static addCustomCSSProperty(css) {
     if (typeof css !== 'string') {
       return;
     }
 
-    const style = document.createElement('style');
-    if (style.styleSheet) {
-      style.styleSheet.cssText = css;
-    }
-    else {
-      style.appendChild(document.createTextNode(css));
-    }
-
-    document.head.appendChild(style);
+    // Remove line breaks
+    css = css.replace(/\n/g, '').replace(/\r/g, '');
+    (css.match(/--.*?:.*?;/g) || []).forEach((match) => {
+      const property = match.split(':')[0];
+      const value = (match.split(':')[1].trim()).slice(0, -1);
+      document.documentElement.style.setProperty(property, value);
+    });
   }
 }
 
