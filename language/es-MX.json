@@ -17,10 +17,10 @@
           "description": "Medio opcional para la introducción."
         },
         {
-          "label": "Show header"
+          "label": "Mostrar encabezado"
         },
         {
-          "label": "Show footer"
+          "label": "Mostrar pie de página"
         }
       ]
     },
@@ -39,30 +39,30 @@
       ]
     },
     {
-      "label": "Use header"
+      "label": "Usar encabezado"
     },
     {
-      "label": "Header",
+      "label": "Encabezado",
       "fields": [
         {
-          "label": "Header"
+          "label": "Encabezado"
         },
         {
-          "label": "Dummy"
+          "label": "Maniquí"
         }
       ]
     },
     {
-      "label": "Use footer"
+      "label": "Usar pie de página"
     },
     {
-      "label": "Footer",
+      "label": "Pie de página",
       "fields": [
         {
-          "label": "Footer"
+          "label": "Pie de página"
         },
         {
-          "label": "Dummy"
+          "label": "Maniquí"
         }
       ]
     },
@@ -79,26 +79,26 @@
                 "label": "Jerarquía de capítulos"
               },
               {
-                "label": "Mostrar navegación por puntos de acceso (hotspot)"
+                "label": "Mostrar navegación por puntos de acceso"
               },
               {
-                "label": "Display header"
+                "label": "Mostrar encabezado"
               },
               {
-                "label": "Display footer"
+                "label": "Mostrar pie de página"
               },
               {
-                "label": "Proporciona un punto de acceso (hotspot) para este capítulo"
+                "label": "Proporciona un punto de acceso para este capítulo"
               },
               {
-                "label": "Navegación por puntos de acceso (hotspot)",
+                "label": "Navegación por puntos de acceso",
                 "fields": [
                   {
-                    "label": "Posición del punto de acceso (hotspot)",
-                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso (hotspot)."
+                    "label": "Posición del punto de acceso",
+                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso."
                   },
                   {
-                    "label": "Título del punto de acceso (hotspot)"
+                    "label": "Título del punto de acceso"
                   }
                 ]
               },
@@ -118,7 +118,7 @@
       "fields": [
         {
           "label": "Color base",
-          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto.",
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrese de establecer un contraste suficientemente alto.",
           "default": "#1768c4"
         },
         {
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "label": "Interfaz de usuario",
+      "label": "Interfaz del usuario",
       "fields": [
         {
           "label": "Traducción para \"Leer\"",
@@ -139,7 +139,7 @@
           "default": "Mostrar 'Tabla de contenidos'"
         },
         {
-          "label": "Traducción para \"Ocultar tabla de contenidos'\"",
+          "label": "Traducción para \"Ocultar 'tabla de contenidos''\"",
           "default": "Ocultar 'Tabla de contenidos'"
         },
         {
@@ -151,8 +151,8 @@
           "default": "Página anterior"
         },
         {
-          "label": "Traducción para \"Ir a la parte superior\"",
-          "default": "Ir a la parte superior"
+          "label": "Traducción para \"Navegar a la parte superior\"",
+          "default": "Navegar a la parte superior"
         },
         {
           "label": "Etiqueta botón pantalla completa",
