@@ -15,6 +15,12 @@
         {
           "label": "Medium für die Titelseite",
           "description": "Optionales Medium für die Titelseite."
+        },
+        {
+          "label": "Header verwenden"
+        },
+        {
+          "label": "Footer verwenden"
         }
       ]
     },
@@ -27,7 +33,36 @@
           "description": "Bild, das für den Hintergrund der Hotspot-Navigation verwendet wird."
         },
         {
-          "label": "Hotspot-Farbe"
+          "label": "Hotspot-Farbe",
+          "default": "rgba(255, 255, 255, .6)"
+        }
+      ]
+    },
+    {
+      "label": "Header verwenden"
+    },
+    {
+      "label": "Header",
+      "fields": [
+        {
+          "label": "Header"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Footer verwenden"
+    },
+    {
+      "label": "Footer",
+      "fields": [
+        {
+          "label": "Footer"
+        },
+        {
+          "label": "Dummy"
         }
       ]
     },
@@ -45,6 +80,12 @@
               },
               {
                 "label": "Hotspot-Navigation zeigen"
+              },
+              {
+                "label": "Header zeigen"
+              },
+              {
+                "label": "Footer zeigen"
               },
               {
                 "label": "Diesem Kapitel einen Hotspot hinzufügen"
@@ -77,7 +118,8 @@
       "fields": [
         {
           "label": "Basisfarbe",
-          "description": "Setze die Basisfarbe für das Farbschema im Portfolio. Bitte denke an einen ausreichend hohen Kontrast."
+          "description": "Setze die Basisfarbe für das Farbschema im Portfolio. Bitte denke an einen ausreichend hohen Kontrast.",
+          "default": "#1768c4"
         },
         {
           "label": "Standardmäßig Inhaltsverzeichnis anzeigen",

@@ -15,6 +15,12 @@
         {
           "label": "Medios da cuberta",
           "description": "Medios opcionais para a introdución."
+        },
+        {
+          "label": "Show header"
+        },
+        {
+          "label": "Show footer"
         }
       ]
     },
@@ -27,13 +33,44 @@
           "description": "Imaxe utilizada como fondo para a navegación por puntos de acceso."
         },
         {
-          "label": "Cor do punto de acceso"
+          "label": "Cor do punto de acceso",
+          "default": "rgba(255, 255, 255, .6)"
         }
       ]
     },
     {
+      "label": "Use header"
+    },
+    {
+      "label": "Header",
       "fields": [
         {
+          "label": "Header"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Use footer"
+    },
+    {
+      "label": "Footer",
+      "fields": [
+        {
+          "label": "Footer"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Portafolios",
+      "fields": [
+        {
+          "label": "Páxinas",
           "entity": "Páxina",
           "field": {
             "label": "Capítulo",
@@ -43,6 +80,12 @@
               },
               {
                 "label": "Amosar navegación por puntos de acceso"
+              },
+              {
+                "label": "Display header"
+              },
+              {
+                "label": "Display footer"
               },
               {
                 "label": "Proporciona un punto de acceso para este capítulo"
@@ -63,21 +106,20 @@
                 "label": "Capítulo"
               }
             ]
-          },
-          "label": "Páxinas"
+          }
         },
         {
           "label": "Maniquí"
         }
-      ],
-      "label": "Portafolios"
+      ]
     },
     {
       "label": "Configuración do comportamento",
       "fields": [
         {
           "label": "Cor base",
-          "description": "Establece a cor base que definirá o esquema de cores global do libro. Asegúrate de establecer un contraste suficientemente alto."
+          "description": "Establece a cor base que definirá o esquema de cores global do libro. Asegúrate de establecer un contraste suficientemente alto.",
+          "default": "#1768c4"
         },
         {
           "label": "Amosar a táboa de contidos por defecto",

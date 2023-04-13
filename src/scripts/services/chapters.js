@@ -1,3 +1,4 @@
+import SinglePlaceholder from '../components/single-placeholder/single-placeholder';
 import Chapter from './../models/chapter';
 
 export default class Chapters {
@@ -131,6 +132,42 @@ export default class Chapters {
   }
 
   /**
+   * Set header.
+   *
+   * @param {SinglePlaceholder} header Header.
+   */
+  static setHeader(header) {
+    Chapters.header = header;
+  }
+
+  /**
+   * Get header.
+   *
+   * @returns {SinglePlaceholder} Header.
+   */
+  static getHeader() {
+    return Chapters.header;
+  }
+
+  /**
+   * Set footer.
+   *
+   * @param {SinglePlaceholder} footer Footer.
+   */
+  static setFooter(footer) {
+    Chapters.footer = footer;
+  }
+
+  /**
+   * Get footer.
+   *
+   * @returns {SinglePlaceholder} Footer.
+   */
+  static getFooter() {
+    return Chapters.footer;
+  }
+
+  /**
    * Sanitize parameters.
    *
    * @param {object[]} params Semantics parameters for chapters.
@@ -204,9 +241,13 @@ export default class Chapters {
       const newChapter = new Chapter({
         id: index,
         hierarchy: chapter.chapterHierarchy,
+        header: Chapters.header,
+        footer: Chapters.footer,
         content: chapter.content,
         contentId: contentId,
         displayHotspotNavigation: chapter.displayHotspotNavigation || false,
+        displayHeader: chapter.displayHeader && Chapters.header || false,
+        displayFooter: chapter.displayFooter && Chapters.footer || false,
         ...(chapter.providesHotspot && {hotspotNavigation: chapter.hotspotNavigation}),
         previousState: Array.isArray(extras.previousState) ?
           extras.previousState[index] :

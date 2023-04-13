@@ -70,6 +70,20 @@
           "H5P.Image 1.1",
           "H5P.Video 1.6"
         ]
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "label": "Show header",
+        "importance": "low",
+        "default": false
+      },
+      {
+        "name": "showFooter",
+        "type": "boolean",
+        "label": "Show footer",
+        "importance": "low",
+        "default": false
       }
     ]
   },
@@ -104,6 +118,84 @@
     ]
   },
   {
+    "name": "showHeader",
+    "type": "boolean",
+    "label": "Use header",
+    "importance": "low",
+    "default": false
+  },
+  {
+    "name": "headerPlaceholderGroup",
+    "type": "group",
+    "label": "Header",
+    "importance": "medium",
+    "widget": "showWhen",
+    "showWhen": {
+      "rules": [
+        {
+          "field": "showHeader",
+          "equals": true
+        }
+      ]
+    },
+    "fields": [
+      {
+        "name": "headerPlaceholder",
+        "type": "library",
+        "label": "Header",
+        "optional": true,
+        "options": [
+          "H5P.PortfolioPlaceholder 0.7"
+        ]
+      },
+      {
+        "name": "dummy",
+        "type": "boolean",
+        "label": "Dummy",
+        "widget": "none"
+      }
+    ]
+  },
+  {
+    "name": "showFooter",
+    "type": "boolean",
+    "label": "Use footer",
+    "importance": "low",
+    "default": false
+  },
+  {
+    "name": "footerPlaceholderGroup",
+    "type": "group",
+    "label": "Footer",
+    "importance": "medium",
+    "widget": "showWhen",
+    "showWhen": {
+      "rules": [
+        {
+          "field": "showFooter",
+          "equals": true
+        }
+      ]
+    },
+    "fields": [
+      {
+        "name": "footerPlaceholder",
+        "type": "library",
+        "label": "Footer",
+        "optional": true,
+        "options": [
+          "H5P.PortfolioPlaceholder 0.7"
+        ]
+      },
+      {
+        "name": "dummy",
+        "type": "boolean",
+        "label": "Dummy",
+        "widget": "none"
+      }
+    ]
+  },
+  {
     "name": "portfolio",
     "label": "Portfolio",
     "type": "group",
@@ -131,12 +223,25 @@
               "type": "text",
               "optional": true,
               "widget": "none"
-
             },
             {
               "name": "displayHotspotNavigation",
               "type": "boolean",
               "label": "Display hotspot navigation",
+              "default": true
+            },
+            {
+              "name": "displayHeader",
+              "type": "boolean",
+              "label": "Display header",
+              "importance": "low",
+              "default": true
+            },
+            {
+              "name": "displayFooter",
+              "type": "boolean",
+              "label": "Display footer",
+              "importance": "low",
               "default": true
             },
             {

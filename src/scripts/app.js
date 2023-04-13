@@ -5,6 +5,7 @@ import Cover from './components/cover';
 import StatusBar from './components/statusbar';
 import SideBar from './components/sidebar';
 import PageContent from './components/pagecontent';
+import SinglePlaceholder from './components/single-placeholder/single-placeholder';
 
 import Colors from './services/colors';
 import Chapters from './services/chapters';
@@ -27,6 +28,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
       },
       bookCover: {},
+      showHeader: false,
+      showFooter: false,
       portfolio: {
         chapters: [],
       },
@@ -80,6 +83,35 @@ export default class Portfolio extends H5P.EventDispatcher {
         ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
       ;}`);
     }
+
+    // Header
+    const header = (
+      !this.params.showHeader ||
+      !this.params.headerPlaceholderGroup?.headerPlaceholder
+    ) ?
+      null :
+      new SinglePlaceholder({
+        params: this.params.headerPlaceholderGroup?.headerPlaceholder,
+        contentId: this.contentId,
+        context: this,
+        previousState: {}
+      });
+
+    // Footer
+    const footer = (
+      !this.params.showFooter ||
+      !this.params.footerPlaceholderGroup?.footerPlaceholder
+    ) ?
+      null :
+      new SinglePlaceholder({
+        params: this.params.footerPlaceholderGroup?.footerPlaceholder,
+        contentId: this.contentId,
+        context: this,
+        previousState: {}
+      });
+
+    Chapters.setHeader(header);
+    Chapters.setFooter(footer);
 
     // Fill up chapter service
     Chapters.fill(
@@ -148,14 +180,16 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.hasNoHashListener = true;
     }
 
+    const showCover = this.params.showCoverPage &&
+      typeof this.previousState.currentChapterId !== 'number';
+
     // Initialize the support components
-    if (
-      this.params.showCoverPage &&
-      typeof this.previousState.currentChapterId !== 'number'
-    ) {
+    if (showCover) {
       this.cover = new Cover(
         {
+          headerDOM: header?.getDOM(),
           coverData: this.params.bookCover,
+          footerDOM: footer?.getDOM(),
           contentId: contentId,
           title: extras?.metadata?.title || ''
         },
@@ -170,7 +204,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.pageContent = new PageContent(
       {
         hotspotNavigationGlobals: this.params.hotspotNavigationGlobals,
-        contentId: this.contentId
+        contentId: this.contentId,
+        isCovered: showCover
       },
       {
         onScrollToTop: () => {
@@ -628,7 +663,11 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.$mainWrapper.get(0).removeChild(this.cover.container);
     }
 
+    this.pageContent.setCovered(false);
     this.showElements();
+
+    Chapters.getByIndex(this.currentChapterId).setHeader('original');
+    Chapters.getByIndex(this.currentChapterId).setFooter('original');
 
     this.trigger('resize');
     // This will happen also on retry, but that doesn't matter, since

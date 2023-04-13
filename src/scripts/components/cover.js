@@ -17,6 +17,10 @@ export default class Cover {
     // Container
     this.container = this.buildContainer();
 
+    this.headerDOM = document.createElement('div');
+    this.headerDOM.style.display = 'none';
+    this.container.append(this.headerDOM);
+
     // Visual header
     if (params.coverData?.coverMedium?.params?.file) {
       this.visuals = this.buildVisualsElement(params.coverData.coverMedium);
@@ -38,6 +42,10 @@ export default class Cover {
 
     // Read button
     this.container.appendChild(this.buildReadButton(Dictionary.get('l10n.read')));
+
+    this.footerDOM = document.createElement('div');
+    this.footerDOM.style.display = 'none';
+    this.container.append(this.footerDOM);
   }
 
   /**
@@ -74,6 +82,16 @@ export default class Cover {
    * already.
    */
   initMedia() {
+    if (this.params.coverData.showHeader && this.params.headerDOM) {
+      this.container.replaceChild(this.params.headerDOM, this.headerDOM);
+      this.headerDOM = this.params.headerDOM;
+    }
+
+    if (this.params.coverData.showFooter && this.params.footerDOM) {
+      this.container.replaceChild(this.params.footerDOM, this.footerDOM);
+      this.footerDOM = this.params.footerDOM;
+    }
+
     if (
       !this.visuals ||
       !this.params.coverData?.coverMedium?.params?.file

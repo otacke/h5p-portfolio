@@ -15,6 +15,12 @@
         {
           "label": "Medio de portada",
           "description": "Medio opcional para la introducción."
+        },
+        {
+          "label": "Show header"
+        },
+        {
+          "label": "Show footer"
         }
       ]
     },
@@ -27,20 +33,59 @@
           "description": "Imagen utilizada como fondo para la navegación por puntos de acceso (hotspot)."
         },
         {
-          "label": "Color del punto de acceso (hotspot)"
+          "label": "Color del punto de acceso (hotspot)",
+          "default": "rgba(255, 255, 255, .6)"
         }
       ]
     },
     {
+      "label": "Use header"
+    },
+    {
+      "label": "Header",
       "fields": [
         {
+          "label": "Header"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Use footer"
+    },
+    {
+      "label": "Footer",
+      "fields": [
+        {
+          "label": "Footer"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Portafolios",
+      "fields": [
+        {
+          "label": "Páginas",
+          "entity": "Página",
           "field": {
+            "label": "Capítulo",
             "fields": [
               {
                 "label": "Jerarquía de capítulos"
               },
               {
                 "label": "Mostrar navegación por puntos de acceso (hotspot)"
+              },
+              {
+                "label": "Display header"
+              },
+              {
+                "label": "Display footer"
               },
               {
                 "label": "Proporciona un punto de acceso (hotspot) para este capítulo"
@@ -60,24 +105,21 @@
               {
                 "label": "Capítulo"
               }
-            ],
-            "label": "Capítulo"
-          },
-          "label": "Páginas",
-          "entity": "Página"
+            ]
+          }
         },
         {
           "label": "Maniquí"
         }
-      ],
-      "label": "Portafolios"
+      ]
     },
     {
       "label": "Configuraciones del comportamiento",
       "fields": [
         {
           "label": "Color base",
-          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto."
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto.",
+          "default": "#1768c4"
         },
         {
           "label": "Mostrar tabla de contenidos como predeterminado",

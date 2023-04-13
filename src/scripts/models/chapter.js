@@ -1,4 +1,10 @@
 import Section from './section';
+import HotspotNavigation from '../components/hotspotnavigation/navigation';
+
+/*
+ * TODO: Clean up, so the placeholders for navigation, chapters, etc. can be
+ * reset
+ */
 
 export default class Chapter {
 
@@ -37,8 +43,20 @@ export default class Chapter {
     this.dom = document.createElement('div');
     this.dom.classList.add('h5p-portfolio-chapter-container');
 
-    // If needed, needs to be set when instance is attached
-    this.instanceDOM = null;
+    this.hotspotNavigationDOM = document.createElement('div');
+    this.hotspotNavigationDOM.style.display = 'none';
+    this.dom.append(this.hotspotNavigationDOM);
+
+    this.headerDOM = document.createElement('div');
+    this.headerDOM.style.display = 'none';
+    this.dom.append(this.headerDOM);
+
+    this.chapterDOM = document.createElement('div');
+    this.dom.append(this.chapterDOM);
+
+    this.footerDOM = document.createElement('div');
+    this.footerDOM.style.display = 'none';
+    this.dom.append(this.footerDOM);
   }
 
   /**
@@ -60,30 +78,83 @@ export default class Chapter {
   }
 
   /**
-   * Set DOM.
+   * Set hotspot navigation.
    *
-   * @param {HTMLElement|null} dom Instance DOM.
+   * @param {HotspotNavigation} hotspotNavigation Hotspot Navigation.
    */
-  setInstanceDOM(dom) {
-    if (this.instanceDOM) {
-      this.dom.removeChild(this.instanceDOM);
-    }
-
-    this.instanceDOM = dom;
-    this.dom.appendChild(this.instanceDOM);
-  }
-
   setHotspotNavigation(hotspotNavigation) {
     if (!this.params.displayHotspotNavigation) {
       return; // Chapter should not display hotspot navigation
     }
 
-    if (this.hotspotNavigationDOM) {
-      this.dom.removeChild(this.hotspotNavigationDOM);
+    this.hotspotNavigation = hotspotNavigation;
+    const newHotspotNavigation = this.hotspotNavigation.getDOM();
+    this.dom.replaceChild(newHotspotNavigation, this.hotspotNavigationDOM);
+    this.hotspotNavigationDOM = newHotspotNavigation;
+  }
+
+  /**
+   * Set header.
+   *
+   * `remove` to remove header, `original` to set original placeholder DOM
+   * incl. event listeners, `clone` for clone.
+   *
+   * @param {string} action Action: remove|original|clone.
+   */
+  setHeader(action) {
+    if (!this.params.displayHeader || !this.params.header) {
+      return;
     }
 
-    this.hotspotNavigation = hotspotNavigation;
-    this.dom.appendChild(this.hotspotNavigation.getDOM());
+    let newDOM;
+    if (action === 'remove') {
+      newDOM = document.createElement('div');
+      newDOM.style.display = 'none';
+    }
+    else if (action === 'original') {
+      newDOM = this.params.header.getDOM();
+    }
+    else if (action === 'clone') {
+      newDOM = this.params.header.getDOMClone();
+    }
+    else {
+      return;
+    }
+
+    this.dom.replaceChild(newDOM, this.headerDOM);
+    this.headerDOM = newDOM;
+  }
+
+  /**
+   * Set footer.
+   *
+   * `remove` to remove footer, `original` to set original placeholder DOM
+   * incl. event listeners, `clone` for clone.
+   *
+   * @param {string} action Action: remove|original|clone.
+   */
+  setFooter(action) {
+    if (!this.params.displayFooter || !this.params.footer) {
+      return;
+    }
+
+    let newDOM;
+    if (action === 'remove') {
+      newDOM = document.createElement('div');
+      newDOM.style.display = 'none';
+    }
+    else if (action === 'original') {
+      newDOM = this.params.footer.getDOM();
+    }
+    else if (action === 'clone') {
+      newDOM = this.params.footer.getDOMClone();
+    }
+    else {
+      return;
+    }
+
+    this.dom.replaceChild(newDOM, this.footerDOM);
+    this.footerDOM = newDOM;
   }
 
   /**

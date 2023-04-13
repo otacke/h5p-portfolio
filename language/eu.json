@@ -15,6 +15,12 @@
         {
           "label": "Azalaren multimedia",
           "description": "Sarbidearentzako aukerazko multimedia."
+        },
+        {
+          "label": "Show header"
+        },
+        {
+          "label": "Show footer"
         }
       ]
     },
@@ -27,13 +33,45 @@
           "description": "Image used as background for the hotspot navigation."
         },
         {
-          "label": "Hotspot color"
+          "label": "Hotspot color",
+          "default": "rgba(255, 255, 255, .6)"
         }
       ]
     },
     {
+      "label": "Use header"
+    },
+    {
+      "label": "Header",
       "fields": [
         {
+          "label": "Header"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Use footer"
+    },
+    {
+      "label": "Footer",
+      "fields": [
+        {
+          "label": "Footer"
+        },
+        {
+          "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Portfolio",
+      "fields": [
+        {
+          "label": "Pages",
+          "entity": "Page",
           "field": {
             "label": "Chapter",
             "fields": [
@@ -42,6 +80,12 @@
               },
               {
                 "label": "Display hotspot navigation"
+              },
+              {
+                "label": "Display header"
+              },
+              {
+                "label": "Display footer"
               },
               {
                 "label": "Provide a hotspot for this chapter"
@@ -62,22 +106,20 @@
                 "label": "Chapter"
               }
             ]
-          },
-          "label": "Pages",
-          "entity": "Page"
+          }
         },
         {
           "label": "Dummy"
         }
-      ],
-      "label": "Portfolio"
+      ]
     },
     {
       "label": "Behavioural settings",
       "fields": [
         {
           "label": "Base color",
-          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast."
+          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast.",
+          "default": "#1768c4"
         },
         {
           "label": "Display table of contents as default",
@@ -86,6 +128,7 @@
       ]
     },
     {
+      "label": "User interface",
       "fields": [
         {
           "label": "Translation for \"Read\"",
@@ -119,8 +162,7 @@
           "label": "Exit fullscreen button label",
           "default": "Exit fullscreen"
         }
-      ],
-      "label": "User interface"
+      ]
     },
     {
       "label": "Accessibility texts",

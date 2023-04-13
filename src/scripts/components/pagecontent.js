@@ -21,6 +21,8 @@ export default class PageContent {
 
     this.currentChapterId = params.currentChapterId ?? 0;
 
+    this.isCovered = params.isCovered || false;
+
     this.content = this.buildPageContent();
   }
 
@@ -59,9 +61,6 @@ export default class PageContent {
    */
   buildChapterDOMs() {
     Chapters.get().forEach((chapter) => {
-      const columnNode = document.createElement('div');
-      columnNode.classList.add('h5p-portfolio-chapter');
-      chapter.setInstanceDOM(columnNode);
       chapter.setHotspotNavigation(new HotspotNavigation(
         {
           image: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
@@ -78,6 +77,19 @@ export default class PageContent {
         }
       ));
     });
+  }
+
+  /**
+   * Set covered.
+   *
+   * @param {boolean} covered Covered state.
+   */
+  setCovered(covered) {
+    if (typeof covered !== 'boolean') {
+      return;
+    }
+
+    this.isCovered = covered;
   }
 
   /**
@@ -131,10 +143,14 @@ export default class PageContent {
       return; // Out of bounds
     }
 
+    // TODO: Clean up, don't access chapter directly
+
     // Instantiate and attach chapter contents
     const chapter = Chapters.get(chapterIndex);
     if (!chapter.isInitialized && chapter.instance) {
-      chapter.instance.attach(H5P.jQuery(chapter.dom));
+      chapter.setHeader('clone');
+      chapter.instance.attach(H5P.jQuery(chapter.chapterDOM));
+      chapter.setFooter('clone');
       chapter.isInitialized = true;
     }
   }
@@ -216,6 +232,14 @@ export default class PageContent {
 
     const chapterIdFrom = this.currentChapterId;
     const chapterIdTo = Chapters.findChapterIndex(target.chapter);
+
+    if (!this.isCovered) {
+      // Footer/Header DOM is put in correct chapter and old position gets clone
+      Chapters.getByIndex(chapterIdFrom).setHeader('clone');
+      Chapters.getByIndex(chapterIdFrom).setFooter('clone');
+      Chapters.getByIndex(chapterIdTo).setHeader('original');
+      Chapters.getByIndex(chapterIdTo).setFooter('original');
+    }
 
     if (chapterIdFrom === chapterIdTo) {
       this.scrollTo(target);
