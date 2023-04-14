@@ -17,10 +17,10 @@
           "description": "Medios opcionais para a introdución."
         },
         {
-          "label": "Show header"
+          "label": "Amosar cabeceira"
         },
         {
-          "label": "Show footer"
+          "label": "Amosar pé de páxina"
         }
       ]
     },
@@ -39,13 +39,13 @@
       ]
     },
     {
-      "label": "Use header"
+      "label": "Usar a cabeceira"
     },
     {
-      "label": "Header",
+      "label": "Cabeceira",
       "fields": [
         {
-          "label": "Header"
+          "label": "Cabeceira"
         },
         {
           "label": "Dummy"
@@ -53,13 +53,13 @@
       ]
     },
     {
-      "label": "Use footer"
+      "label": "Usar o pé de páxina"
     },
     {
-      "label": "Footer",
+      "label": "Pé de páxina",
       "fields": [
         {
-          "label": "Footer"
+          "label": "Pé de páxina"
         },
         {
           "label": "Dummy"
@@ -82,10 +82,10 @@
                 "label": "Amosar navegación por puntos de acceso"
               },
               {
-                "label": "Display header"
+                "label": "Amosar cabeceira"
               },
               {
-                "label": "Display footer"
+                "label": "Amosar pé de páxina"
               },
               {
                 "label": "Proporciona un punto de acceso para este capítulo"
