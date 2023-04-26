@@ -1,6 +1,6 @@
 import './hotspot.scss';
 
-import Util from './../../helpers/util';
+import Util from '@services/util';
 import he from 'he';
 
 export default class Hotspot {

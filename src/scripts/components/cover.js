@@ -1,5 +1,6 @@
-import Util from './../helpers/util';
-import Dictionary from './../services/dictionary';
+import Util from '@services/util';
+import Dictionary from '@services/dictionary';
+import '@styles/_cover.scss';
 
 /**
  * @class

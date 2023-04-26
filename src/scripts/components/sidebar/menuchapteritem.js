@@ -1,4 +1,4 @@
-import Util from './../../helpers/util';
+import Util from '@services/util';
 
 export default class MenuChapterItem {
   /**

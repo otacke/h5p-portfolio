@@ -1,5 +1,5 @@
-import Section from './section';
-import HotspotNavigation from '../components/hotspotnavigation/navigation';
+import Section from '@models/section';
+import HotspotNavigation from '@components/hotspotnavigation/navigation';
 
 /*
  * TODO: Clean up, so the placeholders for navigation, chapters, etc. can be

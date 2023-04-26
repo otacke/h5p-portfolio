@@ -1,15 +1,13 @@
-import URLTools from './helpers/urltools';
-import Util from './helpers/util';
-
-import Cover from './components/cover';
-import StatusBar from './components/statusbar';
-import SideBar from './components/sidebar';
-import PageContent from './components/pagecontent';
-import SinglePlaceholder from './components/single-placeholder/single-placeholder';
-
-import Colors from './services/colors';
-import Chapters from './services/chapters';
-import Dictionary from './services/dictionary';
+import Colors from '@services/colors';
+import Chapters from '@services/chapters';
+import Dictionary from '@services/dictionary';
+import URLTools from '@services/urltools';
+import Util from '@services/util';
+import Cover from '@components/cover';
+import StatusBar from '@components/statusbar';
+import SideBar from '@components/sidebar';
+import PageContent from '@components/pagecontent';
+import SinglePlaceholder from '@components/single-placeholder/single-placeholder';
 
 export default class Portfolio extends H5P.EventDispatcher {
   /**

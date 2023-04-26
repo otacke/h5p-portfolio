@@ -1,4 +1,4 @@
-import Content from './content.js';
+import Content from '@models/content.js';
 
 export default class Section {
 

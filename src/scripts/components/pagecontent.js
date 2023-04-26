@@ -1,6 +1,8 @@
-import Util from './../helpers/util';
-import Chapters from './../services/chapters';
-import HotspotNavigation from './hotspotnavigation/navigation';
+import Util from '@services/util';
+import Chapters from '@services/chapters';
+import HotspotNavigation from '@components/hotspotnavigation/navigation';
+import '@styles/_pagecontent.scss';
+import '@styles/_summary.scss';
 
 export default class PageContent {
   /**

@@ -4,9 +4,20 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const mode = process.argv.includes('--mode=production') ?
   'production' : 'development';
+const libraryName = process.env.npm_package_name;
 
 module.exports = {
   mode: mode,
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/scripts/components'),
+      '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
+      '@models': path.resolve(__dirname, 'src/scripts/models'),
+      '@scripts': path.resolve(__dirname, 'src/scripts'),
+      '@services': path.resolve(__dirname, 'src/scripts/services'),
+      '@styles': path.resolve(__dirname, 'src/styles')
+    }
+  },
   optimization: {
     minimize: mode === 'production',
     minimizer: [
@@ -21,17 +32,18 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'h5p-portfolio.css'
+      filename: `${libraryName}.css`
     })
   ],
   entry: {
-    dist: './src/entries/h5p-portfolio.js'
+    dist: './src/entries/dist.js'
   },
   output: {
-    filename: 'h5p-portfolio.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: `${libraryName}.js`,
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
-  target: ['web'],
+  target: ['browserslist'],
   module: {
     rules: [
       {
@@ -56,12 +68,12 @@ module.exports = {
       },
       {
         test: /\.svg|\.jpg|\.png$/,
-        include: path.join(__dirname, 'src/images'),
+        include: path.join(__dirname, 'src/assets/images'),
         type: 'asset/resource'
       },
       {
         test: /\.woff$/,
-        include: path.join(__dirname, 'src/fonts'),
+        include: path.join(__dirname, 'src/assets/fonts'),
         type: 'asset/resource'
       }
     ]
@@ -69,5 +81,5 @@ module.exports = {
   stats: {
     colors: true
   },
-  devtool: (mode === 'prduction') ? undefined : 'eval-cheap-module-source-map'
+  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' })
 };

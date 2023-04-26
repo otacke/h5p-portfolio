@@ -1,3 +1,5 @@
+@import "@styles/main";
+
 .h5p-portfolio-chapter-container {
   display: none;
   left: 0;
@@ -55,29 +57,6 @@
         margin-top: 0;
       }
     }
-  }
-}
-
-.h5p-portfolio-status-progress-marker {
-  align-items: center;
-  border-top: 1px solid $cool-grey;
-  display: flex;
-  padding: 1em 0 0 1em;
-  clear: both;
-  cursor: pointer;
-
-  input {
-    &[type='checkbox'] {
-      transform: scale(1.75);
-      cursor: pointer;
-    }
-  }
-
-  p {
-    color: $mud;
-    font-weight: bold;
-    margin: 0;
-    padding-left: 1em;
   }
 }
 

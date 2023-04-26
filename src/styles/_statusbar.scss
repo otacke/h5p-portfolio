@@ -1,3 +1,5 @@
+@import "@styles/main";
+
 @mixin prefix($property, $value, $prefixes: ()) {
   @each $prefix in $prefixes {
     #{'-' + $prefix + '-' + $property}: $value;
@@ -24,27 +26,23 @@
     height: 3.6em;
     padding: 0;
     width: 3.6em;
-  }
-}
 
-.h5p-portfolio-status-button {
-  border-radius: 3px;
-
-  &:hover {
-    background-color: var(--color-base-10, $base-color-10);
-    background-size: cover;
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: var(--color-base-20, $base-color-20);
-    background-size: cover;
-  }
-
-  &[disabled] {
     &:hover {
-      background-color: transparent;
-      cursor: default;
+      background-color: var(--color-base-10, $base-color-10);
+      background-size: cover;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: var(--color-base-20, $base-color-20);
+      background-size: cover;
+    }
+
+    &[disabled] {
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
     }
   }
 }
@@ -60,7 +58,7 @@
     &::before {
       color: var(--color-base, $base-color);
       content: '\e90b';
-      font-family: 'h5p-book';
+      font-family: 'h5p-book', sans-serif;
       font-size: 1.2em;
     }
   }
@@ -70,7 +68,7 @@
       font-size: 1.2em;
       color: var(--color-base, $base-color);
       content: '\e90c';
-      font-family: 'h5p-book';
+      font-family: 'h5p-book', sans-serif;
     }
   }
 }
@@ -140,7 +138,6 @@
 
 .h5p-portfolio-status-progress-number {
   color: var(--color-base, $base-color);
-  font-family: Arial;
   font-size: 20px;
   font-weight: 700;
   text-align: right;
@@ -149,7 +146,6 @@
 
 .h5p-portfolio-status-progress-divider {
   color: $mud;
-  font-family: Arial;
   font-size: 20px;
   font-weight: 700;
   text-align: right;
@@ -176,7 +172,6 @@
 
   .title {
     color: $mud;
-    font-family: Arial;
     font-size: 20px;
     font-weight: 700;
     margin: 0;

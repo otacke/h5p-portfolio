@@ -1,8 +1,9 @@
-import Util from './../helpers/util';
-import Chapters from './../services/chapters';
-import Chapter from './../models/chapter';
-import Title from './sidebar/title';
-import MenuChapterItem from './sidebar/menuchapteritem';
+import Util from '@services/util';
+import Chapters from '@services/chapters';
+import Chapter from '@models/chapter';
+import Title from '@components/sidebar/title';
+import MenuChapterItem from '@components/sidebar/menuchapteritem';
+import '@styles/_navigationbar.scss';
 
 /**
  * @class

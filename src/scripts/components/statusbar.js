@@ -1,6 +1,7 @@
-import Util from './../helpers/util';
-import Dictionary from './../services/dictionary';
-import Chapters from './../services/chapters';
+import Util from '@services/util';
+import Dictionary from '@services/dictionary';
+import Chapters from '@services/chapters';
+import '@styles/_statusbar.scss';
 
 /**
  * @class

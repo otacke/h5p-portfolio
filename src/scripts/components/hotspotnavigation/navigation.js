@@ -1,7 +1,7 @@
 import './navigation.scss';
 
-import Util from './../../helpers/util';
-import Chapters from './../../services/chapters';
+import Util from '@services/util';
+import Chapters from '@services/chapters';
 import Hotspot from './hotspot';
 
 export default class HotspotNavigation {

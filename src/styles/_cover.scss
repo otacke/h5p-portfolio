@@ -1,9 +1,10 @@
+@import "@styles/main";
+
 .h5p-portfolio-cover {
   align-items: center;
   background: $background-color;
   display: flex;
   flex-direction: column;
-  font-family: Arial;
   height: 100%;
   left: 0;
   padding-bottom: 200px;
@@ -99,7 +100,6 @@
     border-radius: 3px;
     color: var(--color-text, $background-color);
     cursor: pointer;
-    font-family: Arial;
     font-size: 20px;
     font-weight: 400;
     padding: 10px 40px;
