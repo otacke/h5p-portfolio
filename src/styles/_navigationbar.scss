@@ -133,55 +133,6 @@
   width: 100%;
   position: relative;
 
-  &.h5p-portfolio-navigation-chapter-content {
-    border-bottom: none;
-    height: 1.75em;
-
-    .h5p-portfolio-navigation-chapter-title-text {
-      font-size: 0.85em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-weight: normal;
-
-      &:hover {
-        color: var(--color-base, $base-color);
-        cursor: pointer;
-      }
-    }
-  }
-
-  &.level-1 {
-    padding-left: 1.125em;
-  }
-
-  &.level-2 {
-    padding-left: 2.125em;
-  }
-
-  &.level-3 {
-    padding-left: 3.125em;
-  }
-
-  &.level-4 {
-    padding-left: 4.125em;
-  }
-
-  &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
-    background-color: var(--color-base-10, $base-color-10);
-    // border-bottom-color: white;
-
-    .h5p-portfolio-navigation-chapter-title-text {
-      color: var(--color-base, $base-color);
-      text-decoration: none solid var(--color-base, $base-color);
-    }
-  }
-
-  &:hover:not(.h5p-portfolio-navigation-chapter-content) {
-    background-color: var(--color-base-5, $base-color-5);
-    cursor: pointer;
-  }
-
   .h5p-portfolio-navigation-chapter-title-text {
     background-color: transparent;
     color: $mud;
@@ -231,6 +182,55 @@
     position: absolute;
     right: 15px;
     top: 17px;
+  }
+
+  &.h5p-portfolio-navigation-chapter-content {
+    border-bottom: none;
+    height: 1.75em;
+
+    .h5p-portfolio-navigation-chapter-title-text {
+      font-size: 0.85em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: normal;
+
+      &:hover {
+        color: var(--color-base, $base-color);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.level-1 {
+    padding-left: 1.125em;
+  }
+
+  &.level-2 {
+    padding-left: 2.125em;
+  }
+
+  &.level-3 {
+    padding-left: 3.125em;
+  }
+
+  &.level-4 {
+    padding-left: 4.125em;
+  }
+
+  &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
+    background-color: var(--color-base-10, $base-color-10);
+    // border-bottom-color: white;
+
+    .h5p-portfolio-navigation-chapter-title-text {
+      color: var(--color-base, $base-color);
+      text-decoration: none solid var(--color-base, $base-color);
+    }
+  }
+
+  &:hover:not(.h5p-portfolio-navigation-chapter-content) {
+    background-color: var(--color-base-5, $base-color-5);
+    cursor: pointer;
   }
 
   &:not(.h5p-portfolio-navigation-chapter-content):active {

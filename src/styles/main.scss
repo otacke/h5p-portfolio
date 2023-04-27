@@ -73,18 +73,18 @@ $fullscreen-button-size: 1.8em;
   ::-webkit-scrollbar-thumb:hover {
     background: $scrollbar;
   }
-}
 
-.h5p-portfolio-main {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
+  .h5p-portfolio-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
 
-  &.h5p-portfolio-navigation-open {
+    &.h5p-portfolio-navigation-open {
 
-    .h5p-portfolio-navigation {
-      max-width: 16.563em;
-      width: 16.563em;
+      .h5p-portfolio-navigation {
+        max-width: 16.563em;
+        width: 16.563em;
+      }
     }
   }
 }
@@ -109,29 +109,29 @@ $fullscreen-button-size: 1.8em;
       width: 100%;
       left: 0;
     }
-  }
 
-  .h5p-portfolio-main {
-    flex: 1;
-    overflow: auto;
-
-    .h5p-portfolio-content {
-      overflow-x: hidden;
-      overflow-y: auto;
-      // Note: Subtracts padding, do not use box-sizing because then inner div
-      // will have too little space
-      min-height: calc(100% - 5.5em);
-    }
-  }
-
-  .h5p-portfolio-navigation {
-    display: flex;
-    flex-direction: column;
-
-    .navigation-list {
+    .h5p-portfolio-main {
       flex: 1;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: auto;
+
+      .h5p-portfolio-content {
+        overflow-x: hidden;
+        overflow-y: auto;
+        // Note: Subtracts padding, do not use box-sizing because then inner div
+        // will have too little space
+        min-height: calc(100% - 5.5em);
+      }
+
+      .h5p-portfolio-navigation {
+        display: flex;
+        flex-direction: column;
+
+        .navigation-list {
+          flex: 1;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
     }
   }
 }
