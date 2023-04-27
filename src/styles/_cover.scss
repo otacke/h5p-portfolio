@@ -121,6 +121,10 @@
       outline-style: double;
     }
   }
+
+  &.display-none {
+    display: none;
+  }
 }
 
 .h5p-container {

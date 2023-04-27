@@ -374,6 +374,14 @@ export default class Portfolio extends H5P.EventDispatcher {
   }
 
   /**
+   * Get cover DOM.
+   * @returns {HTMLElement} Cover DOM.
+   */
+  getCoverDOM() {
+    return this.cover?.getDOM();
+  }
+
+  /**
    * Move to.
    * @param {object} [params={}] Parameters.
    */
@@ -641,8 +649,10 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Handle cover removed.
+   * @param {object} [params={}] Parameters.
+   * @param {boolean} [params.skipFocus] If true, skip setting focus.
    */
-  handleCoverRemoved() {
+  handleCoverRemoved(params = {}) {
     this.$mainWrapper.get(0).classList.remove('covered');
     if (this.cover) {
       this.$mainWrapper.get(0).removeChild(this.cover.container);
@@ -660,7 +670,9 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.setActivityStarted();
 
     // Focus header progress bar when cover is removed
-    this.statusBarHeader.progressBar.progress.focus();
+    if (!params.skipFocus) {
+      this.statusBarHeader.progressBar.progress.focus();
+    }
   }
 
   /**

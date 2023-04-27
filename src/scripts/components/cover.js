@@ -50,6 +50,14 @@ export default class Cover {
   }
 
   /**
+   * Get DOM.
+   * @returns {HTMLElement} Cover DOM.
+   */
+  getDOM() {
+    return this.container;
+  }
+
+  /**
    * Create the top level element.
    * @returns {HTMLElement} Cover.
    */

@@ -10,7 +10,7 @@
   {
     "name": "bookCover",
     "type": "group",
-    "label": "Cover Page",
+    "label": "Cover page",
     "importance": "medium",
     "widget": "showWhen",
     "showWhen": {

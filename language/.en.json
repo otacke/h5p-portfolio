@@ -5,7 +5,7 @@
       "description": "A cover that shows info regarding the portfolio before access."
     },
     {
-      "label": "Cover Page",
+      "label": "Cover page",
       "fields": [
         {
           "label": "Cover description",
