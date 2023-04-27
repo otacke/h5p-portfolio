@@ -2,7 +2,6 @@
 export default class URLTools {
   /**
    * Extract fragments from browser URL.
-   *
    * @param {function} validate Validation function.
    * @param {Window} hashWindow Window.
    * @returns {object} Fragments.
@@ -33,7 +32,6 @@ export default class URLTools {
 
   /**
    * Create fragments string from fragments object.
-   *
    * @param {object} fragments Fragments.
    * @returns {string} Fragments string.
    */
@@ -48,7 +46,6 @@ export default class URLTools {
 
   /**
    * Determine whether two fragment objects are equal.
-   *
    * @param {object} fragment1 Fragment 1.
    * @param {object} fragment2 Fragment 2.
    * @param {string[]} [limitTo] Keys to limit equality check to.

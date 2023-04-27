@@ -304,7 +304,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Attach library to wrapper.
-   *
    * @param {H5P.jQuery} $wrapper Wrapping element.
    */
   attach($wrapper) {
@@ -376,7 +375,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Move to.
-   *
    * @param {object} [params={}] Parameters.
    */
   moveTo(params = {}) {
@@ -429,7 +427,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Change the current active chapter.
-   *
    * @param {object} target Target.
    */
   moveToChapter(target) {
@@ -446,7 +443,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Add listener for hash changes to specified window.
-   *
    * @param {HTMLElement} hashWindow Window to listen on.
    */
   addHashListener(hashWindow) {
@@ -540,7 +536,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Change URL hash.
-   *
    * @param {object} params Parameters.
    */
   changeHash(params) {
@@ -559,7 +554,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Check if there's a cover.
-   *
    * @returns {boolean} True, if there's a cover.
    */
   hasCover() {
@@ -568,7 +562,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Set number of active chapter.
-   *
    * @param {number} chapterId Number of active chapter.
    */
   handleChapterChanged(chapterId) {
@@ -582,7 +575,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Validate fragments.
-   *
    * @param {object} fragments Fragments object from URL.
    * @returns {boolean} True, if fragments are valid.
    */
@@ -593,7 +585,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Bubble events from child to parent.
-   *
    * @param {object} origin Origin of event.
    * @param {string} eventName Name of event.
    * @param {object} target Target to trigger event on.
@@ -613,7 +604,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Check if menu is open.
-   *
    * @returns {boolean} True, if menu is open, else false.
    */
   isMenuOpen() {
@@ -622,7 +612,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Detect if wrapper is a small surface.
-   *
    * @returns {boolean} True, if wrapper is a small surface.
    */
   isSmallSurface() {
@@ -631,7 +620,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Check if the content height exceeds the window.
-   *
    * @returns {boolean} True if footer should be hidden.
    */
   shouldFooterBeHidden() {
@@ -642,7 +630,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Display book cover.
-   *
    * @param {HTMLElement} $wrapper Wrapper.
    */
   displayCover($wrapper) {
@@ -696,7 +683,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Check if result has been submitted or input has been given.
-   *
    * @returns {boolean} True, if answer was given.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
@@ -712,7 +698,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get latest score.
-   *
    * @returns {number} Latest score.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
@@ -732,7 +717,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get maximum possible score.
-   *
    * @returns {number} Score necessary for mastering.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
@@ -751,7 +735,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Show solutions.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   showSolutions() {
@@ -770,7 +753,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Reset task.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   resetTask() {
@@ -805,7 +787,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get xAPI data.
-   *
    * @returns {object} xAPI statement.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
@@ -829,7 +810,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get xAPI data from sub content types.
-   *
    * @param {H5P.ContentType[]} instances H5P instances.
    * @returns {object[]} xAPI data objects used to build a report.
    */
@@ -841,7 +821,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Add question itself to the definition part of an xAPIEvent.
-   *
    * @param {H5P.XAPIEvent} xAPIEvent XAPI event.
    */
   addQuestionToXAPI(xAPIEvent) {
@@ -851,7 +830,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Generate xAPI object definition used in xAPI statements.
-   *
    * @returns {object} xAPI definition.
    */
   getxAPIDefinition() {
@@ -864,7 +842,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Answer call to return the current state.
-   *
    * @returns {object} Current state.
    */
   getCurrentState() {
@@ -878,7 +855,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get chapters' information.
-   *
    * @param {number} [chapterId=null] Optional id of specific chapter.
    * @returns {object[]|object} Chapter information.
    */
@@ -896,7 +872,6 @@ export default class Portfolio extends H5P.EventDispatcher {
   /**
    * Get context data.
    * Contract used for confusion report.
-   *
    * @returns {object} Context data.
    */
   getContext() {

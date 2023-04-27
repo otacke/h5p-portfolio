@@ -29,7 +29,6 @@ export default class PageContent {
 
   /**
    * Get DOM.
-   *
    * @returns {HTMLElement} DOM.
    */
   getDOM() {
@@ -38,7 +37,6 @@ export default class PageContent {
 
   /**
    * Build page content.
-   *
    * @returns {HTMLElement} Page content.
    */
   buildPageContent() {
@@ -82,7 +80,6 @@ export default class PageContent {
 
   /**
    * Set covered.
-   *
    * @param {boolean} covered Covered state.
    */
   setCovered(covered) {
@@ -109,7 +106,6 @@ export default class PageContent {
 
   /**
    * Set chapter order in DOM.
-   *
    * @param {number} currentId Current chapter's id.
    */
   setChapterOrder(currentId) {
@@ -126,7 +122,6 @@ export default class PageContent {
 
   /**
    * Preload current chapter and the next one
-   *
    * @param {number} chapterIndex Chapter index.
    */
   preloadChapter(chapterIndex) {
@@ -136,7 +131,6 @@ export default class PageContent {
 
   /**
    * Initialize chapter.
-   *
    * @param {number} chapterIndex Chapter index.
    */
   initializeChapter(chapterIndex) {
@@ -158,7 +152,6 @@ export default class PageContent {
 
   /**
    * Get container height.
-   *
    * @returns {number} Height.
    */
   getHeight() {
@@ -167,7 +160,6 @@ export default class PageContent {
 
   /**
    * Set container height.
-   *
    * @param {number} height Height.
    */
   setHeight(height) {
@@ -180,7 +172,6 @@ export default class PageContent {
 
   /**
    * Scroll to target.
-   *
    * @param {object} target Target.
    */
   scrollTo(target) {
@@ -223,7 +214,6 @@ export default class PageContent {
 
   /**
    * Change chapter.
-   *
    * @param {object} target Target.
    */
   moveToChapter(target) {
@@ -257,7 +247,6 @@ export default class PageContent {
 
   /**
    * Animate chapter transition.
-   *
    * @param {number} chapterIdFrom Chapter from.
    * @param {number} chapterIdTo Chapter to.
    * @param {object} [targetOnPage] Optional target in chapter to scroll to.
@@ -316,7 +305,6 @@ export default class PageContent {
 
   /**
    * Determine whether page is animating.
-   *
    * @returns {boolean} True, if is animating.
    */
   isAnimating() {
@@ -336,7 +324,6 @@ export default class PageContent {
 
   /**
    * Add footer.
-   *
    * @param {HTMLElement} footer Footer.
    */
   addFooter(footer) {

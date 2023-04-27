@@ -72,7 +72,6 @@ export default class StatusBar {
 
   /**
    * Add progress bar.
-   *
    * @returns {object} Progress bar elements.
    */
   buildProgressBar() {
@@ -89,7 +88,6 @@ export default class StatusBar {
 
   /**
    * Build menu toggle button.
-   *
    * @returns {HTMLElement} Menu toggle button.
    */
   buildMenuToggleButton() {
@@ -112,7 +110,6 @@ export default class StatusBar {
 
   /**
    * Create button to scroll to top with.
-   *
    * @returns {HTMLElement} Button.
    */
   buildToTopButton() {
@@ -137,7 +134,6 @@ export default class StatusBar {
 
   /**
    * Create chapter title.
-   *
    * @returns {object} Chapter title elements.
    */
   buildChapterTitle() {
@@ -153,7 +149,6 @@ export default class StatusBar {
 
   /**
    * Add a status-button which shows current and total chapters.
-   *
    * @returns {object} Progress elements.
    */
   buildProgressIndicator() {
@@ -196,7 +191,6 @@ export default class StatusBar {
 
   /**
    * Create navigation buttons.
-   *
    * @returns {object} Navigation buttons.
    */
   buildNavigationButtons() {
@@ -223,7 +217,6 @@ export default class StatusBar {
 
   /**
    * Create navigation button.
-   *
    * @param {object} params Parameters.
    * @param {function} params.onClicked Click handler.
    * @param {string} params.icon CSS class name for icon.
@@ -250,7 +243,6 @@ export default class StatusBar {
 
   /**
    * Build fullscreen button.
-   *
    * @returns {HTMLElement} Fullscreen button.
    */
   buildFullScreenButton() {
@@ -283,7 +275,6 @@ export default class StatusBar {
 
   /**
    * Update status bar.
-   *
    * @param {object} params Parameters.
    * @param {number} params.chapterId Chapter index + 1.
    * @param {string} params.title Chapter title.
@@ -309,7 +300,6 @@ export default class StatusBar {
 
   /**
    * Update progress bar.
-   *
    * @param {number} chapterId Chapter index.
    */
   updateProgressBar(chapterId) {
@@ -341,7 +331,6 @@ export default class StatusBar {
 
   /**
    * Enable button.
-   *
    * @param {string} id Button id.
    */
   enableButton(id) {
@@ -355,7 +344,6 @@ export default class StatusBar {
 
   /**
    * Disable button.
-   *
    * @param {string} id Button id.
    */
   disableButton(id) {
@@ -369,7 +357,6 @@ export default class StatusBar {
 
   /**
    * Set button state.
-   *
    * @param {string} id Button id.
    * @param {object} status Status.
    */
@@ -384,7 +371,6 @@ export default class StatusBar {
 
   /**
    * Set fullscreen state.
-   *
    * @param {boolean} state If true, enter fullscreen, else exit fullscreen.
    */
   setFullScreen(state) {
@@ -418,7 +404,6 @@ export default class StatusBar {
 
   /**
    * Toggle menu.
-   *
    * @param {boolean} [state] True for open, false for closed or toggle.
    * @returns {boolean} Resulting state.
    */
@@ -439,7 +424,6 @@ export default class StatusBar {
 
   /**
    * Check if menu is active/open.
-   *
    * @returns {boolean} True, if open, else false.
    */
   isMenuOpen() {

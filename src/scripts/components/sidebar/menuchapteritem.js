@@ -79,7 +79,6 @@ export default class MenuChapterItem {
 
   /**
    * Get DOM.
-   *
    * @returns {HTMLElement} DOM.
    */
   getDOM() {
@@ -88,7 +87,6 @@ export default class MenuChapterItem {
 
   /**
    * Add CSS class.
-   *
    * @param {string} className Class name.
    */
   addClass(className) {
@@ -97,7 +95,6 @@ export default class MenuChapterItem {
 
   /**
    * Remove CSS class.
-   *
    * @param {string} className Class name.
    */
   removeClass(className) {
@@ -106,7 +103,6 @@ export default class MenuChapterItem {
 
   /**
    * Determine whether item is expanded.
-   *
    * @returns {boolean} True, if expanded, else false.
    */
   isExpanded() {
@@ -115,7 +111,6 @@ export default class MenuChapterItem {
 
   /**
    * Determine whether item is hidden.
-   *
    * @returns {boolean} True, if hidden, else false.
    */
   isHidden() {

@@ -3,14 +3,12 @@ import '@styles/_color_overrides.scss';
 
 /**
  * Color class.
- *
  * @class
  */
 export default class Colors {
 
   /**
    * Set new base color.
-   *
    * @param {string} color RGB color code in hex: #rrggbb.
    */
   static setBase(color) {
@@ -35,7 +33,6 @@ export default class Colors {
 
   /**
    * Get color.
-   *
    * @param {Color} color Base color.
    * @param {object} [params={}] Parameters.
    * @param {number} [params.opacity] Opacity value assuming white background.
@@ -68,7 +65,6 @@ export default class Colors {
 
   /**
    * Check whether color is default base color.
-   *
    * @param {string} color RGB color code in hex: #rrggbb.
    * @returns {boolean} True, if color is default base color, else false.
    */
@@ -79,7 +75,6 @@ export default class Colors {
   /**
    * Compute contrast color to given color.
    * Tries to get contrast ratio of at least 4.5.
-   *
    * @see https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-description
    * @param {Color} baseColor Color to compute contrast color for.
    * @param {Color} comparisonColor Color that the base color is compared to.
@@ -107,7 +102,6 @@ export default class Colors {
 
   /**
    * Get CSS override for content type.
-   *
    * @param {string} machineName content types machine name.
    * @returns {string} CSS override for content type.
    */
@@ -123,7 +117,6 @@ export default class Colors {
    * Get CSS overrides.
    * Color values are set in SCSS including pseudo elements, so we need to
    * override CSS.
-   *
    * @returns {string} CSS overrides.
    */
   static getCSS() {
@@ -144,7 +137,6 @@ export default class Colors {
 
   /**
    * Add custom CSS property.
-   *
    * @param {string} css CSS.
    */
   static addCustomCSSProperty(css) {

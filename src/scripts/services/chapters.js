@@ -5,7 +5,6 @@ export default class Chapters {
 
   /**
    * Fill chapters with chapters.
-   *
    * @param {object} params Parameters.
    * @param {number} contentId ContentId.
    * @param {object} [extras={}] Extras.
@@ -23,7 +22,6 @@ export default class Chapters {
    * Parameter undefined: all chapters.
    * Parameter number: get by index.
    * Parameter string: get by subContentId.
-   *
    * @param {undefined|string|number} param Parameter.
    * @returns {Chapter|Chapter[]} Chapter|Chapters.
    */
@@ -44,7 +42,6 @@ export default class Chapters {
 
   /**
    * Get all chapters.
-   *
    * @returns {Chapter[]} Chapters.
    */
   static getAll() {
@@ -53,7 +50,6 @@ export default class Chapters {
 
   /**
    * Get chapter by index.
-   *
    * @param {number} index Chapter index.
    * @returns {Chapter} Chapter.
    */
@@ -69,7 +65,6 @@ export default class Chapters {
 
   /**
    * Get chapter by subContentId.
-   *
    * @param {string} subContentId SubContentId.
    * @returns {Chapter} Chapter.
    */
@@ -85,7 +80,6 @@ export default class Chapters {
 
   /**
    * Find content by subContentId.
-   *
    * @param {string} subContentId SubContentId.
    * @returns {object|null} Content element.
    */
@@ -111,7 +105,6 @@ export default class Chapters {
 
   /**
    * Find chapter index.
-   *
    * @param {string} subContentId Chapter subContentId.
    * @returns {number|null} Chapter index.
    */
@@ -133,7 +126,6 @@ export default class Chapters {
 
   /**
    * Set header.
-   *
    * @param {SinglePlaceholder} header Header.
    */
   static setHeader(header) {
@@ -142,7 +134,6 @@ export default class Chapters {
 
   /**
    * Get header.
-   *
    * @returns {SinglePlaceholder} Header.
    */
   static getHeader() {
@@ -151,7 +142,6 @@ export default class Chapters {
 
   /**
    * Set footer.
-   *
    * @param {SinglePlaceholder} footer Footer.
    */
   static setFooter(footer) {
@@ -160,7 +150,6 @@ export default class Chapters {
 
   /**
    * Get footer.
-   *
    * @returns {SinglePlaceholder} Footer.
    */
   static getFooter() {
@@ -169,7 +158,6 @@ export default class Chapters {
 
   /**
    * Sanitize parameters.
-   *
    * @param {object[]} params Semantics parameters for chapters.
    * @returns {object} Sanitized parameters for chapters.
    */
@@ -230,7 +218,6 @@ export default class Chapters {
 
   /**
    * Build chapters.
-   *
    * @param {object[]} params Semantics parameters for chapters.
    * @param {number} contentId Content id.
    * @param {object} [extras={}] Extras.

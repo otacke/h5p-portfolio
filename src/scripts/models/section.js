@@ -30,7 +30,6 @@ export default class Section {
 
   /**
    * Get section instance.
-   *
    * @returns {H5P.ContentType} H5P content type instance.
    */
   getInstance() {
@@ -39,7 +38,6 @@ export default class Section {
 
   /**
    * Get contents.
-   *
    * @returns {H5P.ContentType[]} Contents of section.
    */
   getContents() {
@@ -48,7 +46,6 @@ export default class Section {
 
   /**
    * Get section title.
-   *
    * @returns {string} Section title.
    */
   getTitle() {
@@ -61,7 +58,6 @@ export default class Section {
 
   /**
    * Get semantics values.
-   *
    * @returns {object} Semantics values.
    */
   getSemantics() {
@@ -70,7 +66,6 @@ export default class Section {
 
   /**
    * Get subContentId.
-   *
    * @returns {string} SubContentId.
    */
   getSubContentId() {

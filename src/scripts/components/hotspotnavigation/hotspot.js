@@ -38,7 +38,6 @@ export default class Hotspot {
 
   /**
    * Get hotspot DOM.
-   *
    * @returns {HTMLElement} Hotspot DOM.
    */
   getDOM() {
@@ -47,7 +46,6 @@ export default class Hotspot {
 
   /**
    * Handle click on hotspot.
-   *
    * @param {Event} event Mouse event.
    */
   handleClicked(event) {

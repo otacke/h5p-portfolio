@@ -61,7 +61,6 @@ export default class Chapter {
 
   /**
    * Get chapter instance.
-   *
    * @returns {H5P.ContentType} H5P instance of chapter.
    */
   getInstance() {
@@ -70,7 +69,6 @@ export default class Chapter {
 
   /**
    * Get DOM.
-   *
    * @returns {HTMLElement|null} Instance DOM.
    */
   getDOM() {
@@ -79,7 +77,6 @@ export default class Chapter {
 
   /**
    * Set hotspot navigation.
-   *
    * @param {HotspotNavigation} hotspotNavigation Hotspot Navigation.
    */
   setHotspotNavigation(hotspotNavigation) {
@@ -98,7 +95,6 @@ export default class Chapter {
    *
    * `remove` to remove header, `original` to set original placeholder DOM
    * incl. event listeners, `clone` for clone.
-   *
    * @param {string} action Action: remove|original|clone.
    */
   setHeader(action) {
@@ -130,7 +126,6 @@ export default class Chapter {
    *
    * `remove` to remove footer, `original` to set original placeholder DOM
    * incl. event listeners, `clone` for clone.
-   *
    * @param {string} action Action: remove|original|clone.
    */
   setFooter(action) {
@@ -173,7 +168,6 @@ export default class Chapter {
 
   /**
    * Add position.
-   *
    * @param {string} position From previous|current|next.
    * @param {boolean} [state] Forced state to toggle to.
    */
@@ -191,7 +185,6 @@ export default class Chapter {
 
   /**
    * Get id.
-   *
    * @returns {string} Hierachy.
    */
   getHierarchy() {
@@ -200,7 +193,6 @@ export default class Chapter {
 
   /**
    * Get sections.
-   *
    * @returns {object[]} Sections.
    */
   getSections() {
@@ -209,7 +201,6 @@ export default class Chapter {
 
   /**
    * Get section.
-   *
    * @param {number} index Section index.
    * @returns {Section} Section.
    */
@@ -226,7 +217,6 @@ export default class Chapter {
 
   /**
    * Get title.
-   *
    * @returns {string} Chapter title.
    */
   getTitle() {
@@ -235,7 +225,6 @@ export default class Chapter {
 
   /**
    * Get subContentId.
-   *
    * @returns {string} SubContentId.
    */
   getSubContentId() {

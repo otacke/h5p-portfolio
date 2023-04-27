@@ -51,7 +51,6 @@ export default class Cover {
 
   /**
    * Create the top level element.
-   *
    * @returns {HTMLElement} Cover.
    */
   buildContainer() {
@@ -62,7 +61,6 @@ export default class Cover {
 
   /**
    * Create an element which contains both the cover image and a background bar.
-   *
    * @param {object} [params={}] Parameters.
    * @returns {HTMLElement} Visual stuff for cover.
    */
@@ -128,7 +126,6 @@ export default class Cover {
 
   /**
    * Build element responsible for the bar behind medium.
-   *
    * @returns {HTMLElement} Horizontal bar in the background.
    */
   buildCoverBar() {
@@ -139,7 +136,6 @@ export default class Cover {
 
   /**
    * Build title.
-   *
    * @param {string} titleText Text for title element.
    * @returns {HTMLElement} Title element.
    */
@@ -156,7 +152,6 @@ export default class Cover {
 
   /**
    * Build description.
-   *
    * @param {string} descriptionText Text for description element.
    * @returns {HTMLElement} Description element.
    */
@@ -174,7 +169,6 @@ export default class Cover {
 
   /**
    * Build read button.
-   *
    * @param {string} buttonText Button text.
    * @returns {HTMLElement} Read button element.
    */
@@ -194,7 +188,6 @@ export default class Cover {
 
   /**
    * Determine whether cover is hidden.
-   *
    * @returns {boolean} True, if cover is hidden.
    */
   isHidden() {

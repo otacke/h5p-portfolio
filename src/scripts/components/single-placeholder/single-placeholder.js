@@ -36,7 +36,6 @@ export default class SinglePlaceholder {
 
   /**
    * Get instance container.
-   *
    * @returns {HTMLElement} Instance container.
    */
   getDOM() {
@@ -45,7 +44,6 @@ export default class SinglePlaceholder {
 
   /**
    * Get dead clone of instance container.
-   *
    * @returns {HTMLElement} Clone of instance container.
    */
   getDOMClone() {
@@ -64,7 +62,6 @@ export default class SinglePlaceholder {
 
   /**
    * Make it easy to bubble events from parent to children.
-   *
    * @param {object} origin Origin of the event.
    * @param {string} eventName Name of the event.
    * @param {object[]} targets Targets to trigger event on.
@@ -83,7 +80,6 @@ export default class SinglePlaceholder {
 
   /**
    * Make it easy to bubble events from child to parent.
-   *
    * @param {object} origin Origin of event.
    * @param {string} eventName Name of event.
    * @param {object} target Target to trigger event on.

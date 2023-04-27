@@ -22,7 +22,6 @@ export default class Title {
 
   /**
    * Get DOM.
-   *
    * @returns {HTMLElement} DOM.
    */
   getDOM() {
