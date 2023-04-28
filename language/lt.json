@@ -13,8 +13,8 @@
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
-          "label": "Vir6elio aplinka",
-          "description": "Papildoma aplinka įžangai"
+          "label": "Viršelio aplinka",
+          "description": "Papildoma aplinka įžangai."
         },
         {
           "label": "Show header"
@@ -39,30 +39,30 @@
       ]
     },
     {
-      "label": "Use header"
+      "label": "Naudoti antraštę"
     },
     {
-      "label": "Header",
+      "label": "Antraštė",
       "fields": [
         {
-          "label": "Header"
+          "label": "Antraštė"
         },
         {
-          "label": "Dummy"
+          "label": "Maketas"
         }
       ]
     },
     {
-      "label": "Use footer"
+      "label": "Naudoti poraštę"
     },
     {
-      "label": "Footer",
+      "label": "Poraštė",
       "fields": [
         {
-          "label": "Footer"
+          "label": "Poraštė"
         },
         {
-          "label": "Dummy"
+          "label": "Maketas"
         }
       ]
     },
