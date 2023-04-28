@@ -5,7 +5,7 @@
       "description": "Una portada que muestra información sobre el portafolios antes de acceder a él."
     },
     {
-      "label": "Página de Portada",
+      "label": "Página de portada",
       "fields": [
         {
           "label": "Descripción de la portada",
