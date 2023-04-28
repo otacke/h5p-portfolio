@@ -1,0 +1,182 @@
+{
+  "semantics": [
+    {
+      "label": "Habilitar portada de portafolios",
+      "description": "Una portada que muestra información sobre el portafolios antes de acceder a él."
+    },
+    {
+      "label": "Página de portada",
+      "fields": [
+        {
+          "label": "Descripción de la portada",
+          "description": "Este texto será la descripción de su portafolios.",
+          "default": "<p style=\"text-align: center;\"></p>"
+        },
+        {
+          "label": "Medio de portada",
+          "description": "Medio opcional para la introducción."
+        },
+        {
+          "label": "Mostrar encabezado"
+        },
+        {
+          "label": "Mostrar pie de página"
+        }
+      ]
+    },
+    {
+      "label": "Navegación de puntos de acceso",
+      "description": "Establece valores globales para la navegación por puntos de acceso.",
+      "fields": [
+        {
+          "label": "Imagen para navegación por puntos de acceso",
+          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso."
+        },
+        {
+          "label": "Color del punto de acceso",
+          "default": "rgba(255, 255, 255, .6)"
+        }
+      ]
+    },
+    {
+      "label": "Usar encabezado"
+    },
+    {
+      "fields": [
+        {
+          "label": "Encabezado"
+        },
+        {
+          "label": "Maniquí"
+        }
+      ],
+      "label": "Encabezado"
+    },
+    {
+      "label": "Usar pie de página"
+    },
+    {
+      "label": "Pie de página",
+      "fields": [
+        {
+          "label": "Pie de página"
+        },
+        {
+          "label": "Maniquí"
+        }
+      ]
+    },
+    {
+      "fields": [
+        {
+          "entity": "Página",
+          "label": "Páginas",
+          "field": {
+            "label": "Capítulo",
+            "fields": [
+              {
+                "label": "Jerarquía de capítulos"
+              },
+              {
+                "label": "Mostrar navegación por puntos de acceso"
+              },
+              {
+                "label": "Mostrar encabezado"
+              },
+              {
+                "label": "Mostrar pie de página"
+              },
+              {
+                "label": "Proporciona un punto de acceso para este capítulo"
+              },
+              {
+                "label": "Navegación por puntos de acceso",
+                "fields": [
+                  {
+                    "label": "Posición del punto de acceso",
+                    "description": "Hacer clic en la imagen en miniatura para colocar el punto de acceso."
+                  },
+                  {
+                    "label": "Título del punto de acceso"
+                  }
+                ]
+              },
+              {
+                "label": "Capítulo"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Maniquí"
+        }
+      ],
+      "label": "Portafolios"
+    },
+    {
+      "label": "Configuraciones del comportamiento",
+      "fields": [
+        {
+          "label": "Color base",
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrese de establecer un contraste suficientemente alto.",
+          "default": "#1768c4"
+        },
+        {
+          "label": "Mostrar tabla de contenidos de forma predeterminada",
+          "description": "Cuando se habilita, la tabla de contenido se muestra al abrir el portafolios."
+        }
+      ]
+    },
+    {
+      "label": "Interfaz del usuario",
+      "fields": [
+        {
+          "label": "Traducción para \"Leer\"",
+          "default": "Leer"
+        },
+        {
+          "label": "Traducción para \"Mostrar tabla de contenidos'\"",
+          "default": "Mostrar 'Tabla de contenidos'"
+        },
+        {
+          "label": "Traducción para \"Ocultar 'tabla de contenidos''\"",
+          "default": "Ocultar 'Tabla de contenidos'"
+        },
+        {
+          "label": "Traducción para \"Página siguiente\"",
+          "default": "Página siguiente"
+        },
+        {
+          "label": "Traducción para \"Página anterior\"",
+          "default": "Página anterior"
+        },
+        {
+          "label": "Traducción para \"Navegar a la parte superior\"",
+          "default": "Navegar a la parte superior"
+        },
+        {
+          "label": "Etiqueta botón pantalla completa",
+          "default": "Pantalla completa"
+        },
+        {
+          "label": "Etiqueta botón Salir de pantalla completa",
+          "default": "Salir de pantalla completa"
+        }
+      ]
+    },
+    {
+      "label": "Textos de Accesibilidad",
+      "fields": [
+        {
+          "label": "Alternativa textual para progreso de páginas",
+          "description": "Un texto alternativo para el progreso visual de página. @page y @total son las variables disponibles.",
+          "default": "Página @page de @total."
+        },
+        {
+          "label": "Etiqueta para expandir/contraer el menú de navegación",
+          "default": "Alternar menú de navegación"
+        }
+      ]
+    }
+  ]
+}
