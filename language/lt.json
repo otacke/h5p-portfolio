@@ -35,6 +35,9 @@
         {
           "label": "Hotspot color",
           "default": "rgba(255, 255, 255, .6)"
+        },
+        {
+          "label": "Show hotspot title in navigation"
         }
       ]
     },

@@ -24,6 +24,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       hotspotNavigationGlobals: {
         hotspotNavigationImage: {},
         hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
+        showHotspotTitle: false
       },
       bookCover: {},
       showHeader: false,
@@ -215,7 +216,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         hotspotNavigationImage: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
         contentId: this.contentId,
         hotspotColors: hotspotColors,
-        isCovered: showCover
+        isCovered: showCover,
+        showHotspotTitles: this.params.hotspotNavigationGlobals.showHotspotTitles
       },
       {
         onScrollToTop: () => {

@@ -64,7 +64,8 @@ export default class PageContent {
         {
           image: this.params.hotspotNavigationImage,
           hotspotColors: this.params.hotspotColors,
-          contentId: this.params.contentId
+          contentId: this.params.contentId,
+          showHotspotTitles: this.params.showHotspotTitles
         },
         {
           onClicked: ((subContentId) => {

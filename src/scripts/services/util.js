@@ -87,4 +87,14 @@ export default class Util {
 
     return exceptions.includes(instance.libraryInfo?.machineName);
   }
+
+  /**
+   * Determine whether a device supports touch events
+   * @returns {boolean} True, if device supports touch events, else false.
+   */
+  static supportsTouch() {
+    return (
+      ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
+    );
+  }
 }

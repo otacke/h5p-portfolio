@@ -43,7 +43,8 @@ export default class HotspotNavigation {
             id: chapter.getSubContentId(),
             position: chapter.params.hotspotNavigation.position,
             title: chapter.params.hotspotNavigation.title,
-            color: this.params.hotspotColors[index]
+            color: this.params.hotspotColors[index],
+            showHotspotTitles: this.params.showHotspotTitles
           }, {
             onClicked: ((subContentId) => this.callbacks.onClicked(subContentId))
           }

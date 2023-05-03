@@ -1,7 +1,7 @@
-import './hotspot.scss';
-
 import Util from '@services/util';
+import Label from './label.js';
 import he from 'he';
+import './hotspot.scss';
 
 export default class Hotspot {
   /**
@@ -27,11 +27,40 @@ export default class Hotspot {
     this.dom.classList.add('h5p-portfolio-hotspot-navigation-hotspot');
     this.dom.style.left = `${this.params.position.x}%`;
     this.dom.style.top = `${this.params.position.y}%`;
-    if (this.params.title) {
-      this.dom.setAttribute('title', this.params.title);
-    }
     if (this.params.color) {
       this.dom.style.background = this.params.color;
+    }
+
+    if (this.params.title) {
+      const vertical = this.params.position.y < 50 ? 'bottom' : 'top';
+      const horizontal = this.params.position.x < 50 ? 'right' : 'left';
+
+      this.label = new Label({
+        text: this.params.title,
+        startVisible: this.params.showHotspotTitles,
+        position: `${vertical}-${horizontal}`
+      });
+      this.dom.append(this.label.getDOM());
+
+      this.dom.addEventListener('click', (event) => {
+        this.handleClicked(event);
+      });
+
+      if (!this.params.showHotspotTitles) {
+        // Works as a custom tooltip
+        this.dom.addEventListener('mouseenter', (event) => {
+          this.handleMouseOver(event);
+        });
+        this.dom.addEventListener('focus', (event) => {
+          this.handleMouseOver(event);
+        });
+        this.dom.addEventListener('mouseleave', () => {
+          this.handleMouseOut();
+        });
+        this.dom.addEventListener('blur', (event) => {
+          this.handleMouseOut(event);
+        });
+      }
     }
 
     this.dom.addEventListener('click', (event) => {
@@ -77,6 +106,29 @@ export default class Hotspot {
     this.toastTimeout = setTimeout(() => {
       this.isShowingToast = false;
     }, Hotspot.toastDurationMs);
+  }
+
+  /**
+   * Handle mouseover.
+   * @param {Event} event Event that triggered.
+   */
+  handleMouseOver(event) {
+    if (Util.supportsTouch()) {
+      return;
+    }
+
+    this.label.show({ skipDelay: event instanceof FocusEvent });
+  }
+
+  /**
+   * Handle mouseout.
+   */
+  handleMouseOut() {
+    if (Util.supportsTouch()) {
+      return;
+    }
+
+    this.label.hide();
   }
 }
 

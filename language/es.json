@@ -35,6 +35,9 @@
         {
           "label": "Color del punto de acceso",
           "default": "rgba(255, 255, 255, .6)"
+        },
+        {
+          "label": "Show hotspot title in navigation"
         }
       ]
     },

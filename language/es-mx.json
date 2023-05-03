@@ -5,11 +5,11 @@
       "description": "Una portada que muestra información sobre el portafolios antes de acceder a él."
     },
     {
-      "label": "Página de portada",
+      "label": "Página de Portada",
       "fields": [
         {
           "label": "Descripción de la portada",
-          "description": "Este texto será la descripción de su portafolios.",
+          "description": "Este texto será la descripción de tu portafolios.",
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
@@ -25,16 +25,19 @@
       ]
     },
     {
-      "label": "Navegación de puntos de acceso",
-      "description": "Establece valores globales para la navegación por puntos de acceso.",
+      "label": "Navegación de puntos de acceso (hotspots)",
+      "description": "Establece valores globales para la navegación por puntos de acceso (hotspots).",
       "fields": [
         {
-          "label": "Imagen para navegación por puntos de acceso",
-          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso."
+          "label": "Imagen para navegación por puntos de acceso (hotspot)",
+          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso (hotspot)."
         },
         {
-          "label": "Color del punto de acceso",
+          "label": "Color del punto de acceso (hotspot)",
           "default": "rgba(255, 255, 255, .6)"
+        },
+        {
+          "label": "Show hotspot title in navigation"
         }
       ]
     },
@@ -42,6 +45,7 @@
       "label": "Usar encabezado"
     },
     {
+      "label": "Encabezado",
       "fields": [
         {
           "label": "Encabezado"
@@ -49,8 +53,7 @@
         {
           "label": "Maniquí"
         }
-      ],
-      "label": "Encabezado"
+      ]
     },
     {
       "label": "Usar pie de página"
@@ -67,10 +70,11 @@
       ]
     },
     {
+      "label": "Portafolios",
       "fields": [
         {
-          "entity": "Página",
           "label": "Páginas",
+          "entity": "Página",
           "field": {
             "label": "Capítulo",
             "fields": [
@@ -94,7 +98,14 @@
                 "fields": [
                   {
                     "label": "Posición del punto de acceso",
-                    "description": "Hacer clic en la imagen en miniatura para colocar el punto de acceso."
+                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso."
+                  },
+                  {
+                    "label": "Use custom hotspot color"
+                  },
+                  {
+                    "label": "Hotspot color",
+                    "default": "rgba(255, 255, 255, 0)"
                   },
                   {
                     "label": "Título del punto de acceso"
@@ -110,8 +121,7 @@
         {
           "label": "Maniquí"
         }
-      ],
-      "label": "Portafolios"
+      ]
     },
     {
       "label": "Configuraciones del comportamiento",
@@ -122,7 +132,7 @@
           "default": "#1768c4"
         },
         {
-          "label": "Mostrar tabla de contenidos de forma predeterminada",
+          "label": "Mostrar tabla de contenidos como predeterminado",
           "description": "Cuando se habilita, la tabla de contenido se muestra al abrir el portafolios."
         }
       ]

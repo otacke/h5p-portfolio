@@ -114,6 +114,13 @@
           "showAlpha": true,
           "preferredFormat": "rgb"
         }
+      },
+      {
+        "name": "showHotspotTitles",
+        "type": "boolean",
+        "label": "Show hotspot titles in navigation",
+        "optional": true,
+        "default": false
       }
     ]
   },
@@ -277,6 +284,7 @@
                   "name": "useCustomHotspotColor",
                   "type": "boolean",
                   "label": "Use custom hotspot color",
+                  "optional": true,
                   "default": false
                 },
                 {
