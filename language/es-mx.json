@@ -109,6 +109,13 @@
                   },
                   {
                     "label": "Título del punto de acceso"
+                  },
+                  {
+                    "default": "rgba(255, 255, 255, 0)",
+                    "label": "Hotspot color"
+                  },
+                  {
+                    "label": "Hotspot title"
                   }
                 ]
               },
