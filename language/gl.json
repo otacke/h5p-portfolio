@@ -37,7 +37,7 @@
           "default": "rgba(255, 255, 255, .6)"
         },
         {
-          "label": "Show hotspot title in navigation"
+          "label": "Mostra o título do punto de acceso na navegación"
         }
       ]
     },
@@ -101,10 +101,10 @@
                     "description": "Preme na imaxe en miniatura para colocar o punto de acceso."
                   },
                   {
-                    "label": "Use custom hotspot color"
+                    "label": "Usa cor de punto de acceso personalizado"
                   },
                   {
-                    "label": "Hotspot color",
+                    "label": "Cor do punto de acceso",
                     "default": "rgba(255, 255, 255, 0)"
                   },
                   {
