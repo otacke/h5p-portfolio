@@ -30,6 +30,9 @@ export default class Hotspot {
     if (this.params.title) {
       this.dom.setAttribute('title', this.params.title);
     }
+    if (this.params.color) {
+      this.dom.style.background = this.params.color;
+    }
 
     this.dom.addEventListener('click', (event) => {
       this.handleClicked(event);

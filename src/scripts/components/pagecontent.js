@@ -62,8 +62,8 @@ export default class PageContent {
     Chapters.get().forEach((chapter) => {
       chapter.setHotspotNavigation(new HotspotNavigation(
         {
-          image: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
-          color: this.params.hotspotNavigationGlobals.hotspotNavigationColor,
+          image: this.params.hotspotNavigationImage,
+          hotspotColors: this.params.hotspotColors,
           contentId: this.params.contentId
         },
         {

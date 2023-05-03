@@ -98,6 +98,13 @@
                     "description": "Klicke auf die gewünschte Stelle im Vorschaubild, um den Hotspot zu platzieren."
                   },
                   {
+                    "label": "Benutze eigene Hotspot-Farbe"
+                  },
+                  {
+                    "label": "Hotspot-Farbe",
+                    "default": "rgba(255, 255, 255, 0)"
+                  },
+                  {
                     "label": "Hotspot-Beschriftung"
                   }
                 ]

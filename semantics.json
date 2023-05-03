@@ -274,6 +274,25 @@
                   ]
                 },
                 {
+                  "name": "useCustomHotspotColor",
+                  "type": "boolean",
+                  "label": "Use custom hotspot color",
+                  "default": false
+                },
+                {
+                  "name": "customHotspotColor",
+                  "type": "text",
+                  "label": "Hotspot color",
+                  "optional": true,
+                  "widget": "colorSelector",
+                  "default": "rgba(255, 255, 255, 0)",
+                  "spectrum": {
+                    "showInput": true,
+                    "showAlpha": true,
+                    "preferredFormat": "rgb"
+                  }
+                },
+                {
                   "name": "title",
                   "type": "text",
                   "label": "Hotspot title",

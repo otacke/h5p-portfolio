@@ -98,6 +98,13 @@
                     "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso."
                   },
                   {
+                    "label": "Use custom hotspot color"
+                  },
+                  {
+                    "label": "Hotspot color",
+                    "default": "rgba(255, 255, 255, 0)"
+                  },
+                  {
                     "label": "Título del punto de acceso"
                   }
                 ]

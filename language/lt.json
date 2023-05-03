@@ -98,6 +98,13 @@
                     "description": "Click on the thumbnail image to place the hotspot."
                   },
                   {
+                    "label": "Use custom hotspot color"
+                  },
+                  {
+                    "label": "Hotspot color",
+                    "default": "rgba(255, 255, 255, 0)"
+                  },
+                  {
                     "label": "Hotspot title"
                   }
                 ]

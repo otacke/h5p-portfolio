@@ -37,13 +37,13 @@ export default class HotspotNavigation {
     // Hotspots
     this.hotspots = Chapters.getAll()
       .filter((chapter) => chapter.params.hotspotNavigation)
-      .map((chapter) => {
+      .map((chapter, index) => {
         return new Hotspot(
           {
             id: chapter.getSubContentId(),
             position: chapter.params.hotspotNavigation.position,
             title: chapter.params.hotspotNavigation.title,
-            color: this.params.color
+            color: this.params.hotspotColors[index]
           }, {
             onClicked: ((subContentId) => this.callbacks.onClicked(subContentId))
           }

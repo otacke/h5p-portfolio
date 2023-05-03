@@ -199,10 +199,22 @@ export default class Portfolio extends H5P.EventDispatcher {
       );
     }
 
+    // Custom colors for chapters
+    const hotspotColors = this.params.portfolio.chapters
+      .filter((chapter) => {
+        return chapter.displayHotspotNavigation &&
+          chapter.hotspotNavigation?.useCustomHotspotColor;
+      })
+      .map((chapter) => {
+        return chapter.hotspotNavigation?.customHotspotColor ||
+          this.params.hotspotNavigationGlobals.hotspotNavigationColor;
+      });
+
     this.pageContent = new PageContent(
       {
-        hotspotNavigationGlobals: this.params.hotspotNavigationGlobals,
+        hotspotNavigationImage: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
         contentId: this.contentId,
+        hotspotColors: hotspotColors,
         isCovered: showCover
       },
       {
