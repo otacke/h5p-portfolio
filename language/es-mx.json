@@ -9,7 +9,7 @@
       "fields": [
         {
           "label": "Descripción de la portada",
-          "description": "Este texto será la descripción de tu portafolios.",
+          "description": "Este texto será la descripción de su portafolios.",
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
@@ -42,7 +42,6 @@
       "label": "Usar encabezado"
     },
     {
-      "label": "Encabezado",
       "fields": [
         {
           "label": "Encabezado"
@@ -50,7 +49,8 @@
         {
           "label": "Maniquí"
         }
-      ]
+      ],
+      "label": "Encabezado"
     },
     {
       "label": "Usar pie de página"
@@ -67,11 +67,10 @@
       ]
     },
     {
-      "label": "Portafolios",
       "fields": [
         {
-          "label": "Páginas",
           "entity": "Página",
+          "label": "Páginas",
           "field": {
             "label": "Capítulo",
             "fields": [
@@ -95,14 +94,7 @@
                 "fields": [
                   {
                     "label": "Posición del punto de acceso",
-                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso."
-                  },
-                  {
-                    "label": "Use custom hotspot color"
-                  },
-                  {
-                    "label": "Hotspot color",
-                    "default": "rgba(255, 255, 255, 0)"
+                    "description": "Hacer clic en la imagen en miniatura para colocar el punto de acceso."
                   },
                   {
                     "label": "Título del punto de acceso"
@@ -118,18 +110,19 @@
         {
           "label": "Maniquí"
         }
-      ]
+      ],
+      "label": "Portafolios"
     },
     {
       "label": "Configuraciones del comportamiento",
       "fields": [
         {
           "label": "Color base",
-          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto.",
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrese de establecer un contraste suficientemente alto.",
           "default": "#1768c4"
         },
         {
-          "label": "Mostrar tabla de contenidos por defecto",
+          "label": "Mostrar tabla de contenidos de forma predeterminada",
           "description": "Cuando se habilita, la tabla de contenido se muestra al abrir el portafolios."
         }
       ]
