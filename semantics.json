@@ -153,7 +153,11 @@
         "optional": true,
         "options": [
           "H5P.PortfolioPlaceholder 0.7"
-        ]
+        ],
+        "paramOverrides": {
+          "customTitleL10NId": "header",
+          "disableExtraTitleField": true
+        }
       },
       {
         "name": "dummy",
@@ -192,7 +196,11 @@
         "optional": true,
         "options": [
           "H5P.PortfolioPlaceholder 0.7"
-        ]
+        ],
+        "paramOverrides": {
+          "customTitleL10NId": "footer",
+          "disableExtraTitleField": true
+        }
       },
       {
         "name": "dummy",
