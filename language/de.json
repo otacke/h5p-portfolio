@@ -2,7 +2,7 @@
   "semantics": [
     {
       "label": "Titelseite anzeigen",
-      "description": "Auf der Titelseite werden Informationen über das Buch angezeigt bevor es geöffnet wird."
+      "description": "Auf der Titelseite werden Informationen über das Buch angezeigt, bevor es geöffnet wird."
     },
     {
       "label": "Titelseite",
