@@ -202,13 +202,15 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     // Custom colors for chapters
     const hotspotColors = this.params.portfolio.chapters
-      .filter((chapter) => {
-        return chapter.displayHotspotNavigation &&
-          chapter.hotspotNavigation?.useCustomHotspotColor;
-      })
       .map((chapter) => {
-        return chapter.hotspotNavigation?.customHotspotColor ||
-          this.params.hotspotNavigationGlobals.hotspotNavigationColor;
+        if (
+          !chapter.displayHotspotNavigation ||
+          !chapter.hotspotNavigation?.useCustomHotspotColor
+        ) {
+          return null;
+        }
+
+        return chapter.hotspotNavigation?.customHotspotColor;
       });
 
     this.pageContent = new PageContent(

@@ -36,8 +36,11 @@ export default class HotspotNavigation {
 
     // Hotspots
     this.hotspots = Chapters.getAll()
-      .filter((chapter) => chapter.params.hotspotNavigation)
       .map((chapter, index) => {
+        if (!chapter.params.hotspotNavigation) {
+          return null;
+        }
+
         return new Hotspot(
           {
             id: chapter.getSubContentId(),
@@ -50,6 +53,8 @@ export default class HotspotNavigation {
           }
         );
       });
+
+    this.hotspots = this.hotspots.filter((hotspot) => hotspot !== null);
 
     this.hotspots.forEach((hotspot) => {
       this.dom.appendChild(hotspot.getDOM());
