@@ -93,6 +93,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         params: this.params.headerPlaceholderGroup?.headerPlaceholder,
         contentId: this.contentId,
         context: this,
+        classNames: ['h5p-portfolio-header'],
         previousState: {}
       });
 
@@ -106,6 +107,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         params: this.params.footerPlaceholderGroup?.footerPlaceholder,
         contentId: this.contentId,
         context: this,
+        classNames: ['h5p-portfolio-footer'],
         previousState: {}
       });
 

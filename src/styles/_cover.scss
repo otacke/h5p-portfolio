@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 100%;
   left: 0;
-  padding-bottom: 200px;
+  // padding-bottom: 200px;
   position: relative;
   top: 0;
   width: 100%;
@@ -19,6 +19,14 @@
 
   p {
     margin: 0 0 .5em;
+  }
+
+  .h5p-portfolio-header {
+    border-bottom: 0.125em dashed rgba(0 0 0 / 0.1);
+  }
+
+  .h5p-portfolio-footer {
+    border-top: 0.125em dashed rgba(0 0 0 / 0.1);
   }
 }
 
@@ -91,6 +99,7 @@
 }
 
 .h5p-portfolio-cover-readbutton {
+  margin-bottom: 3em;
   margin-top: .5em;
 
   button {

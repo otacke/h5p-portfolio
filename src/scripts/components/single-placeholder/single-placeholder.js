@@ -7,12 +7,19 @@ import Util from '@services/util';
  */
 export default class SinglePlaceholder {
   constructor(params = {}, callbacks = {}) {
-    this.params = params;
+    this.params = Util.extend({
+      classNames: []
+    }, params);
 
     this.callbacks = Util.extend({
     }, callbacks);
 
-    this.dom = document.createElement('h5p-single-placeholder-container');
+    this.dom = document.createElement('div');
+    this.dom.classList.add('h5p-single-placeholder-container');
+
+    this.params.classNames.forEach((className) => {
+      this.dom.classList.add(className);
+    });
 
     // TODO: Previous state
     const previousState = params.previousState ?? {};

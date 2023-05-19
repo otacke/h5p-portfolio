@@ -24,6 +24,22 @@
     transform: translateX(100%);
   }
 
+  .h5p-portfolio-header {
+    border-bottom: 0.125em dashed rgba(0 0 0 / 0.1);
+
+    .h5p-portfolio-placeholder-content-row {
+      margin: 0 1em;
+    }
+  }
+
+  .h5p-portfolio-footer {
+    border-top: 0.125em dashed rgba(0 0 0 / 0.1);
+
+    .h5p-portfolio-placeholder-content-row {
+      margin: 0 1em;
+    }
+  }
+
   .h5p-portfolio-chapter > div {
     margin-left: auto;
     margin-right: auto;
@@ -37,7 +53,6 @@
 }
 
 .h5p-portfolio-content {
-  padding: 1rem;
   overflow: hidden;
   position: relative;
   width: 100%;
