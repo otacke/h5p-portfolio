@@ -79,6 +79,10 @@ $fullscreen-button-size: 1.8em;
     flex: 1;
     overflow: hidden;
 
+    &.h5p-content-hidden {
+      display: none;
+    }
+
     &.h5p-portfolio-navigation-open {
 
       .h5p-portfolio-navigation {
