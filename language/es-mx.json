@@ -9,7 +9,7 @@
       "fields": [
         {
           "label": "Descripción de la portada",
-          "description": "Este texto será la descripción de tu portafolios.",
+          "description": "Este texto será la descripción de su portafolios.",
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
@@ -25,19 +25,19 @@
       ]
     },
     {
-      "label": "Navegación de puntos de acceso (hotspots)",
-      "description": "Establece valores globales para la navegación por puntos de acceso (hotspots).",
+      "label": "Navegación de puntos de acceso",
+      "description": "Establece valores globales para la navegación por puntos de acceso.",
       "fields": [
         {
-          "label": "Imagen para navegación por puntos de acceso (hotspot)",
-          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso (hotspot)."
+          "label": "Imagen para navegación por puntos de acceso",
+          "description": "Imagen utilizada como fondo para la navegación por puntos de acceso."
         },
         {
-          "label": "Color del punto de acceso (hotspot)",
+          "label": "Color del punto de acceso",
           "default": "rgba(255, 255, 255, .6)"
         },
         {
-          "label": "Show hotspot title in navigation"
+          "label": "Mostrar el título del punto de acceso en la navegación"
         }
       ]
     },
@@ -98,13 +98,13 @@
                 "fields": [
                   {
                     "label": "Posición del punto de acceso",
-                    "description": "Haz clic en la imagen en miniatura para colocar el punto de acceso."
+                    "description": "Hacer clic en la imagen en miniatura para colocar el punto de acceso."
                   },
                   {
-                    "label": "Use custom hotspot color"
+                    "label": "Usar color de punto de acceso personalizado"
                   },
                   {
-                    "label": "Hotspot color",
+                    "label": "Color del punto de acceso",
                     "default": "rgba(255, 255, 255, 0)"
                   },
                   {
