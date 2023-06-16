@@ -1,7 +1,6 @@
 import './navigation.scss';
 
 import Util from '@services/util';
-import Chapters from '@services/chapters';
 import Hotspot from './hotspot';
 
 export default class HotspotNavigation {
@@ -35,7 +34,7 @@ export default class HotspotNavigation {
     this.dom.appendChild(image);
 
     // Hotspots
-    this.hotspots = Chapters.getAll()
+    this.hotspots = this.params.chapters.getAll()
       .map((chapter, index) => {
         if (!chapter.params.hotspotNavigation) {
           return null;

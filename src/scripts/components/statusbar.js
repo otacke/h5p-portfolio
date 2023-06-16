@@ -1,5 +1,4 @@
 import Util from '@services/util';
-import Chapters from '@services/chapters';
 import '@styles/_statusbar.scss';
 
 /**
@@ -166,7 +165,7 @@ export default class StatusBar {
 
     const total = document.createElement('span');
     total.classList.add('h5p-portfolio-status-progress-number');
-    total.innerHTML = Chapters.get().length;
+    total.innerHTML = this.params.chapters.get().length;
     total.setAttribute('aria-hidden', 'true');
 
     const hiddenButRead = document.createElement('p');
@@ -301,7 +300,7 @@ export default class StatusBar {
     );
     this.setButtonStatus(
       'next',
-      { enabled: params.chapterId < Chapters.get().length }
+      { enabled: params.chapterId < this.params.chapters.get().length }
     );
   }
 
@@ -311,11 +310,11 @@ export default class StatusBar {
    */
   updateProgressBar(chapterId) {
     this.progressBar.progress.style.width =
-      `${chapterId / Chapters.get().length * 100}%`;
+      `${chapterId / this.params.chapters.get().length * 100}%`;
 
     const title = this.params.dictionary.get('a11y.progress')
       .replace('@page', chapterId)
-      .replace('@total', Chapters.get().length);
+      .replace('@total', this.params.chapters.get().length);
 
     this.progressBar.progress.title = title;
     this.progressIndicator.hiddenButRead.innerHTML = title;

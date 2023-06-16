@@ -112,16 +112,17 @@ export default class Portfolio extends H5P.EventDispatcher {
         previousState: {}
       });
 
-    Chapters.setHeader(header);
-    Chapters.setFooter(footer);
+    this.chapters = new Chapters();
+    this.chapters.setHeader(header);
+    this.chapters.setFooter(footer);
 
     // Fill up chapter service
-    Chapters.fill(
+    this.chapters.fill(
       this.params.portfolio.chapters,
       this.contentId,
       { previousState : this.previousState?.chapterStates });
 
-    Chapters.get().forEach((chapter) => {
+    this.chapters.get().forEach((chapter) => {
       this.bubbleUp(chapter.getInstance(), 'resize', this);
     });
 
@@ -219,6 +220,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.pageContent = new PageContent(
       {
+        chapters: this.chapters,
         hotspotNavigationImage: this.params.hotspotNavigationGlobals.hotspotNavigationImage,
         contentId: this.contentId,
         hotspotColors: hotspotColors,
@@ -245,7 +247,10 @@ export default class Portfolio extends H5P.EventDispatcher {
     );
 
     this.sideBar = new SideBar(
-      { mainTitle: extras?.metadata?.title },
+      {
+        chapters: this.chapters,
+        mainTitle: extras?.metadata?.title
+      },
       {
         onMoved: ((params) => {
           this.moveTo(params);
@@ -259,6 +264,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.statusBarHeader = new StatusBar(
       {
         dictionary: this.dictionary,
+        chapters: this.chapters,
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-header'
@@ -282,6 +288,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.statusBarFooter = new StatusBar(
       {
         dictionary: this.dictionary,
+        chapters: this.chapters,
         displayToTopButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-footer'
@@ -305,7 +312,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     // Kickstart the statusbar
     const statusUpdates = {
       chapterId: this.currentChapterId + 1,
-      title: Chapters.get(this.currentChapterId).getTitle()
+      title: this.chapters.get(this.currentChapterId).getTitle()
     };
 
     this.statusBarHeader.update(statusUpdates);
@@ -352,7 +359,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.updateFooter();
 
     // Set start view.
-    const currentChapter = Chapters.get(this.currentChapterId);
+    const currentChapter = this.chapters.get(this.currentChapterId);
     this.sideBar.handleClicked({
       hierarchy: currentChapter.getHierarchy(),
       target: {
@@ -369,10 +376,10 @@ export default class Portfolio extends H5P.EventDispatcher {
    * Handle resizing of the content
    */
   resize() {
-    if (!this.pageContent || !Chapters.get().length || !this.$mainWrapper) {
+    if (!this.pageContent || !this.chapters.get().length || !this.$mainWrapper) {
       return;
     }
-    const currentNode = Chapters.get(this.currentChapterId).getDOM();
+    const currentNode = this.chapters.get(this.currentChapterId).getDOM();
 
     if (currentNode.offsetParent === null) {
       return; // Chapter is not visble.
@@ -422,16 +429,16 @@ export default class Portfolio extends H5P.EventDispatcher {
     if (!params.id && params.direction) {
       if (
         this.currentChapterId === 0 && params.direction === 'prev' ||
-        this.currentChapterId === Chapters.get().length - 1 && params.direction === 'next'
+        this.currentChapterId === this.chapters.get().length - 1 && params.direction === 'next'
       ) {
         return; // Nowhere to move to
       }
 
       if (params.direction === 'prev') {
-        params.chapter = Chapters.get(this.currentChapterId - 1).getSubContentId();
+        params.chapter = this.chapters.get(this.currentChapterId - 1).getSubContentId();
       }
       else if (params.direction === 'next') {
-        params.chapter = Chapters.get(this.currentChapterId + 1).getSubContentId();
+        params.chapter = this.chapters.get(this.currentChapterId + 1).getSubContentId();
       }
 
       delete params.section;
@@ -439,7 +446,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       delete params.header;
     }
     else if (typeof params.id === 'number') {
-      params.chapter = Chapters.get(params.id).getSubContentId();
+      params.chapter = this.chapters.get(params.id).getSubContentId();
     }
 
     // Create the new hash
@@ -464,7 +471,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     const params = {
       chapterId: this.currentChapterId + 1,
-      title: Chapters.get(this.currentChapterId).getTitle()
+      title: this.chapters.get(this.currentChapterId).getTitle()
     };
 
     this.statusBarHeader.update(params);
@@ -485,7 +492,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       }
       else {
         this.moveToChapter({
-          chapter: `h5p-portfolio-chapter-${Chapters.get(0).instance.subContentId}`,
+          chapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
           h5pPortfolioId: this.h5pPortfolioId
         });
       }
@@ -496,11 +503,11 @@ export default class Portfolio extends H5P.EventDispatcher {
    * Re-attach footer.
    */
   updateFooter() {
-    if ( Chapters.get().length === 0) {
+    if ( this.chapters.get().length === 0) {
       return;
     }
 
-    const column = Chapters.get(this.currentChapterId).getDOM();
+    const column = this.chapters.get(this.currentChapterId).getDOM();
     const moveFooterInsideContent = this.shouldFooterBeHidden(column.clientHeight);
 
     // Move status bar footer to content in fullscreen
@@ -599,7 +606,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     if (!isNaN(chapterId)) {
       this.currentChapterId = chapterId;
 
-      this.sideBar.setCurrentItem(Chapters.get(chapterId).getHierarchy());
+      this.sideBar.setCurrentItem(this.chapters.get(chapterId).getHierarchy());
     }
   }
 
@@ -683,8 +690,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.pageContent.setCovered(false);
     this.showElements();
 
-    Chapters.getByIndex(this.currentChapterId).setHeader('original');
-    Chapters.getByIndex(this.currentChapterId).setFooter('original');
+    this.chapters.getByIndex(this.currentChapterId).setHeader('original');
+    this.chapters.getByIndex(this.currentChapterId).setFooter('original');
 
     this.trigger('resize');
     // This will happen also on retry, but that doesn't matter, since
@@ -721,7 +728,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   getAnswerGiven() {
-    return Chapters.get().reduce((accu, current) => {
+    return this.chapters.get().reduce((accu, current) => {
       if (typeof current.getInstance()?.getAnswerGiven === 'function') {
         return accu || current.getInstance().getAnswerGiven();
       }
@@ -736,8 +743,8 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   getScore() {
-    if (Chapters.get().length > 0) {
-      return Chapters.get().reduce((accu, current) => {
+    if (this.chapters.get().length > 0) {
+      return this.chapters.get().reduce((accu, current) => {
         if (typeof current.instance.getScore === 'function') {
           return accu + current.instance.getScore();
         }
@@ -755,8 +762,8 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
-    if (Chapters.get().length > 0) {
-      return Chapters.get().reduce((accu, current) => {
+    if (this.chapters.get().length > 0) {
+      return this.chapters.get().reduce((accu, current) => {
         if (typeof current.instance.getMaxScore === 'function') {
           return accu + current.instance.getMaxScore();
         }
@@ -772,7 +779,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   showSolutions() {
-    Chapters.get().forEach((chapter) => {
+    this.chapters.get().forEach((chapter) => {
       if (typeof chapter.instance.toggleReadSpeaker === 'function') {
         chapter.instance.toggleReadSpeaker(true);
       }
@@ -790,11 +797,11 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   resetTask() {
-    if (!Chapters.get().length) {
+    if (!this.chapters.get().length) {
       return;
     }
 
-    Chapters.get().forEach((chapter) => {
+    this.chapters.get().forEach((chapter) => {
       if (!chapter.isInitialized) {
         return;
       }
@@ -808,7 +815,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.moveTo({
       h5pPortfolioId: this.contentId,
-      chapter: Chapters.get(0).getSubContentId(),
+      chapter: this.chapters.get(0).getSubContentId(),
       toTop: true
     });
 
@@ -837,7 +844,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     return {
       statement: xAPIEvent.data.statement,
       children: this.getXAPIDataFromChildren(
-        Chapters.get().map((chapter) => chapter.instance)
+        this.chapters.get().map((chapter) => chapter.instance)
       )
     };
   }
@@ -880,7 +887,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   getCurrentState() {
     return {
-      chapterStates: Chapters.getAll().map((chapter) => {
+      chapterStates: this.chapters.getAll().map((chapter) => {
         return chapter?.instance?.getCurrentState() || {};
       }),
       currentChapterId: this.currentChapterId
@@ -893,7 +900,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @returns {object[]|object} Chapter information.
    */
   getChaptersInformation(chapterId = null) {
-    const info = Chapters.getAll()
+    const info = this.chapters.getAll()
       .map((chapter) => ({
         hierarchy: chapter.hierarchy,
         title: chapter.title,

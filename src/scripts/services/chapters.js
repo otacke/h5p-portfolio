@@ -4,14 +4,21 @@ import Chapter from '@models/chapter';
 export default class Chapters {
 
   /**
+   * @class
+   */
+  constructor() {
+    this.chapters = [];
+  }
+
+  /**
    * Fill chapters with chapters.
    * @param {object} params Parameters.
    * @param {number} contentId ContentId.
    * @param {object} [extras] Extras.
    */
-  static fill(params = [], contentId, extras = {}) {
-    Chapters.chapters = Chapters.build(
-      Chapters.sanitize(params),
+  fill(params = [], contentId, extras = {}) {
+    this.chapters = this.build(
+      this.sanitize(params),
       contentId,
       extras
     );
@@ -23,17 +30,17 @@ export default class Chapters {
    * Parameter number: get by index.
    * Parameter string: get by subContentId.
    * @param {undefined|string|number} param Parameter.
-   * @returns {Chapter|Chapter[]} Chapter|Chapters.
+   * @returns {Chapter|Chapter[]} Chapter|this.
    */
-  static get(param) {
+  get(param) {
     if (typeof param === 'number') {
-      return Chapters.getByIndex(param);
+      return this.getByIndex(param);
     }
     else if (typeof param === 'string') {
-      return Chapters.getBySubcontentId(param);
+      return this.getBySubcontentId(param);
     }
     else if (!param) {
-      return Chapters.getAll();
+      return this.getAll();
     }
     else {
       return null;
@@ -42,10 +49,10 @@ export default class Chapters {
 
   /**
    * Get all chapters.
-   * @returns {Chapter[]} Chapters.
+   * @returns {Chapter[]} this.
    */
-  static getAll() {
-    return Chapters.chapters || [];
+  getAll() {
+    return this.chapters || [];
   }
 
   /**
@@ -53,14 +60,14 @@ export default class Chapters {
    * @param {number} index Chapter index.
    * @returns {Chapter} Chapter.
    */
-  static getByIndex(index) {
-    const length = Chapters.chapters?.length;
+  getByIndex(index) {
+    const length = this.chapters?.length;
 
     if (!length || index < 0 || index > length - 1) {
       return {}; // Nothing to offer
     }
 
-    return Chapters.chapters[index] || {};
+    return this.chapters[index] || {};
   }
 
   /**
@@ -68,12 +75,12 @@ export default class Chapters {
    * @param {string} subContentId SubContentId.
    * @returns {Chapter} Chapter.
    */
-  static getBySubcontentId(subContentId) {
+  getBySubcontentId(subContentId) {
     if (typeof subContentId !== 'string') {
       return {};
     }
 
-    return Chapters.chapters.find((chapter) => {
+    return this.chapters.find((chapter) => {
       return chapter.instance?.subContentId === subContentId;
     }) || {};
   }
@@ -83,10 +90,10 @@ export default class Chapters {
    * @param {string} subContentId SubContentId.
    * @returns {object|null} Content element.
    */
-  static findContent(subContentId) {
+  findContent(subContentId) {
     let content = null;
 
-    Chapters.get().forEach((chapter) => {
+    this.get().forEach((chapter) => {
       if (content) {
         return; // Already found;
       }
@@ -108,10 +115,10 @@ export default class Chapters {
    * @param {string} subContentId Chapter subContentId.
    * @returns {number|null} Chapter index.
    */
-  static findChapterIndex(subContentId) {
+  findChapterIndex(subContentId) {
     let position = null;
 
-    Chapters.get().forEach((chapter, index) => {
+    this.get().forEach((chapter, index) => {
       if (position !== null) {
         return; // Already found
       }
@@ -128,32 +135,32 @@ export default class Chapters {
    * Set header.
    * @param {SinglePlaceholder} header Header.
    */
-  static setHeader(header) {
-    Chapters.header = header;
+  setHeader(header) {
+    this.header = header;
   }
 
   /**
    * Get header.
    * @returns {SinglePlaceholder} Header.
    */
-  static getHeader() {
-    return Chapters.header;
+  getHeader() {
+    return this.header;
   }
 
   /**
    * Set footer.
    * @param {SinglePlaceholder} footer Footer.
    */
-  static setFooter(footer) {
-    Chapters.footer = footer;
+  setFooter(footer) {
+    this.footer = footer;
   }
 
   /**
    * Get footer.
    * @returns {SinglePlaceholder} Footer.
    */
-  static getFooter() {
-    return Chapters.footer;
+  getFooter() {
+    return this.footer;
   }
 
   /**
@@ -161,7 +168,7 @@ export default class Chapters {
    * @param {object[]} params Semantics parameters for chapters.
    * @returns {object} Sanitized parameters for chapters.
    */
-  static sanitize(params = []) {
+  sanitize(params = []) {
 
     // Filter out invalid chapters
     params = params.filter((chapter) => {
@@ -223,19 +230,21 @@ export default class Chapters {
    * @param {object} [extras] Extras.
    * @returns {Chapter[]} Sanitized parameters for chapters.
    */
-  static build(params = [], contentId, extras = {}) {
+  build(params = [], contentId, extras = {}) {
     return params.map((chapter, index) => {
       const newChapter = new Chapter({
         id: index,
         hierarchy: chapter.chapterHierarchy,
-        header: Chapters.header,
-        footer: Chapters.footer,
+        header: this.header,
+        footer: this.footer,
         content: chapter.content,
         contentId: contentId,
         displayHotspotNavigation: chapter.displayHotspotNavigation || false,
-        displayHeader: chapter.displayHeader && Chapters.header || false,
-        displayFooter: chapter.displayFooter && Chapters.footer || false,
-        ...(chapter.providesHotspot && {hotspotNavigation: chapter.hotspotNavigation}),
+        displayHeader: chapter.displayHeader && this.header || false,
+        displayFooter: chapter.displayFooter && this.footer || false,
+        ...(chapter.providesHotspot && {
+          hotspotNavigation: chapter.hotspotNavigation
+        }),
         previousState: Array.isArray(extras.previousState) ?
           extras.previousState[index] :
           {}
@@ -245,5 +254,3 @@ export default class Chapters {
     });
   }
 }
-
-Chapters.chapters = [];

@@ -1,5 +1,4 @@
 import Util from '@services/util';
-import Chapters from '@services/chapters';
 import HotspotNavigation from '@components/hotspotnavigation/navigation';
 import '@styles/_pagecontent.scss';
 
@@ -46,7 +45,7 @@ export default class PageContent {
     const content = document.createElement('div');
     content.classList.add('h5p-portfolio-content');
 
-    Chapters.get().forEach((chapter) => {
+    this.params.chapters.get().forEach((chapter) => {
       content.appendChild(chapter.getDOM());
     });
 
@@ -59,9 +58,10 @@ export default class PageContent {
    * Build Chapter DOMs.
    */
   buildChapterDOMs() {
-    Chapters.get().forEach((chapter) => {
+    this.params.chapters.get().forEach((chapter) => {
       chapter.setHotspotNavigation(new HotspotNavigation(
         {
+          chapters: this.params.chapters,
           image: this.params.hotspotNavigationImage,
           hotspotColors: this.params.hotspotColors,
           contentId: this.params.contentId,
@@ -110,11 +110,11 @@ export default class PageContent {
    * @param {number} currentId Current chapter's id.
    */
   setChapterOrder(currentId) {
-    if (currentId < 0 || currentId > Chapters.get().length - 1) {
+    if (currentId < 0 || currentId > this.params.chapters.get().length - 1) {
       return;
     }
 
-    Chapters.get().forEach((chapter, index) => {
+    this.params.chapters.get().forEach((chapter, index) => {
       chapter.toggleAnimationPosition('previous', false);
       chapter.toggleAnimationPosition('current', index === currentId);
       chapter.toggleAnimationPosition('next', false);
@@ -135,14 +135,14 @@ export default class PageContent {
    * @param {number} chapterIndex Chapter index.
    */
   initializeChapter(chapterIndex) {
-    if (chapterIndex < 0 || chapterIndex > Chapters.get().length - 1) {
+    if (chapterIndex < 0 || chapterIndex > this.params.chapters.get().length - 1) {
       return; // Out of bounds
     }
 
     // TODO: Clean up, don't access chapter directly
 
     // Instantiate and attach chapter contents
-    const chapter = Chapters.get(chapterIndex);
+    const chapter = this.params.chapters.get(chapterIndex);
     if (!chapter.isInitialized && chapter.instance) {
       chapter.setHeader('clone');
       chapter.instance.attach(H5P.jQuery(chapter.chapterDOM));
@@ -181,7 +181,7 @@ export default class PageContent {
       return;
     }
 
-    let content = Chapters.findContent(target.content);
+    let content = this.params.chapters.findContent(target.content);
     if (!content) {
       return;
     }
@@ -223,14 +223,14 @@ export default class PageContent {
     }
 
     const chapterIdFrom = this.currentChapterId;
-    const chapterIdTo = Chapters.findChapterIndex(target.chapter);
+    const chapterIdTo = this.params.chapters.findChapterIndex(target.chapter);
 
     if (!this.isCovered) {
       // Footer/Header DOM is put in correct chapter and old position gets clone
-      Chapters.getByIndex(chapterIdFrom)?.setHeader('clone');
-      Chapters.getByIndex(chapterIdFrom)?.setFooter('clone');
-      Chapters.getByIndex(chapterIdTo)?.setHeader('original');
-      Chapters.getByIndex(chapterIdTo)?.setFooter('original');
+      this.params.chapters.getByIndex(chapterIdFrom)?.setHeader('clone');
+      this.params.chapters.getByIndex(chapterIdFrom)?.setFooter('clone');
+      this.params.chapters.getByIndex(chapterIdTo)?.setHeader('original');
+      this.params.chapters.getByIndex(chapterIdTo)?.setFooter('original');
     }
 
     if (chapterIdFrom === chapterIdTo) {
@@ -263,8 +263,8 @@ export default class PageContent {
      * Animation done by making the current and the target node
      * visible and then applying the correct translation in x-direction
      */
-    const chapterFrom = Chapters.get(chapterIdFrom);
-    const chapterTo = Chapters.get(chapterIdTo);
+    const chapterFrom = this.params.chapters.get(chapterIdFrom);
+    const chapterTo = this.params.chapters.get(chapterIdTo);
     const direction = (chapterIdFrom < chapterIdTo) ? 'next' : 'previous';
 
     chapterTo.toggleAnimationPosition(direction, true);
@@ -320,7 +320,7 @@ export default class PageContent {
       return;
     }
 
-    Chapters.get(this.currentChapterId).instance.trigger('resize');
+    this.params.chapters.get(this.currentChapterId).instance.trigger('resize');
   }
 
   /**

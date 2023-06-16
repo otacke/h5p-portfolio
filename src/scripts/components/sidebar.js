@@ -1,5 +1,4 @@
 import Util from '@services/util';
-import Chapters from '@services/chapters';
 import Chapter from '@models/chapter';
 import Title from '@components/sidebar/title';
 import MenuChapterItem from '@components/sidebar/menuchapteritem';
@@ -13,6 +12,8 @@ import '@styles/_navigationbar.scss';
 class SideBar extends H5P.EventDispatcher {
   constructor(params = {}, callbacks = {}) {
     super();
+
+    this.params = params;
 
     this.callbacks = Util.extend({
       onMoved: (() => {}),
@@ -62,7 +63,7 @@ class SideBar extends H5P.EventDispatcher {
   buildMenuItems() {
     const menuItems = [];
 
-    Chapters.get().forEach((chapter) => {
+    this.params.chapters.get().forEach((chapter) => {
       const hierarchy = chapter.getHierarchy();
 
       // MenuChapterItem parameters for chapter
@@ -183,7 +184,7 @@ class SideBar extends H5P.EventDispatcher {
    * @returns {string[]} List of all hierarchies.
    */
   buildHierarchyKeys() {
-    return Chapters.get().reduce((all, chapter) => {
+    return this.params.chapters.get().reduce((all, chapter) => {
       const chapterHierarchy = chapter.getHierarchy();
 
       const chapterHierarchies = this.extractContentItemTargets(chapter)
