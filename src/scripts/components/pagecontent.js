@@ -6,8 +6,8 @@ import '@styles/_pagecontent.scss';
 export default class PageContent {
   /**
    * @class
-   * @param {object} [params={}] Parameters.
-   * @param {object} [callbacks={}] Callbacks.
+   * @param {object} [params] Parameters.
+   * @param {object} [callbacks] Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
     this.params = params;

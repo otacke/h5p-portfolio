@@ -3,8 +3,8 @@ import Util from '@services/util';
 export default class MenuChapterItem {
   /**
    * @class
-   * @param {object} [params={}] Parameters.
-   * @param {object} [callbacks={}] Callbacks.
+   * @param {object} [params] Parameters.
+   * @param {object} [callbacks] Callbacks.
    */
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({}, params);

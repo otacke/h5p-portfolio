@@ -14,7 +14,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @class
    * @param {object} params Parameters.
    * @param {string} contentId ContentId.
-   * @param {object} [extras={}] Extra configuration, e.g. metadata.
+   * @param {object} [extras] Extra configuration, e.g. metadata.
    */
   constructor(params, contentId, extras = {}) {
     super();
@@ -401,7 +401,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Move to.
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    */
   moveTo(params = {}) {
     if (params.direction && params.direction !== 'prev' && params.direction !== 'next') {
@@ -667,7 +667,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Handle cover removed.
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    * @param {boolean} [params.skipFocus] If true, skip setting focus.
    */
   handleCoverRemoved(params = {}) {
@@ -885,7 +885,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Get chapters' information.
-   * @param {number} [chapterId=null] Optional id of specific chapter.
+   * @param {number} [chapterId] Optional id of specific chapter.
    * @returns {object[]|object} Chapter information.
    */
   getChaptersInformation(chapterId = null) {

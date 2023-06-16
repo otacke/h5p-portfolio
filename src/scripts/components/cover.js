@@ -69,7 +69,7 @@ export default class Cover {
 
   /**
    * Create an element which contains both the cover image and a background bar.
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    * @returns {HTMLElement} Visual stuff for cover.
    */
   buildVisualsElement(params = {}) {

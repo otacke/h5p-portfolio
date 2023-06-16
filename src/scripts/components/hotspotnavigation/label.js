@@ -5,7 +5,7 @@ export default class Label {
 
   /**
    * @class
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    */
   constructor(params = {}) {
     this.params = Util.extend({
@@ -43,7 +43,7 @@ export default class Label {
 
   /**
    * Show.
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    * @param {boolean} [params.isTouch] If true, was called by touch device.
    * @param {boolean} [params.skipDelay] If true, will immediately show label.
    */

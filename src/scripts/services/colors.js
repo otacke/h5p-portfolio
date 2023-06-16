@@ -34,7 +34,7 @@ export default class Colors {
   /**
    * Get color.
    * @param {Color} color Base color.
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    * @param {number} [params.opacity] Opacity value assuming white background.
    * @returns {Color} Color with opacity figured in.
    */

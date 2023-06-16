@@ -2,7 +2,7 @@ export default class Content {
 
   /**
    * @class
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    */
   constructor(params = {}) {
     this.instance = params.instance;

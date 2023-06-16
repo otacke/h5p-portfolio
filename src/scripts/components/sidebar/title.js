@@ -1,7 +1,7 @@
 export default class Title {
   /**
    * @class
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    * @param {string} params.titleText Title text.
    */
   constructor(params = {}) {

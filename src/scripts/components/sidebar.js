@@ -199,7 +199,7 @@ class SideBar extends H5P.EventDispatcher {
    * Determine whether a child is really the child of a parent.
    * @param {string} child Hierarchy to check for being child.
    * @param {string} parent Hierarchy to check for being parent.
-   * @param {object} [params={}] Extra parameters.
+   * @param {object} [params] Extra parameters.
    * @param {boolean} [params.directChild] If true, grandchildren... not child.
    * @returns {boolean} True, if (direct) child, else false.
    */
@@ -284,7 +284,7 @@ class SideBar extends H5P.EventDispatcher {
   /**
    * Set currente item.
    * @param {string} hierarchy Hierarchy.
-   * @param {params} [params={}] Parameters.
+   * @param {params} [params] Parameters.
    * @param {boolean} [params.toggleSelected] If true, may collapse item.
    */
   setCurrentItem(hierarchy, params = {}) {

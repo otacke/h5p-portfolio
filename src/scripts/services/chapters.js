@@ -7,7 +7,7 @@ export default class Chapters {
    * Fill chapters with chapters.
    * @param {object} params Parameters.
    * @param {number} contentId ContentId.
-   * @param {object} [extras={}] Extras.
+   * @param {object} [extras] Extras.
    */
   static fill(params = [], contentId, extras = {}) {
     Chapters.chapters = Chapters.build(
@@ -220,7 +220,7 @@ export default class Chapters {
    * Build chapters.
    * @param {object[]} params Semantics parameters for chapters.
    * @param {number} contentId Content id.
-   * @param {object} [extras={}] Extras.
+   * @param {object} [extras] Extras.
    * @returns {Chapter[]} Sanitized parameters for chapters.
    */
   static build(params = [], contentId, extras = {}) {
