@@ -1,5 +1,4 @@
 import Util from '@services/util';
-import Dictionary from '@services/dictionary';
 import '@styles/_cover.scss';
 
 /**
@@ -34,15 +33,19 @@ export default class Cover {
     }
 
     // Title
-    this.container.appendChild(this.BuildTitle(params.title));
+    this.container.append(this.BuildTitle(params.title));
 
     // Description text
     if (params.coverData?.coverDescription) {
-      this.container.appendChild(this.buildDescription(params.coverData.coverDescription));
+      this.container.append(
+        this.buildDescription(params.coverData.coverDescription)
+      );
     }
 
     // Read button
-    this.container.appendChild(this.buildReadButton(Dictionary.get('l10n.read')));
+    this.container.append(
+      this.buildReadButton(this.params.dictionary.get('l10n.read'))
+    );
 
     this.footerDOM = document.createElement('div');
     this.footerDOM.style.display = 'none';

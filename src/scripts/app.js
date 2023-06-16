@@ -58,7 +58,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.isPreview = this.params.behaviour.isPreview;
 
     // Fill dictionary
-    Dictionary.fill({
+    this.dictionary = new Dictionary();
+    this.dictionary.fill({
       l10n: this.params.l10n,
       a11y: this.params.a11y
     });
@@ -188,6 +189,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     if (showCover) {
       this.cover = new Cover(
         {
+          dictionary: this.dictionary,
           headerDOM: header?.getDOM(),
           coverData: this.params.bookCover,
           footerDOM: footer?.getDOM(),
@@ -256,6 +258,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.statusBarHeader = new StatusBar(
       {
+        dictionary: this.dictionary,
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-header'
@@ -278,6 +281,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.statusBarFooter = new StatusBar(
       {
+        dictionary: this.dictionary,
         displayToTopButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-footer'

@@ -1,5 +1,4 @@
 import Util from '@services/util';
-import Dictionary from '@services/dictionary';
 import Chapters from '@services/chapters';
 import '@styles/_statusbar.scss';
 
@@ -94,7 +93,7 @@ export default class StatusBar {
     const buttonWrapper = document.createElement('button');
     buttonWrapper.classList.add('h5p-portfolio-status-menu');
     buttonWrapper.classList.add('h5p-portfolio-status-button');
-    buttonWrapper.title = Dictionary.get('a11y.menu');
+    buttonWrapper.title = this.params.dictionary.get('a11y.menu');
     buttonWrapper.setAttribute('aria-expanded', 'false');
     buttonWrapper.setAttribute('aria-controls', 'h5p-portfolio-navigation-menu');
     buttonWrapper.onclick = () => {
@@ -121,8 +120,12 @@ export default class StatusBar {
     button.classList.add('h5p-portfolio-status-to-top');
     button.classList.add('h5p-portfolio-status-button');
     button.classList.add('h5p-portfolio-status-arrow');
-    button.setAttribute('title', Dictionary.get('l10n.navigateToTop'));
-    button.setAttribute('aria-label', Dictionary.get('l10n.navigateToTop'));
+    button.setAttribute(
+      'title', this.params.dictionary.get('l10n.navigateToTop')
+    );
+    button.setAttribute(
+      'aria-label', this.params.dictionary.get('l10n.navigateToTop')
+    );
     button.addEventListener('click', () => {
       this.callbacks.onScrollToTop();
     });
@@ -198,7 +201,7 @@ export default class StatusBar {
 
     buttons['previous'] = this.buildNavigationButton({
       icon: 'icon-previous',
-      label: Dictionary.get('l10n.previousPage'),
+      label: this.params.dictionary.get('l10n.previousPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'prev', toTop: true });
       })
@@ -206,7 +209,7 @@ export default class StatusBar {
 
     buttons['next'] = this.buildNavigationButton({
       icon: 'icon-next',
-      label: Dictionary.get('l10n.nextPage'),
+      label: this.params.dictionary.get('l10n.nextPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'next', toTop: true });
       })
@@ -250,8 +253,12 @@ export default class StatusBar {
     fullScreenButton.classList.add('h5p-portfolio-status-fullscreen');
     fullScreenButton.classList.add('h5p-portfolio-status-button');
     fullScreenButton.classList.add('h5p-portfolio-enter-fullscreen');
-    fullScreenButton.setAttribute('title', Dictionary.get('l10n.fullscreen'));
-    fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.fullscreen'));
+    fullScreenButton.setAttribute(
+      'title', this.params.dictionary.get('l10n.fullscreen')
+    );
+    fullScreenButton.setAttribute(
+      'aria-label', this.params.dictionary.get('l10n.fullscreen')
+    );
     fullScreenButton.addEventListener('click', () => {
       this.callbacks.onToggleFullscreen();
     });
@@ -303,9 +310,10 @@ export default class StatusBar {
    * @param {number} chapterId Chapter index.
    */
   updateProgressBar(chapterId) {
-    this.progressBar.progress.style.width = `${chapterId / Chapters.get().length * 100}%`;
+    this.progressBar.progress.style.width =
+      `${chapterId / Chapters.get().length * 100}%`;
 
-    const title = Dictionary.get('a11y.progress')
+    const title = this.params.dictionary.get('a11y.progress')
       .replace('@page', chapterId)
       .replace('@total', Chapters.get().length);
 
@@ -382,16 +390,28 @@ export default class StatusBar {
       return;
     }
 
-    this.fullScreenButton.classList.toggle('h5p-portfolio-enter-fullscreen', !state);
-    this.fullScreenButton.classList.toggle('h5p-portfolio-exit-fullscreen', state);
+    this.fullScreenButton.classList.toggle(
+      'h5p-portfolio-enter-fullscreen', !state
+    );
+    this.fullScreenButton.classList.toggle(
+      'h5p-portfolio-exit-fullscreen', state
+    );
 
     if (state) {
-      this.fullScreenButton.setAttribute('title', Dictionary.get('l10n.exitFullscreen'));
-      this.fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.exitFullscreen'));
+      this.fullScreenButton.setAttribute(
+        'title', this.params.dictionary.get('l10n.exitFullscreen')
+      );
+      this.fullScreenButton.setAttribute(
+        'aria-label', this.params.dictionary.get('l10n.exitFullscreen')
+      );
     }
     else {
-      this.fullScreenButton.setAttribute('title', Dictionary.get('l10n.fullscreen'));
-      this.fullScreenButton.setAttribute('aria-label', Dictionary.get('l10n.fullscreen'));
+      this.fullScreenButton.setAttribute(
+        'title', this.params.dictionary.get('l10n.fullscreen')
+      );
+      this.fullScreenButton.setAttribute(
+        'aria-label', this.params.dictionary.get('l10n.fullscreen')
+      );
     }
   }
 
