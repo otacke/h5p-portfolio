@@ -27,6 +27,7 @@ export default class Hotspot {
     this.dom.classList.add('h5p-portfolio-hotspot-navigation-hotspot');
     this.dom.style.left = `${this.params.position.x}%`;
     this.dom.style.top = `${this.params.position.y}%`;
+    this.dom.setAttribute('tabindex', '-1');
     if (this.params.color) {
       this.dom.style.background = this.params.color;
     }

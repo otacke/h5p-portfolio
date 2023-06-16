@@ -16,9 +16,11 @@ export default class Label {
     this.dom = document.createElement('div');
     this.dom.classList.add('h5p-portfolio-hotspot-navigation-label-container');
     this.dom.classList.add(this.params.position);
+    this.dom.setAttribute('aria-hidden', 'true');
 
     const label = document.createElement('div');
     label.classList.add('h5p-portfolio-hotspot-navigation-label');
+    label.setAttribute('aria-hidden', 'true');
     this.dom.appendChild(label);
 
     this.labelInner = document.createElement('div');

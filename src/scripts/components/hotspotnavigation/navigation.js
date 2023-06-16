@@ -31,6 +31,8 @@ export default class HotspotNavigation {
     const image = document.createElement('img');
     image.classList.add('h5p-portfolio-hotspot-navigation-image');
     image.src = H5P.getPath(this.params.image.path, this.params.contentId);
+    image.alt = '';
+    image.setAttribute('aria-hidden', true);
     this.dom.appendChild(image);
 
     // Hotspots
