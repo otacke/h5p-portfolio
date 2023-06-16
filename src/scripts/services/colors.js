@@ -8,24 +8,33 @@ import '@styles/_color_overrides.scss';
 export default class Colors {
 
   /**
+   * @class
+   */
+  constructor() {
+    // Relevant default colors defined in SCSS main class or derived from those
+    this.colorBase = Colors.DEFAULT_COLOR_BASE;
+    this.colorText = Colors.DEFAULT_COLOR_BG;
+  }
+
+  /**
    * Set new base color.
    * @param {string} color RGB color code in hex: #rrggbb.
    */
-  static setBase(color) {
+  setBase(color) {
     if (!color) {
       return;
     }
 
-    Colors.colorBase = Color(color);
+    this.colorBase = Color(color);
 
     // Get contrast color with highest contrast
-    Colors.colorText = [
+    this.colorText = [
       Colors.DEFAULT_COLOR_BG,
-      Colors.computeContrastColor(Colors.colorBase),
-      Colors.computeContrastColor(Colors.colorBase, Colors.DEFAULT_COLOR_BG)
+      this.computeContrastColor(this.colorBase),
+      this.computeContrastColor((this.colorBase), Colors.DEFAULT_COLOR_BG)
     ].map((color) => ({
       color: color,
-      contrast: Colors.colorBase.contrast(color)
+      contrast: this.colorBase.contrast(color)
     })).reduce((result, current) => {
       return (current.contrast > result.contrast) ? current : result;
     }, {contrast: 0}).color;
@@ -38,7 +47,7 @@ export default class Colors {
    * @param {number} [params.opacity] Opacity value assuming white background.
    * @returns {Color} Color with opacity figured in.
    */
-  static getColor(color, params = {}) {
+  getColor(color, params = {}) {
     if (
       typeof params.opacity === 'string' &&
       /^([0-9]|[1-8][0-9]|9[0-9]|100)(\.\d+)?\s?%$/.test(params.opacity)
@@ -68,8 +77,8 @@ export default class Colors {
    * @param {string} color RGB color code in hex: #rrggbb.
    * @returns {boolean} True, if color is default base color, else false.
    */
-  static isBaseColor(color) {
-    return Color(color).hex() === Colors.colorBase.hex();
+  isBaseColor(color) {
+    return Color(color).hex() === this.colorBase.hex();
   }
 
   /**
@@ -80,7 +89,7 @@ export default class Colors {
    * @param {Color} comparisonColor Color that the base color is compared to.
    * @returns {Color} Contrast color.
    */
-  static computeContrastColor(baseColor, comparisonColor) {
+  computeContrastColor(baseColor, comparisonColor) {
     comparisonColor = comparisonColor || baseColor;
 
     const luminance = comparisonColor.luminosity();
@@ -92,7 +101,7 @@ export default class Colors {
       }));
 
       const contrast = contrastColor.contrast(comparisonColor);
-      if (contrast >= Colors.MINIMUM_ACCEPTABLE_CONTRAST) {
+      if (contrast >= this.MINIMUM_ACCEPTABLE_CONTRAST) {
         break;
       }
     }
@@ -105,12 +114,12 @@ export default class Colors {
    * @param {string} machineName content types machine name.
    * @returns {string} CSS override for content type.
    */
-  static getContentTypeCSS(machineName) {
-    if (!Colors.COLOR_OVERRIDES[machineName]) {
+  getContentTypeCSS(machineName) {
+    if (!this.COLOR_OVERRIDES[machineName]) {
       return '';
     }
 
-    return Colors.COLOR_OVERRIDES[machineName].getCSS();
+    return this.COLOR_OVERRIDES[machineName].getCSS();
   }
 
   /**
@@ -119,19 +128,19 @@ export default class Colors {
    * override CSS.
    * @returns {string} CSS overrides.
    */
-  static getCSS() {
+  getCSS() {
     return `:root{
-      --color-base: ${Colors.colorBase};
-      --color-base-5: ${Colors.getColor(Colors.colorBase, { opacity: .05 })};
-      --color-base-10: ${Colors.getColor(Colors.colorBase, { opacity: .1 })};
-      --color-base-20: ${Colors.getColor(Colors.colorBase, { opacity: .2 })};
-      --color-base-75: ${Colors.getColor(Colors.colorBase, { opacity: .75 })};
-      --color-base-80: ${Colors.getColor(Colors.colorBase, { opacity: .80 })};
-      --color-base-85: ${Colors.getColor(Colors.colorBase, { opacity: .85 })};
-      --color-base-90: ${Colors.getColor(Colors.colorBase, { opacity: .9 })};
-      --color-base-95: ${Colors.getColor(Colors.colorBase, { opacity: .95 })};
-      --color-text: ${Colors.colorText};
-      --color-contrast: ${Colors.computeContrastColor(Colors.colorBase, Colors.DEFAULT_COLOR_BG)};
+      --color-base: ${this.colorBase};
+      --color-base-5: ${this.getColor(this.colorBase, { opacity: .05 })};
+      --color-base-10: ${this.getColor(this.colorBase, { opacity: .1 })};
+      --color-base-20: ${this.getColor(this.colorBase, { opacity: .2 })};
+      --color-base-75: ${this.getColor(this.colorBase, { opacity: .75 })};
+      --color-base-80: ${this.getColor(this.colorBase, { opacity: .80 })};
+      --color-base-85: ${this.getColor(this.colorBase, { opacity: .85 })};
+      --color-base-90: ${this.getColor(this.colorBase, { opacity: .9 })};
+      --color-base-95: ${this.getColor(this.colorBase, { opacity: .95 })};
+      --color-text: ${this.colorText};
+      --color-contrast: ${this.computeContrastColor(this.colorBase, Colors.DEFAULT_COLOR_BG)};
     }`;
   }
 
@@ -139,7 +148,7 @@ export default class Colors {
    * Add custom CSS property.
    * @param {string} css CSS.
    */
-  static addCustomCSSProperty(css) {
+  addCustomCSSProperty(css) {
     if (typeof css !== 'string') {
       return;
     }
@@ -161,6 +170,4 @@ Colors.DEFAULT_COLOR_BG = Color('#ffffff');
 /** @constant {number} Minimum acceptable contrast for normal font size, cmp. https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure */
 Colors.MINIMUM_ACCEPTABLE_CONTRAST = 4.5;
 
-// Relevant default colors defined in SCSS main class or derived from those
-Colors.colorBase = Colors.DEFAULT_COLOR_BASE;
-Colors.colorText = Colors.DEFAULT_COLOR_BG;
+

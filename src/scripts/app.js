@@ -64,22 +64,24 @@ export default class Portfolio extends H5P.EventDispatcher {
       a11y: this.params.a11y
     });
 
+    this.colors = new Colors();
+
     // Will be called in static context
     this.validateFragments = this.validateFragments.bind(this);
 
     // Apply custom base color
     if (
       params?.behaviour?.baseColor &&
-      !Colors.isBaseColor(params.behaviour.baseColor) &&
+      !this.colors.isBaseColor(params.behaviour.baseColor) &&
       (!Portfolio.wasInstantiated[this.contentId] || this.isPreview)
     ) {
-      Colors.setBase(params.behaviour.baseColor);
-      Colors.addCustomCSSProperty(Colors.getCSS());
+      this.colors.setBase(params.behaviour.baseColor);
+      this.colors.addCustomCSSProperty(this.colors.getCSS());
     }
 
     if (!Portfolio.wasInstantiated[this.contentId] || this.isPreview) {
       // Apply hotspot color
-      Colors.addCustomCSSProperty(`:root{--color-hotspot-background:
+      this.colors.addCustomCSSProperty(`:root{--color-hotspot-background:
         ${this.params.hotspotNavigationGlobals.hotspotNavigationColor}
       ;}`);
     }
