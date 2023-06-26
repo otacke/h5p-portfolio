@@ -25,23 +25,6 @@
       ]
     },
     {
-      "label": "Hotspot navigation",
-      "description": "Set global values for hotspot navigation.",
-      "fields": [
-        {
-          "label": "Hotspot navigation image",
-          "description": "Image used as background for the hotspot navigation."
-        },
-        {
-          "label": "Hotspot color",
-          "default": "rgba(255, 255, 255, .6)"
-        },
-        {
-          "label": "Show hotspot title in navigation"
-        }
-      ]
-    },
-    {
       "label": "Use header"
     },
     {
@@ -66,6 +49,23 @@
         },
         {
           "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Hotspot navigation",
+      "description": "Set global values for hotspot navigation.",
+      "fields": [
+        {
+          "label": "Hotspot navigation image",
+          "description": "Image used as background for the hotspot navigation."
+        },
+        {
+          "label": "Hotspot color",
+          "default": "rgba(255, 255, 255, .6)"
+        },
+        {
+          "label": "Show hotspot title in navigation"
         }
       ]
     },

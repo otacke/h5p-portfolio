@@ -25,23 +25,6 @@
       ]
     },
     {
-      "label": "Hotspot-Navigation",
-      "description": "Setze die globalen Werte für die Hotspot-Navigation.",
-      "fields": [
-        {
-          "label": "Bild für die Hotspot-Navigation",
-          "description": "Bild, das für den Hintergrund der Hotspot-Navigation verwendet wird."
-        },
-        {
-          "label": "Hotspot-Farbe",
-          "default": "rgba(255, 255, 255, .6)"
-        },
-        {
-          "label": "Zeige Hotspot-Beschriftung in Navigation"
-        }
-      ]
-    },
-    {
       "label": "Header verwenden"
     },
     {
@@ -66,6 +49,23 @@
         },
         {
           "label": "Dummy"
+        }
+      ]
+    },
+    {
+      "label": "Hotspot-Navigation",
+      "description": "Setze die globalen Werte für die Hotspot-Navigation.",
+      "fields": [
+        {
+          "label": "Bild für die Hotspot-Navigation",
+          "description": "Bild, das für den Hintergrund der Hotspot-Navigation verwendet wird."
+        },
+        {
+          "label": "Hotspot-Farbe",
+          "default": "rgba(255, 255, 255, .6)"
+        },
+        {
+          "label": "Zeige Hotspot-Beschriftung in Navigation"
         }
       ]
     },
