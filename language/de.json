@@ -26,7 +26,7 @@
     },
     {
       "label": "Header verwenden",
-      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
+      "description": "Wenn du diesen Schalter aktivierst/deaktiviert, wird der Header in allen Kapiteln entsprechend hinzugefügt/entfernt."
     },
     {
       "label": "Header",
@@ -41,7 +41,7 @@
     },
     {
       "label": "Footer verwenden",
-      "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly."
+      "description": "Wenn du diesen Schalter aktivierst/deaktiviert, wird der Footer in allen Kapiteln entsprechend hinzugefügt/entfernt."
     },
     {
       "label": "Footer",
