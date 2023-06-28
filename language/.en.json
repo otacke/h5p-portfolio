@@ -25,7 +25,8 @@
       ]
     },
     {
-      "label": "Use header"
+      "label": "Use header",
+      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
     },
     {
       "label": "Header",
@@ -39,7 +40,8 @@
       ]
     },
     {
-      "label": "Use footer"
+      "label": "Use footer",
+      "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly."
     },
     {
       "label": "Footer",

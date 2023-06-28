@@ -25,7 +25,8 @@
       ]
     },
     {
-      "label": "Usar a cabeceira"
+      "label": "Usar a cabeceira",
+      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
     },
     {
       "label": "Cabeceira",
@@ -39,7 +40,8 @@
       ]
     },
     {
-      "label": "Usar o pé de páxina"
+      "label": "Usar o pé de páxina",
+      "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly."
     },
     {
       "label": "Pé de páxina",

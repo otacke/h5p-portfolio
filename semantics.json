@@ -89,6 +89,7 @@
   },
   {
     "name": "showHeader",
+    "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly.",
     "type": "boolean",
     "label": "Use header",
     "importance": "low",
@@ -135,6 +136,7 @@
     "name": "showFooter",
     "type": "boolean",
     "label": "Use footer",
+    "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly.",
     "importance": "low",
     "default": false
   },
