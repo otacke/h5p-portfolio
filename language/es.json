@@ -26,7 +26,7 @@
     },
     {
       "label": "Usar encabezado",
-      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
+      "description": "Si cambia este selector a activo/inactivo, el encabezado de todos los capítulos será mostrado/eliminado respectivamente."
     },
     {
       "label": "Encabezado",
@@ -41,7 +41,7 @@
     },
     {
       "label": "Usar pie de página",
-      "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly."
+      "description": "Si cambia este selector a activo/inactivo, el pie de página de todos los capítulos será mostrado/eliminado respectivamente."
     },
     {
       "label": "Pie de página",
