@@ -187,6 +187,22 @@
         {
           "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis ein- und auszublenden",
           "default": "Inhaltsverzeichnis ein- bzw. ausschalten"
+        },
+        {
+          "label": "Obere Naviation",
+          "default": "Obere Navigation"
+        },
+        {
+          "label": "Untere Naviation",
+          "default": "Untere Navigation"
+        },
+        {
+          "label": "Main navigation",
+          "default": "Hauptnavigation"
+        },
+        {
+          "label": "Hauptinhalt",
+          "default": "Hauptinhalt"
         }
       ]
     }

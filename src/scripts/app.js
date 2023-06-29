@@ -48,7 +48,11 @@ export default class Portfolio extends H5P.EventDispatcher {
       },
       a11y: {
         progress: 'Page @page of @total.',
-        menu: 'Toggle navigation menu'
+        menu: 'Toggle navigation menu',
+        topNavigation: 'Top navigation',
+        bottomNavigation: 'Bottom navigation',
+        mainNavigation: 'Main navigation',
+        mainContent: 'Main content'
       }
     }, params);
 
@@ -114,7 +118,9 @@ export default class Portfolio extends H5P.EventDispatcher {
         previousState: {}
       });
 
-    this.chapters = new Chapters();
+    this.chapters = new Chapters({
+      dictionary: this.dictionary
+    });
     this.chapters.setHeader(header);
     this.chapters.setFooter(footer);
 
@@ -227,7 +233,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         contentId: this.contentId,
         hotspotColors: hotspotColors,
         isCovered: showCover,
-        showHotspotTitles: this.params.hotspotNavigationGlobals.showHotspotTitles
+        showHotspotTitles: this.params.hotspotNavigationGlobals.showHotspotTitles,
+        dictionary: this.dictionary
       },
       {
         onScrollToTop: () => {
@@ -251,7 +258,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.sideBar = new SideBar(
       {
         chapters: this.chapters,
-        mainTitle: extras?.metadata?.title
+        mainTitle: extras?.metadata?.title,
+        a11yLabel: this.dictionary.get('a11y.mainNavigation')
       },
       {
         onMoved: ((params) => {
@@ -269,7 +277,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         chapters: this.chapters,
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-portfolio-status-header'
+        styleClassName: 'h5p-portfolio-status-header',
+        a11yLabel: this.dictionary.get('a11y.topNavigation')
       },
       {
         onMoved: ((params) => {
@@ -293,7 +302,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         chapters: this.chapters,
         displayToTopButton: true,
         displayFullScreenButton: true,
-        styleClassName: 'h5p-portfolio-status-footer'
+        styleClassName: 'h5p-portfolio-status-footer',
+        a11yLabel: this.dictionary.get('a11y.bottomNavigation')
       },
       {
         onMoved: ((params) => {

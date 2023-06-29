@@ -42,8 +42,14 @@ export default class PageContent {
     this.buildChapterDOMs();
     this.preloadChapter(this.currentChapterId);
 
-    const content = document.createElement('div');
+    /*
+     * Technically, this could be "main", but we have subcontent which could
+     * use "main" as well, and there should only be one main landmark role per
+     * document.
+     */
+    const content = document.createElement('region');
     content.classList.add('h5p-portfolio-content');
+    content.setAttribute('aria-label', this.params.dictionary.get('a11y.mainContent'));
 
     this.params.chapters.get().forEach((chapter) => {
       content.appendChild(chapter.getDOM());

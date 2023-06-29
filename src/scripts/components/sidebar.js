@@ -20,8 +20,9 @@ class SideBar extends H5P.EventDispatcher {
       onResized: (() => {})
     }, callbacks);
 
-    this.container = document.createElement('div');
+    this.container = document.createElement('nav');
     this.container.classList.add('h5p-portfolio-navigation');
+    this.container.setAttribute('aria-label', this.params.a11yLabel);
     if (params.mainTitle) {
       const title = new Title({ titleText: params.mainTitle });
       this.container.appendChild(title.getDOM());

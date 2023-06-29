@@ -187,6 +187,22 @@
         {
           "label": "Label for expanding/collapsing navigation menu",
           "default": "Toggle navigation menu"
+        },
+        {
+          "label": "Top naviation",
+          "default": "Top navigation"
+        },
+        {
+          "label": "Bottom naviation",
+          "default": "Bottom navigation"
+        },
+        {
+          "label": "Top naviation",
+          "default": "Top navigation"
+        },
+        {
+          "label": "mainContent",
+          "default": "Main content"
         }
       ]
     }

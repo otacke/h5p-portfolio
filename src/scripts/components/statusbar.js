@@ -23,9 +23,12 @@ export default class StatusBar {
    * Build DOM.
    */
   buildDOM() {
-    this.wrapper = document.createElement('div');
+    this.wrapper = document.createElement('nav');
     this.wrapper.classList.add(this.params.styleClassName);
     this.wrapper.setAttribute('tabindex', '-1');
+    if (this.params.a11yLabel) {
+      this.wrapper.setAttribute('aria-label', this.params.a11yLabel);
+    }
 
     // Progressbar
     this.progressBar = this.buildProgressBar();
