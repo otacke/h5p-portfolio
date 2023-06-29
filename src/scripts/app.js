@@ -48,7 +48,8 @@ export default class Portfolio extends H5P.EventDispatcher {
       },
       a11y: {
         progress: 'Page @page of @total.',
-        menu: 'Toggle navigation menu',
+        openMainNavigation: 'Open main navigation menu',
+        closeMainNavigation: 'Close main navigation menu',
         topNavigation: 'Top navigation',
         bottomNavigation: 'Bottom navigation',
         mainNavigation: 'Main navigation',
@@ -542,10 +543,11 @@ export default class Portfolio extends H5P.EventDispatcher {
    * Toggle menu.
    */
   toggleMenu() {
-    this.contentArea.classList.toggle('h5p-portfolio-navigation-open');
+    const isMenuOpen = this.contentArea.classList
+      .toggle('h5p-portfolio-navigation-open');
 
     // Update the menu button
-    this.statusBarHeader.toggleMenu();
+    this.statusBarHeader.toggleMenu(isMenuOpen);
 
     // We need to resize the whole book since the interactions are getting
     // more width and those with a static ratio will increase their height.

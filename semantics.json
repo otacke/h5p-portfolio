@@ -498,10 +498,16 @@
         "default": "Page @page of @total."
       },
       {
-        "name": "menu",
+        "name": "openMainNavigation",
         "type": "text",
-        "label": "Label for expanding/collapsing navigation menu",
-        "default": "Toggle navigation menu"
+        "label": "Label for expanding main navigation menu",
+        "default": "Open main navigation menu"
+      },
+      {
+        "name": "closeMainNavigation",
+        "type": "text",
+        "label": "Label for collapsing main navigation menu",
+        "default": "Close main navigation menu"
       },
       {
         "name": "topNavigation",

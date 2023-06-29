@@ -185,8 +185,12 @@
           "default": "Páxina @page de @total."
         },
         {
-          "label": "Etiqueta para expandir/colapsar o menú de navegación",
-          "default": "Alternar o menú de navegación"
+          "label": "Label for expanding main navigation menu",
+          "default": "Open main navigation menu"
+        },
+        {
+          "label": "Label for collapsing main navigation menu",
+          "default": "Close main navigation menu"
         },
         {
           "label": "Top naviation",

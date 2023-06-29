@@ -185,15 +185,19 @@
           "default": "Seite @page von @total."
         },
         {
-          "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis ein- und auszublenden",
-          "default": "Inhaltsverzeichnis ein- bzw. ausschalten"
+          "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis einzublenden",
+          "default": "Öffne Hauptnavigationsmenü"
         },
         {
-          "label": "Obere Naviation",
+          "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis auszublenden",
+          "default": "Schließe Hauptnavigationsmenü"
+        },
+        {
+          "label": "Obere Navigation",
           "default": "Obere Navigation"
         },
         {
-          "label": "Untere Naviation",
+          "label": "Untere Navigation",
           "default": "Untere Navigation"
         },
         {

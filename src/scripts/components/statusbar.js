@@ -95,9 +95,12 @@ export default class StatusBar {
     const buttonWrapper = document.createElement('button');
     buttonWrapper.classList.add('h5p-portfolio-status-menu');
     buttonWrapper.classList.add('h5p-portfolio-status-button');
-    buttonWrapper.title = this.params.dictionary.get('a11y.menu');
     buttonWrapper.setAttribute('aria-expanded', 'false');
     buttonWrapper.setAttribute('aria-controls', 'h5p-portfolio-navigation-menu');
+    buttonWrapper.setAttribute(
+      'aria-label',
+      this.params.dictionary.get('a11y.openMainNavigation')
+    );
     buttonWrapper.onclick = () => {
       this.callbacks.onToggleMenu();
     };
@@ -440,6 +443,11 @@ export default class StatusBar {
 
     this.menuToggleButton.classList.toggle('h5p-portfolio-status-menu-active', state);
     this.menuToggleButton.setAttribute('aria-expanded', state);
+
+    const ariaLabel = (state) ?
+      this.params.dictionary.get('a11y.closeMainNavigation') :
+      this.params.dictionary.get('a11y.openMainNavigation');
+    this.menuToggleButton.setAttribute('aria-label', ariaLabel);
 
     return state;
   }
