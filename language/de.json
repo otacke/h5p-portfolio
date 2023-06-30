@@ -67,7 +67,7 @@
           "default": "rgba(255, 255, 255, .6)"
         },
         {
-          "label": "Zeige Hotspot-Beschriftung in Navigation"
+          "label": "Zeige Hotspot-Beschriftung in Navigation dauerhaft"
         }
       ]
     },

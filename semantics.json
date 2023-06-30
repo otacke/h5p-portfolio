@@ -224,9 +224,9 @@
       {
         "name": "showHotspotTitles",
         "type": "boolean",
-        "label": "Show hotspot titles in navigation",
+        "label": "Permanently show hotspot titles in navigation",
         "optional": true,
-        "default": false
+        "default": true
       }
     ]
   },
