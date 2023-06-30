@@ -185,28 +185,28 @@
           "default": "Página @page de @total."
         },
         {
-          "label": "Label for expanding main navigation menu",
-          "default": "Open main navigation menu"
+          "label": "Etiqueta para expandir menú principal de navegación",
+          "default": "Abrir menú principal de navegación"
         },
         {
-          "label": "Label for collapsing main navigation menu",
-          "default": "Close main navigation menu"
+          "label": "Etiqueta para colapsar el menú principal de navegación",
+          "default": "Cerrar menú principal de navegación"
         },
         {
-          "label": "Top naviation",
-          "default": "Top navigation"
+          "label": "Navegación superior",
+          "default": "Navegación superior"
         },
         {
-          "label": "Bottom naviation",
-          "default": "Bottom navigation"
+          "label": "Navegación inferior",
+          "default": "Navegación inferior"
         },
         {
-          "label": "Main navigation",
-          "default": "Main navigation"
+          "label": "Navegación principal",
+          "default": "Navegación superior"
         },
         {
-          "label": "Main content",
-          "default": "Main content"
+          "label": "Contenido principal",
+          "default": "Contenido principal"
         }
       ]
     }
