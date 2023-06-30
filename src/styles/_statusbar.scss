@@ -53,6 +53,7 @@
   border: .125em solid $background-color;
   flex-shrink: 0;
   justify-content: center;
+  order: 5;
 
   &.h5p-portfolio-enter-fullscreen {
     &::before {
@@ -79,6 +80,7 @@
   border: 2px solid $background-color;
   border-radius: 3px;
   flex-shrink: 0;
+  order: 0;
 
   .icon-menu {
     color: var(--color-base, $base-color);
@@ -190,6 +192,14 @@
   flex-shrink: 0;
   height: 2.75em;
   width: 2.75em;
+
+  &.previous {
+    order: 3;
+  }
+
+  &.next {
+    order: 4;
+  }
 
   .navigation-button {
     background: transparent;

@@ -37,6 +37,17 @@ export default class StatusBar {
     const wrapperInfo = document.createElement('div');
     wrapperInfo.classList.add('h5p-portfolio-status');
 
+    // Fullscreen button
+    if (this.params.displayFullScreenButton && H5P.fullscreenSupported) {
+      this.fullScreenButton = this.buildFullScreenButton();
+      wrapperInfo.appendChild(this.fullScreenButton);
+    }
+
+    // Navigation buttons
+    this.navigationButtons = this.buildNavigationButtons();
+    wrapperInfo.appendChild(this.navigationButtons['next']);
+    wrapperInfo.appendChild(this.navigationButtons['previous']);
+
     // Menu toggle button
     if (this.params.displayMenuToggleButton) {
       this.menuToggleButton = this.buildMenuToggleButton();
@@ -56,17 +67,6 @@ export default class StatusBar {
     // Progress indicator
     this.progressIndicator = this.buildProgressIndicator();
     wrapperInfo.appendChild(this.progressIndicator.wrapper);
-
-    // Navigation buttons
-    this.navigationButtons = this.buildNavigationButtons();
-    wrapperInfo.appendChild(this.navigationButtons['previous']);
-    wrapperInfo.appendChild(this.navigationButtons['next']);
-
-    // Fullscreen button
-    if (this.params.displayFullScreenButton && H5P.fullscreenSupported) {
-      this.fullScreenButton = this.buildFullScreenButton();
-      wrapperInfo.appendChild(this.fullScreenButton);
-    }
 
     this.wrapper.appendChild(wrapperInfo);
   }
@@ -206,6 +206,7 @@ export default class StatusBar {
 
     buttons['previous'] = this.buildNavigationButton({
       icon: 'icon-previous',
+      class: 'previous',
       label: this.params.dictionary.get('l10n.previousPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'prev', toTop: true });
@@ -214,6 +215,7 @@ export default class StatusBar {
 
     buttons['next'] = this.buildNavigationButton({
       icon: 'icon-next',
+      class: 'next',
       label: this.params.dictionary.get('l10n.nextPage'),
       onClicked: (() => {
         this.callbacks.onMoved({ direction: 'next', toTop: true });
@@ -235,6 +237,10 @@ export default class StatusBar {
     const button = document.createElement('button');
     button.classList.add('h5p-portfolio-status-arrow');
     button.classList.add('h5p-portfolio-status-button');
+    if (params.class) {
+      button.classList.add(params.class);
+    }
+
     button.setAttribute('aria-label', params.label);
     button.addEventListener('click', () => {
       params.onClicked();
