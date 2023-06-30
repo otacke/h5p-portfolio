@@ -294,7 +294,10 @@ export default class Portfolio extends H5P.EventDispatcher {
           this.toggleFullScreen();
         }),
         onToggleMenu: (() => {
-          this.toggleMenu();
+          const isMenuOpen = this.toggleMenu();
+          if (isMenuOpen) {
+            this.focusMenu();
+          }
         })
       }
     );
@@ -319,7 +322,10 @@ export default class Portfolio extends H5P.EventDispatcher {
           this.toggleFullScreen();
         }),
         onToggleMenu: (() => {
-          this.toggleMenu();
+          const isMenuOpen = this.toggleMenu();
+          if (isMenuOpen) {
+            this.focusMenu();
+          }
         })
       }
     );
@@ -542,7 +548,15 @@ export default class Portfolio extends H5P.EventDispatcher {
   }
 
   /**
+   * Set focus on menu.
+   */
+  focusMenu() {
+    this.sideBar.focus();
+  }
+
+  /**
    * Toggle menu.
+   * @returns {boolean} True, if menu is open, else false.
    */
   toggleMenu() {
     const isMenuOpen = this.contentArea.classList
@@ -561,6 +575,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         this.trigger('resize');
       }, 0); // Content may need to be resized after re-drawn
     }, 150);
+
+    return isMenuOpen;
   }
 
   /**

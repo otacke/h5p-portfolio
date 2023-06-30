@@ -283,6 +283,11 @@ class SideBar extends H5P.EventDispatcher {
     });
   }
 
+  // Set focus on previously active menu item.
+  focus() {
+    this.currentlyTabbableMenuItem?.focus();
+  }
+
   /**
    * Set currente item.
    * @param {string} hierarchy Hierarchy.
@@ -295,6 +300,7 @@ class SideBar extends H5P.EventDispatcher {
 
       if (item.hierarchy === hierarchy) {
         instance.makeTabbable();
+        this.currentlyTabbableMenuItem = instance;
 
         // Do not care about content items
         if (hierarchy.indexOf(':') === -1) {
