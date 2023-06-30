@@ -528,6 +528,19 @@
         "default": "Main navigation"
       },
       {
+        "name": "hotspotNavigation",
+        "type": "text",
+        "label": "Hotspot navigation",
+        "default": "Hotspot navigation"
+      },
+      {
+        "name": "goTo",
+        "type": "text",
+        "label": "Go to",
+        "description": "@title is placeholder that will be replaced with the respective value.",
+        "default": "Go to @title"
+      },
+      {
         "name": "mainContent",
         "type": "text",
         "label": "Main content",

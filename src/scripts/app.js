@@ -53,6 +53,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         topNavigation: 'Top navigation',
         bottomNavigation: 'Bottom navigation',
         mainNavigation: 'Main navigation',
+        hotspotNavigation: 'Hotspot navigation',
+        goTo: 'Go to @title',
         mainContent: 'Main content'
       }
     }, params);

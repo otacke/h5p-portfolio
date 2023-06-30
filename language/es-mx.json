@@ -205,6 +205,15 @@
           "default": "Navegación superior"
         },
         {
+          "label": "Hotspot navigation",
+          "default": "Hotspot navigation"
+        },
+        {
+          "label": "Go to",
+          "description": "@title is placeholder that will be replaced with the respective value.",
+          "default": "Go to @title"
+        },
+        {
           "label": "Contenido principal",
           "default": "Contenido principal"
         }

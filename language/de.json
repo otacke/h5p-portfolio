@@ -201,8 +201,17 @@
           "default": "Untere Navigation"
         },
         {
-          "label": "Main navigation",
+          "label": "Hauptnavigation",
           "default": "Hauptnavigation"
+        },
+        {
+          "label": "Hotspot-Navigation",
+          "default": "Hotspot-Navigation"
+        },
+        {
+          "label": "Gehe zu",
+          "description": "@title ist ein Platzhalter und wird durch den entsprechenden Wert ersetzt.",
+          "default": "Gehe zu @title"
         },
         {
           "label": "Hauptinhalt",

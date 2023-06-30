@@ -18,9 +18,11 @@ export default class HotspotNavigation {
       onClicked: (() => {})
     }, callbacks);
 
-    this.dom = document.createElement('div');
+    this.dom = document.createElement('navigation');
     this.dom.classList.add('h5p-portfolio-hotspot-navigation');
-    this.dom.setAttribute('aria-hidden', true);
+    this.dom.setAttribute(
+      'aria-label', this.params.dictionary.get('a11y.hotspotNavigation')
+    );
 
     this.hotspots = [];
 
@@ -42,11 +44,16 @@ export default class HotspotNavigation {
           return null;
         }
 
+        const a11yLabel = this.params.dictionary.get('a11y.goTo').replace(
+          /@title/, chapter.params.hotspotNavigation.title || chapter.title
+        );
+
         return new Hotspot(
           {
             id: chapter.getSubContentId(),
             position: chapter.params.hotspotNavigation.position,
             title: chapter.params.hotspotNavigation.title,
+            a11yLabel: a11yLabel,
             color: this.params.hotspotColors[index],
             showHotspotTitles: this.params.showHotspotTitles
           }, {
