@@ -26,7 +26,7 @@
     },
     {
       "label": "Usar a cabeceira",
-      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
+      "description": "Se activas/desactivas este interruptor, a cabeceira de todos os capítulos mostrarase/eliminarase en consecuencia."
     },
     {
       "label": "Cabeceira",
@@ -41,7 +41,7 @@
     },
     {
       "label": "Usar o pé de páxina",
-      "description": "If you toggle this switch on/off, the footer of all chapters will be displayed/removed accordingly."
+      "description": "Se activas/desactivas este interruptor, o pé de todos os capítulos mostrarase/eliminarase en consecuencia."
     },
     {
       "label": "Pé de páxina",
@@ -67,7 +67,7 @@
           "default": "rgba(255, 255, 255, .6)"
         },
         {
-          "label": "Mostra o título do punto de acceso na navegación"
+          "label": "Mostrar permanentemente o título do punto de acceso na navegación"
         }
       ]
     },
@@ -185,37 +185,37 @@
           "default": "Páxina @page de @total."
         },
         {
-          "label": "Label for expanding main navigation menu",
-          "default": "Open main navigation menu"
+          "label": "Etiqueta para ampliar o menú de navegación principal",
+          "default": "Abrir o menú de navegación principal"
         },
         {
-          "label": "Label for collapsing main navigation menu",
-          "default": "Close main navigation menu"
+          "label": "Etiqueta para contraer o menú de navegación principal",
+          "default": "Pechar o menú de navegación principal"
         },
         {
-          "label": "Top naviation",
-          "default": "Top navigation"
+          "label": "Navegación superior",
+          "default": "Navegación superior"
         },
         {
-          "label": "Bottom naviation",
-          "default": "Bottom navigation"
+          "label": "Navegación inferior",
+          "default": "Navegación inferior"
         },
         {
           "label": "Main navigation",
           "default": "Main navigation"
         },
         {
-          "label": "Hotspot navigation",
-          "default": "Hotspot navigation"
+          "label": "Navegación por puntos de acceso",
+          "default": "Navegación por puntos de acceso"
         },
         {
-          "label": "Go to",
-          "description": "@title is placeholder that will be replaced with the respective value.",
-          "default": "Go to @title"
+          "label": "Ir a",
+          "description": "@title é un marcador de posición que se substituirá polo valor respectivo.",
+          "default": "Ir a @title"
         },
         {
           "label": "Main content",
-          "default": "Main content"
+          "default": "Contido principal"
         }
       ]
     }
