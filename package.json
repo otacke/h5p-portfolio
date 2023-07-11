@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js'",
     "build": "webpack --mode=production",
-    "watch": "webpack --watch --mode=development"
+    "watch": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
