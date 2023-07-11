@@ -37,7 +37,7 @@ export default class Colors {
       contrast: this.colorBase.contrast(color)
     })).reduce((result, current) => {
       return (current.contrast > result.contrast) ? current : result;
-    }, {contrast: 0}).color;
+    }, { contrast: 0 }).color;
   }
 
   /**

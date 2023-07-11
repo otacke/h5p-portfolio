@@ -909,7 +909,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     return {
       interactionType: 'compound',
       type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
-      description: {'en-US': ''}
+      description: { 'en-US': '' }
     };
   }
 
