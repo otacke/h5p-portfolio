@@ -67,7 +67,7 @@
           "default": "rgba(255, 255, 255, .6)"
         },
         {
-          "label": "Mostrar el título del punto de acceso en la navegación"
+          "label": "Mostrar permanentemente el título del punto de acceso en la navegación"
         }
       ]
     },
@@ -205,13 +205,13 @@
           "default": "Navegación superior"
         },
         {
-          "label": "Hotspot navigation",
-          "default": "Hotspot navigation"
+          "label": "Navegación por puntos de acceso",
+          "default": "Navegación por puntos de acceso"
         },
         {
-          "label": "Go to",
-          "description": "@title is placeholder that will be replaced with the respective value.",
-          "default": "Go to @title"
+          "label": "Ir a",
+          "description": "@title es un marcador de posición que se reemplazará con el valor respectivo.",
+          "default": "Ir a @título"
         },
         {
           "label": "Contenido principal",
