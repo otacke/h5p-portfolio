@@ -234,10 +234,10 @@ export default class PageContent {
 
     if (!this.isCovered) {
       // Footer/Header DOM is put in correct chapter and old position gets clone
-      this.params.chapters.getByIndex(chapterIdFrom)?.setHeader('clone');
-      this.params.chapters.getByIndex(chapterIdFrom)?.setFooter('clone');
-      this.params.chapters.getByIndex(chapterIdTo)?.setHeader('original');
-      this.params.chapters.getByIndex(chapterIdTo)?.setFooter('original');
+      this.params.chapters.getByIndex(chapterIdFrom)?.setHeader?.('clone');
+      this.params.chapters.getByIndex(chapterIdFrom)?.setFooter?.('clone');
+      this.params.chapters.getByIndex(chapterIdTo)?.setHeader?.('original');
+      this.params.chapters.getByIndex(chapterIdTo)?.setFooter?.('original');
     }
 
     if (chapterIdFrom === chapterIdTo) {
