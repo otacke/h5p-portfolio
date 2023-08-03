@@ -33,7 +33,7 @@ export default class Cover {
     }
 
     // Title
-    this.container.append(this.BuildTitle(params.title));
+    this.container.append(this.buildTitle(params.title));
 
     // Description text
     if (params.coverData?.coverDescription) {
@@ -150,7 +150,7 @@ export default class Cover {
    * @param {string} titleText Text for title element.
    * @returns {HTMLElement} Title element.
    */
-  BuildTitle(titleText) {
+  buildTitle(titleText) {
     const title = document.createElement('p');
     title.innerHTML = titleText;
 
