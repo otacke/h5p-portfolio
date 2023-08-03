@@ -1,6 +1,6 @@
 {
   "name": "h5p-portfolio",
-  "version": "0.7.5",
+  "version": "0.8.0",
   "description": "H5P Portfolio",
   "scripts": {
     "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js'",
@@ -18,22 +18,22 @@
   "author": "RUB, Oliver Tacke",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.22.6",
-    "@babel/core": "^7.22.8",
-    "@babel/preset-env": "^7.22.7",
+    "@babel/cli": "^7.22.9",
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
-    "eslint": "^8.44.0",
-    "eslint-plugin-jsdoc": "^46.4.3",
+    "eslint": "^8.46.0",
+    "eslint-plugin-jsdoc": "^46.4.5",
     "mini-css-extract-plugin": "^2.7.6",
     "regenerator-runtime": "^0.13.11",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.63.6",
+    "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
-    "stylelint": "^15.10.1",
+    "stylelint": "^15.10.2",
     "stylelint-config-recommended": "^13.0.0",
     "stylelint-config-recommended-scss": "^12.0.0",
-    "webpack": "^5.88.1",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {

@@ -116,7 +116,7 @@
         "label": "Header",
         "optional": true,
         "options": [
-          "H5P.PortfolioPlaceholder 0.7"
+          "H5P.PortfolioPlaceholder 0.8"
         ],
         "paramOverrides": {
           "customTitleL10NId": "header",
@@ -169,7 +169,7 @@
         "label": "Footer",
         "optional": true,
         "options": [
-          "H5P.PortfolioPlaceholder 0.7"
+          "H5P.PortfolioPlaceholder 0.8"
         ],
         "paramOverrides": {
           "customTitleL10NId": "footer",
@@ -350,7 +350,7 @@
               "name": "content",
               "type": "library",
               "options": [
-                "H5P.PortfolioChapter 0.7"
+                "H5P.PortfolioChapter 0.8"
               ],
               "optional": false
             }
