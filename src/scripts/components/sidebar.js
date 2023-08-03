@@ -295,6 +295,13 @@ class SideBar extends H5P.EventDispatcher {
    * @param {boolean} [params.toggleSelected] If true, may collapse item.
    */
   setCurrentItem(hierarchy, params = {}) {
+    const currentItem = this.menuItems.find((item) => {
+      return item.instance.isActivated();
+    });
+    if (currentItem?.hierarchy === hierarchy && !params.toggleSelected) {
+      return;
+    }
+
     this.menuItems.forEach((item) => {
       const instance = item.instance;
 

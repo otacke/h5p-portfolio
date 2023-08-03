@@ -172,6 +172,14 @@ export default class MenuChapterItem {
   }
 
   /**
+   * Determine whether item is activated.
+   * @returns {boolean} True, if is activated.
+   */
+  isActivated() {
+    return this.button.classList.contains('h5p-portfolio-navigation-current');
+  }
+
+  /**
    * Activate item.
    */
   activate() {
