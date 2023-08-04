@@ -1,7 +1,7 @@
-import Util from '@services/util';
-import Chapter from '@models/chapter';
-import Title from '@components/sidebar/title';
-import MenuChapterItem from '@components/sidebar/menuchapteritem';
+import Util from '@services/util.js';
+import Chapter from '@models/chapter.js';
+import Title from '@components/sidebar/title.js';
+import MenuChapterItem from '@components/sidebar/menuchapteritem.js';
 import '@styles/_navigationbar.scss';
 
 /**

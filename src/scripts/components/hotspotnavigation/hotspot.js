@@ -1,4 +1,4 @@
-import Util from '@services/util';
+import Util from '@services/util.js';
 import Label from './label.js';
 import he from 'he';
 import './hotspot.scss';

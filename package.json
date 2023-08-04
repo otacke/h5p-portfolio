@@ -17,6 +17,7 @@
   ],
   "author": "RUB, Oliver Tacke",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",

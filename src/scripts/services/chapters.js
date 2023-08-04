@@ -1,5 +1,5 @@
-import SinglePlaceholder from '@components/single-placeholder/single-placeholder';
-import Chapter from '@models/chapter';
+import SinglePlaceholder from '@components/single-placeholder/single-placeholder.js';
+import Chapter from '@models/chapter.js';
 
 export default class Chapters {
 

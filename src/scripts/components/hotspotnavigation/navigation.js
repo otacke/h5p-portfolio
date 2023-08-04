@@ -1,7 +1,7 @@
 import './navigation.scss';
 
-import Util from '@services/util';
-import Hotspot from './hotspot';
+import Util from '@services/util.js';
+import Hotspot from './hotspot.js';
 
 export default class HotspotNavigation {
   /**
