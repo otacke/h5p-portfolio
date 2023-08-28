@@ -924,11 +924,28 @@ export default class Portfolio extends H5P.EventDispatcher {
    */
   getChaptersInformation(chapterId = null) {
     const info = this.chapters.getAll()
-      .map((chapter) => ({
-        hierarchy: chapter.hierarchy,
-        title: chapter.title,
-        placeholderDOMs: chapter.instance.getPlaceholderDOMs()
-      }));
+      .map((chapter) => {
+        const headerDOM = (chapter.headerDOM.style.display !== 'none') ?
+          chapter.headerDOM :
+          null;
+
+        const footerDOM = (chapter.footerDOM.style.display !== 'none') ?
+          chapter.footerDOM :
+          null;
+
+        const placeholderDOMs = [
+          headerDOM,
+          ...chapter.instance.getPlaceholderDOMs(),
+          footerDOM
+        ].filter((dom) => dom !== null);
+
+        return {
+          hierarchy: chapter.hierarchy,
+          title: chapter.title,
+          placeholderDOMs: placeholderDOMs
+        };
+      }
+      );
 
     return (chapterId !== null) ? info[chapterId] : info;
   }
