@@ -24,6 +24,12 @@ export default class PageContent {
     this.isCovered = params.isCovered || false;
 
     this.content = this.buildPageContent();
+
+    // Workaround for H5P.Video with YouTube content. Needs to be attached.
+    Util.callOnceVisible(this.content, () => {
+      this.params.chapters.getByIndex(this.currentChapterId).setHeader('original');
+      this.params.chapters.getByIndex(this.currentChapterId).setFooter('original');
+    });
   }
 
   /**

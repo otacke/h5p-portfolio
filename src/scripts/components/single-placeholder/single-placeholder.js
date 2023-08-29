@@ -21,8 +21,18 @@ export default class SinglePlaceholder {
       this.dom.classList.add(className);
     });
 
-    // TODO: Previous state
     const previousState = params.previousState ?? {};
+
+    // Workaround for H5P.Video with YouTube content. Needs to be attached.
+    const hiddenDOM = document.createElement('div');
+    hiddenDOM.classList.add('hidden-dom');
+    hiddenDOM.append(this.dom);
+    document.body.append(hiddenDOM);
+
+    // Workaround for H5P.Video with YouTube content. Needs to be attached.
+    window.requestAnimationFrame(() => {
+      hiddenDOM.remove(); // Not needed anymore
+    });
 
     const instance = (!params.params) ?
       null :

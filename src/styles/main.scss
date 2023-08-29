@@ -32,6 +32,13 @@ $fullscreen-button-size: 1.8em;
     url("@fonts/h5p-portfolio.svg") format("svg");
 }
 
+.hidden-dom {
+  left: -9999999px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
 .h5p-portfolio [class^='icon-'],
 .h5p-portfolio [class*=' icon-'] {
   font-family: 'h5p-book', sans-serif;

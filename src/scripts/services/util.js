@@ -97,4 +97,33 @@ export default class Util {
       ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
     );
   }
+
+  /**
+   * Call callback function once dom element gets visible in viewport.
+   * @param {HTMLElement} dom DOM element to wait for.
+   * @param {function} callback Function to call once DOM element is visible.
+   */
+  static callOnceVisible(dom, callback) {
+    if (typeof dom !== 'object' || typeof callback !== 'function') {
+      return; // Invalid arguments
+    }
+
+    // iOS is behind ... Again ...
+    const idleCallback = window.requestIdleCallback ?
+      window.requestIdleCallback :
+      window.requestAnimationFrame;
+
+    idleCallback(() => {
+      // Get started once visible and ready
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          observer.unobserve(dom);
+          callback();
+        }
+      }, {
+        threshold: 0
+      });
+      observer.observe(dom);
+    });
+  }
 }
