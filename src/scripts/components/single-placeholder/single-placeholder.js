@@ -61,6 +61,7 @@ export default class SinglePlaceholder {
 
   /**
    * Get dead clone of instance container.
+   * Would be nice to have this not rebuild the clone each time.
    * @returns {HTMLElement} Clone of instance container.
    */
   getDOMClone() {
