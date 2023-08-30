@@ -132,7 +132,8 @@
           ]
         },
         "portfolioPlaceholder": {
-          "colorSelectorBackground": true
+          "colorSelectorBackground": true,
+          "imageHeightLimit": true
         }
       },
       {
@@ -188,7 +189,8 @@
           ]
         },
         "portfolioPlaceholder": {
-          "colorSelectorBackground": true
+          "colorSelectorBackground": true,
+          "imageHeightLimit": true
         }
       },
       {
