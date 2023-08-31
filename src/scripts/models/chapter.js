@@ -112,6 +112,14 @@ export default class Chapter {
     }
     else if (action === 'clone') {
       newDOM = this.params.header.getDOMClone();
+      const rect = (this.params.header.getDOM().childNodes[0]).getBoundingClientRect();
+      if (rect.height > 0) {
+        const oldHeight = newDOM.childNodes[0].style.minHeight;
+        newDOM.childNodes[0].style.minHeight = `${rect.height}px`;
+        window.setTimeout(() => {
+          newDOM.childNodes[0].style.minHeight = oldHeight;
+        }, 500);
+      }
     }
     else {
       return;
