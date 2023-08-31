@@ -243,14 +243,6 @@ export default class PageContent {
     const chapterIdFrom = this.currentChapterId;
     const chapterIdTo = this.params.chapters.findChapterIndex(target.chapter);
 
-    if (!this.isCovered) {
-      // Footer/Header DOM is put in correct chapter and old position gets clone
-      this.params.chapters.getByIndex(chapterIdFrom)?.setHeader?.('clone');
-      this.params.chapters.getByIndex(chapterIdFrom)?.setFooter?.('clone');
-      this.params.chapters.getByIndex(chapterIdTo)?.setHeader?.('original');
-      this.params.chapters.getByIndex(chapterIdTo)?.setFooter?.('original');
-    }
-
     if (chapterIdFrom === chapterIdTo) {
       this.scrollTo(target);
       return;
@@ -259,7 +251,15 @@ export default class PageContent {
     this.currentChapterId = chapterIdTo;
 
     this.preloadChapter(this.currentChapterId);
-    this.animateChapterTransition(chapterIdFrom, this.currentChapterId, target);
+    this.animateChapterTransition(chapterIdFrom, this.currentChapterId, target, () => {
+      if (!this.isCovered) {
+        // Footer/Header DOM is put in correct chapter and old position gets clone
+        this.params.chapters.getByIndex(chapterIdFrom)?.setHeader?.('clone');
+        this.params.chapters.getByIndex(chapterIdFrom)?.setFooter?.('clone');
+        this.params.chapters.getByIndex(chapterIdTo)?.setHeader?.('original');
+        this.params.chapters.getByIndex(chapterIdTo)?.setFooter?.('original');
+      }
+    });
 
     this.callbacks.onChapterChanged(this.currentChapterId);
   }
@@ -269,8 +269,9 @@ export default class PageContent {
    * @param {number} chapterIdFrom Chapter from.
    * @param {number} chapterIdTo Chapter to.
    * @param {object} [targetOnPage] Optional target in chapter to scroll to.
+   * @param {function} [done] Callback when done.
    */
-  animateChapterTransition(chapterIdFrom, chapterIdTo, targetOnPage) {
+  animateChapterTransition(chapterIdFrom, chapterIdTo, targetOnPage, done) {
     if (typeof chapterIdFrom !== 'number' || typeof chapterIdTo !== 'number') {
       return;
     }
@@ -314,6 +315,8 @@ export default class PageContent {
         if (targetOnPage) {
           this.scrollTo(targetOnPage);
         }
+
+        done?.();
 
         this.isAnimatingState = false;
 
