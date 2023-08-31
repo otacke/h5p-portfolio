@@ -260,6 +260,8 @@ export default class PageContent {
 
     this.preloadChapter(this.currentChapterId);
     this.animateChapterTransition(chapterIdFrom, this.currentChapterId, target);
+
+    this.callbacks.onChapterChanged(this.currentChapterId);
   }
 
   /**
