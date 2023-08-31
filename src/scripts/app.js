@@ -596,6 +596,10 @@ export default class Portfolio extends H5P.EventDispatcher {
     }
 
     this.resize();
+
+    window.setTimeout(() => {
+      this.trigger('resize');
+    }, 50);
   }
 
   /**
