@@ -379,6 +379,15 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.updateFooter();
 
+    // Set start view.
+    const currentChapter = this.chapters.get(this.currentChapterId);
+    this.sideBar.handleClicked({
+      hierarchy: currentChapter.getHierarchy(),
+      target: {
+        chapter: currentChapter.getSubContentId()
+      }
+    });
+
     setTimeout(() => {
       this.trigger('attached');
     }, 0);
