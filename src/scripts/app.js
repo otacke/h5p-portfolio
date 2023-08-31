@@ -402,6 +402,11 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.pageContent.resize();
     }
 
+    if (H5P.isFullscreen) {
+      this.pageContent.setHeight(null);
+      return;
+    }
+
     if (
       this.pageContent.getHeight() === currentNode.offsetHeight ||
       this.pageContent.isAnimating()
@@ -580,6 +585,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     else {
       H5P.fullScreen(this.$mainWrapper, this);
     }
+
+    this.resize();
   }
 
   /**

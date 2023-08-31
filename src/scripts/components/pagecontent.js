@@ -174,9 +174,14 @@ export default class PageContent {
 
   /**
    * Set container height.
-   * @param {number} height Height.
+   * @param {number|null} height Height.
    */
   setHeight(height) {
+    if (height === null) {
+      this.content.style.height = '';
+      return;
+    }
+
     if (typeof height !== 'number') {
       return;
     }
@@ -255,8 +260,6 @@ export default class PageContent {
 
     this.preloadChapter(this.currentChapterId);
     this.animateChapterTransition(chapterIdFrom, this.currentChapterId, target);
-
-    this.callbacks.onChapterChanged(this.currentChapterId);
   }
 
   /**
