@@ -13,6 +13,79 @@
   width: 100%;
   z-index: 3;
 
+  .h5p-portfolio-cover-image {
+    box-shadow: 10px 4px 47px 0 $black-20;
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  .h5p-portfolio-cover-title {
+    color: $medium-grey;
+    font-size: 2.188em;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none solid $medium-grey;
+
+    p {
+      margin: 0 0 .5em;
+    }
+  }
+
+  .h5p-portfolio-cover-description {
+    color: $medium-grey;
+    font-size: 1.25em;
+    font-weight: 400;
+    margin-bottom: .5em;
+    width: 80%;
+    text-decoration: none solid $medium-grey;
+
+    p {
+      margin: 0 0 .5em;
+    }
+  }
+
+  .h5p-portfolio-cover-readbutton {
+    margin-bottom: 3em;
+    margin-top: .5em;
+
+    button {
+      background-color: var(--color-base, $base-color);
+      background-size: cover;
+      border: 0;
+      border-radius: 3px;
+      color: var(--color-text, $background-color);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 400;
+      padding: 10px 40px;
+      text-align: center;
+      text-decoration: none solid var(--color-text, $background-color);
+
+      &:hover {
+        background-color: var(--color-base-90, $base-color-90);
+        background-size: cover;
+        cursor: pointer;
+      }
+
+      &:active {
+        background-color: var(--color-base-95, $base-color-95);
+        background-size: cover;
+      }
+
+      &:focus {
+        outline-style: double;
+      }
+    }
+
+    &.display-none {
+      display: none;
+    }
+  }
+
   &.h5p-cover-nographics .h5p-portfolio-cover-title {
     padding-top: 4rem;
   }
@@ -73,79 +146,6 @@
   background-size: cover;
   height: 70%;
   width: inherit;
-}
-
-.h5p-portfolio-cover-image {
-  box-shadow: 10px 4px 47px 0 $black-20;
-  height: 100%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-}
-
-.h5p-portfolio-cover-title {
-  color: $medium-grey;
-  font-size: 2.188em;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none solid $medium-grey;
-
-  p {
-    margin: 0 0 .5em;
-  }
-}
-
-.h5p-portfolio-cover-description {
-  color: $medium-grey;
-  font-size: 1.25em;
-  font-weight: 400;
-  margin-bottom: .5em;
-  width: 80%;
-  text-decoration: none solid $medium-grey;
-
-  p {
-    margin: 0 0 .5em;
-  }
-}
-
-.h5p-portfolio-cover-readbutton {
-  margin-bottom: 3em;
-  margin-top: .5em;
-
-  button {
-    background-color: var(--color-base, $base-color);
-    background-size: cover;
-    border: 0;
-    border-radius: 3px;
-    color: var(--color-text, $background-color);
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 400;
-    padding: 10px 40px;
-    text-align: center;
-    text-decoration: none solid var(--color-text, $background-color);
-
-    &:hover {
-      background-color: var(--color-base-90, $base-color-90);
-      background-size: cover;
-      cursor: pointer;
-    }
-
-    &:active {
-      background-color: var(--color-base-95, $base-color-95);
-      background-size: cover;
-    }
-
-    &:focus {
-      outline-style: double;
-    }
-  }
-
-  &.display-none {
-    display: none;
-  }
 }
 
 .h5p-container {
