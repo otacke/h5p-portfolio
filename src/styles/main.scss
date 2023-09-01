@@ -130,7 +130,7 @@ $fullscreen-button-size: 1.8em;
         overflow-y: auto;
         // Note: Subtracts padding, do not use box-sizing because then inner div
         // will have too little space
-        min-height: calc(100% - 5.5em);
+        min-height: calc(100% - 4.5em);
       }
 
       .h5p-portfolio-navigation {

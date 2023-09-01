@@ -469,4 +469,12 @@ export default class StatusBar {
 
     return this.menuToggleButton.classList.contains('h5p-portfolio-status-menu-active');
   }
+
+  /**
+   * Get height.
+   * @returns {number} Height.
+   */
+  getHeight() {
+    return this.wrapper.getBoundingClientRect().height;
+  }
 }

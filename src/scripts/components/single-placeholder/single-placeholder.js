@@ -79,6 +79,14 @@ export default class SinglePlaceholder {
   }
 
   /**
+   * Get height.
+   * @returns {number} Height.
+   */
+  getHeight() {
+    return this.getDOM().getBoundingClientRect().height ?? 0;
+  }
+
+  /**
    * Make it easy to bubble events from parent to children.
    * @param {object} origin Origin of the event.
    * @param {string} eventName Name of the event.

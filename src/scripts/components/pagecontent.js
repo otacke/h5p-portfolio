@@ -186,7 +186,7 @@ export default class PageContent {
       return;
     }
 
-    this.content.style.height = `${height}px`;
+    this.content.style.minHeight = `${height}px`;
   }
 
   /**

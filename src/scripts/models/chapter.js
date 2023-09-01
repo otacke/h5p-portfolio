@@ -76,6 +76,27 @@ export default class Chapter {
   }
 
   /**
+   * Get height.
+   * @returns {number} Height.
+   */
+  getHotspotNavigationHeight() {
+    return this.hotspotNavigationDOM?.getBoundingClientRect().height ?? 0;
+  }
+
+  /**
+   * Set chapter content minimum height.
+   * @param {number|string} value Height or '' for reset.
+   */
+  setChapterContentMinHeight(value) {
+    if (typeof value === 'number') {
+      this.chapterDOM.style.minHeight = `${value}px`;
+    }
+    else if (value === '') {
+      this.chapterDOM.style.minHeight = '';
+    }
+  }
+
+  /**
    * Set hotspot navigation.
    * @param {HotspotNavigation} hotspotNavigation Hotspot Navigation.
    */

@@ -411,21 +411,40 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.pageContent.resize();
     }
 
-    if (H5P.isFullscreen) {
-      this.pageContent.setHeight(null);
-      return;
-    }
-
     if (
-      this.pageContent.getHeight() === currentNode.offsetHeight ||
-      this.pageContent.isAnimating()
+      !H5P.isFullscreen &&
+      (
+        this.pageContent.getHeight() === currentNode.offsetHeight ||
+        this.pageContent.isAnimating()
+      )
     ) {
       return; // Resize not necessary
     }
 
-    this.pageContent.setHeight(currentNode.offsetHeight);
-
     this.updateFooter();
+
+    const currentChapter = this.chapters.getByIndex(this.currentChapterId);
+
+    if (H5P.isFullscreen) {
+      // TODO: Hotspot navigaton
+
+      const minHeight = window.innerHeight -
+        this.statusBarHeader.getHeight() -
+        currentChapter.getHotspotNavigationHeight() -
+        this.chapters.getHeader()?.getHeight() -
+        this.chapters.getFooter()?.getHeight() -
+        this.statusBarFooter.getHeight();
+
+      // Yes, 19 is a magic number, some DOM offset that I am not paid to find
+      currentChapter.setChapterContentMinHeight(minHeight - 19);
+    }
+    else {
+      currentChapter.setChapterContentMinHeight('');
+    }
+
+    window.requestAnimationFrame(() => {
+      this.pageContent.setHeight(currentNode.offsetHeight);
+    });
   }
 
   /**
