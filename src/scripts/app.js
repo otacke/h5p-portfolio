@@ -9,6 +9,10 @@ import SideBar from '@components/sidebar.js';
 import PageContent from '@components/pagecontent.js';
 import SinglePlaceholder from '@components/single-placeholder/single-placeholder.js';
 
+/*
+ * This whole project got out of hand with new requirements pouring in but no
+ * time/funding for a decent refactoring. Sorry.
+ */
 export default class Portfolio extends H5P.EventDispatcher {
   /**
    * @class
