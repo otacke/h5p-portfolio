@@ -17,10 +17,6 @@
     padding-top: 120px;
   }
 
-  p {
-    margin: 0 0 .5em;
-  }
-
   .h5p-portfolio-header {
     border-bottom: 2px solid rgb(185, 197, 203);
 
@@ -95,6 +91,10 @@
   font-weight: 700;
   text-align: center;
   text-decoration: none solid $medium-grey;
+
+  p {
+    margin: 0 0 .5em;
+  }
 }
 
 .h5p-portfolio-cover-description {
@@ -104,6 +104,10 @@
   margin-bottom: .5em;
   width: 80%;
   text-decoration: none solid $medium-grey;
+
+  p {
+    margin: 0 0 .5em;
+  }
 }
 
 .h5p-portfolio-cover-readbutton {
