@@ -435,8 +435,8 @@ export default class Portfolio extends H5P.EventDispatcher {
       const minHeight = window.innerHeight -
         this.statusBarHeader.getHeight() -
         currentChapter.getHotspotNavigationHeight() -
-        this.chapters.getHeader()?.getHeight() -
-        this.chapters.getFooter()?.getHeight() -
+        (this.chapters.getHeader()?.getHeight() ?? 0) -
+        (this.chapters.getFooter()?.getHeight() ?? 0) -
         this.statusBarFooter.getHeight();
 
       // Yes, 19 is a magic number, some DOM offset that I am not paid to find
@@ -622,7 +622,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     window.setTimeout(() => {
       this.trigger('resize');
-    }, 50);
+    }, 250); // Browser may need time to exit full screen
   }
 
   /**
