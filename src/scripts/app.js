@@ -430,17 +430,30 @@ export default class Portfolio extends H5P.EventDispatcher {
     const currentChapter = this.chapters.getByIndex(this.currentChapterId);
 
     if (H5P.isFullscreen) {
-      // TODO: Hotspot navigaton
+      // The copy-move mechanism for headers doesn't suffice here
+      const headerHeight = currentChapter.getDOM()
+        .querySelector('.h5p-portfolio-header')
+        ?.getBoundingClientRect().height ?? 0;
 
-      const minHeight = window.innerHeight -
-        this.statusBarHeader.getHeight() -
-        currentChapter.getHotspotNavigationHeight() -
-        (this.chapters.getHeader()?.getHeight() ?? 0) -
-        (this.chapters.getFooter()?.getHeight() ?? 0) -
-        this.statusBarFooter.getHeight();
+      const footerHeight = currentChapter.getDOM()
+        .querySelector('.h5p-portfolio-footer')
+        ?.getBoundingClientRect().height ?? 0;
 
-      // Yes, 19 is a magic number, some DOM offset that I am not paid to find
-      currentChapter.setChapterContentMinHeight(minHeight - 19);
+      const contentHeight = currentChapter.getHotspotNavigationHeight() +
+        headerHeight +
+        footerHeight;
+
+      if (contentHeight > 0) {
+        const minHeight = window.innerHeight -
+          this.statusBarHeader.getHeight() -
+          contentHeight -
+          this.statusBarFooter.getHeight();
+
+        // Yes, 19 is a magic number, some DOM offset that I am not paid to find
+        if (minHeight - 19 > 0) {
+          currentChapter.setChapterContentMinHeight(minHeight - 19);
+        }
+      }
     }
     else {
       currentChapter.setChapterContentMinHeight('');
