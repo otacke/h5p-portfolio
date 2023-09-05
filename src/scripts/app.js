@@ -460,6 +460,10 @@ export default class Portfolio extends H5P.EventDispatcher {
     }
 
     window.requestAnimationFrame(() => {
+      if (this.pageContent.isAnimatingState) {
+        return; // Prevent jumping up and down while animating
+      }
+
       this.pageContent.setHeight(currentNode.offsetHeight);
     });
   }
