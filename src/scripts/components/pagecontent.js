@@ -27,8 +27,8 @@ export default class PageContent {
 
     // Workaround for H5P.Video with YouTube content. Needs to be attached.
     Util.callOnceVisible(this.content, () => {
-      this.params.chapters.getByIndex(this.currentChapterId).setHeader('original');
-      this.params.chapters.getByIndex(this.currentChapterId).setFooter('original');
+      this.params.chapters.getByIndex(this.currentChapterId)?.setHeader('original');
+      this.params.chapters.getByIndex(this.currentChapterId)?.setFooter('original');
     });
   }
 
