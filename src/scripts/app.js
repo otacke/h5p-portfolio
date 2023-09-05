@@ -439,14 +439,14 @@ export default class Portfolio extends H5P.EventDispatcher {
         .querySelector('.h5p-portfolio-footer')
         ?.getBoundingClientRect().height ?? 0;
 
-      const contentHeight = currentChapter.getHotspotNavigationHeight() +
+      const extraContentHeight = currentChapter.getHotspotNavigationHeight() +
         headerHeight +
         footerHeight;
 
-      if (contentHeight > 0) {
+      if (extraContentHeight >= 0) {
         const minHeight = window.innerHeight -
           this.statusBarHeader.getHeight() -
-          contentHeight -
+          extraContentHeight -
           this.statusBarFooter.getHeight();
 
         // Yes, 19 is a magic number, some DOM offset that I am not paid to find
