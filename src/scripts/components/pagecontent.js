@@ -320,6 +320,11 @@ export default class PageContent {
 
         this.isAnimatingState = false;
 
+        // Animation could be done already
+        window.requestAnimationFrame(() => {
+          this.callbacks.onResized();
+        });
+
         // Ensure all animation has ended
         window.setTimeout(() => {
           this.callbacks.onResized();
