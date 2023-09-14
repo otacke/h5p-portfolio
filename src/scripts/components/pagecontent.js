@@ -320,8 +320,11 @@ export default class PageContent {
 
         this.isAnimatingState = false;
 
-        this.callbacks.onResized();
-      }, 250);
+        // Ensure all animation has ended
+        window.setTimeout(() => {
+          this.callbacks.onResized();
+        }, 250); // Animation duration
+      }, 250); // Animation duration
     }, 50);
   }
 
