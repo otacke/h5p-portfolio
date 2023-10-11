@@ -283,7 +283,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         dictionary: this.dictionary,
         chapters: this.chapters,
         displayMenuToggleButton: true,
-        displayFullScreenButton: true,
+        displayFullScreenButton: !this.params.behaviour.isPreview,
         styleClassName: 'h5p-portfolio-status-header',
         a11yLabel: this.dictionary.get('a11y.topNavigation')
       },
@@ -311,7 +311,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         dictionary: this.dictionary,
         chapters: this.chapters,
         displayToTopButton: true,
-        displayFullScreenButton: true,
+        displayFullScreenButton: !this.params.behaviour.isPreview,
         styleClassName: 'h5p-portfolio-status-footer',
         a11yLabel: this.dictionary.get('a11y.bottomNavigation')
       },
