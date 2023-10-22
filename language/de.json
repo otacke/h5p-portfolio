@@ -29,10 +29,10 @@
       "description": "Wenn du diesen Schalter aktivierst/deaktiviert, wird der Header in allen Kapiteln entsprechend hinzugefügt/entfernt."
     },
     {
-      "label": "Header",
+      "label": "Kopfzeile",
       "fields": [
         {
-          "label": "Header"
+          "label": "Kopfzeile"
         },
         {
           "label": "Dummy"
@@ -44,10 +44,10 @@
       "description": "Wenn du diesen Schalter aktivierst/deaktiviert, wird der Footer in allen Kapiteln entsprechend hinzugefügt/entfernt."
     },
     {
-      "label": "Footer",
+      "label": "Fußzeile",
       "fields": [
         {
-          "label": "Footer"
+          "label": "Fußzeile"
         },
         {
           "label": "Dummy"
