@@ -17,10 +17,10 @@
           "description": "Papildoma aplinka įžangai."
         },
         {
-          "label": "Show header"
+          "label": "Rodyti antraštę"
         },
         {
-          "label": "Show footer"
+          "label": "Rodyti poraštę"
         }
       ]
     },
@@ -75,22 +75,22 @@
       "label": "Portfolio",
       "fields": [
         {
-          "label": "Pages",
-          "entity": "Page",
+          "label": "Puslapiai",
+          "entity": "Puslapis",
           "field": {
-            "label": "Chapter",
+            "label": "Skyrius",
             "fields": [
               {
-                "label": "Chapter hierarchy"
+                "label": "Skyriaus hierarchija"
               },
               {
                 "label": "Display hotspot navigation"
               },
               {
-                "label": "Display header"
+                "label": "Rodyti antraštę"
               },
               {
-                "label": "Display footer"
+                "label": "Rodyti poraštę"
               },
               {
                 "label": "Provide a hotspot for this chapter"
