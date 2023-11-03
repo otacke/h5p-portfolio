@@ -1,6 +1,6 @@
 {
   "name": "h5p-portfolio",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "H5P Portfolio",
   "scripts": {
     "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js'",
