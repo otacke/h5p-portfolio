@@ -23,7 +23,7 @@ H5PUpgrades['H5P.Portfolio'] = (function () {
               return replaceSubContentIDs(param);
             });
           }
-          else if (typeof params === 'object') {
+          else if (typeof params === 'object' && params !== null) {
             if (params.library && params.subContentId) {
               /*
                 * NOTE: We avoid using H5P.createUUID since this is an upgrade
