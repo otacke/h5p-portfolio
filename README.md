@@ -15,6 +15,16 @@ Clone this repository with git and check out the branch that you are interested
 in (or choose the branch first and then download the archive, but learning
 how to use git really makes sense).
 
+Also ensure to clone related repositories that hold complementary components if
+you want to change those:
+- [Main Portfolio view component](https://github.com/otacke/h5p-portfolio)
+- [View component for a chapter](https://github.com/otacke/h5p-portfolio-chapter)
+- [View component for a placeholder block](https://github.com/otacke/h5p-portfolio-placeholder)
+- [Main Portfolio editor component](https://github.com/otacke/h5p-editor-portfolio)
+- [Editor component for a chapter](https://github.com/otacke/h5p-editor-portfolio-chapter)
+- [Editor component for a placeholder block](https://github.com/otacke/h5p-editor-portfolio-placeholder)
+- [Optional subcontent for offering files for download](https://github.com/otacke/h5p-file-for-download)
+
 Change to the repository directory and run
 ```bash
 npm install
@@ -38,6 +48,22 @@ some browsers don't support, you'll have to add a polyfill.
 
 The build process will also move the source files into one distribution file and
 minify the code.
+
+In order to lint your code in order to detect H5P coding style guide viloations,
+use:
+```bash
+npm run lint
+```
+In order to pack an H5P library, please install the
+[H5P CLI tool](https://h5p.org/h5p-cli-guide) instead of zipping everything
+manually. That tool will take care of a couple of things automatically that you
+will need to know otherwise.
+
+In simple cases, something such as
+```bash
+h5p pack <your-repository-directory> my-awesome-library.h5p
+```
+will suffice.
 
 For more information on how to use those distribution files in H5P, please have
 a look at https://youtu.be/xEgBJaRUBGg and the H5P developer guide at
