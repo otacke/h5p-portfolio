@@ -11,23 +11,85 @@ export default class URLTools {
       return {};
     }
 
-    // Convert fragment string to object with properties
-    const fragments = {};
-    hashWindow.location.hash.replace('#', '').split('&').forEach((fragment) => {
-      if (fragment.indexOf('=') === -1) {
-        return; // Skip if incomplete pair
-      }
+    let hashQueryString = '';
 
-      const argPair = fragment.split('=');
-      fragments[argPair[0]] = argPair[1];
-    });
+    const firstQMIndex = hashWindow.location.hash.indexOf('?');
+
+    if (firstQMIndex !== -1) {
+      hashQueryString = hashWindow.location.hash.substring(firstQMIndex + 1);
+    }
+    else if (hashWindow.location.hash.indexOf('=') !== -1) {
+      hashQueryString = hashWindow.location.hash.replace('#', '');
+    }
+
+    const queries = hashQueryString.split('&')
+      .filter((query) => query.indexOf('=') !== -1)
+      .reduce((pairs, query) => {
+        const [key, value] = query.split('=');
+        pairs[key] = value;
+        return pairs;
+      }, {});
 
     // Optionally validate and ignore fragments
-    if (typeof validate === 'function' && !validate(fragments)) {
+    if (typeof validate === 'function' && !validate(queries)) {
       return {};
     }
 
-    return fragments;
+    return queries;
+  }
+
+  static parseURLQueries(urlQueries) {
+    urlQueries = (urlQueries.indexOf('?') === 0 ?
+      urlQueries.substring(1) :
+      urlQueries);
+
+    urlQueries = urlQueries.replace(/&amp;/g, '&');
+
+    return urlQueries.split('&')
+      .filter((query) => query.indexOf('=') !== -1)
+      .reduce((pairs, query) => {
+        const [key, value] = query.split('=');
+        pairs[key] = value;
+        return pairs;
+      }, {});
+  }
+
+  static stringifyURLQueries(urlQueries, prefix = '') {
+    const queryString = Object.entries(urlQueries)
+      .filter((entry) => entry.length === 2)
+      .map((entry) => `${entry[0]}=${entry[1]}`)
+      .join('&');
+
+    if (!queryString.length) {
+      return '';
+    }
+
+    return `${prefix}${queryString}`;
+  }
+
+  /**
+   * Get hash selector from URL hash.
+   * @param {string} hash URL hash.
+   * @param {string} [prefix] Prefix.
+   * @returns {string} Hash selector.
+   */
+  static getHashSelector(hash, prefix = '') {
+    let hashSelector = '';
+
+    const firstQMIndex = hash.indexOf('?');
+
+    if ( firstQMIndex !== -1 ) {
+      hashSelector = hash.substring(1, firstQMIndex);
+    }
+    else if (hash.indexOf('=') === -1) {
+      hashSelector = hash.replace('#', '');
+    }
+
+    if (!hashSelector.length) {
+      return '';
+    }
+
+    return `${prefix}${hashSelector}`;
   }
 
   /**

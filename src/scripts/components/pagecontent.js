@@ -247,6 +247,10 @@ export default class PageContent {
     const chapterIdFrom = this.currentChapterId;
     const chapterIdTo = this.params.chapters.findChapterIndex(target.chapter);
 
+    if (typeof chapterIdFrom !== 'number' || typeof chapterIdTo !== 'number') {
+      return;
+    }
+
     if (chapterIdFrom === chapterIdTo) {
       this.scrollTo(target);
       return;
@@ -309,9 +313,16 @@ export default class PageContent {
       // End the animation
       setTimeout(() => {
         chapterFrom.toggleAnimationPosition('previous', false);
-        chapterFrom.toggleAnimationPosition('current', false);
+        /*
+         * In theory, this should not be necessary, but when some other
+         * page element changes the URL hash fragment, this may fail
+         * TODO: Find solution without using the URL hash fragment that was
+         * introduced by H5P.InteractiveBook
+         */
+        this.params.chapters.getAll().forEach((chapter) => {
+          chapter.toggleAnimationPosition('current', chapter === chapterTo);
+        });
         chapterFrom.toggleAnimationPosition('next', false);
-        chapterTo.toggleAnimationPosition('current', true);
 
         chapterTo.stopAnimation();
         chapterFrom.stopAnimation();

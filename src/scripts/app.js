@@ -515,9 +515,10 @@ export default class Portfolio extends H5P.EventDispatcher {
       params.chapter = this.chapters.get(params.id).getSubContentId();
     }
 
-    // Create the new hash
-    params.newHash = URLTools.createFragmentsString(params);
-    this.changeHash(params);
+    if (String(params.h5pPortfolioId) === String(this.contentId)) {
+      this.moveToChapter(params);
+      this.changeURL(params);
+    }
 
     if (params.toTop) {
       this.scrollToTop();
@@ -546,6 +547,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
   /**
    * Add listener for hash changes to specified window.
+   * TODO: This is only invoked when loading the page: remove and replace
    * @param {HTMLElement} hashWindow Window to listen on.
    */
   addHashListener(hashWindow) {
@@ -655,21 +657,40 @@ export default class Portfolio extends H5P.EventDispatcher {
   }
 
   /**
-   * Change URL hash.
+   * Change URL in browser bar
    * @param {object} params Parameters.
    */
-  changeHash(params) {
-    if (String(params.h5pPortfolioId) !== String(this.contentId)) {
-      return;
+  changeURL(params = {}) {
+    if (this.isPreview && this.hasNoHashListener) {
+      return; // Don't change URL in preview mode
     }
 
-    if (this.isPreview || this.hasNoHashListener) {
-      // Don't change hash in preview but trigger moving to chapter
-      this.moveToChapter(params);
-      return;
-    }
+    const origin = this.hashWindow.location.origin;
+    const pathname = this.hashWindow.location.pathname;
 
-    this.hashWindow?.location?.replace(params.newHash);
+    /*
+     * InteractiveBook that was forked for Portfolio used the hash fragment to
+     * store data as if it was search queries, leading to all kinds of issues.
+     * That's why we cannot rely on location.hash alone but need to parse it for
+     * the selector and also for the search queries.
+     */
+    let hashSelector =
+      URLTools.getHashSelector(this.hashWindow.location.hash, '#');
+
+    params = {
+      ...URLTools.parseURLQueries(this.hashWindow.location.search),
+      ...params
+    };
+    const search = URLTools.stringifyURLQueries(params, '?');
+
+    const urlString =
+      `${origin}${pathname}${search}${hashSelector}`;
+
+    /*
+     * First parameter is state object, not really used here, 2nd is unused.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
+     */
+    this.hashWindow.history.pushState(urlString, '', urlString);
   }
 
   /**
