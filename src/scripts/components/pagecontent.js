@@ -206,6 +206,10 @@ export default class PageContent {
 
     // If header is specified, try to find headers
     let dom = content.dom;
+    if (!dom) {
+      return;
+    }
+
     if (target.header !== null) {
       const headers = dom.querySelectorAll('h2, h3');
       if (headers[target.header]) {
