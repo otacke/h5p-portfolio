@@ -204,13 +204,13 @@ export default class PageContent {
       return;
     }
 
-    // If header is specified, try to find headers
-    let dom = content.dom;
+    // If dom is specified, try to find headers
+    let dom = content.getDOM();
     if (!dom) {
       return;
     }
 
-    if (target.header !== null) {
+    if (target.header) {
       const headers = dom.querySelectorAll('h2, h3');
       if (headers[target.header]) {
         dom = headers[target.header];

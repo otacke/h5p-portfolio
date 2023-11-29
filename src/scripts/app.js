@@ -171,31 +171,18 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.updateFooter();
     });
 
-    /*
-     * Bad check. Neither should H5PIntegration be queried directly nor
-     * should there be custom code for a platform - but this code taken from
-     * Interactive Book will trigger moodle's custom integration to redirect
-     * the page otherwise and given that moodle doesn't usually allow open
-     * course access, the link that is now missing may be semi-helpful only
-     * anyway.
-     */
-    if (typeof H5PIntegration?.moodleComponent === 'undefined') {
-      try {
-        this.addHashListener(top);
-      }
-      catch (error) {
-        if (error instanceof DOMException) {
-          // Use iframe window to store book location hash
-          this.addHashListener(window);
-        }
-        else {
-          this.hasNoHashListener = true;
-          throw error;
-        }
-      }
+    // Determine window context to get URL from
+    try {
+      this.contextWindow = top;
     }
-    else {
-      this.hasNoHashListener = true;
+    catch (error) {
+      if (error instanceof DOMException) {
+        // Use context window to store book location
+        this.contextWindow(window);
+      }
+      else {
+        this.cannotHandleURL = true;
+      }
     }
 
     const showCover = this.params.showCoverPage &&
@@ -353,6 +340,19 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.setActivityStarted();
     }
 
+    const payload = URLTools.extractFragmentsFromURL(this.validateFragments, this.contextWindow);
+    if (
+      payload.h5pPortfolioId && String(payload.h5pPortfolioId) === String(this.contentId)
+    ) {
+      this.moveToChapter(payload);
+    }
+    else {
+      this.moveToChapter({
+        chapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
+        h5pPortfolioId: this.h5pPortfolioId
+      });
+    }
+
     Portfolio.wasInstantiated[this.contentId] = true;
   }
 
@@ -501,10 +501,12 @@ export default class Portfolio extends H5P.EventDispatcher {
       }
 
       if (params.direction === 'prev') {
-        params.chapter = this.chapters.get(this.currentChapterId - 1).getSubContentId();
+        params.chapter =
+          this.chapters.get(this.currentChapterId - 1).getSubContentId();
       }
       else if (params.direction === 'next') {
-        params.chapter = this.chapters.get(this.currentChapterId + 1).getSubContentId();
+        params.chapter =
+          this.chapters.get(this.currentChapterId + 1).getSubContentId();
       }
 
       delete params.section;
@@ -512,7 +514,8 @@ export default class Portfolio extends H5P.EventDispatcher {
       delete params.header;
     }
     else if (typeof params.id === 'number') {
-      params.chapter = this.chapters.get(params.id).getSubContentId();
+      params.chapter =
+        this.chapters.get(params.id).getSubContentId();
     }
 
     if (String(params.h5pPortfolioId) === String(this.contentId)) {
@@ -543,28 +546,6 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.statusBarHeader.update(params);
     this.statusBarFooter.update(params);
-  }
-
-  /**
-   * Add listener for hash changes to specified window.
-   * TODO: This is only invoked when loading the page: remove and replace
-   * @param {HTMLElement} hashWindow Window to listen on.
-   */
-  addHashListener(hashWindow) {
-    this.hashWindow = hashWindow;
-
-    hashWindow.addEventListener('hashchange', () => {
-      const payload = URLTools.extractFragmentsFromURL(this.validateFragments, this.hashWindow);
-      if (payload.h5pPortfolioId && String(payload.h5pPortfolioId) === String(this.contentId)) {
-        this.moveToChapter(payload);
-      }
-      else {
-        this.moveToChapter({
-          chapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
-          h5pPortfolioId: this.h5pPortfolioId
-        });
-      }
-    });
   }
 
   /**
@@ -661,12 +642,12 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} params Parameters.
    */
   changeURL(params = {}) {
-    if (this.isPreview && this.hasNoHashListener) {
+    if (this.isPreview && this.cannotHandleURL) {
       return; // Don't change URL in preview mode
     }
 
-    const origin = this.hashWindow.location.origin;
-    const pathname = this.hashWindow.location.pathname;
+    const origin = this.contextWindow.location.origin;
+    const pathname = this.contextWindow.location.pathname;
 
     /*
      * InteractiveBook that was forked for Portfolio used the hash fragment to
@@ -675,10 +656,10 @@ export default class Portfolio extends H5P.EventDispatcher {
      * the selector and also for the search queries.
      */
     let hashSelector =
-      URLTools.getHashSelector(this.hashWindow.location.hash, '#');
+      URLTools.getHashSelector(this.contextWindow.location.hash, '#');
 
     params = {
-      ...URLTools.parseURLQueries(this.hashWindow.location.search),
+      ...URLTools.parseURLQueryString(this.contextWindow.location.search),
       ...params
     };
     const search = URLTools.stringifyURLQueries(params, '?');
@@ -687,10 +668,10 @@ export default class Portfolio extends H5P.EventDispatcher {
       `${origin}${pathname}${search}${hashSelector}`;
 
     /*
-     * First parameter is state object, not really used here, 2nd is unused.
+     * First parameter is state object, not used here, 2nd is unused.
      * @see https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
      */
-    this.hashWindow.history.pushState(urlString, '', urlString);
+    this.contextWindow.history.pushState('', '', urlString);
   }
 
   /**
