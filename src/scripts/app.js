@@ -348,8 +348,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     }
     else {
       this.moveToChapter({
-        chapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
-        h5pPortfolioId: this.h5pPortfolioId
+        h5pPortfolioChapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
+        h5pPortfolioId: this.contentId
       });
     }
 
@@ -388,7 +388,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.sideBar.handleClicked({
       hierarchy: currentChapter.getHierarchy(),
       target: {
-        chapter: currentChapter.getSubContentId()
+        h5pPortfolioChapter: currentChapter.getSubContentId()
       }
     });
 
@@ -481,7 +481,11 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} [params] Parameters.
    */
   moveTo(params = {}) {
-    if (params.direction && params.direction !== 'prev' && params.direction !== 'next') {
+    if (
+      params.h5pPortfolioDirection &&
+      params.h5pPortfolioDirection !== 'prev' &&
+      params.h5pPortfolioDirection !== 'next'
+    ) {
       return; // Invalid
     }
 
@@ -492,29 +496,31 @@ export default class Portfolio extends H5P.EventDispatcher {
     params.h5pPortfolioId = this.contentId;
 
     // Use shorthand
-    if (!params.id && params.direction) {
+    if (!params.id && params.h5pPortfolioDirection) {
       if (
-        this.currentChapterId === 0 && params.direction === 'prev' ||
-        this.currentChapterId === this.chapters.get().length - 1 && params.direction === 'next'
+        this.currentChapterId === 0 &&
+        params.h5pPortfolioDirection === 'prev' ||
+        this.currentChapterId === this.chapters.get().length - 1 &&
+        params.h5pPortfolioDirection === 'next'
       ) {
         return; // Nowhere to move to
       }
 
-      if (params.direction === 'prev') {
-        params.chapter =
+      if (params.h5pPortfolioDirection === 'prev') {
+        params.h5pPortfolioChapter =
           this.chapters.get(this.currentChapterId - 1).getSubContentId();
       }
-      else if (params.direction === 'next') {
-        params.chapter =
+      else if (params.h5pPortfolioDirection === 'next') {
+        params.h5pPortfolioChapter =
           this.chapters.get(this.currentChapterId + 1).getSubContentId();
       }
 
-      delete params.section;
-      delete params.content;
+      delete params.h5pPortfolioSection;
+      delete params.h5pPortfolioContentContent;
       delete params.header;
     }
     else if (typeof params.id === 'number') {
-      params.chapter =
+      params.h5pPortfolioChapter =
         this.chapters.get(params.id).getSubContentId();
     }
 
@@ -658,10 +664,23 @@ export default class Portfolio extends H5P.EventDispatcher {
     let hashSelector =
       URLTools.getHashSelector(this.contextWindow.location.hash, '#');
 
-    params = {
-      ...URLTools.parseURLQueryString(this.contextWindow.location.search),
-      ...params
-    };
+    params = Object.keys(params)
+      .filter((key) => key !== 'h5pPortfolioDirection')
+      .reduce((result, key) => {
+        return Object.assign(result, { [key]: params[key] });
+      }, {});
+
+    // Preserve all query params except for h5pPortfolio
+    let queryParams = URLTools.parseURLQueryString(this.contextWindow.location.search);
+
+    // Remove all queryParams with a key that starts with h5pPortfolio
+    queryParams = Object.keys(queryParams)
+      .filter((key) => !key.startsWith('h5pPortfolio'))
+      .reduce((result, key) => {
+        return Object.assign(result, { [key]: params[key] });
+      }, {});
+
+    params = { ...queryParams, ...params };
     const search = URLTools.stringifyURLQueries(params, '?');
 
     const urlString =
@@ -900,8 +919,8 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     this.moveTo({
       h5pPortfolioId: this.contentId,
-      chapter: this.chapters.get(0).getSubContentId(),
-      toTop: true
+      h5pPortfolioChapter: this.chapters.get(0).getSubContentId(),
+      h5pPortfolioToTop: true
     });
 
     if (this.hasCover()) {

@@ -209,7 +209,10 @@ export default class StatusBar {
       class: 'previous',
       label: this.params.dictionary.get('l10n.previousPage'),
       onClicked: (() => {
-        this.callbacks.onMoved({ direction: 'prev', toTop: true });
+        this.callbacks.onMoved({
+          h5pPortfolioDirection: 'prev',
+          h5pPortfolioToTop: true
+        });
       })
     });
 
@@ -218,7 +221,10 @@ export default class StatusBar {
       class: 'next',
       label: this.params.dictionary.get('l10n.nextPage'),
       onClicked: (() => {
-        this.callbacks.onMoved({ direction: 'next', toTop: true });
+        this.callbacks.onMoved({
+          h5pPortfolioDirection: 'next',
+          h5pPortfolioToTop: true
+        });
       })
     });
 

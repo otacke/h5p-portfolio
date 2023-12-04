@@ -73,35 +73,45 @@ class SideBar extends H5P.EventDispatcher {
         hierarchy: hierarchy,
         isExpandable: this.hasChildren(hierarchy),
         target: {
-          chapter: chapter.getSubContentId(),
-          toTop: true
+          h5pPortfolioChapter: chapter.getSubContentId(),
+          h5pPortfolioToTop: true
         }
       };
 
       // MenuChapterItem parameters for contents
-      const contentMenuItems = this.extractContentItemTargets(chapter).map((target, index, all) => {
-        const hierarchy = `${chapter.getHierarchy()}:${index}`;
+      const contentMenuItems = this.extractContentItemTargets(chapter)
+        .map((target, index, all) => {
+          const hierarchy = `${chapter.getHierarchy()}:${index}`;
 
-        let className;
-        if (index === 0) {
-          className = 'h5p-portfolio-navigation-chapter-first';
-        }
-        else if (index === all.length - 1) {
-          className = 'h5p-portfolio-navigation-chapter-last';
-        }
-
-        return {
-          title: target.title,
-          className: className,
-          hierarchy: hierarchy,
-          target: {
-            chapter: target.chapter,
-            section: target.section,
-            content: target.content,
-            header: target.header
+          let className;
+          if (index === 0) {
+            className = 'h5p-portfolio-navigation-chapter-first';
           }
-        };
-      });
+          else if (index === all.length - 1) {
+            className = 'h5p-portfolio-navigation-chapter-last';
+          }
+
+          return {
+            title: target.title,
+            className: className,
+            hierarchy: hierarchy,
+            target: {
+              h5pPortfolioChapter: target.chapter,
+              ...(
+                target.h5pPortfolioSection &&
+                { h5pPortfolioSection: target.h5pPortfolioSection }
+              ),
+              ...(
+                target.h5pPortfolioContent &&
+                { h5pPortfolioContent: target.h5pPortfolioContent }
+              ),
+              ...(
+                typeof target.header === 'number' &&
+                { header: target.header }
+              )
+            }
+          };
+        });
 
       /*
        * Build one menu item for each parameter
@@ -154,8 +164,8 @@ class SideBar extends H5P.EventDispatcher {
             linkInfo = [{
               title: currentContent.getTitle(),
               chapter: chapter.getSubContentId(),
-              section: currentSection.getSubContentId(),
-              content: currentContent.getSubContentId()
+              h5pPortfolioSection: currentSection.getSubContentId(),
+              h5pPortfolioContent: currentContent.getSubContentId()
             }];
           }
           else if (instance.libraryInfo?.machineName === 'H5P.AdvancedText') {
@@ -166,9 +176,9 @@ class SideBar extends H5P.EventDispatcher {
                 return {
                   title: header.textContent,
                   chapter: chapter.getSubContentId(),
-                  section: currentSection.getSubContentId(),
-                  content: currentContent.getSubContentId(),
-                  header: index
+                  h5pPortfolioSection: currentSection.getSubContentId(),
+                  h5pPortfolioContent: currentContent.getSubContentId(),
+                  ...(typeof index === 'number' && { header: index })
                 };
               });
           }

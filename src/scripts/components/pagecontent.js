@@ -83,8 +83,8 @@ export default class PageContent {
         {
           onClicked: ((subContentId) => {
             this.callbacks.onMoved({
-              chapter: subContentId,
-              toTop: true
+              h5pPortfolioChapter: subContentId,
+              h5pPortfolioToTop: true
             });
           })
         }
@@ -194,12 +194,12 @@ export default class PageContent {
    * @param {object} target Target.
    */
   scrollTo(target) {
-    if (target.toTop) {
+    if (target.h5pPortfolioToTop) {
       this.callbacks.onScrollToTop();
       return;
     }
 
-    let content = this.params.chapters.findContent(target.content);
+    let content = this.params.chapters.findContent(target.h5pPortfolioContent);
     if (!content) {
       return;
     }
@@ -245,7 +245,7 @@ export default class PageContent {
     }
 
     const chapterIdFrom = this.currentChapterId;
-    const chapterIdTo = this.params.chapters.findChapterIndex(target.chapter);
+    const chapterIdTo = this.params.chapters.findChapterIndex(target.h5pPortfolioChapter);
 
     if (typeof chapterIdFrom !== 'number' || typeof chapterIdTo !== 'number') {
       return;

@@ -64,7 +64,7 @@ export default class URLTools {
    */
   static stringifyURLQueries(urlQueries, prefix = '') {
     const queryString = Object.entries(urlQueries)
-      .filter((entry) => entry.length === 2)
+      .filter((entry) => entry.length === 2 && entry[1] !== undefined)
       .map((entry) => `${entry[0]}=${entry[1]}`)
       .join('&');
 
