@@ -1,5 +1,5 @@
 import Util from '@services/util.js';
-import HotspotNavigation from '@components/hotspotnavigation/navigation.js';
+import HotspotNavigation from './hotspotnavigation/navigation.js';
 import './pagecontent.scss';
 
 export default class PageContent {

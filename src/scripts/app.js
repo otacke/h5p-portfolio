@@ -6,7 +6,7 @@ import Util from '@services/util.js';
 import Cover from '@components/cover.js';
 import StatusBar from '@components/statusbar.js';
 import SideBar from '@components/sidebar/sidebar.js';
-import PageContent from '@components/pagecontent.js';
+import PageContent from '@components/pagecontent/pagecontent.js';
 import SinglePlaceholder from '@components/single-placeholder/single-placeholder.js';
 import QuestionTypeContract from '@mixins/question-type-contract.js';
 import XAPI from '@mixins/xapi.js';
