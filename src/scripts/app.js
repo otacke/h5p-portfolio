@@ -10,6 +10,7 @@ import PageContent from '@components/pagecontent.js';
 import SinglePlaceholder from '@components/single-placeholder/single-placeholder.js';
 import QuestionTypeContract from '@mixins/question-type-contract.js';
 import XAPI from '@mixins/xapi.js';
+import '@styles/h5p-portfolio.scss';
 
 export default class Portfolio extends H5P.EventDispatcher {
   /**

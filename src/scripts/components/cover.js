@@ -1,5 +1,5 @@
 import Util from '@services/util.js';
-import '@styles/_cover.scss';
+import './cover.scss';
 
 /**
  * @class

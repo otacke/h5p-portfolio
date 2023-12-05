@@ -1,6 +1,6 @@
 import Util from '@services/util.js';
 import HotspotNavigation from '@components/hotspotnavigation/navigation.js';
-import '@styles/_pagecontent.scss';
+import './pagecontent.scss';
 
 export default class PageContent {
   /**

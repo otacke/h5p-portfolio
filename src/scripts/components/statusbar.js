@@ -1,5 +1,5 @@
 import Util from '@services/util.js';
-import '@styles/_statusbar.scss';
+import './statusbar.scss';
 
 /**
  * @class
