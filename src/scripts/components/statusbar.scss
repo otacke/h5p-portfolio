@@ -1,12 +1,5 @@
 @import "@styles/main";
 
-@mixin prefix($property, $value, $prefixes: ()) {
-  @each $prefix in $prefixes {
-    #{'-' + $prefix + '-' + $property}: $value;
-  }
-  #{$property}: $value;
-}
-
 .h5p-portfolio-status {
   align-items: center;
   background-color: $background-color;
@@ -215,8 +208,6 @@
 }
 
 .h5p-portfolio-status-header {
-  @include prefix(position, sticky, webkit);
-
   background: $background-color;
   top: 0;
   z-index: 2;
