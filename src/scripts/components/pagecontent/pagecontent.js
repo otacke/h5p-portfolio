@@ -205,7 +205,7 @@ export default class PageContent {
     }
 
     // If dom is specified, try to find headers
-    let dom = content.getDOM();
+    let dom = content.getDOM?.(); // For some reason, content doesn't have a getDOM function on moodle?!
     if (!dom) {
       return;
     }

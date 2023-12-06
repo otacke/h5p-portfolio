@@ -12,6 +12,17 @@ import QuestionTypeContract from '@mixins/question-type-contract.js';
 import XAPI from '@mixins/xapi.js';
 import '@styles/h5p-portfolio.scss';
 
+/*
+ * TODO:
+ * The content type is based on Interactive Book. The chapter DOM including
+ * chapter transition and sizing. It is okay for Interactive Book, but now that
+ * there can be a hotspots navigation, a header and a footer with different
+ * needs, it's not. The pagecontent DOM should be refactored to not use absolute
+ * positioning and heights set in CSS.
+ *
+ * Rename CSS classes to reflect the JavaScript class name/filename
+ */
+
 export default class Portfolio extends H5P.EventDispatcher {
   /**
    * @class
@@ -174,17 +185,34 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.updateFooter();
     });
 
-    // Determine window context to get URL from
-    try {
-      this.contextWindow = top;
+    /*
+     * Bad check. Neither should H5PIntegration be queried directly nor
+     * should there be custom code for a platform - but this code taken from
+     * Interactive Book will trigger moodle's custom integration to redirect
+     * the page otherwise and given that moodle doesn't usually allow open
+     * course access, the link that is now missing may be semi-helpful only
+     * anyway.
+     */
+    if (typeof H5PIntegration?.moodleComponent !== 'undefined') {
+      this.cannotHandleURL = true;
     }
-    catch (error) {
-      if (error instanceof DOMException) {
-        // Use context window to store book location
-        this.contextWindow(window);
+    else {
+      // Determine window context to get URL from
+      try {
+        this.contextWindow = top;
       }
-      else {
-        this.cannotHandleURL = true;
+      catch (error) {
+        if (error instanceof DOMException) {
+          // Use context window to store book location
+          this.contextWindow = window;
+
+          if (!this.contextWindow.location) {
+            this.cannotHandleURL = true;
+          }
+        }
+        else {
+          this.cannotHandleURL = true;
+        }
       }
     }
 
@@ -343,7 +371,12 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.setActivityStarted();
     }
 
-    const payload = URLTools.extractFragmentsFromURL(this.validateFragments, this.contextWindow);
+    const payload = (this.cannotHandleURL) ?
+      URLTools.extractFragmentsFromURL(
+        this.validateFragments, this.contextWindow
+      ) :
+      {};
+
     if (
       payload.h5pPortfolioId && String(payload.h5pPortfolioId) === String(this.contentId)
     ) {
@@ -651,8 +684,12 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} params Parameters.
    */
   changeURL(params = {}) {
-    if (this.isPreview && this.cannotHandleURL) {
-      return; // Don't change URL in preview mode
+    if (
+      this.isPreview ||
+      this.cannotHandleURL ||
+      !this.contextWindow?.loation
+    ) {
+      return; // Don't change URL
     }
 
     const origin = this.contextWindow.location.origin;

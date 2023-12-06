@@ -7,7 +7,7 @@ export default class URLTools {
    * @returns {object} Fragments.
    */
   static extractFragmentsFromURL(validate, contextWindow) {
-    if (!contextWindow.location.hash && !contextWindow.location.search) {
+    if (!contextWindow?.location?.hash && !contextWindow?.location?.search) {
       return {};
     }
 
