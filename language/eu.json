@@ -1,15 +1,15 @@
 {
   "semantics": [
     {
-      "label": "Gaitu portfolioko azala",
-      "description": "Portfolioan sartu aurretik informazioa erakusten duen azala."
+      "label": "Gaitu lan-sortaren azala",
+      "description": "Lan-sortan sartu aurretik informazioa erakusten duen azala."
     },
     {
-      "label": "Azalaren Orria",
+      "label": "Azalaren orria",
       "fields": [
         {
           "label": "Azalaren deskribapena",
-          "description": "Testu hau zure portfolioaren deskribapena izango da.",
+          "description": "Testu hau zure lan-sortaren deskribapena izango da.",
           "default": "<p style=\"text-align: center;\"></p>"
         },
         {
@@ -17,22 +17,22 @@
           "description": "Sarbidearentzako aukerazko multimedia."
         },
         {
-          "label": "Show header"
+          "label": "Erakutsi goiburua"
         },
         {
-          "label": "Show footer"
+          "label": "Erakutsi oina"
         }
       ]
     },
     {
       "label": "Use header",
-      "description": "If you toggle this switch on/off, the header of all chapters will be displayed/removed accordingly."
+      "description": "Kontrol hau aktibatuz/desaktibatuz gero, kapitulu guztien goiburua horren arabera bistaratu/ezkutatu egingo da."
     },
     {
       "label": "Header",
       "fields": [
         {
-          "label": "Header"
+          "label": "Goiburua"
         },
         {
           "label": "Dummy"
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "label": "Portfolio",
+      "label": "Lan-sorta",
       "fields": [
         {
           "label": "Pages",
@@ -130,12 +130,12 @@
       "fields": [
         {
           "label": "Base color",
-          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast.",
+          "description": "Ezarri lan-sortaren kolore-eskema orokorra definituko duen oinarrizko kolorea. Mesedez, ziurtatu nahiko kontrastea duela.",
           "default": "#1768c4"
         },
         {
           "label": "Display table of contents as default",
-          "description": "When enabled the table of contents is showed when opening the portfolio."
+          "description": "Gaituta dagoenean, edukien taula erakusten da lan-sorta irekitzean."
         }
       ]
     },
