@@ -1,0 +1,10 @@
+{
+  "moduleNameMapper": {
+  "^@services(.*)$": "<rootDir>/src/scripts/services$1",
+  "^@scripts(.*)$": "<rootDir>/src/scripts$1"
+},
+"testPathIgnorePatterns": [
+  "<rootDir>/node_modules/",
+  "<rootDir>/src/stylesheets/"
+]
+}

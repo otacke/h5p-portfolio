@@ -2,16 +2,19 @@
 export default class URLTools {
   /**
    * Extract fragments from browser URL.
-   * @param {function} validate Validation function.
    * @param {Window} contextWindow Window.
+   * @param {function} validate Validation function.
    * @returns {object} Fragments.
    */
-  static extractFragmentsFromURL(validate, contextWindow) {
+  static extractFragmentsFromURL(contextWindow, validate) {
     if (!contextWindow?.location?.hash && !contextWindow?.location?.search) {
       return {};
     }
 
     let hashQueryString = contextWindow.location.hash;
+    if (hashQueryString.indexOf('#') === 0) {
+      hashQueryString = hashQueryString.substring(1);
+    }
 
     // Original implementation encoded fragments in the hash :-/
     const firstQMIndex = contextWindow.location.hash.indexOf('?');
@@ -38,6 +41,10 @@ export default class URLTools {
    * @returns {object} Parsed URL query string.
    */
   static parseURLQueryString(urlQueryString = '') {
+    if (typeof urlQueryString !== 'string') {
+      urlQueryString = '';
+    }
+
     urlQueryString = (
       urlQueryString.indexOf('?') === 0 ||
       urlQueryString.indexOf('&') === 0
@@ -63,8 +70,14 @@ export default class URLTools {
    * @returns {string} Stringified URL queries.
    */
   static stringifyURLQueries(urlQueries, prefix = '') {
+    if (typeof urlQueries !== 'object' || urlQueries === null) {
+      return '';
+    }
+
+    prefix = prefix ?? '';
+
     const queryString = Object.entries(urlQueries)
-      .filter((entry) => entry.length === 2 && entry[1] !== undefined)
+      .filter((entry) => entry.length === 2 && !!entry[1])
       .map((entry) => `${entry[0]}=${entry[1]}`)
       .join('&');
 
@@ -83,6 +96,7 @@ export default class URLTools {
    */
   static getHashSelector(hash, prefix = '') {
     let hashSelector = '';
+    prefix = prefix ?? '';
 
     const firstQMIndex = hash.indexOf('?');
 

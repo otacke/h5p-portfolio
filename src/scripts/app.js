@@ -373,7 +373,8 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     const payload = (this.cannotHandleURL) ?
       URLTools.extractFragmentsFromURL(
-        this.validateFragments, this.contextWindow
+        this.contextWindow,
+        this.validateFragments
       ) :
       {};
 
