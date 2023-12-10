@@ -21,6 +21,8 @@ import '@styles/h5p-portfolio.scss';
  * positioning and heights set in CSS.
  *
  * Rename CSS classes to reflect the JavaScript class name/filename
+ *
+ * Change em to rem
  */
 
 export default class Portfolio extends H5P.EventDispatcher {
