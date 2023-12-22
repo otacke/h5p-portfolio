@@ -1,3 +1,5 @@
+import Util from '@services/util';
+
 /**
  * Mixin containing methods for H5P Question Type contract.
  */
@@ -90,8 +92,10 @@ export default class QuestionTypeContract {
       }
     });
 
-    // Force reset activity start time
-    this.setActivityStarted(true);
+    // Clean up previous state to avoid fallback in getCurrentState()
+    for (const state in this.previousState) {
+      delete this.previousState[state];
+    }
 
     this.moveTo({
       h5pPortfolioId: this.contentId,
@@ -99,11 +103,17 @@ export default class QuestionTypeContract {
       h5pPortfolioToTop: true
     });
 
+    // Remove all portfolio query parameters
+    this.changeURL();
+
     if (this.hasCover()) {
       this.displayCover(this.$mainWrapper);
     }
 
     this.isAnswerUpdated = false;
+
+    // Force reset activity start time
+    this.setActivityStarted(true);
   }
 
   /**
@@ -131,9 +141,18 @@ export default class QuestionTypeContract {
 
   /**
    * Answer call to return the current state.
-   * @returns {object} Current state.
+   * @returns {object|undefined} Current state.
    */
   getCurrentState() {
+    const chapterStates = this.chapters.getAll().map((chapter) => {
+      return chapter?.instance?.getCurrentState() || {};
+    });
+
+    const isEmpty = H5P.isEmpty ?? Util.isEmpty;
+    if (isEmpty(chapterStates)) {
+      return;
+    }
+
     return {
       chapterStates: this.chapters.getAll().map((chapter) => {
         return chapter?.instance?.getCurrentState() || {};

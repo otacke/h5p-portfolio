@@ -158,4 +158,24 @@ export default class Util {
       observer.observe(dom);
     });
   }
+
+  /**
+   * Check if (nested) item is empty.
+   * Polyfill for older H5P core versions before 1.26.
+   * @param {*} item Item to test.
+   * @returns {boolean} True, if item is empty.
+   */
+  static isEmpty(item) {
+    if (!item && item !== 0 && item !== false) {
+      return true; // undefined, null, NaN and empty strings.
+    }
+    else if (Array.isArray(item)) {
+      return item.every((item) => Util.isEmpty(item));
+    }
+    else if (typeof item === 'object') {
+      return Object.values(item).every((item) => Util.isEmpty(item));
+    }
+
+    return false;
+  }
 }
