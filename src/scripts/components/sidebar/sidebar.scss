@@ -153,6 +153,22 @@
       opacity: 0;
       visibility: none;
     }
+
+    &.icon-expanded {
+      &::before {
+        content: '\e901';
+        width: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &.icon-collapsed {
+      &::before {
+        content: '\e902';
+        width: 1.5rem;
+        display: inline-block;
+      }
+    }
   }
 
   &.h5p-portfolio-navigation-chapter-content {

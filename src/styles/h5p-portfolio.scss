@@ -128,7 +128,6 @@
 @media (max-width: 40rem) {
   .h5p-portfolio {
     .h5p-portfolio-main {
-
       &.h5p-portfolio-navigation-open {
 
         .h5p-portfolio-navigation {
@@ -162,81 +161,5 @@
         }
       }
     }
-  }
-}
-
-.icon-expanded {
-  &::before {
-    content: '\e901';
-    width: 1.5rem;
-    display: inline-block;
-  }
-}
-
-.icon-collapsed {
-  &::before {
-    content: '\e902';
-    width: 1.5rem;
-    display: inline-block;
-  }
-}
-
-.icon-menu {
-  &::before {
-    content: '\e906';
-  }
-}
-
-.icon-previous {
-  &::before {
-    content: '\e907';
-  }
-}
-
-.icon-next {
-  &::before {
-    content: '\e908';
-  }
-}
-
-.icon-up {
-  &::before {
-    content: '\e909';
-  }
-}
-
-.icon-question-answered {
-  &::before {
-    content: '\e90a';
-  }
-}
-
-.icon-enable-fullscreen {
-  &::before {
-    content: '\e90b';
-  }
-}
-
-.icon-disable-fullscreen {
-  &::before {
-    content: '\e90c';
-  }
-}
-
-.icon-restart {
-  &::before {
-    content: '\e90d';
-  }
-}
-
-.icon-paper-pencil {
-  &::before {
-    content: '\e90e';
-  }
-}
-
-.icon-paper {
-  &::before {
-    content: '\e90f';
   }
 }

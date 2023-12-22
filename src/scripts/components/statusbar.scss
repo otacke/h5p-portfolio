@@ -80,6 +80,10 @@
     color: var(--color-base, $base-color);
     font-size: 1.5rem;
     margin: auto;
+
+    &::before {
+      content: '\e906';
+    }
   }
 
   &.h5p-portfolio-status-menu-active {
@@ -201,6 +205,24 @@
     color: var(--color-base, $base-color);
     font-size: 1.5rem;
     margin: auto;
+
+    &.icon-previous {
+      &::before {
+        content: '\e907';
+      }
+    }
+
+    &.icon-next {
+      &::before {
+        content: '\e908';
+      }
+    }
+
+    &.icon-up {
+      &::before {
+        content: '\e909';
+      }
+    }
   }
 
   &.disabled .navigation-button {
