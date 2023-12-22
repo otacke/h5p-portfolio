@@ -57,7 +57,6 @@ export default class MenuChapterItem {
 
     this.expandIcon = document.createElement('div');
     this.expandIcon.classList.add('h5p-portfolio-navigation-chapter-accordion');
-    this.expandIcon.classList.add(`level-${hierarchyLevel}`);
 
     this.button.appendChild(this.expandIcon);
 
@@ -70,6 +69,9 @@ export default class MenuChapterItem {
 
     if (this.isExpandable) {
       this.collapse();
+    }
+    else {
+      this.expandIcon.classList.add('display-none');
     }
 
     this.hide();

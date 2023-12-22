@@ -7,7 +7,6 @@
   flex-direction: column;
   height: 100%;
   left: 0;
-  // padding-bottom: 200px;
   position: relative;
   top: 0;
   width: 100%;
@@ -25,32 +24,32 @@
 
   .h5p-portfolio-cover-title {
     color: $medium-grey;
-    font-size: 2.188em;
+    font-size: 2.188rem;
     font-weight: 700;
     text-align: center;
     text-decoration: none solid $medium-grey;
 
     p {
-      margin: 0 0 .5em;
+      margin: 0 0 .5rem;
     }
   }
 
   .h5p-portfolio-cover-description {
     color: $medium-grey;
-    font-size: 1.25em;
+    font-size: 1.25rem;
     font-weight: 400;
-    margin-bottom: .5em;
+    margin-bottom: .5rem;
     width: 80%;
     text-decoration: none solid $medium-grey;
 
     p {
-      margin: 0 0 .5em;
+      margin: 0 0 .5rem;
     }
   }
 
   .h5p-portfolio-cover-readbutton {
-    margin-bottom: 3em;
-    margin-top: .5em;
+    margin-bottom: 3rem;
+    margin-top: .5rem;
 
     button {
       background-color: var(--color-base, $base-color);
@@ -59,9 +58,9 @@
       border-radius: 3px;
       color: var(--color-text, $background-color);
       cursor: pointer;
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: 400;
-      padding: 10px 40px;
+      padding: 0.75rem 2.5rem;
       text-align: center;
       text-decoration: none solid var(--color-text, $background-color);
 
@@ -94,7 +93,7 @@
     border-bottom: 2px solid rgb(185, 197, 203);
 
     .h5p-portfolio-placeholder-content-row {
-      margin: 0 1em;
+      margin: 0 1rem;
     }
   }
 
@@ -102,7 +101,7 @@
     border-top: 2px solid rgb(185, 197, 203);
 
     .h5p-portfolio-placeholder-content-row {
-      margin: 0 1em;
+      margin: 0 1rem;
     }
   }
 }
@@ -110,20 +109,20 @@
 .h5p-portfolio-cover-graphics {
   align-items: center;
   display: flex;
-  height: 15em;
+  height: 15rem;
   justify-content: center;
-  margin: 4.375em 0;
+  margin: 4.375rem 0;
   position: relative;
   width: 100%;
 
   &.h5p-image > img,
   &.h5p-video > video,
   &.h5p-video.h5p-youtube > div:not(.h5p-portfolio-cover-bar) {
-    box-shadow: 0.5em 0.25em 3em 0 $black-20;
+    box-shadow: 0.5rem 0.25rem 3rem 0 $black-20;
     position: absolute;
     left: 50%;
-    max-height: 15em;
-    min-width: 20em;
+    max-height: 15rem;
+    min-width: 20rem;
     top: 50%;
     transform: translate(-50%, -50%);
   }
@@ -137,7 +136,7 @@
   }
 
   &.h5p-video.h5p-youtube > div:not(.h5p-portfolio-cover-bar) {
-    max-width: 26.666em;
+    max-width: 26.666rem;
   }
 }
 

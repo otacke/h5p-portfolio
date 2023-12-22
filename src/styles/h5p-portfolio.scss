@@ -23,7 +23,7 @@
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  line-height: 1;
+  line-height: 1.5rem;
   text-transform: none;
 }
 
@@ -71,8 +71,8 @@
     &.h5p-portfolio-navigation-open {
 
       .h5p-portfolio-navigation {
-        max-width: 16.563em;
-        width: 16.563em;
+        max-width: 16.563rem;
+        width: 16.563rem;
       }
     }
   }
@@ -89,7 +89,7 @@
     flex-direction: column;
 
     .h5p-portfolio-content {
-      padding-bottom: 4.5em;
+      padding-bottom: 4.5rem;
     }
 
     .h5p-portfolio-status-footer {
@@ -108,7 +108,7 @@
         overflow-y: auto;
         // Note: Subtracts padding, do not use box-sizing because then inner div
         // will have too little space
-        min-height: calc(100% - 4.5em);
+        min-height: calc(100% - 4.5rem);
       }
 
       .h5p-portfolio-navigation {
@@ -165,45 +165,19 @@
   }
 }
 
-.icon-close {
-  ::before {
-    content: '\e900';
-  }
-}
-
 .icon-expanded {
   &::before {
     content: '\e901';
+    width: 1.5rem;
+    display: inline-block;
   }
 }
 
 .icon-collapsed {
   &::before {
     content: '\e902';
-  }
-}
-
-.icon-chapter-started {
-  &::before {
-    content: '\e903';
-  }
-}
-
-.icon-chapter-done {
-  &::before {
-    content: '\e90a';
-  }
-}
-
-.icon-check-mark {
-  &::before {
-    content: '\e910';
-  }
-}
-
-.icon-chapter-blank {
-  &::before {
-    content: '\e905';
+    width: 1.5rem;
+    display: inline-block;
   }
 }
 

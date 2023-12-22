@@ -3,9 +3,9 @@
 .h5p-portfolio-navigation {
   background-color: $background-color;
   background-size: cover;
-  box-shadow: .625em .625em 1.875em $dark-grey-20;
+  box-shadow: .625rem .625rem 1.875rem $dark-grey-20;
   max-width: 0;
-  min-height: 19em;
+  min-height: 19rem;
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -40,18 +40,18 @@
   transition: max-height .5s ease-in;
 
   >:first-child {
-    margin-top: .5em;
+    margin-top: .5rem;
   }
 
   >:last-child {
     border-bottom: solid 1px $ghost-white;
-    padding-bottom: .5em;
+    padding-bottom: .5rem;
   }
 
   .h5p-portfolio-navigation-section {
     background: transparent;
     color: $mud;
-    font-size: .875em;
+    font-size: .875rem;
     font-weight: 400;
     line-height: 1.8;
     overflow: hidden;
@@ -61,7 +61,7 @@
       position: relative;
       background: transparent;
       border: 0;
-      padding: 0 1.125em;
+      padding: 0 1.125rem;
       max-width: 100%;
     }
 
@@ -70,7 +70,7 @@
       color: $black;
       font-size: 5px;
       visibility: hidden;
-      width: 2.17em;
+      width: 2.17rem;
       top: 50%;
       transform: translateY(-50%);
 
@@ -80,9 +80,9 @@
     }
 
     .h5p-portfolio-navigation-section-title {
-      font-size: .85em;
-      margin-left: 15px;
-      margin-right: 2em;
+      font-size: .85rem;
+      margin-left: 1rem;
+      margin-right: 2rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -108,12 +108,12 @@
   list-style: none;
 
   &.h5p-portfolio-navigation-chapter-first {
-    margin-top: .5em;
+    margin-top: .5rem;
   }
 
   &.h5p-portfolio-navigation-chapter-last {
     border-bottom: solid 1px $ghost-white;
-    height: 2em;
+    height: 2rem;
   }
 }
 
@@ -125,9 +125,9 @@
   border-bottom: solid 1px $ghost-white;
   color: $mud;
   display: flex;
-  height: 3.438em;
+  height: 2.825rem;
   margin: 0;
-  padding: 0 1.125em;
+  padding: 0 1rem 0 0;
   text-align: initial;
   text-decoration: none solid $mud;
   width: 100%;
@@ -136,11 +136,9 @@
   .h5p-portfolio-navigation-chapter-title-text {
     background-color: transparent;
     color: $mud;
-    font-size: 1em;
+    font-size: 0.85rem;
     font-weight: 700;
-    line-height: 1.5em;
-    padding-left: 1.5em;
-    padding-right: 2em;
+    line-height: 1.5rem;
     overflow: hidden;
     text-decoration: none solid $mud;
     text-overflow: ellipsis;
@@ -148,52 +146,26 @@
   }
 
   .h5p-portfolio-navigation-chapter-accordion {
-    align-self: center;
-    font-size: .65em;
-    width: 1em;
-    position: absolute;
-    top: 17px;
+    font-size: .65rem;
+    width: 1rem;
 
     &.hidden {
       opacity: 0;
       visibility: none;
     }
-
-    &.level-1 {
-      left: 1.5em;
-    }
-
-    &.level-2 {
-      left: 3.5em;
-    }
-
-    &.level-3 {
-      left: 5.5em;
-    }
-
-    &.level-4 {
-      left: 7.5em;
-    }
-  }
-
-  .h5p-portfolio-navigation-chapter-progress {
-    align-self: center;
-    font-size: .75em;
-    position: absolute;
-    right: 15px;
-    top: 17px;
   }
 
   &.h5p-portfolio-navigation-chapter-content {
     border-bottom: none;
-    height: 1.75em;
+    height: 1.75rem;
 
     .h5p-portfolio-navigation-chapter-title-text {
-      font-size: 0.85em;
+      font-size: 0.708rem;
+      font-weight: normal;
       overflow: hidden;
+      padding-left: 1rem;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-weight: normal;
 
       &:hover {
         color: var(--color-base, $base-color);
@@ -203,19 +175,19 @@
   }
 
   &.level-1 {
-    padding-left: 1.125em;
+    padding-left: 0.75rem;
   }
 
   &.level-2 {
-    padding-left: 2.125em;
+    padding-left: 1.75rem;
   }
 
   &.level-3 {
-    padding-left: 3.125em;
+    padding-left: 2.75rem;
   }
 
   &.level-4 {
-    padding-left: 4.125em;
+    padding-left: 3.75rem;
   }
 
   &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
@@ -245,10 +217,10 @@
   .navigation-title {
     align-self: center;
     color: var(--color-text, $background-color);
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: 400;
     overflow: hidden;
-    padding-left: 1.25em;
+    padding-left: 1.25rem;
     text-decoration: none solid var(--color-text, $background-color);
     text-overflow: ellipsis;
   }

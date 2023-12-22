@@ -12,12 +12,12 @@
     background: rgba(255 255 255 / 0.7);
     color: rgba(0 0 0 / 0.7);
     line-height: 1.5;
-    padding: 0.25em;
+    padding: 0.25rem;
     overflow: hidden;
-    font-size: 0.6em;
-    min-width: 5em;
-    max-width: 6em;
-    max-height: 20.5em;
+    font-size: 0.8rem;
+    min-width: 5rem;
+    max-width: 6rem;
+    max-height: 20.5rem;
 
     .h5p-portfolio-hotspot-navigation-label-inner {
       white-space: initial;
@@ -35,7 +35,7 @@
   }
 
   &.bottom {
-    bottom: -2.75em;
+    bottom: -2.75rem;
     left: 50%;
     transform: translateX(-50%);
 
@@ -77,12 +77,12 @@
   }
 
   &.bottom-right {
-    bottom: -0.75em;
+    bottom: -1.25rem;
     left: 125%;
   }
 
   &.bottom-left {
-    bottom: -0.75em;
+    bottom: -1.25rem;
     right: 125%;
   }
 
@@ -97,19 +97,19 @@
 
   &.multiline {
     &.bottom {
-      bottom: -4.125em;
+      bottom: -4.125rem;
     }
 
     &.bottom-right {
-      bottom: -3.125em;
+      bottom: -3.125rem;
     }
 
     &.bottom-left {
-      bottom: -3.125em;
+      bottom: -3.125rem;
     }
 
     .h5p-portfolio-hotspot-navigation-label {
-      min-width: 5em;
+      min-width: 5rem;
 
       .h5p-portfolio-hotspot-navigation-label-inner {
         white-space: initial;
