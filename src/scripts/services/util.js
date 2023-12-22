@@ -2,26 +2,25 @@
 export default class Util {
   /**
    * Extend an array just like JQuery's extend.
-   * @param {...object} var_args Objects to be merged.
    * @returns {object} Merged objects.
    */
-  static extend(var_args) {
-    for (let i = 1; i < var_args.length; i++) {
-      for (let key in var_args[i]) {
-        if (Object.prototype.hasOwnProperty.call(var_args[i], key)) {
+  static extend() {
+    for (let i = 1; i < arguments.length; i++) {
+      for (let key in arguments[i]) {
+        if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
           if (
-            typeof var_args[0][key] === 'object' &&
-            typeof var_args[i][key] === 'object'
+            typeof arguments[0][key] === 'object' &&
+            typeof arguments[i][key] === 'object'
           ) {
-            this.extend(var_args[0][key], var_args[i][key]);
+            this.extend(arguments[0][key], arguments[i][key]);
           }
           else {
-            var_args[0][key] = var_args[i][key];
+            arguments[0][key] = arguments[i][key];
           }
         }
       }
     }
-    return var_args[0];
+    return arguments[0];
   }
 
   /**
@@ -138,7 +137,7 @@ export default class Util {
    */
   static callOnceVisible(dom, callback) {
     if (typeof dom !== 'object' || typeof callback !== 'function') {
-      return; // Invalid var_args
+      return; // Invalid arguments
     }
 
     // iOS is behind ... Again ...
