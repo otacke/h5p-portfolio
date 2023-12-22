@@ -720,7 +720,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     queryParams = Object.keys(queryParams)
       .filter((key) => !key.startsWith('h5pPortfolio'))
       .reduce((result, key) => {
-        return Object.assign(result, { [key]: params[key] });
+        return Object.assign(result, { [key]: queryParams[key] });
       }, {});
 
     params = { ...queryParams, ...params };
