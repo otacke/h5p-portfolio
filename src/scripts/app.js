@@ -690,7 +690,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     if (
       this.isPreview ||
       this.cannotHandleURL ||
-      !this.contextWindow?.loation
+      !this.contextWindow?.location
     ) {
       return; // Don't change URL
     }
