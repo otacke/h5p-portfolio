@@ -53,7 +53,7 @@
     &::before {
       color: var(--color-base, $base-color);
       content: '\e90b';
-      font-family: 'h5p-book', sans-serif;
+      font-family: 'h5p-book', system-ui, -apple-system, sans-serif;
       font-size: 1rem;
     }
   }
@@ -63,7 +63,7 @@
       font-size: 1rem;
       color: var(--color-base, $base-color);
       content: '\e90c';
-      font-family: 'h5p-book', sans-serif;
+      font-family: 'h5p-book', system-ui, -apple-system, sans-serif;
     }
   }
 }
