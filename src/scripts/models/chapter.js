@@ -10,7 +10,7 @@ export default class Chapter {
   constructor(params = {}) {
     this.params = params;
 
-    this.isInitialized = false;
+    this.initializedState = false;
     this.title = params.content.metadata.title;
     this.hierarchy = params.hierarchy;
 
@@ -76,6 +76,26 @@ export default class Chapter {
    */
   getHotspotNavigationHeight() {
     return this.hotspotNavigationDOM?.getBoundingClientRect().height ?? 0;
+  }
+
+  /**
+   * Set initialized.
+   * @param {boolean} state State.
+   */
+  setInitialized(state) {
+    if (typeof state !== 'boolean') {
+      return;
+    }
+
+    this.initializedState = state;
+  }
+
+  /**
+   * Determine whether chapter is initialized.
+   * @returns {boolean} True, if chapter is initialized, else false.
+   */
+  isInitialized() {
+    return this.initializedState ?? false;
   }
 
   /**

@@ -84,9 +84,10 @@ export default class QuestionTypeContract {
     }
 
     this.chapters.get().forEach((chapter) => {
-      if (!chapter.isInitialized) {
+      if (!chapter.isInitialized()) {
         return;
       }
+
       if (typeof chapter.instance.resetTask === 'function') {
         chapter.instance.resetTask();
       }

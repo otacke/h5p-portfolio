@@ -152,15 +152,13 @@ export default class PageContent {
       return; // Out of bounds
     }
 
-    // TODO: Clean up, don't access chapter directly
-
     // Instantiate and attach chapter contents
     const chapter = this.params.chapters.get(chapterIndex);
-    if (!chapter.isInitialized && chapter.instance) {
+    if (!chapter.isInitialized() && chapter.getInstance()) {
       chapter.setHeader('clone');
-      chapter.instance.attach(H5P.jQuery(chapter.chapterDOM));
+      chapter.getInstance().attach(H5P.jQuery(chapter.chapterDOM));
       chapter.setFooter('clone');
-      chapter.isInitialized = true;
+      chapter.setInitialized(true);
     }
   }
 
