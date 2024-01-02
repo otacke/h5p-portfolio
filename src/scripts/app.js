@@ -299,7 +299,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         dictionary: this.dictionary,
         chapters: this.chapters,
         displayMenuToggleButton: true,
-        displayFullScreenButton: !this.params.behaviour.isPreview,
+        displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-header',
         a11yLabel: this.dictionary.get('a11y.topNavigation')
       },
