@@ -313,12 +313,7 @@ export default class PageContent {
       // End the animation
       setTimeout(() => {
         chapterFrom.toggleAnimationPosition('previous', false);
-        /*
-         * In theory, this should not be necessary, but when some other
-         * page element changes the URL hash fragment, this may fail
-         * TODO: Find solution without using the URL hash fragment that was
-         * introduced by H5P.InteractiveBook
-         */
+
         this.params.chapters.getAll().forEach((chapter) => {
           chapter.toggleAnimationPosition('current', chapter === chapterTo);
         });

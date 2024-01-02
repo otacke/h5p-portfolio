@@ -1,11 +1,6 @@
 import Section from '@models/section.js';
 import HotspotNavigation from '@components/pagecontent/hotspotnavigation/navigation.js';
 
-/*
- * TODO: Clean up, so the placeholders for navigation, chapters, etc. can be
- * reset
- */
-
 export default class Chapter {
 
   /**
