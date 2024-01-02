@@ -18,9 +18,9 @@ import '@styles/h5p-portfolio.scss';
  * chapter transition and sizing. It is okay for Interactive Book, but now that
  * there can be a hotspots navigation, a header and a footer with different
  * needs, it's not. The pagecontent DOM should be refactored to not use absolute
- * positioning and heights set in CSS. Grid is a hot candidate
+ * positioning and heights set in CSS. Grid is a hot candidate, but this will
+ * still involve a lot of work.
  */
-
 export default class Portfolio extends H5P.EventDispatcher {
   /**
    * @class
