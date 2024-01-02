@@ -479,13 +479,15 @@ export default class Portfolio extends H5P.EventDispatcher {
         footerHeight;
 
       if (extraContentHeight >= 0) {
-        const minHeight = window.innerHeight -
+        let minHeight = window.innerHeight -
           this.statusBarHeader.getHeight() -
           extraContentHeight -
           this.statusBarFooter.getHeight();
 
         // Yes, 19 is a magic number, some DOM offset that I am not paid to find
         if (minHeight - 19 > 0) {
+          minHeight = Math.min(minHeight, extraContentHeight);
+
           currentChapter.setChapterContentMinHeight(minHeight - 19);
         }
       }
