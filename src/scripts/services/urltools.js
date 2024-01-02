@@ -1,5 +1,3 @@
-import { type } from "os";
-
 /** Class representing URL related functions */
 export default class URLTools {
   /**
