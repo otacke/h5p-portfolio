@@ -5,6 +5,7 @@ tests
 dev
 src
 .eslintrc.json
+eslint.config.js
 .idea
 .git
 .babelrc
