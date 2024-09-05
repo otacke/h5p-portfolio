@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Descripción de la portada",
-          "description": "Este texto será la descripción de tu portafolios.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "Este texto será la descripción de tu portafolios."
         },
         {
           "label": "Medio de portada",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Color base",
-          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto.",
-          "default": "#1768c4"
+          "description": "Configura el color base que definirá el esquema general de color del portafolios. Por favor, asegúrate de establecer un contraste suficientemente alto."
         },
         {
           "label": "Mostrar tabla de contenidos por defecto",
