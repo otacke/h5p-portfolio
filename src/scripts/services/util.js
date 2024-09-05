@@ -112,7 +112,7 @@ export default class Util {
 
     // Check for (temporary) exceptions
     const exceptions = [
-      'H5P.Blanks', // Exception required for original V1.12.11 and before, can be removed when later is out or changes merged in
+      'H5P.Blanks', // Exception required for original V1.12.11 and before
       'H5P.MemoryGame', // Doesn't implement getMaxScore yet
       'H5P.SpeakTheWordsSet' // Doesn't implement getMaxScore yet
     ];

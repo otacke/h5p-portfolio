@@ -1,6 +1,12 @@
 import Util from '@services/util.js';
 import './label.scss';
 
+/** @constant {number} LABEL_SIZE_FACTOR Label size factor compared to font size. */
+const LABEL_SIZE_FACTOR = 1.5;
+
+/** @constant {number} VISIBILITY_TIMEOUT_MS Visibility timeout in milliseconds. */
+const VISIBILITY_TIMEOUT_MS = 10;
+
 export default class Label {
 
   /**
@@ -63,7 +69,7 @@ export default class Label {
       window.getComputedStyle(this.labelInner).getPropertyValue('font-size')
     );
     const labelSize = Math.floor(this.labelInner.getBoundingClientRect().height);
-    this.dom.classList.toggle('multiline', fontSize * 1.5 < labelSize);
+    this.dom.classList.toggle('multiline', fontSize * LABEL_SIZE_FACTOR < labelSize);
 
     this.dom.classList.toggle('touch-device', params.isTouch || false);
 
@@ -73,7 +79,7 @@ export default class Label {
     else {
       window.setTimeout(() => {
         this.dom.classList.remove('visibility-hidden');
-      }, 10);
+      }, VISIBILITY_TIMEOUT_MS);
     }
 
     this.dom.classList.remove('display-none');

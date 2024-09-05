@@ -2,6 +2,15 @@ import Util from '@services/util.js';
 import HotspotNavigation from './hotspotnavigation/navigation.js';
 import './pagecontent.scss';
 
+/** @constant {number} SCROLL_INTO_VIEW_TIMEOUT_MS Timeout for scroll into view in ms. */
+const SCROLL_INTO_VIEW_TIMEOUT_MS = 100;
+
+/** @constant {number} ANIMATION_DURATION_TIMEOUT_MS Timeout for animation workaround in ms. */
+const ANIMATION_DURATION_TIMEOUT_MS = 250;
+
+/** @constant {number} ANIMATION_DELAY_MS Delay for animation in ms. */
+const ANIMATION_DELAY_MS = 50;
+
 export default class PageContent {
   /**
    * @class
@@ -229,7 +238,7 @@ export default class PageContent {
 
       setTimeout(() => {
         dom.scrollIntoView(true);
-      }, 100);
+      }, SCROLL_INTO_VIEW_TIMEOUT_MS);
     }
   }
 
@@ -336,9 +345,9 @@ export default class PageContent {
         // Ensure all animation has ended
         window.setTimeout(() => {
           this.callbacks.onResized();
-        }, 250); // Animation duration
-      }, 250); // Animation duration
-    }, 50);
+        }, ANIMATION_DURATION_TIMEOUT_MS);
+      }, ANIMATION_DURATION_TIMEOUT_MS);
+    }, ANIMATION_DELAY_MS);
   }
 
   /**

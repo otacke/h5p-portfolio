@@ -68,7 +68,8 @@ describe('URLTools', () => {
           }
         },
         {
-          name: 'invalid hash (InteractiveBook format) values: 2, extra search', hash: '#foo=1&bar=2', search: '?batz=3',
+          name:
+            'invalid hash (InteractiveBook format) values: 2, extra search', hash: '#foo=1&bar=2', search: '?batz=3',
           result: {
             foo: '1',
             bar: '2',
@@ -76,7 +77,8 @@ describe('URLTools', () => {
           }
         },
         {
-          name: 'invalid hash (InteractiveBook format) values: 2, duplicate search', hash: '#foo=1&bar=2', search: '?foo=3',
+          name:
+            'invalid hash (InteractiveBook format) values: 2, duplicate search', hash: '#foo=1&bar=2', search: '?foo=3',
           result: {
             foo: '3',
             bar: '2'

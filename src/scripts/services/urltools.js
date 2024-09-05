@@ -74,10 +74,12 @@ export default class URLTools {
       return '';
     }
 
+    const QUERY_LENGTH = 2;
+
     prefix = prefix ?? '';
 
     const queryString = Object.entries(urlQueries)
-      .filter((entry) => entry.length === 2 && !!entry[1])
+      .filter((entry) => entry.length === QUERY_LENGTH && !!entry[1])
       .map((entry) => `${entry[0]}=${entry[1]}`)
       .join('&');
 
