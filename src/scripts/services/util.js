@@ -100,7 +100,7 @@ export default class Util {
       return false;
     }
 
-    if (instance.isTask) {
+    if (typeof instance.isTask === 'boolean') {
       return instance.isTask; // Content will determine if it's task on its own
     }
 
