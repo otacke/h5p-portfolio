@@ -1,6 +1,6 @@
 {
   "name": "h5p-portfolio",
-  "version": "0.9.16",
+  "version": "0.9.17",
   "description": "H5P Portfolio",
   "scripts": {
     "test": "jest",
