@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Cover description",
-          "description": "This text will be the description of your portfolio.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "This text will be the description of your portfolio."
         },
         {
           "label": "Cover medium",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Base color",
-          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast.",
-          "default": "#1768c4"
+          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast."
         },
         {
           "label": "Display table of contents as default",
@@ -214,7 +212,7 @@
           "default": "Go to @title"
         },
         {
-          "label": "mainContent",
+          "label": "Main content",
           "default": "Main content"
         }
       ]

@@ -1,6 +1,9 @@
 import Color from 'color';
 import '@styles/_color_overrides.scss';
 
+/** @constant {number} CONTRAST_STEP_PERCENTAGE Steps in between contrasts as percent */
+const CONTRAST_STEP_PERCENTAGE = 0.05;
+
 /**
  * Color class.
  * @class
@@ -52,6 +55,7 @@ export default class Colors {
       typeof params.opacity === 'string' &&
       /^([0-9]|[1-8][0-9]|9[0-9]|100)(\.\d+)?\s?%$/.test(params.opacity)
     ) {
+      // eslint-disable-next-line no-magic-numbers
       params.opacity = parseInt(params.opacity) / 100;
     }
 
@@ -95,9 +99,10 @@ export default class Colors {
     const luminance = comparisonColor.luminosity();
 
     let contrastColor;
-    for (let diff = 0; diff <= 1; diff = diff + 0.05) {
+    for (let diff = 0; diff <= 1; diff = diff + CONTRAST_STEP_PERCENTAGE) {
       contrastColor = Color.rgb(baseColor.rgb().array().map((value) => {
-        return value * ((luminance > .5) ? (1 - diff) : (1 + diff));
+        // eslint-disable-next-line no-magic-numbers
+        return value * ((luminance > 0.5) ? (1 - diff) : (1 + diff));
       }));
 
       const contrast = contrastColor.contrast(comparisonColor);
@@ -167,7 +172,10 @@ export default class Colors {
 Colors.DEFAULT_COLOR_BASE = Color('#1768c4');
 Colors.DEFAULT_COLOR_BG = Color('#ffffff');
 
-/** @constant {number} Minimum acceptable contrast for normal font size, cmp. https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure */
+/**
+ * Minimum acceptable contrast for normal font size, cmp. https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure
+ * @constant {number} MINIMUM_ACCEPTABLE_CONTRAST
+ */
 Colors.MINIMUM_ACCEPTABLE_CONTRAST = 4.5;
 
 

@@ -3,6 +3,9 @@ import Label from './label.js';
 import he from 'he';
 import './hotspot.scss';
 
+/** @constant {number} Center_PERCENTPOINTS 50 as 100 / 2, obviously */
+const CENTER_PERCENTPOINTS = 50;
+
 export default class Hotspot {
   /**
    * @class
@@ -11,7 +14,7 @@ export default class Hotspot {
    */
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({
-      position: { x: 50, y: 50 }
+      position: { x: CENTER_PERCENTPOINTS, y: CENTER_PERCENTPOINTS }
     }, params);
     this.callbacks = Util.extend({
       onClicked: (() => {})
@@ -33,8 +36,8 @@ export default class Hotspot {
     }
 
     if (this.params.title) {
-      const vertical = this.params.position.y < 50 ? 'bottom' : 'top';
-      const horizontal = this.params.position.x < 50 ? 'right' : 'left';
+      const vertical = this.params.position.y < CENTER_PERCENTPOINTS ? 'bottom' : 'top';
+      const horizontal = this.params.position.x < CENTER_PERCENTPOINTS ? 'right' : 'left';
 
       this.label = new Label({
         text: this.params.title,

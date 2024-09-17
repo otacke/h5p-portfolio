@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Descrición da cuberta",
-          "description": "Este texto será a descrición da teu portafolios.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "Este texto será a descrición da teu portafolios."
         },
         {
           "label": "Medios da cuberta",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Cor base",
-          "description": "Establece a cor base que definirá o esquema de cores global do libro. Asegúrate de establecer un contraste suficientemente alto.",
-          "default": "#1768c4"
+          "description": "Establece a cor base que definirá o esquema de cores global do libro. Asegúrate de establecer un contraste suficientemente alto."
         },
         {
           "label": "Amosar a táboa de contidos por defecto",

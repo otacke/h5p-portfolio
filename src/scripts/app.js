@@ -21,6 +21,16 @@ import '@styles/h5p-portfolio.scss';
  * positioning and heights set in CSS. Grid is a hot candidate, but this will
  * still involve a lot of work.
  */
+
+/** @constant {number} DOM_OFFSET some DOM offset that I am not paid to find. */
+const DOM_OFFSET_PX = 19;
+
+/** @constant {number} RESIZE_TIMEOUT_MS Resize timeout in ms. */
+const RESIZE_TIMEOUT_MS = 150;
+
+/** @constant {number} FULLSCREEN_TIMEOUT_MS Resize timeout in ms. */
+const FULLSCREEN_TIMEOUT_MS = 250;
+
 export default class Portfolio extends H5P.EventDispatcher {
   /**
    * @class
@@ -484,11 +494,10 @@ export default class Portfolio extends H5P.EventDispatcher {
           extraContentHeight -
           this.statusBarFooter.getHeight();
 
-        // Yes, 19 is a magic number, some DOM offset that I am not paid to find
-        if (minHeight - 19 > 0) {
+        if (minHeight - DOM_OFFSET_PX > 0) {
           minHeight = Math.min(minHeight, extraContentHeight);
 
-          currentChapter.setChapterContentMinHeight(minHeight - 19);
+          currentChapter.setChapterContentMinHeight(minHeight - DOM_OFFSET_PX);
         }
       }
     }
@@ -645,7 +654,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       setTimeout(() => {
         this.trigger('resize');
       }, 0); // Content may need to be resized after re-drawn
-    }, 150);
+    }, RESIZE_TIMEOUT_MS);
 
     return isMenuOpen;
   }
@@ -665,7 +674,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     window.setTimeout(() => {
       this.trigger('resize');
-    }, 250); // Browser may need time to exit full screen
+    }, FULLSCREEN_TIMEOUT_MS); // Browser may need time to exit full screen
   }
 
   /**

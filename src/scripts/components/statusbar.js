@@ -45,8 +45,8 @@ export default class StatusBar {
 
     // Navigation buttons
     this.navigationButtons = this.buildNavigationButtons();
-    wrapperInfo.appendChild(this.navigationButtons['next']);
-    wrapperInfo.appendChild(this.navigationButtons['previous']);
+    wrapperInfo.appendChild(this.navigationButtons.next);
+    wrapperInfo.appendChild(this.navigationButtons.previous);
 
     // Menu toggle button
     if (this.params.displayMenuToggleButton) {
@@ -204,7 +204,7 @@ export default class StatusBar {
   buildNavigationButtons() {
     const buttons = {};
 
-    buttons['previous'] = this.buildNavigationButton({
+    buttons.previous = this.buildNavigationButton({
       icon: 'icon-previous',
       class: 'previous',
       label: this.params.dictionary.get('l10n.previousPage'),
@@ -216,7 +216,7 @@ export default class StatusBar {
       })
     });
 
-    buttons['next'] = this.buildNavigationButton({
+    buttons.next = this.buildNavigationButton({
       icon: 'icon-next',
       class: 'next',
       label: this.params.dictionary.get('l10n.nextPage'),
@@ -328,6 +328,7 @@ export default class StatusBar {
    */
   updateProgressBar(chapterId) {
     this.progressBar.progress.style.width =
+      // eslint-disable-next-line no-magic-numbers
       `${chapterId / this.params.chapters.get().length * 100}%`;
 
     const title = this.params.dictionary.get('a11y.progress')

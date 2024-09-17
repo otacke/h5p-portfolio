@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Viršelio aprašymas",
-          "description": "Šis tekstas bus jūsų portfelio aprašymas.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "Šis tekstas bus jūsų portfelio aprašymas."
         },
         {
           "label": "Viršelio aplinka",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Base color",
-          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast.",
-          "default": "#1768c4"
+          "description": "Set the base color that will define the overall color scheme of the portfolio. Please ensure a high enough contrast."
         },
         {
           "label": "Display table of contents as default",

@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Beschreibung",
-          "description": "Dieser Text wird zur Beschreibung des Portfolios unter dem eigentlichen Titel angezeigt.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "Dieser Text wird zur Beschreibung des Portfolios unter dem eigentlichen Titel angezeigt."
         },
         {
           "label": "Medium für die Titelseite",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Basisfarbe",
-          "description": "Setze die Basisfarbe für das Farbschema im Portfolio. Bitte denke an einen ausreichend hohen Kontrast.",
-          "default": "#1768c4"
+          "description": "Setze die Basisfarbe für das Farbschema im Portfolio. Bitte denke an einen ausreichend hohen Kontrast."
         },
         {
           "label": "Standardmäßig Inhaltsverzeichnis anzeigen",

@@ -9,8 +9,7 @@
       "fields": [
         {
           "label": "Azalaren deskribapena",
-          "description": "Testu hau zure lan-sortaren deskribapena izango da.",
-          "default": "<p style=\"text-align: center;\"></p>"
+          "description": "Testu hau zure lan-sortaren deskribapena izango da."
         },
         {
           "label": "Azalaren multimedia",
@@ -130,8 +129,7 @@
       "fields": [
         {
           "label": "Base color",
-          "description": "Ezarri lan-sortaren kolore-eskema orokorra definituko duen oinarrizko kolorea. Mesedez, ziurtatu nahiko kontrastea duela.",
-          "default": "#1768c4"
+          "description": "Ezarri lan-sortaren kolore-eskema orokorra definituko duen oinarrizko kolorea. Mesedez, ziurtatu nahiko kontrastea duela."
         },
         {
           "label": "Display table of contents as default",
