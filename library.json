@@ -8,6 +8,10 @@
   "fullscreen": 1,
   "author": "RUB, Oliver Tacke",
   "license": "MIT",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 27
+  },
   "machineName": "H5P.Portfolio",
   "embedTypes": [
     "iframe"
