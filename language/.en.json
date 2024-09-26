@@ -62,11 +62,10 @@
           "description": "Image used as background for the hotspot navigation."
         },
         {
-          "label": "Hotspot color",
-          "default": "rgba(255, 255, 255, .6)"
+          "label": "Hotspot color"
         },
         {
-          "label": "Permanentty show hotspot title in navigation"
+          "label": "Permanently show hotspot titles in navigation"
         }
       ]
     },
@@ -105,8 +104,7 @@
                     "label": "Use custom hotspot color"
                   },
                   {
-                    "label": "Hotspot color",
-                    "default": "rgba(255, 255, 255, 0)"
+                    "label": "Hotspot color"
                   },
                   {
                     "label": "Hotspot title"
@@ -199,8 +197,8 @@
           "default": "Bottom navigation"
         },
         {
-          "label": "Top naviation",
-          "default": "Top navigation"
+          "label": "Main navigation",
+          "default": "Main navigation"
         },
         {
           "label": "Hotspot navigation",

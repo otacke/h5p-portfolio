@@ -62,8 +62,7 @@
           "description": "Bild, das für den Hintergrund der Hotspot-Navigation verwendet wird."
         },
         {
-          "label": "Hotspot-Farbe",
-          "default": "rgba(255, 255, 255, .6)"
+          "label": "Hotspot-Farbe"
         },
         {
           "label": "Zeige Hotspot-Beschriftung in Navigation dauerhaft"
@@ -105,8 +104,7 @@
                     "label": "Benutze eigene Hotspot-Farbe"
                   },
                   {
-                    "label": "Hotspot-Farbe",
-                    "default": "rgba(255, 255, 255, 0)"
+                    "label": "Hotspot-Farbe"
                   },
                   {
                     "label": "Hotspot-Beschriftung"

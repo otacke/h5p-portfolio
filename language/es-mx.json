@@ -62,8 +62,7 @@
           "description": "Imagen utilizada como fondo para la navegación por puntos de acceso."
         },
         {
-          "label": "Color del punto de acceso",
-          "default": "rgba(255, 255, 255, .6)"
+          "label": "Color del punto de acceso"
         },
         {
           "label": "Mostrar permanentemente el título del punto de acceso en la navegación"
@@ -105,8 +104,7 @@
                     "label": "Usar color de punto de acceso personalizado"
                   },
                   {
-                    "label": "Color del punto de acceso",
-                    "default": "rgba(255, 255, 255, 0)"
+                    "label": "Color del punto de acceso"
                   },
                   {
                     "label": "Título del punto de acceso"
