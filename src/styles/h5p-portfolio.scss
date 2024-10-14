@@ -1,4 +1,4 @@
-@import "@styles/main";
+@use "@styles/main";
 
 @font-face {
   font-family: "h5p-book";
@@ -38,7 +38,7 @@
   }
 
   &.h5p-fullscreen {
-    background-color: $background-color;
+    background-color: main.$background-color;
   }
 
   .h5p-content-controls {
@@ -47,16 +47,16 @@
 
   ::-webkit-scrollbar {
     width: 6px;
-    background: $scrollbar-30;
+    background: main.$scrollbar-30;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: $scrollbar-75;
+    background: main.$scrollbar-75;
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: $scrollbar;
+    background: main.$scrollbar;
   }
 
   .h5p-portfolio-main {
@@ -141,10 +141,10 @@
         }
 
         .h5p-portfolio-navigation-chapter-button {
-          background-color: $background-color;
+          background-color: main.$background-color;
 
           &.h5p-portfolio-navigation-current {
-            border-bottom: solid 1px $ghost-white;
+            border-bottom: solid 1px main.$ghost-white;
           }
         }
 

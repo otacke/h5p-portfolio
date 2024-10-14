@@ -1,13 +1,13 @@
-@import "@styles/main";
+@use "@styles/main";
 
 .h5p-portfolio-status {
   align-items: center;
-  background-color: $background-color;
+  background-color: main.$background-color;
   background-size: cover;
   border: 0;
-  border-color: var(--color-base, $base-color);
+  border-color: var(--color-base, main.$base-color);
   border-style: solid;
-  box-shadow: 10px 10px 30px $dark-grey-20;
+  box-shadow: 10px 10px 30px main.$dark-grey-20;
   display: flex;
   overflow: hidden;
   padding: .5rem;
@@ -22,13 +22,13 @@
     width: 3rem;
 
     &:hover {
-      background-color: var(--color-base-10, $base-color-10);
+      background-color: var(--color-base-10, main.$base-color-10);
       background-size: cover;
       cursor: pointer;
     }
 
     &:active {
-      background-color: var(--color-base-20, $base-color-20);
+      background-color: var(--color-base-20, main.$base-color-20);
       background-size: cover;
     }
 
@@ -42,16 +42,16 @@
 }
 
 .h5p-portfolio-status-fullscreen {
-  background-color: var(--color-base-5, $base-color-5);
+  background-color: var(--color-base-5, main.$base-color-5);
   background-size: cover;
-  border: .125rem solid $background-color;
+  border: .125rem solid main.$background-color;
   flex-shrink: 0;
   justify-content: center;
   order: 5;
 
   &.h5p-portfolio-enter-fullscreen {
     &::before {
-      color: var(--color-base, $base-color);
+      color: var(--color-base, main.$base-color);
       content: '\e90b';
       font-family: 'h5p-book', system-ui, -apple-system, sans-serif;
       font-size: 1rem;
@@ -61,7 +61,7 @@
   &.h5p-portfolio-exit-fullscreen {
     &::before {
       font-size: 1rem;
-      color: var(--color-base, $base-color);
+      color: var(--color-base, main.$base-color);
       content: '\e90c';
       font-family: 'h5p-book', system-ui, -apple-system, sans-serif;
     }
@@ -69,15 +69,15 @@
 }
 
 .h5p-portfolio-status-menu {
-  background-color: $background-color;
+  background-color: main.$background-color;
   background-size: cover;
-  border: 2px solid $background-color;
+  border: 2px solid main.$background-color;
   border-radius: 3px;
   flex-shrink: 0;
   order: 0;
 
   .icon-menu {
-    color: var(--color-base, $base-color);
+    color: var(--color-base, main.$base-color);
     font-size: 1.5rem;
     margin: auto;
 
@@ -87,12 +87,12 @@
   }
 
   &.h5p-portfolio-status-menu-active {
-    background-color: var(--color-base, $base-color);
+    background-color: var(--color-base, main.$base-color);
     opacity: 20;
     position: relative;
 
     .icon-menu {
-      color: $background-color;
+      color: main.$background-color;
       left: 50%;
       position: absolute;
       top: 50%;
@@ -100,13 +100,13 @@
     }
 
     &:hover {
-      background-color: var(--color-base-90, $base-color-90);
+      background-color: var(--color-base-90, main.$base-color-90);
       background-size: cover;
       cursor: pointer;
     }
 
     &:active {
-      background-color: var(--color-base-95, $base-color-95);
+      background-color: var(--color-base-95, main.$base-color-95);
       background-size: cover;
     }
 
@@ -137,29 +137,29 @@
 }
 
 .h5p-portfolio-status-progress-number {
-  color: var(--color-base, $base-color);
+  color: var(--color-base, main.$base-color);
   font-size: 20px;
   font-weight: 700;
   text-align: right;
-  text-decoration: none solid var(--color-base, $base-color);
+  text-decoration: none solid var(--color-base, main.$base-color);
 }
 
 .h5p-portfolio-status-progress-divider {
-  color: $mud;
+  color: main.$mud;
   font-size: 20px;
   font-weight: 700;
   text-align: right;
-  text-decoration: none solid $mud;
+  text-decoration: none solid main.$mud;
 }
 
 .h5p-portfolio-status-progressbar-back {
-  background-color: var(--color-base-20, $base-color-20);
+  background-color: var(--color-base-20, main.$base-color-20);
   background-size: cover;
   width: 100%;
 }
 
 .h5p-portfolio-status-progressbar-front {
-  background-color: var(--color-base, $base-color);
+  background-color: var(--color-base, main.$base-color);
   height: .25rem;
   transition: 1s;
 }
@@ -171,21 +171,21 @@
   white-space: nowrap;
 
   .title {
-    color: $mud;
+    color: main.$mud;
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
     overflow: hidden;
     padding: 0 1rem;
-    text-decoration: none solid $mud;
+    text-decoration: none solid main.$mud;
     text-overflow: ellipsis;
   }
 }
 
 .h5p-portfolio-status-arrow {
-  background-color: var(--color-base-5, $base-color-5);
+  background-color: var(--color-base-5, main.$base-color-5);
   background-size: cover;
-  border: .125rem solid $background-color;
+  border: .125rem solid main.$background-color;
   border-radius: 3px;
   flex-shrink: 0;
   height: 2.75rem;
@@ -202,7 +202,7 @@
   .navigation-button {
     background: transparent;
     border: 0;
-    color: var(--color-base, $base-color);
+    color: var(--color-base, main.$base-color);
     font-size: 1.5rem;
     margin: auto;
 
@@ -231,7 +231,7 @@
 }
 
 .h5p-portfolio-status-header {
-  background: $background-color;
+  background: main.$background-color;
   top: 0;
   z-index: 2;
 

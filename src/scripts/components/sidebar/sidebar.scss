@@ -1,9 +1,9 @@
-@import "@styles/main";
+@use "@styles/main";
 
 .h5p-portfolio-navigation {
-  background-color: $background-color;
+  background-color: main.$background-color;
   background-size: cover;
-  box-shadow: .625rem .625rem 1.875rem $dark-grey-20;
+  box-shadow: .625rem .625rem 1.875rem main.$dark-grey-20;
   max-width: 0;
   min-height: 19rem;
   overflow: hidden;
@@ -26,14 +26,14 @@
   }
 
   .navigation-list {
-    background-color: $background-color;
+    background-color: main.$background-color;
     margin: 0;
     padding: 0;
   }
 }
 
 .h5p-portfolio-navigation-sectionlist {
-  background-color: $background-color;
+  background-color: main.$background-color;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -44,13 +44,13 @@
   }
 
   >:last-child {
-    border-bottom: solid 1px $ghost-white;
+    border-bottom: solid 1px main.$ghost-white;
     padding-bottom: .5rem;
   }
 
   .h5p-portfolio-navigation-section {
     background: transparent;
-    color: $mud;
+    color: main.$mud;
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.8;
@@ -67,7 +67,7 @@
 
     .h5p-portfolio-navigation-section-icon {
       position: absolute;
-      color: $black;
+      color: main.$black;
       font-size: 5px;
       visibility: hidden;
       width: 2.17rem;
@@ -90,7 +90,7 @@
   }
 
   :hover {
-    color: var(--color-base, $base-color);
+    color: var(--color-base, main.$base-color);
     cursor: pointer;
   }
 }
@@ -112,35 +112,35 @@
   }
 
   &.h5p-portfolio-navigation-chapter-last {
-    border-bottom: solid 1px $ghost-white;
+    border-bottom: solid 1px main.$ghost-white;
     height: 2rem;
   }
 }
 
 .h5p-portfolio-navigation-chapter-button {
   align-items: center;
-  background-color: $background-color;
+  background-color: main.$background-color;
   background-size: cover;
   border: 0;
-  border-bottom: solid 1px $ghost-white;
-  color: $mud;
+  border-bottom: solid 1px main.$ghost-white;
+  color: main.$mud;
   display: flex;
   height: 2.825rem;
   margin: 0;
   padding: 0 1rem 0 0;
   text-align: initial;
-  text-decoration: none solid $mud;
+  text-decoration: none solid main.$mud;
   width: 100%;
   position: relative;
 
   .h5p-portfolio-navigation-chapter-title-text {
     background-color: transparent;
-    color: $mud;
+    color: main.$mud;
     font-size: 0.85rem;
     font-weight: 700;
     line-height: 1.5rem;
     overflow: hidden;
-    text-decoration: none solid $mud;
+    text-decoration: none solid main.$mud;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -184,7 +184,7 @@
       white-space: nowrap;
 
       &:hover {
-        color: var(--color-base, $base-color);
+        color: var(--color-base, main.$base-color);
         cursor: pointer;
       }
     }
@@ -207,37 +207,37 @@
   }
 
   &.h5p-portfolio-navigation-current:not(.h5p-portfolio-navigation-chapter-content) {
-    background-color: var(--color-base-10, $base-color-10);
+    background-color: var(--color-base-10, main.$base-color-10);
     // border-bottom-color: white;
 
     .h5p-portfolio-navigation-chapter-title-text {
-      color: var(--color-base, $base-color);
-      text-decoration: none solid var(--color-base, $base-color);
+      color: var(--color-base, main.$base-color);
+      text-decoration: none solid var(--color-base, main.$base-color);
     }
   }
 
   &:hover:not(.h5p-portfolio-navigation-chapter-content) {
-    background-color: var(--color-base-5, $base-color-5);
+    background-color: var(--color-base-5, main.$base-color-5);
     cursor: pointer;
   }
 
   &:not(.h5p-portfolio-navigation-chapter-content):active {
-    background-color: var(--color-base-10, $base-color-10);
+    background-color: var(--color-base-10, main.$base-color-10);
   }
 }
 
 .h5p-portfolio-navigation-maintitle {
-  background-color: var(--color-base, $base-color);
+  background-color: var(--color-base, main.$base-color);
   background-size: cover;
 
   .navigation-title {
     align-self: center;
-    color: var(--color-text, $background-color);
+    color: var(--color-text, main.$background-color);
     font-size: 1rem;
     font-weight: 400;
     overflow: hidden;
     padding-left: 1.25rem;
-    text-decoration: none solid var(--color-text, $background-color);
+    text-decoration: none solid var(--color-text, main.$background-color);
     text-overflow: ellipsis;
   }
 }
