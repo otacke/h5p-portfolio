@@ -2,7 +2,7 @@
   "title": "Portfolio",
   "description": "RUB Portfolio",
   "majorVersion": 0,
-  "minorVersion": 10,
+  "minorVersion": 11,
   "patchVersion": 0,
   "runnable": 1,
   "fullscreen": 1,
@@ -37,7 +37,7 @@
     {
       "machineName": "H5PEditor.Portfolio",
       "majorVersion": 0,
-      "minorVersion": 10
+      "minorVersion": 11
     },
     {
       "machineName": "H5PEditor.ShowWhen",
