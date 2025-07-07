@@ -358,7 +358,7 @@
               "name": "content",
               "type": "library",
               "options": [
-                "H5P.PortfolioChapter 0.9"
+                "H5P.PortfolioChapter 0.10"
               ],
               "optional": false
             }
