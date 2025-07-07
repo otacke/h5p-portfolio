@@ -116,7 +116,7 @@
         "label": "Header",
         "optional": true,
         "options": [
-          "H5P.PortfolioPlaceholder 0.9"
+          "H5P.PortfolioPlaceholder 0.10"
         ],
         "paramOverrides": {
           "customTitleL10NId": "header",
@@ -173,7 +173,7 @@
         "label": "Footer",
         "optional": true,
         "options": [
-          "H5P.PortfolioPlaceholder 0.9"
+          "H5P.PortfolioPlaceholder 0.10"
         ],
         "paramOverrides": {
           "customTitleL10NId": "footer",
