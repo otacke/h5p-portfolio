@@ -24,7 +24,7 @@ export default class URLTools {
 
     let queries = {
       ... URLTools.parseURLQueryString(hashQueryString),
-      ... URLTools.parseURLQueryString(contextWindow.location.search)
+      ... URLTools.parseURLQueryString(contextWindow.location.search),
     };
 
     // Optionally validate and ignore fragments

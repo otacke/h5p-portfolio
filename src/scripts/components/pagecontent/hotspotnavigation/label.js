@@ -15,7 +15,7 @@ export default class Label {
    */
   constructor(params = {}) {
     this.params = Util.extend({
-      position: 'bottom'
+      position: 'bottom',
     }, params);
 
     // Label
@@ -31,7 +31,7 @@ export default class Label {
 
     this.labelInner = document.createElement('div');
     this.labelInner.classList.add(
-      'h5p-portfolio-hotspot-navigation-label-inner'
+      'h5p-portfolio-hotspot-navigation-label-inner',
     );
     this.labelInner.innerText = this.params.text;
     label.appendChild(this.labelInner);
@@ -66,7 +66,7 @@ export default class Label {
 
     // Determine whether there are multiple lines, need to adjust position
     const fontSize = parseFloat(
-      window.getComputedStyle(this.labelInner).getPropertyValue('font-size')
+      window.getComputedStyle(this.labelInner).getPropertyValue('font-size'),
     );
     const labelSize = Math.floor(this.labelInner.getBoundingClientRect().height);
     this.dom.classList.toggle('multiline', fontSize * LABEL_SIZE_FACTOR < labelSize);

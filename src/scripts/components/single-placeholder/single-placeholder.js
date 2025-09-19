@@ -8,7 +8,7 @@ import Util from '@services/util.js';
 export default class SinglePlaceholder {
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({
-      classNames: []
+      classNames: [],
     }, params);
 
     this.callbacks = Util.extend({
@@ -41,7 +41,7 @@ export default class SinglePlaceholder {
         params.contentId,
         H5P.jQuery(this.dom),
         false,
-        { previousState: previousState }
+        { previousState: previousState },
       );
 
     // Resize instance to fit inside parent and vice versa

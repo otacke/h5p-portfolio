@@ -16,35 +16,35 @@ describe('URLTools', () => {
       let testCases = [
         {
           name: 'no hash, no search', hash: '', search: '',
-          result: {}
+          result: {},
         },
         {
           name: 'hash as #, search', hash: '#', search: '',
-          result: {}
+          result: {},
         },
         {
           name: 'no hash, search as ?', hash: '', search: '?',
-          result: {}
+          result: {},
         },
         {
           name: 'regularHash, search queries: 1', hash: '#someHash', search: '?foo=1',
           result: {
-            foo: '1'
-          }
+            foo: '1',
+          },
         },
         {
           name: 'regularHash, search queries: 2', hash: '#someHash', search: '?foo=1&bar=2',
           result: {
             foo: '1',
-            bar: '2'
-          }
-        }
+            bar: '2',
+          },
+        },
       ];
 
       testCases.forEach((testCase) => {
         test(testCase.name, () => {
           let contextWindow = {
-            location: { hash: testCase.hash, search: testCase.search }
+            location: { hash: testCase.hash, search: testCase.search },
           };
           expect(URLTools.extractFragmentsFromURL(contextWindow))
             .toEqual(testCase.result);
@@ -57,15 +57,15 @@ describe('URLTools', () => {
         {
           name: 'invalid hash (InteractiveBook format) values: 1', hash: '#foo=1', search: '',
           result: {
-            foo: '1'
-          }
+            foo: '1',
+          },
         },
         {
           name: 'invalid hash (InteractiveBook format) values: 2', hash: '#foo=1&bar=2', search: '',
           result: {
             foo: '1',
-            bar: '2'
-          }
+            bar: '2',
+          },
         },
         {
           name:
@@ -73,23 +73,23 @@ describe('URLTools', () => {
           result: {
             foo: '1',
             bar: '2',
-            batz: '3'
-          }
+            batz: '3',
+          },
         },
         {
           name:
             'invalid hash (InteractiveBook format) values: 2, duplicate search', hash: '#foo=1&bar=2', search: '?foo=3',
           result: {
             foo: '3',
-            bar: '2'
-          }
-        }
+            bar: '2',
+          },
+        },
       ];
 
       testCases.forEach((testCase) => {
         test(testCase.name, () => {
           let contextWindow = {
-            location: { hash: testCase.hash, search: testCase.search }
+            location: { hash: testCase.hash, search: testCase.search },
           };
           expect(URLTools.extractFragmentsFromURL(contextWindow))
             .toEqual(testCase.result);
@@ -104,13 +104,13 @@ describe('URLTools', () => {
 
       test('Valid fragments', () => {
         let contextWindow = {
-          location: { hash: '', search: '?foo=1' }
+          location: { hash: '', search: '?foo=1' },
         };
         expect(URLTools.extractFragmentsFromURL(contextWindow, validate))
           .toEqual({ foo: '1' });
 
         contextWindow = {
-          location: { hash: '', search: '?foo=2' }
+          location: { hash: '', search: '?foo=2' },
         };
         expect(URLTools.extractFragmentsFromURL(contextWindow, validate))
           .toEqual({});

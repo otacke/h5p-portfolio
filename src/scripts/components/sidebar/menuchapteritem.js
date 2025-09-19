@@ -12,7 +12,7 @@ export default class MenuChapterItem {
     this.callbacks = Util.extend({
       onClicked: (() => {}),
       onKeyUp: (() => {}),
-      onKeyDown: (() => {})
+      onKeyDown: (() => {}),
     }, callbacks);
 
     this.isExpandable = this.params.isExpandable;
@@ -40,7 +40,7 @@ export default class MenuChapterItem {
     this.button.addEventListener('click', () => {
       this.callbacks.onClicked({
         hierarchy: this.params.hierarchy,
-        target: this.params.target
+        target: this.params.target,
       });
     });
 

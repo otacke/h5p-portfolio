@@ -34,10 +34,10 @@ export default class Colors {
     this.colorText = [
       Colors.DEFAULT_COLOR_BG,
       this.computeContrastColor(this.colorBase),
-      this.computeContrastColor((this.colorBase), Colors.DEFAULT_COLOR_BG)
+      this.computeContrastColor((this.colorBase), Colors.DEFAULT_COLOR_BG),
     ].map((color) => ({
       color: color,
-      contrast: this.colorBase.contrast(color)
+      contrast: this.colorBase.contrast(color),
     })).reduce((result, current) => {
       return (current.contrast > result.contrast) ? current : result;
     }, { contrast: 0 }).color;
@@ -55,7 +55,7 @@ export default class Colors {
       typeof params.opacity === 'string' &&
       /^([0-9]|[1-8][0-9]|9[0-9]|100)(\.\d+)?\s?%$/.test(params.opacity)
     ) {
-      // eslint-disable-next-line no-magic-numbers
+       
       params.opacity = parseInt(params.opacity) / 100;
     }
 
@@ -72,7 +72,7 @@ export default class Colors {
     return Color.rgb(
       color.rgb().array().map((value, index) => {
         return params.opacity * value + (1 - params.opacity) * rgbBackground[index];
-      })
+      }),
     );
   }
 

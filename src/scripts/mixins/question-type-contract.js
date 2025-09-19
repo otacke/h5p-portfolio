@@ -101,7 +101,7 @@ export default class QuestionTypeContract {
     this.moveTo({
       h5pPortfolioId: this.contentId,
       h5pPortfolioChapter: this.chapters.get(0).getSubContentId(),
-      h5pPortfolioToTop: true
+      h5pPortfolioToTop: true,
     });
 
     // Remove all portfolio query parameters
@@ -129,14 +129,14 @@ export default class QuestionTypeContract {
       this.getMaxScore(),
       this,
       true,
-      this.getScore() === this.getMaxScore()
+      this.getScore() === this.getMaxScore(),
     );
 
     return {
       statement: xAPIEvent.data.statement,
       children: this.getXAPIDataFromChildren(
-        this.chapters.get().map((chapter) => chapter.instance)
-      )
+        this.chapters.get().map((chapter) => chapter.instance),
+      ),
     };
   }
 
@@ -158,7 +158,7 @@ export default class QuestionTypeContract {
       chapterStates: this.chapters.getAll().map((chapter) => {
         return chapter?.instance?.getCurrentState() || {};
       }),
-      currentChapterId: this.currentChapterId
+      currentChapterId: this.currentChapterId,
     };
   }
 
@@ -174,7 +174,7 @@ export default class QuestionTypeContract {
 
     return {
       type: 'page',
-      value: (this.currentChapterId + 1)
+      value: (this.currentChapterId + 1),
     };
   }
 }

@@ -14,10 +14,10 @@ export default class Hotspot {
    */
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({
-      position: { x: CENTER_PERCENTPOINTS, y: CENTER_PERCENTPOINTS }
+      position: { x: CENTER_PERCENTPOINTS, y: CENTER_PERCENTPOINTS },
     }, params);
     this.callbacks = Util.extend({
-      onClicked: (() => {})
+      onClicked: (() => {}),
     }, callbacks);
 
     if (this.params.title) {
@@ -42,7 +42,7 @@ export default class Hotspot {
       this.label = new Label({
         text: this.params.title,
         startVisible: this.params.showHotspotTitles,
-        position: `${vertical}-${horizontal}`
+        position: `${vertical}-${horizontal}`,
       });
       this.dom.append(this.label.getDOM());
 
@@ -103,7 +103,7 @@ export default class Hotspot {
 
     H5P.attachToastTo(this.dom, this.params.title, {
       duration: Hotspot.toastDurationMs,
-      position: { noOverflowX: true, noOverflowY: true }
+      position: { noOverflowX: true, noOverflowY: true },
     });
 
     this.isShowingToast = true;

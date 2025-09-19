@@ -11,7 +11,7 @@ export default class Cover {
     this.params = params;
 
     this.callbacks = Util.extend({
-      onClosed: (() => {})
+      onClosed: (() => {}),
     }, callbacks);
 
     // Container
@@ -38,13 +38,13 @@ export default class Cover {
     // Description text
     if (params.coverData?.coverDescription) {
       this.container.append(
-        this.buildDescription(params.coverData.coverDescription)
+        this.buildDescription(params.coverData.coverDescription),
       );
     }
 
     // Read button
     this.container.append(
-      this.buildReadButton(this.params.dictionary.get('l10n.read'))
+      this.buildReadButton(this.params.dictionary.get('l10n.read')),
     );
 
     this.footerDOM = document.createElement('div');
@@ -121,7 +121,7 @@ export default class Cover {
       this.params.contentId,
       H5P.jQuery(this.visuals),
       false,
-      { metadata: coverMedium.medatata }
+      { metadata: coverMedium.medatata },
     );
 
     // Postparation

@@ -21,7 +21,7 @@ export default class Section {
 
       const content = new Content({
         instance: instances[i],
-        semantics: instancesSemantics[i]
+        semantics: instancesSemantics[i],
       });
 
       this.contents.push(content);

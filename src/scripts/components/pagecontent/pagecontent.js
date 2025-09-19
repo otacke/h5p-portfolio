@@ -25,7 +25,7 @@ export default class PageContent {
       onResized: (() => {}),
       onChapterChanged: (() => {}),
       onMoved: (() => {}),
-      isPreview: (() => {})
+      isPreview: (() => {}),
     }, callbacks);
 
     this.currentChapterId = params.currentChapterId ?? 0;
@@ -87,16 +87,16 @@ export default class PageContent {
           hotspotColors: this.params.hotspotColors,
           contentId: this.params.contentId,
           showHotspotTitles: this.params.showHotspotTitles,
-          dictionary: this.params.dictionary
+          dictionary: this.params.dictionary,
         },
         {
           onClicked: ((subContentId) => {
             this.callbacks.onMoved({
               h5pPortfolioChapter: subContentId,
-              h5pPortfolioToTop: true
+              h5pPortfolioToTop: true,
             });
-          })
-        }
+          }),
+        },
       ));
     });
   }

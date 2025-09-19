@@ -114,7 +114,7 @@ export default class Util {
     const exceptions = [
       'H5P.Blanks', // Exception required for original V1.12.11 and before
       'H5P.MemoryGame', // Doesn't implement getMaxScore yet
-      'H5P.SpeakTheWordsSet' // Doesn't implement getMaxScore yet
+      'H5P.SpeakTheWordsSet', // Doesn't implement getMaxScore yet
     ];
 
     return exceptions.includes(instance.libraryInfo?.machineName);
@@ -153,7 +153,7 @@ export default class Util {
           callback();
         }
       }, {
-        threshold: 0
+        threshold: 0,
       });
       observer.observe(dom);
     });
@@ -162,7 +162,7 @@ export default class Util {
   /**
    * Check if (nested) item is empty.
    * Polyfill for older H5P core versions before 1.26.
-   * @param {*} item Item to test.
+   * @param {number|string|null|undefined} item Item to test.
    * @returns {boolean} True, if item is empty.
    */
   static isEmpty(item) {

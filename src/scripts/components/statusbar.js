@@ -13,7 +13,7 @@ export default class StatusBar {
       onMoved: (() => {}),
       onScrollToTop: (() => {}),
       onToggleMenu: (() => {}),
-      onToggleFullscreen: (() => {})
+      onToggleFullscreen: (() => {}),
     }, callbacks);
 
     this.buildDOM();
@@ -99,7 +99,7 @@ export default class StatusBar {
     buttonWrapper.setAttribute('aria-controls', 'h5p-portfolio-navigation-menu');
     buttonWrapper.setAttribute(
       'aria-label',
-      this.params.dictionary.get('a11y.openMainNavigation')
+      this.params.dictionary.get('a11y.openMainNavigation'),
     );
     buttonWrapper.onclick = () => {
       this.callbacks.onToggleMenu();
@@ -126,10 +126,10 @@ export default class StatusBar {
     button.classList.add('h5p-portfolio-status-button');
     button.classList.add('h5p-portfolio-status-arrow');
     button.setAttribute(
-      'title', this.params.dictionary.get('l10n.navigateToTop')
+      'title', this.params.dictionary.get('l10n.navigateToTop'),
     );
     button.setAttribute(
-      'aria-label', this.params.dictionary.get('l10n.navigateToTop')
+      'aria-label', this.params.dictionary.get('l10n.navigateToTop'),
     );
     button.addEventListener('click', () => {
       this.callbacks.onScrollToTop();
@@ -193,7 +193,7 @@ export default class StatusBar {
       total: total,
       divider: divider,
       progressText: progressText,
-      hiddenButRead: hiddenButRead
+      hiddenButRead: hiddenButRead,
     };
   }
 
@@ -211,9 +211,9 @@ export default class StatusBar {
       onClicked: (() => {
         this.callbacks.onMoved({
           h5pPortfolioDirection: 'prev',
-          h5pPortfolioToTop: true
+          h5pPortfolioToTop: true,
         });
-      })
+      }),
     });
 
     buttons.next = this.buildNavigationButton({
@@ -223,9 +223,9 @@ export default class StatusBar {
       onClicked: (() => {
         this.callbacks.onMoved({
           h5pPortfolioDirection: 'next',
-          h5pPortfolioToTop: true
+          h5pPortfolioToTop: true,
         });
-      })
+      }),
     });
 
     return buttons;
@@ -271,10 +271,10 @@ export default class StatusBar {
     fullScreenButton.classList.add('h5p-portfolio-status-button');
     fullScreenButton.classList.add('h5p-portfolio-enter-fullscreen');
     fullScreenButton.setAttribute(
-      'title', this.params.dictionary.get('l10n.fullscreen')
+      'title', this.params.dictionary.get('l10n.fullscreen'),
     );
     fullScreenButton.setAttribute(
-      'aria-label', this.params.dictionary.get('l10n.fullscreen')
+      'aria-label', this.params.dictionary.get('l10n.fullscreen'),
     );
     fullScreenButton.addEventListener('click', () => {
       this.callbacks.onToggleFullscreen();
@@ -314,11 +314,11 @@ export default class StatusBar {
     // Enable/disable navigation buttons depending on chapter
     this.setButtonStatus(
       'previous',
-      { enabled: params.chapterId > 1 }
+      { enabled: params.chapterId > 1 },
     );
     this.setButtonStatus(
       'next',
-      { enabled: params.chapterId < this.params.chapters.get().length }
+      { enabled: params.chapterId < this.params.chapters.get().length },
     );
   }
 
@@ -328,7 +328,7 @@ export default class StatusBar {
    */
   updateProgressBar(chapterId) {
     this.progressBar.progress.style.width =
-      // eslint-disable-next-line no-magic-numbers
+       
       `${chapterId / this.params.chapters.get().length * 100}%`;
 
     const title = this.params.dictionary.get('a11y.progress')
@@ -409,26 +409,26 @@ export default class StatusBar {
     }
 
     this.fullScreenButton.classList.toggle(
-      'h5p-portfolio-enter-fullscreen', !state
+      'h5p-portfolio-enter-fullscreen', !state,
     );
     this.fullScreenButton.classList.toggle(
-      'h5p-portfolio-exit-fullscreen', state
+      'h5p-portfolio-exit-fullscreen', state,
     );
 
     if (state) {
       this.fullScreenButton.setAttribute(
-        'title', this.params.dictionary.get('l10n.exitFullscreen')
+        'title', this.params.dictionary.get('l10n.exitFullscreen'),
       );
       this.fullScreenButton.setAttribute(
-        'aria-label', this.params.dictionary.get('l10n.exitFullscreen')
+        'aria-label', this.params.dictionary.get('l10n.exitFullscreen'),
       );
     }
     else {
       this.fullScreenButton.setAttribute(
-        'title', this.params.dictionary.get('l10n.fullscreen')
+        'title', this.params.dictionary.get('l10n.fullscreen'),
       );
       this.fullScreenButton.setAttribute(
-        'aria-label', this.params.dictionary.get('l10n.fullscreen')
+        'aria-label', this.params.dictionary.get('l10n.fullscreen'),
       );
     }
   }

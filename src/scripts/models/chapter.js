@@ -20,7 +20,7 @@ export default class Chapter {
       params.contentId,
       undefined,
       undefined,
-      { previousState: params.previousState }
+      { previousState: params.previousState },
     );
 
     // Build sections
@@ -31,7 +31,7 @@ export default class Chapter {
     for (let i = 0; i < childInstances.length; i++) {
       this.sections.push(new Section({
         instance: childInstances[i],
-        semantics: childSemantics[i]
+        semantics: childSemantics[i],
       }));
     }
 

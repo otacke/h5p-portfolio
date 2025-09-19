@@ -31,7 +31,7 @@ export default class XAPI {
     return {
       interactionType: 'compound',
       type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
-      description: { 'en-US': 'Portfolio' }
+      description: { 'en-US': 'Portfolio' },
     };
   }
 }

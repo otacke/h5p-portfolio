@@ -11,17 +11,17 @@ export default class HotspotNavigation {
    */
   constructor(params = {}, callbacks = {}) {
     this.params = Util.extend({
-      image: {}
+      image: {},
     }, params);
 
     this.callbacks = Util.extend({
-      onClicked: (() => {})
+      onClicked: (() => {}),
     }, callbacks);
 
     this.dom = document.createElement('navigation');
     this.dom.classList.add('h5p-portfolio-hotspot-navigation');
     this.dom.setAttribute(
-      'aria-label', this.params.dictionary.get('a11y.hotspotNavigation')
+      'aria-label', this.params.dictionary.get('a11y.hotspotNavigation'),
     );
 
     this.hotspots = [];
@@ -45,7 +45,7 @@ export default class HotspotNavigation {
         }
 
         const a11yLabel = this.params.dictionary.get('a11y.goTo').replace(
-          /@title/, chapter.params.hotspotNavigation.title || chapter.title
+          /@title/, chapter.params.hotspotNavigation.title || chapter.title,
         );
 
         return new Hotspot(
@@ -55,10 +55,10 @@ export default class HotspotNavigation {
             title: chapter.params.hotspotNavigation.title,
             a11yLabel: a11yLabel,
             color: this.params.hotspotColors[index],
-            showHotspotTitles: this.params.showHotspotTitles
+            showHotspotTitles: this.params.showHotspotTitles,
           }, {
-            onClicked: ((subContentId) => this.callbacks.onClicked(subContentId))
-          }
+            onClicked: ((subContentId) => this.callbacks.onClicked(subContentId)),
+          },
         );
       });
 

@@ -42,7 +42,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     super();
 
     Util.addMixins(
-      Portfolio, [QuestionTypeContract, XAPI]
+      Portfolio, [QuestionTypeContract, XAPI],
     );
 
     this.params = Util.extend({
@@ -50,7 +50,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       hotspotNavigationGlobals: {
         hotspotNavigationImage: {},
         hotspotNavigationColor: 'rgba(255, 255, 255, .6)',
-        showHotspotTitle: false
+        showHotspotTitle: false,
       },
       bookCover: {},
       showHeader: false,
@@ -60,7 +60,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       },
       behaviour: {
         defaultTableOfContents: true,
-        isPreview: false
+        isPreview: false,
       },
       l10n: {
         read: 'Read',
@@ -70,7 +70,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         previousPage: 'Previous page',
         navigateToTop: 'Navigate to the top',
         fullscreen: 'Fullscreen',
-        exitFullscreen: 'Exit fullscreen'
+        exitFullscreen: 'Exit fullscreen',
       },
       a11y: {
         progress: 'Page @page of @total.',
@@ -81,8 +81,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         mainNavigation: 'Main navigation',
         hotspotNavigation: 'Hotspot navigation',
         goTo: 'Go to @title',
-        mainContent: 'Main content'
-      }
+        mainContent: 'Main content',
+      },
     }, params);
 
     this.contentId = contentId;
@@ -94,7 +94,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.dictionary = new Dictionary();
     this.dictionary.fill({
       l10n: this.params.l10n,
-      a11y: this.params.a11y
+      a11y: this.params.a11y,
     });
 
     this.colors = new Colors();
@@ -130,7 +130,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         contentId: this.contentId,
         context: this,
         classNames: ['h5p-portfolio-header'],
-        previousState: {}
+        previousState: {},
       });
 
     // Footer
@@ -144,11 +144,11 @@ export default class Portfolio extends H5P.EventDispatcher {
         contentId: this.contentId,
         context: this,
         classNames: ['h5p-portfolio-footer'],
-        previousState: {}
+        previousState: {},
       });
 
     this.chapters = new Chapters({
-      dictionary: this.dictionary
+      dictionary: this.dictionary,
     });
     this.chapters.setHeader(header);
     this.chapters.setFooter(footer);
@@ -236,13 +236,13 @@ export default class Portfolio extends H5P.EventDispatcher {
           coverData: this.params.bookCover,
           footerDOM: footer?.getDOM(),
           contentId: contentId,
-          title: extras?.metadata?.title || ''
+          title: extras?.metadata?.title || '',
         },
         {
           onClosed: (() => {
             this.handleCoverRemoved();
-          })
-        }
+          }),
+        },
       );
     }
 
@@ -267,7 +267,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         hotspotColors: hotspotColors,
         isCovered: showCover,
         showHotspotTitles: this.params.hotspotNavigationGlobals.showHotspotTitles,
-        dictionary: this.dictionary
+        dictionary: this.dictionary,
       },
       {
         onScrollToTop: () => {
@@ -284,15 +284,15 @@ export default class Portfolio extends H5P.EventDispatcher {
         }),
         isPreview: (() => {
           return this.isPreview || false;
-        })
-      }
+        }),
+      },
     );
 
     this.sideBar = new SideBar(
       {
         chapters: this.chapters,
         mainTitle: extras?.metadata?.title,
-        a11yLabel: this.dictionary.get('a11y.mainNavigation')
+        a11yLabel: this.dictionary.get('a11y.mainNavigation'),
       },
       {
         onMoved: ((params) => {
@@ -300,8 +300,8 @@ export default class Portfolio extends H5P.EventDispatcher {
         }),
         onResized: (() => {
           this.trigger('resize');
-        })
-      }
+        }),
+      },
     );
 
     this.statusBarHeader = new StatusBar(
@@ -311,7 +311,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         displayMenuToggleButton: true,
         displayFullScreenButton: true,
         styleClassName: 'h5p-portfolio-status-header',
-        a11yLabel: this.dictionary.get('a11y.topNavigation')
+        a11yLabel: this.dictionary.get('a11y.topNavigation'),
       },
       {
         onMoved: ((params) => {
@@ -328,8 +328,8 @@ export default class Portfolio extends H5P.EventDispatcher {
           if (isMenuOpen) {
             this.focusMenu();
           }
-        })
-      }
+        }),
+      },
     );
 
     this.statusBarFooter = new StatusBar(
@@ -339,7 +339,7 @@ export default class Portfolio extends H5P.EventDispatcher {
         displayToTopButton: true,
         displayFullScreenButton: !this.params.behaviour.isPreview,
         styleClassName: 'h5p-portfolio-status-footer',
-        a11yLabel: this.dictionary.get('a11y.bottomNavigation')
+        a11yLabel: this.dictionary.get('a11y.bottomNavigation'),
       },
       {
         onMoved: ((params) => {
@@ -356,14 +356,14 @@ export default class Portfolio extends H5P.EventDispatcher {
           if (isMenuOpen) {
             this.focusMenu();
           }
-        })
-      }
+        }),
+      },
     );
 
     // Kickstart the statusbar
     const statusUpdates = {
       chapterId: this.currentChapterId + 1,
-      title: this.chapters.get(this.currentChapterId).getTitle()
+      title: this.chapters.get(this.currentChapterId).getTitle(),
     };
 
     this.statusBarHeader.update(statusUpdates);
@@ -382,7 +382,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     const payload = (this.cannotHandleURL) ?
       URLTools.extractFragmentsFromURL(
         this.contextWindow,
-        this.validateFragments
+        this.validateFragments,
       ) :
       {};
 
@@ -394,7 +394,7 @@ export default class Portfolio extends H5P.EventDispatcher {
     else {
       this.moveToChapter({
         h5pPortfolioChapter: `h5p-portfolio-chapter-${this.chapters.get(0).instance.subContentId}`,
-        h5pPortfolioId: this.contentId
+        h5pPortfolioId: this.contentId,
       });
     }
 
@@ -433,8 +433,8 @@ export default class Portfolio extends H5P.EventDispatcher {
     this.sideBar.handleClicked({
       hierarchy: currentChapter.getHierarchy(),
       target: {
-        h5pPortfolioChapter: currentChapter.getSubContentId()
-      }
+        h5pPortfolioChapter: currentChapter.getSubContentId(),
+      },
     });
 
     setTimeout(() => {
@@ -593,7 +593,7 @@ export default class Portfolio extends H5P.EventDispatcher {
 
     const params = {
       chapterId: this.currentChapterId + 1,
-      title: this.chapters.get(this.currentChapterId).getTitle()
+      title: this.chapters.get(this.currentChapterId).getTitle(),
     };
 
     this.statusBarHeader.update(params);
@@ -895,15 +895,15 @@ export default class Portfolio extends H5P.EventDispatcher {
         const placeholderDOMs = [
           headerDOM,
           ...chapter.instance.getPlaceholderDOMs(),
-          footerDOM
+          footerDOM,
         ].filter((dom) => dom !== null);
 
         return {
           hierarchy: chapter.hierarchy,
           title: chapter.title,
-          placeholderDOMs: placeholderDOMs
+          placeholderDOMs: placeholderDOMs,
         };
-      }
+      },
       );
 
     return (chapterId !== null) ? info[chapterId] : info;

@@ -17,7 +17,7 @@ class SideBar extends H5P.EventDispatcher {
 
     this.callbacks = Util.extend({
       onMoved: (() => {}),
-      onResized: (() => {})
+      onResized: (() => {}),
     }, callbacks);
 
     this.container = document.createElement('nav');
@@ -74,8 +74,8 @@ class SideBar extends H5P.EventDispatcher {
         isExpandable: this.hasChildren(hierarchy),
         target: {
           h5pPortfolioChapter: chapter.getSubContentId(),
-          h5pPortfolioToTop: true
-        }
+          h5pPortfolioToTop: true,
+        },
       };
 
       // MenuChapterItem parameters for contents
@@ -108,8 +108,8 @@ class SideBar extends H5P.EventDispatcher {
               ...(
                 typeof target.header === 'number' &&
                 { header: target.header }
-              )
-            }
+              ),
+            },
           };
         });
 
@@ -130,12 +130,12 @@ class SideBar extends H5P.EventDispatcher {
             }),
             onKeyDown: ((params) => {
               this.handleKeyNavigated(params, 1);
-            })
+            }),
           });
 
         menuItems.push({
           hierarchy: param.hierarchy,
-          instance: menuItem
+          instance: menuItem,
         });
       });
     });
@@ -165,7 +165,7 @@ class SideBar extends H5P.EventDispatcher {
               title: currentContent.getTitle(),
               chapter: chapter.getSubContentId(),
               h5pPortfolioSection: currentSection.getSubContentId(),
-              h5pPortfolioContent: currentContent.getSubContentId()
+              h5pPortfolioContent: currentContent.getSubContentId(),
             }];
           }
           else if (instance.libraryInfo?.machineName === 'H5P.AdvancedText') {
@@ -178,7 +178,7 @@ class SideBar extends H5P.EventDispatcher {
                   chapter: chapter.getSubContentId(),
                   h5pPortfolioSection: currentSection.getSubContentId(),
                   h5pPortfolioContent: currentContent.getSubContentId(),
-                  ...(typeof index === 'number' && { header: index })
+                  ...(typeof index === 'number' && { header: index }),
                 };
               });
           }

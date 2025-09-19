@@ -20,7 +20,7 @@ export default class Chapters {
     this.chapters = this.build(
       this.sanitize(params),
       contentId,
-      extras
+      extras,
     );
   }
 
@@ -216,7 +216,7 @@ export default class Chapters {
       params = [{
         id: 0,
         chapterHierarchy: '1',
-        content: {}
+        content: {},
       }];
     }
 
@@ -243,11 +243,11 @@ export default class Chapters {
         displayHeader: chapter.displayHeader && this.header || false,
         displayFooter: chapter.displayFooter && this.footer || false,
         ...(chapter.providesHotspot && {
-          hotspotNavigation: chapter.hotspotNavigation
+          hotspotNavigation: chapter.hotspotNavigation,
         }),
         previousState: Array.isArray(extras.previousState) ?
           extras.previousState[index] :
-          {}
+          {},
       });
 
       return newChapter;
