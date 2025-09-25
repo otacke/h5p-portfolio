@@ -22,3 +22,4 @@ package.json
 package-lock.json
 worknotes
 LICENSE
+jest.config.json
