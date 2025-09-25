@@ -340,7 +340,7 @@
                   "name": "title",
                   "type": "text",
                   "label": "Hotspot title",
-                  "optional": "true"
+                  "optional": true
                 }
               ],
               "widget": "showWhen",
