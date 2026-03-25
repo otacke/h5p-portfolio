@@ -205,8 +205,8 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.cannotHandleURL = true;
     }
     else {
-      this.contextWindow = this.getContextWindow();
-      this.cannotHandleURL = !this.hasURLCapability();
+      this.contextWindow = URLTools.getContextWindow();
+      this.cannotHandleURL = !URLTools.hasURLCapability(this.contextWindow);
     }
 
     const showCover = this.params.showCoverPage &&
@@ -892,39 +892,6 @@ export default class Portfolio extends H5P.EventDispatcher {
       );
 
     return (chapterId !== null) ? info[chapterId] : info;
-  }
-
-  /**
-   * Get context window.
-   * @returns {Window} Context window.
-   */
-  getContextWindow() {
-    try {
-      return window.top;
-    }
-    catch (error) {
-      return window;
-    }
-  }
-
-  /**
-   * Check if URL can be handled.
-   * @returns {boolean} True if URL can be handled, else false.
-   */
-  hasURLCapability() {
-    try {
-      if (!this.contextWindow?.location) {
-        return false;
-      }
-
-      void this.contextWindow.location.origin;
-      void this.contextWindow.location.pathname;
-
-      return true;
-    }
-    catch (error) {
-      return false;
-    }
   }
 }
 

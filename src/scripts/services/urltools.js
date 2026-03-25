@@ -115,4 +115,38 @@ export default class URLTools {
 
     return `${prefix}${hashSelector}`;
   }
+
+  /**
+   * Get context window.
+   * @returns {Window} Context window.
+   */
+  static getContextWindow() {
+    try {
+      return window.top;
+    }
+    catch (error) {
+      return window;
+    }
+  }
+
+  /**
+   * Check if URL can be handled.
+   * @param {Window} contextWindow Window to check URL capability on.
+   * @returns {boolean} True if URL can be handled, else false.
+   */
+  static hasURLCapability(contextWindow) {
+    try {
+      if (!contextWindow?.location) {
+        return false;
+      }
+
+      void contextWindow.location.origin;
+      void contextWindow.location.pathname;
+
+      return true;
+    }
+    catch (error) {
+      return false;
+    }
+  }
 }
