@@ -202,11 +202,11 @@ export default class Portfolio extends H5P.EventDispatcher {
      * anyway.
      */
     if (typeof H5PIntegration?.moodleComponent !== 'undefined') {
-      this.cannotHandleURL = true;
+      this.canHandleURL = false;
     }
     else {
       this.contextWindow = URLTools.getContextWindow();
-      this.cannotHandleURL = !URLTools.hasURLCapability(this.contextWindow);
+      this.canHandleURL = URLTools.hasURLCapability(this.contextWindow);
     }
 
     const showCover = this.params.showCoverPage &&
@@ -364,7 +364,7 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.setActivityStarted();
     }
 
-    const payload = (this.cannotHandleURL) ?
+    const payload = (this.canHandleURL) ?
       URLTools.extractFragmentsFromURL(
         this.contextWindow,
         this.validateFragments,
@@ -679,11 +679,7 @@ export default class Portfolio extends H5P.EventDispatcher {
    * @param {object} params Parameters.
    */
   changeURL(params = {}) {
-    if (
-      this.isPreview ||
-      this.cannotHandleURL ||
-      !this.contextWindow?.location
-    ) {
+    if (this.isPreview || !this.canHandleURL) {
       return; // Don't change URL
     }
 
