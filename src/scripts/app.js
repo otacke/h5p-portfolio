@@ -205,23 +205,8 @@ export default class Portfolio extends H5P.EventDispatcher {
       this.cannotHandleURL = true;
     }
     else {
-      // Determine window context to get URL from
-      try {
-        this.contextWindow = top;
-      }
-      catch (error) {
-        if (error instanceof DOMException) {
-          // Use context window to store book location
-          this.contextWindow = window;
-
-          if (!this.contextWindow.location) {
-            this.cannotHandleURL = true;
-          }
-        }
-        else {
-          this.cannotHandleURL = true;
-        }
-      }
+      this.contextWindow = this.getContextWindow();
+      this.cannotHandleURL = !this.hasURLCapability();
     }
 
     const showCover = this.params.showCoverPage &&
@@ -907,6 +892,39 @@ export default class Portfolio extends H5P.EventDispatcher {
       );
 
     return (chapterId !== null) ? info[chapterId] : info;
+  }
+
+  /**
+   * Get context window.
+   * @returns {Window} Context window.
+   */
+  getContextWindow() {
+    try {
+      return window.top;
+    }
+    catch (error) {
+      return window;
+    }
+  }
+
+  /**
+   * Check if URL can be handled.
+   * @returns {boolean} True if URL can be handled, else false.
+   */
+  hasURLCapability() {
+    try {
+      if (!this.contextWindow?.location) {
+        return false;
+      }
+
+      void this.contextWindow.location.origin;
+      void this.contextWindow.location.pathname;
+
+      return true;
+    }
+    catch (error) {
+      return false;
+    }
   }
 }
 
