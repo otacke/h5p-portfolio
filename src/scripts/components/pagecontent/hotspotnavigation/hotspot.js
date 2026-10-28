@@ -1,6 +1,6 @@
 import Util from '@services/util.js';
 import Label from './label.js';
-import he from 'he';
+import { decode } from 'he';
 import './hotspot.scss';
 
 /** @constant {number} Center_PERCENTPOINTS 50 as 100 / 2, obviously */
@@ -21,7 +21,7 @@ export default class Hotspot {
     }, callbacks);
 
     if (this.params.title) {
-      this.params.title = he.decode(this.params.title);
+      this.params.title = decode(this.params.title);
     }
 
     this.isShowingToast = false;
